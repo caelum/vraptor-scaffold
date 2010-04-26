@@ -1,5 +1,6 @@
 package br.com.vraptor;
 
+import static br.com.vraptor.test.TestHelper.deleteFile;
 import static org.junit.Assert.assertTrue;
 
 import java.io.File;
@@ -7,8 +8,6 @@ import java.io.File;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-
-import static br.com.vraptor.test.TestHelper.deleteFile;
 
 /**
  * Tests to {@link Scaffold}.
@@ -51,6 +50,12 @@ public class ScaffoldTest {
 	public void shouldCreateWebXml() throws Exception {
 		Scaffold.main(args);
 		assertTrue("Should exists web.xml.", new File(projectName + "/src/main/webapp/WEB-INF/web.xml").exists());
+	}
+	
+	@Test
+	public void shouldCreatePomXml() throws Exception {
+		Scaffold.main(args);
+		assertTrue("Should exists pom.xml.", new File(projectName + "/pom.xml").exists());
 	}
 	
 }
