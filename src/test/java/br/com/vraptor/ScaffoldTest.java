@@ -58,4 +58,9 @@ public class ScaffoldTest {
 		assertTrue("Should exists pom.xml.", new File(projectName + "/pom.xml").exists());
 	}
 	
+	@Test
+	public void shouldCreateIndex() throws Exception {
+		Scaffold.main(args);
+		assertTrue("Should exists index.jsp.", new File(projectName + "/src/main/webapp/index.jsp").exists());
+	}
 }

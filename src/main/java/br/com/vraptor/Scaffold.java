@@ -15,12 +15,12 @@ public final class Scaffold {
 	
 	public static void main(String[] args) throws IOException {
 		for (String arg: args) {
-			new File(arg).mkdirs();
 			new File(arg + SRC_PATH).mkdirs();
 			new File(arg + RESOURCE_PATH).mkdir();
 			new File(arg + WEBAPP_PATH + "/WEB-INF").mkdirs();
-			copy("/scaffold/web.xml", arg + "/src/main/webapp/WEB-INF/web.xml");
 			copy("/scaffold/pom.xml", arg + "/pom.xml");
+			copy("/scaffold/index.jsp", arg + "/src/main/webapp/index.jsp");
+			copy("/scaffold/web.xml", arg + "/src/main/webapp/WEB-INF/web.xml");
 		}
 	}
 	
