@@ -9,14 +9,15 @@ import java.io.OutputStream;
 public final class Scaffold {
 	
 	private static final String MAIN_PATH = "/src/main/";
-	private static final String SRC_PATH = MAIN_PATH + "java";
-	private static final String RESOURCE_PATH = MAIN_PATH + "resource";
+	private static final String TEST_PATH = "/src/test/";
 	private static final String WEBAPP_PATH = MAIN_PATH + "webapp";
 	
 	public static void main(String[] args) throws IOException {
 		for (String arg: args) {
-			new File(arg + SRC_PATH).mkdirs();
-			new File(arg + RESOURCE_PATH).mkdir();
+			new File(arg + MAIN_PATH + "java").mkdirs();
+			new File(arg + TEST_PATH + "java").mkdirs();
+			new File(arg + MAIN_PATH + "resources").mkdir();
+			new File(arg + TEST_PATH + "resources").mkdir();
 			new File(arg + WEBAPP_PATH + "/WEB-INF").mkdirs();
 			copy("/scaffold/pom.xml", arg + "/pom.xml");
 			copy("/scaffold/index.jsp", arg + "/src/main/webapp/index.jsp");
