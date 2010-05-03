@@ -1,6 +1,7 @@
 package br.com.vraptor;
 
 import static br.com.vraptor.test.TestHelper.deleteFile;
+import static org.junit.Assert.*;
 import static org.junit.Assert.assertTrue;
 
 import java.io.BufferedReader;
@@ -107,6 +108,11 @@ public class ScaffoldTest {
 			buffReader.close();
 		}
 		return builder.toString();
+	}
+	
+	@Test
+	public void testname() throws Exception {
+		Scaffold.model();
 	}
 
 }

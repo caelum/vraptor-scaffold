@@ -5,6 +5,20 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.io.OutputStreamWriter;
+import java.io.Writer;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import freemarker.template.Configuration;
+import freemarker.template.DefaultObjectWrapper;
+import freemarker.template.ObjectWrapper;
+import freemarker.template.Template;
+import freemarker.template.TemplateException;
 
 public final class Scaffold {
 	
@@ -37,5 +51,44 @@ public final class Scaffold {
 	    }
 	    in.close();
 	    out.close();
+	}
+	
+	public static void model() throws IOException, TemplateException {
+		 /* ------------------------------------------------------------------- */    
+        /* You should do this ONLY ONCE in the whole application life-cycle:   */    
+    
+        /* Create and adjust the configuration */
+        Configuration cfg = new Configuration();
+        cfg.setObjectWrapper(ObjectWrapper.DEFAULT_WRAPPER);
+        cfg.setClassForTemplateLoading(Scaffold.class, "/");
+        /* ------------------------------------------------------------------- */    
+        /* You usually do these for many times in the application life-cycle:  */    
+                
+        /* Get or create a template */
+        Template temp = cfg.getTemplate("/scaffold/TemplateModel.ftl");
+
+        /* Create a data-model */
+        Map root = new HashMap();
+        List<AttributeWrapper> attributes = new ArrayList<AttributeWrapper>();
+        
+        AttributeWrapper attributeWrapper2 = new AttributeWrapper();
+		AttributeWrapper attributeWrapper = new AttributeWrapper();
+		
+        attributeWrapper.setName("name");
+        attributeWrapper.setType("string");
+        
+        attributeWrapper2.setName("value");
+        attributeWrapper2.setType("Long");
+        
+		attributes.add(attributeWrapper);
+        attributes.add(attributeWrapper2);
+		
+		root.put("attributes", attributes);
+		root.put("package", "${package}");
+        
+        /* Merge data-model with template */
+        Writer out = new OutputStreamWriter(new FileOutputStream(new File("/home/rodolfo/Desktop/Model.java")));
+        temp.process(root, out);
+        out.flush();
 	}
 }
