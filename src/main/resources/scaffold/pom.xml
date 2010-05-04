@@ -1,12 +1,11 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>vraptor-scaffold</groupId>
-	<artifactId>vraptor-scaffold</artifactId>
+	<groupId>${GROUP_ID}</groupId>
+	<artifactId>${ARTIFACT_ID}</artifactId>
 	<packaging>war</packaging>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>vraptor-scaffold</name>
-	<description>vraptor-scaffold</description>
+	<name>${NAME}</name>
 
 	<build>
 		<plugins>
@@ -16,6 +15,14 @@
 				<configuration>
 					<source>1.6</source>
 					<target>1.6</target>
+				</configuration>
+			</plugin>
+			<plugin>
+				<artifactId>maven-eclipse-plugin</artifactId>
+				<configuration>
+					<downloadSources>true</downloadSources>
+					<downloadJavadocs>true</downloadJavadocs>
+					<wtpversion>2.0</wtpversion>
 				</configuration>
 			</plugin>
 		</plugins>
