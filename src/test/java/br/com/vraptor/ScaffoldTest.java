@@ -65,6 +65,19 @@ public class ScaffoldTest {
 		Scaffold.main(args);
 		assertTrue("Should exists web.xml.", new File(projectName + "/src/main/webapp/WEB-INF/web.xml").exists());
 	}
+	
+	@Test
+	public void shouldCreateDecoratorsXml() throws Exception {
+		Scaffold.main(args);
+		assertTrue("Should exists decorators.xml.", new File(projectName + "/src/main/webapp/WEB-INF/decorators.xml").exists());
+	}
+	
+	@Test
+	public void shouldCreateDecorator() throws Exception {
+		Scaffold.main(args);
+		assertTrue("Should exists decorator.", new File(projectName + "/src/main/webapp/decorators/main.ftl").exists());
+	}
+	
 
 	@Test
 	public void shouldCreatePomXml() throws Exception {

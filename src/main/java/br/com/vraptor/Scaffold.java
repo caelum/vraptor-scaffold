@@ -23,6 +23,7 @@ public final class Scaffold {
 	private static final String MAIN_PATH = "/src/main/";
 	private static final String TEST_PATH = "/src/test/";
 	private static final String WEBAPP_PATH = MAIN_PATH + "webapp";
+	private static Configuration CFG;
 
 	public static void main(String[] args) throws Exception {
 		for (String arg : args) {
@@ -30,10 +31,13 @@ public final class Scaffold {
 			new File(arg + TEST_PATH + "java").mkdirs();
 			new File(arg + MAIN_PATH + "resources").mkdir();
 			new File(arg + TEST_PATH + "resources").mkdir();
-			new File(arg + WEBAPP_PATH + "/WEB-INF").mkdirs();
+			new File(arg + WEBAPP_PATH + "/WEB-INF/").mkdirs();
+			new File(arg + WEBAPP_PATH + "/decorators").mkdir();
 			generatePom(arg);
 			copy("/scaffold/index.jsp", arg + "/src/main/webapp/index.jsp");
-			copy("/scaffold/web.xml", arg + "/src/main/webapp/WEB-INF/web.xml");
+			copy("/scaffold/WEB-INF/web.xml", arg + "/src/main/webapp/WEB-INF/web.xml");
+			copy("/scaffold/WEB-INF/decorators.xml", arg + "/src/main/webapp/WEB-INF/decorators.xml");
+			copy("/scaffold/decorators/main.ftl", arg + "/src/main/webapp/decorators/main.ftl");
 		}
 	}
 
@@ -66,11 +70,13 @@ public final class Scaffold {
 		}
 	}
 
-	public static Template loadTemplate(String name) throws IOException, TemplateException {
-		Configuration cfg = new Configuration();
-		cfg.setObjectWrapper(new DefaultObjectWrapper());
-		cfg.setClassForTemplateLoading(Scaffold.class, "/scaffold");
+	private static Template loadTemplate(String name) throws IOException, TemplateException {
+		if (CFG == null) {
+			CFG = new Configuration();
+			CFG.setObjectWrapper(new DefaultObjectWrapper());
+			CFG.setClassForTemplateLoading(Scaffold.class, "/scaffold");
+		}
 
-		return cfg.getTemplate(name);
+		return CFG.getTemplate(name);
 	}
 }
