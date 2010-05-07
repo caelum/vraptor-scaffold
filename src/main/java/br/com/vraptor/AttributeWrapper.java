@@ -5,6 +5,11 @@ public class AttributeWrapper {
 	private String name;
 	private String type;
 
+	public AttributeWrapper(String name, String type) {
+		setName(name);
+		setType(type);
+	}
+
 	public void setName(String name) {
 		this.name = name;
 	}
