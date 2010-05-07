@@ -8,15 +8,18 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.Writer;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.io.IOUtils;
 
 import freemarker.template.Configuration;
-import freemarker.template.DefaultObjectWrapper;
+import freemarker.template.ObjectWrapper;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
+import freemarker.template.utility.StringUtil;
 
 public final class Scaffold {
 
@@ -27,17 +30,29 @@ public final class Scaffold {
 
 	public static void main(String[] args) throws Exception {
 		for (String arg : args) {
-			new File(arg + MAIN_PATH + "java").mkdirs();
-			new File(arg + TEST_PATH + "java").mkdirs();
-			new File(arg + MAIN_PATH + "resources").mkdir();
-			new File(arg + TEST_PATH + "resources").mkdir();
-			new File(arg + WEBAPP_PATH + "/WEB-INF/").mkdirs();
-			new File(arg + WEBAPP_PATH + "/decorators").mkdir();
-			generatePom(arg);
-			copy("/scaffold/index.jsp", arg + "/src/main/webapp/index.jsp");
-			copy("/scaffold/WEB-INF/web.xml", arg + "/src/main/webapp/WEB-INF/web.xml");
-			copy("/scaffold/WEB-INF/decorators.xml", arg + "/src/main/webapp/WEB-INF/decorators.xml");
-			copy("/scaffold/decorators/main.ftl", arg + "/src/main/webapp/decorators/main.ftl");
+			if (args.length == 1) {
+				new File(arg + MAIN_PATH + "java").mkdirs();
+				new File(arg + TEST_PATH + "java").mkdirs();
+				new File(arg + MAIN_PATH + "resources").mkdir();
+				new File(arg + TEST_PATH + "resources").mkdir();
+				new File(arg + WEBAPP_PATH + "/WEB-INF/").mkdirs();
+				new File(arg + WEBAPP_PATH + "/decorators").mkdir();
+				generatePom(arg);
+				copy("/scaffold/index.jsp", arg + "/src/main/webapp/index.jsp");
+				copy("/scaffold/WEB-INF/web.xml", arg + "/src/main/webapp/WEB-INF/web.xml");
+				copy("/scaffold/WEB-INF/decorators.xml", arg + "/src/main/webapp/WEB-INF/decorators.xml");
+				copy("/scaffold/decorators/main.ftl", arg + "/src/main/webapp/decorators/main.ftl");
+			}
+		}
+		
+		if (args.length > 1) {
+			String model = args[1];
+			List<AttributeWrapper> attributes = new ArrayList<AttributeWrapper>();
+			for(int i = 2; i < args.length; i++) {
+				String[] attribute_string = args[i].split(":");
+				attributes.add(new AttributeWrapper(attribute_string[0], attribute_string[1]));
+			}
+			generateModel(model, attributes);
 		}
 	}
 
@@ -58,7 +73,7 @@ public final class Scaffold {
 		writeFile(pom, content, arg + "/pom.xml");
 	}
 
-	private static void writeFile(Template template, Map<String, String> content, String filename)
+	private static void writeFile(Template template, Map<String, ?> content, String filename)
 			throws IOException, TemplateException {
 		File file = new File(filename);
 		Writer output = new BufferedWriter(new FileWriter(file));
@@ -73,10 +88,20 @@ public final class Scaffold {
 	private static Template loadTemplate(String name) throws IOException, TemplateException {
 		if (CFG == null) {
 			CFG = new Configuration();
-			CFG.setObjectWrapper(new DefaultObjectWrapper());
+			CFG.setObjectWrapper(ObjectWrapper.DEFAULT_WRAPPER);
 			CFG.setClassForTemplateLoading(Scaffold.class, "/scaffold");
 		}
 
 		return CFG.getTemplate(name);
+	}
+	
+	private static void generateModel(String model, List<AttributeWrapper> attributes) throws IOException, TemplateException {
+		Template templateModel = loadTemplate("TemplateModel.ftl");
+		Map<String, Object> content = new HashMap<String, Object>();
+		content.put("class", model);
+		content.put("attributes", attributes);
+		new File("src/main/java/app/models/").mkdirs();
+		String filename = "src/main/java/app/models/" + StringUtil.capitalize(model) + ".java";
+		writeFile(templateModel, content, filename);
 	}
 }

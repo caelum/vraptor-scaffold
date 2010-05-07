@@ -27,6 +27,7 @@ public class ScaffoldTest {
 	@After
 	public void after() throws IOException {
 		FileUtils.deleteDirectory(new File(projectName));
+		FileUtils.deleteDirectory(new File("src/main/java/app"));
 	}
 
 	@Test
@@ -89,5 +90,12 @@ public class ScaffoldTest {
 	public void shouldCreateIndex() throws Exception {
 		Scaffold.main(args);
 		assertTrue("Should exists index.jsp.", new File(projectName + "/src/main/webapp/index.jsp").exists());
+	}
+	
+	@Test
+	public void shouldGenerateModel() throws Exception {
+		args = new String[] { "scaffold", "product", "name:string", "value:double" };
+		Scaffold.main(args);
+		assertTrue("Should exists mode for product.", new File("src/main/java/app/models/Product.java").exists());
 	}
 }
