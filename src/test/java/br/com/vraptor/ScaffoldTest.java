@@ -28,6 +28,7 @@ public class ScaffoldTest {
 	public void after() throws IOException {
 		FileUtils.deleteDirectory(new File(projectName));
 		FileUtils.deleteDirectory(new File("src/main/java/app"));
+
 	}
 
 	@Test
@@ -66,22 +67,22 @@ public class ScaffoldTest {
 		Scaffold.main(args);
 		assertTrue("Should exists web.xml.", new File(projectName + "/src/main/webapp/WEB-INF/web.xml").exists());
 	}
-	
+
 	@Test
 	public void shouldCreateDecoratorsXml() throws Exception {
 		Scaffold.main(args);
 		assertTrue("Should exists decorators.xml.", new File(projectName + "/src/main/webapp/WEB-INF/decorators.xml").exists());
 	}
-	
+
 	@Test
 	public void shouldCreateDecorator() throws Exception {
 		Scaffold.main(args);
 		assertTrue("Should exists decorator.", new File(projectName + "/src/main/webapp/decorators/main.ftl").exists());
 	}
-	
+
 
 	@Test
-	public void shouldCreatePomXml() throws Exception {
+	public void shouldGeneratePomXml() throws Exception {
 		Scaffold.main(args);
 		assertTrue("Should exists pom.xml.", new File(projectName + "/pom.xml").exists());
 	}
@@ -91,11 +92,23 @@ public class ScaffoldTest {
 		Scaffold.main(args);
 		assertTrue("Should exists index.jsp.", new File(projectName + "/src/main/webapp/index.jsp").exists());
 	}
-	
+
 	@Test
 	public void shouldGenerateModel() throws Exception {
 		args = new String[] { "scaffold", "product", "name:string", "value:double" };
 		Scaffold.main(args);
 		assertTrue("Should exists mode for product.", new File("src/main/java/app/models/Product.java").exists());
+	}
+
+	@Test
+	public void shouldCreateModelFolder() throws Exception {
+		Scaffold.main(args);
+		assertTrue("Should exists model folder.", new File(projectName + "/src/main/java/app/models").exists());
+	}
+
+	@Test
+	public void shouldCreateControllerFolder() throws Exception {
+		Scaffold.main(args);
+		assertTrue("Should exists controller folder.", new File(projectName + "/src/main/java/app/controllers").exists());
 	}
 }
