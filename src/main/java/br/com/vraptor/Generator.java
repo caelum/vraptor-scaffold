@@ -47,6 +47,16 @@ public class Generator {
 		writeFile(templateModel, content, filename);
 	}
 
+	public static void generateController(String model) throws IOException, TemplateException {
+		Template templateModel = CFG.getTemplate("TemplateController.ftl");
+		Map<String, String> content = new HashMap<String, String>();
+		content.put("class", model);
+		String filename = "src/main/java/app/controllers/" + StringUtil.capitalize(model) + "Controller.java";
+
+		new File("src/main/java/app/controllers").mkdirs();
+		writeFile(templateModel, content, filename);
+	}
+
 	public static void generatePom(String projectName) throws IOException, TemplateException {
 		Template pom = CFG.getTemplate("pom.xml");
 		Map<String, String> content = new HashMap<String, String>();

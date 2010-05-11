@@ -1,6 +1,7 @@
 package br.com.vraptor;
 
 import static br.com.vraptor.Generator.copy;
+import static br.com.vraptor.Generator.generateController;
 import static br.com.vraptor.Generator.generateModel;
 import static br.com.vraptor.Generator.generatePom;
 
@@ -40,6 +41,7 @@ public final class Scaffold {
 				attributes.add(new AttributeWrapper(attribute_string[0], attribute_string[1]));
 			}
 			generateModel(model, attributes);
+			generateController(model);
 		}
 	}
 }

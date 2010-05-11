@@ -97,7 +97,15 @@ public class ScaffoldTest {
 	public void shouldGenerateModel() throws Exception {
 		args = new String[] { "scaffold", "product", "name:string", "value:double" };
 		Scaffold.main(args);
-		assertTrue("Should exists mode for product.", new File("src/main/java/app/models/Product.java").exists());
+		assertTrue("Should exists model for product.", new File("src/main/java/app/models/Product.java").exists());
+	}
+	
+	@Test
+	public void shouldGenerateController() throws Exception {
+		args = new String[] { "scaffold", "product", "name:string", "value:double" };
+		Scaffold.main(args);
+		File productController = new File("src/main/java/app/controllers/ProductController.java");
+		assertTrue("Should exists controller for product.", productController.exists());
 	}
 
 	@Test

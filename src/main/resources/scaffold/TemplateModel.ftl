@@ -23,18 +23,18 @@ public class ${class?cap_first} {
 
 <#macro generate_attributes>
 	<#list attributes as attribute>
-  		private ${attribute.type?cap_first} ${attribute.name};
+  	private ${attribute.type?cap_first} ${attribute.name};
 	</#list> 
 </#macro>
 
 <#macro generate_getters_setters>
 	<#list attributes as attribute>
-		public void set${attribute.name?cap_first}(${attribute.type?cap_first} ${attribute.name}) {
-			this.${attribute.name} = ${attribute.name};
-		}
+	public void set${attribute.name?cap_first}(${attribute.type?cap_first} ${attribute.name}) {
+		this.${attribute.name} = ${attribute.name};
+	}
 
-		public ${attribute.type?cap_first} get${attribute.name?cap_first}() {
-			return ${attribute.name};
-		}
+	public ${attribute.type?cap_first} get${attribute.name?cap_first}() {
+		return ${attribute.name};
+	}
 	</#list>
 </#macro>
