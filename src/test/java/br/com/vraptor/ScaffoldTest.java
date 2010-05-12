@@ -65,9 +65,10 @@ public class ScaffoldTest {
 	@Test
 	public void shouldCreateWebXml() throws Exception {
 		Scaffold.main(args);
-		assertTrue("Should exists web.xml.", new File(projectName + "/src/main/webapp/WEB-INF/web.xml").exists());
+		assertFile("Should exists web.xml.", projectName + "/src/main/webapp/WEB-INF/web.xml", 
+				"src/main/resources/scaffold/WEB-INF/web.xml");
 	}
-
+	
 	@Test
 	public void shouldCreateDecoratorsXml() throws Exception {
 		Scaffold.main(args);
@@ -91,6 +92,20 @@ public class ScaffoldTest {
 	public void shouldCreateIndex() throws Exception {
 		Scaffold.main(args);
 		assertTrue("Should exists index.jsp.", new File(projectName + "/src/main/webapp/index.jsp").exists());
+	}
+	
+	@Test
+	public void shouldCreateLog4j() throws Exception {
+		Scaffold.main(args);
+		assertFile("Should exists log4j.xml.", projectName + "/src/main/resources/log4j.xml", 
+				"src/main/resources/scaffold/log4j.xml");
+	}
+	
+	@Test
+	public void shouldCreatePersistenceXml() throws Exception {
+		Scaffold.main(args);
+		assertFile("Should exists persistence.xml.", projectName + "/src/main/resources/META-INF/persistence.xml", 
+				"src/main/resources/scaffold/META-INF/persistence.xml");
 	}
 
 	@Test
@@ -118,5 +133,9 @@ public class ScaffoldTest {
 	public void shouldCreateControllerFolder() throws Exception {
 		Scaffold.main(args);
 		assertTrue("Should exists controller folder.", new File(projectName + "/src/main/java/app/controllers").exists());
+	}
+	
+	private void assertFile(String msg, String expeted, String file) throws IOException {
+		assertTrue(msg, FileUtils.contentEquals(new File(expeted),  new File(file)));
 	}
 }

@@ -22,7 +22,7 @@ public final class Scaffold {
 			new File(projectName + MAIN_PATH + "java/app/models").mkdirs();
 			new File(projectName + MAIN_PATH + "java/app/controllers").mkdir();
 			new File(projectName + TEST_PATH + "java").mkdirs();
-			new File(projectName + MAIN_PATH + "resources").mkdir();
+			new File(projectName + MAIN_PATH + "resources/META-INF").mkdirs();
 			new File(projectName + TEST_PATH + "resources").mkdir();
 			new File(projectName + WEBAPP_PATH + "/WEB-INF/").mkdirs();
 			new File(projectName + WEBAPP_PATH + "/decorators").mkdir();
@@ -31,6 +31,8 @@ public final class Scaffold {
 			copy("/scaffold/WEB-INF/web.xml", projectName + "/src/main/webapp/WEB-INF/web.xml");
 			copy("/scaffold/WEB-INF/decorators.xml", projectName + "/src/main/webapp/WEB-INF/decorators.xml");
 			copy("/scaffold/decorators/main.ftl", projectName + "/src/main/webapp/decorators/main.ftl");
+			copy("/scaffold/log4j.xml", projectName + "/src/main/resources/log4j.xml");
+			copy("/scaffold/META-INF/persistence.xml", projectName + "/src/main/resources/META-INF/persistence.xml");
 		}
 
 		if (args.length > 1) {
