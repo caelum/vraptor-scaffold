@@ -13,6 +13,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.io.IOUtils;
+import org.jvnet.inflector.Noun;
 
 import freemarker.template.Configuration;
 import freemarker.template.ObjectWrapper;
@@ -51,8 +52,9 @@ public class Generator {
 		Template templateModel = CFG.getTemplate("TemplateController.ftl");
 		Map<String, String> content = new HashMap<String, String>();
 		content.put("class", model);
+		content.put("pluralClass", Noun.pluralOf(model));
 		String filename = "src/main/java/app/controllers/" + StringUtil.capitalize(model) + "Controller.java";
-
+		
 		new File("src/main/java/app/controllers").mkdirs();
 		writeFile(templateModel, content, filename);
 	}
