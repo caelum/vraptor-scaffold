@@ -135,6 +135,13 @@ public class ScaffoldTest {
 		assertTrue("Should exists controller folder.", new File(projectName + "/src/main/java/app/controllers").exists());
 	}
 	
+	@Test
+	public void shouldCreateFreemarkerPathResolver() throws Exception {
+		Scaffold.main(args);
+		assertFile("Should exists path resolver.", 
+				"src/main/resources/scaffold/TemplatePathResolver.ftl", projectName + "/src/main/java/app/infrastructure/FreemarkerPathResolver.ftl");
+	}
+	
 	private void assertFile(String msg, String expeted, String file) throws IOException {
 		assertTrue(msg, FileUtils.contentEquals(new File(expeted),  new File(file)));
 	}

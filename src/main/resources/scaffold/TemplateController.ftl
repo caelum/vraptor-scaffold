@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 
+import app.models.${class?cap_first};
 import br.com.caelum.vraptor.Delete;
 import br.com.caelum.vraptor.Get;
 import br.com.caelum.vraptor.Path;
@@ -14,23 +15,19 @@ import br.com.caelum.vraptor.Result;
 import br.com.caelum.vraptor.view.Results;
 
 @Resource
-public class <@className/> {
+public class ${class?cap_first}Controller {
 
 	private Result result;
 	private EntityManager entityManager;
 	
-	public <@className/>(Result result, EntityManager entityManager) {
+	public ${class?cap_first}Controller(Result result, EntityManager entityManager) {
 		this.entityManager = entityManager;
 		this.result = result;
 	}
 	
 	@Get
-	@Path(${pluralClass}})
+	@Path("${path}")
 	public List<${class?cap_first}> index() {
 		return entityManager.createQuery("from ${class?cap_first}").getResultList();
 	}
 }
-
-<#macro className>
-${class?cap_first}Controller
-</#macro> 

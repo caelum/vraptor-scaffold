@@ -52,7 +52,7 @@ public class Generator {
 		Template templateModel = CFG.getTemplate("TemplateController.ftl");
 		Map<String, String> content = new HashMap<String, String>();
 		content.put("class", model);
-		content.put("pluralClass", Noun.pluralOf(model));
+		content.put("path", "/" + Noun.pluralOf(model));
 		String filename = "src/main/java/app/controllers/" + StringUtil.capitalize(model) + "Controller.java";
 		
 		new File("src/main/java/app/controllers").mkdirs();
