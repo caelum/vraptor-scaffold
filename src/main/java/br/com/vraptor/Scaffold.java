@@ -4,6 +4,7 @@ import static br.com.vraptor.Generator.copy;
 import static br.com.vraptor.Generator.generateController;
 import static br.com.vraptor.Generator.generateModel;
 import static br.com.vraptor.Generator.generatePom;
+import static br.com.vraptor.Generator.generateViews;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -46,6 +47,7 @@ public final class Scaffold {
 			}
 			generateModel(model, attributes);
 			generateController(model);
+			generateViews(model, attributes);
 		}
 	}
 }

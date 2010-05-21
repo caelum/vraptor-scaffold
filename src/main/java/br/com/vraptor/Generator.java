@@ -57,6 +57,18 @@ public class Generator {
 		
 		new File("src/main/java/app/controllers").mkdirs();
 		writeFile(templateModel, content, filename);
+	} 
+	
+	public static void generateViews(String model, List<AttributeWrapper> attributes) throws IOException, TemplateException {
+		Template templateModel = CFG.getTemplate("view/index.ftl");
+		
+		Map<String, Object> content = new HashMap<String, Object>();
+		content.put("attributes", attributes);
+		content.put("model", model.toLowerCase());
+		
+		String filename = "src/main/webapp/WEB-INF/freemarker/" + model.toLowerCase();
+		new File(filename).mkdirs();
+		writeFile(templateModel, content, filename  + "/index.ftl");
 	}
 
 	public static void generatePom(String projectName) throws IOException, TemplateException {

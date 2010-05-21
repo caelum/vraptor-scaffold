@@ -28,6 +28,7 @@ public class ScaffoldTest {
 	public void after() throws IOException {
 		FileUtils.deleteDirectory(new File(projectName));
 		FileUtils.deleteDirectory(new File("src/main/java/app"));
+		FileUtils.deleteDirectory(new File("src/main/webapp"));
 
 	}
 
