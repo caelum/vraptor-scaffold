@@ -12,22 +12,39 @@ import java.util.List;
 
 public final class Scaffold {
 
-	private static final String MAIN_PATH = "/src/main/";
-	private static final String TEST_PATH = "/src/test/";
-	private static final String WEBAPP_PATH = MAIN_PATH + "webapp";
-
-
 	public static void main(String[] args) throws Exception {
 		if (args.length == 1) {
 			String projectName = args[0];
-			new File(projectName + MAIN_PATH + "java/app/models").mkdirs();
-			new File(projectName + MAIN_PATH + "java/app/controllers").mkdir();
-			new File(projectName + MAIN_PATH + "java/app/infrastructure").mkdir();
-			new File(projectName + TEST_PATH + "java").mkdirs();
-			new File(projectName + MAIN_PATH + "resources/META-INF").mkdirs();
-			new File(projectName + TEST_PATH + "resources").mkdir();
-			new File(projectName + WEBAPP_PATH + "/WEB-INF/freemarker").mkdirs();
-			new File(projectName + WEBAPP_PATH + "/decorators").mkdir();
+			
+			Generator.create(projectName);
+			
+			String mainJava = projectName + Generator.buildDirectoryName("src", "main", "java");
+			String mainResources = projectName + Generator.buildDirectoryName("src", "main", "resources");
+			
+			String testJava = projectName + Generator.buildDirectoryName("src", "test", "java");
+			String testResources = projectName + Generator.buildDirectoryName("src", "test", "resources");
+			
+			String webapp = projectName + Generator.buildDirectoryName("src", "main", "webapp");
+			
+			String appPath = mainJava.concat(File.separator).concat("app");
+			
+			Generator.create(mainJava);
+			Generator.create(mainResources);
+			Generator.create(testJava);
+			Generator.create(testResources);
+			Generator.create(webapp);
+			Generator.create(appPath);
+			
+			Generator.create(appPath + Generator.buildDirectoryName("models"));
+			Generator.create(appPath + Generator.buildDirectoryName("controllers"));
+			Generator.create(appPath + Generator.buildDirectoryName("infrastructure"));
+			
+			Generator.create(mainResources + Generator.buildDirectoryName("META-INF"));
+			Generator.create(webapp + Generator.buildDirectoryName("decorators"));
+			String webInf = webapp + Generator.buildDirectoryName("WEB-INF");
+			Generator.create(webInf);
+			Generator.create(webInf + Generator.buildDirectoryName("freemarker"));
+			
 			generatePom(projectName);
 			copy("/scaffold/FreemarkerPathResolver.java", projectName + "/src/main/java/app/infrastructure/FreemarkerPathResolver.java");
 			copy("/scaffold/index.jsp", projectName + "/src/main/webapp/index.jsp");
@@ -42,8 +59,8 @@ public final class Scaffold {
 			String model = args[1];
 			List<AttributeWrapper> attributes = new ArrayList<AttributeWrapper>();
 			for(int i = 2; i < args.length; i++) {
-				String[] attribute_string = args[i].split(":");
-				attributes.add(new AttributeWrapper(attribute_string[0], attribute_string[1]));
+				String[] attribute = args[i].split(":");
+				attributes.add(new AttributeWrapper(attribute[0], attribute[1]));
 			}
 			generateModel(model, attributes);
 			generateController(model);

@@ -17,7 +17,6 @@
 
 <#macro generate_tds_value>
 	<#list attributes as attribute>
-		
-		<td>${"$"}${"{"}${model}.${attribute.name}${"}"}</td>
+		<td>${"$"}${"{"}${model}.${attribute.name}${"!\"\"}"}</td>
 	</#list> 
 </#macro>

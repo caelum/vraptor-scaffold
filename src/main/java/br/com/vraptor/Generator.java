@@ -91,4 +91,17 @@ public class Generator {
 			output.close();
 		}
 	}
+	
+	public static String buildDirectoryName(String... pathFragments) {
+		String path = "";
+		for (String fragment : pathFragments) {
+			path = path.concat(File.separator + fragment);
+		}
+		return path;
+	}
+	
+	public static void create(String path) {
+		new File(path).mkdirs();
+		System.out.println("Created: " + path);
+	}
 }
