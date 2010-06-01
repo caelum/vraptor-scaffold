@@ -4,7 +4,7 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 
 @Entity
-public class ${class?cap_first} {
+public class ${model?cap_first} {
 
 	@Id
 	private Long id;

@@ -1,70 +1,131 @@
 package br.com.vraptor;
 
-import static br.com.vraptor.Generator.copy;
-import static br.com.vraptor.Generator.generateController;
-import static br.com.vraptor.Generator.generateModel;
-import static br.com.vraptor.Generator.generatePom;
-import static br.com.vraptor.Generator.generateViews;
+import static br.com.vraptor.FileUtils.buildDirectoryName;
+import static br.com.vraptor.FileUtils.copy;
+import static br.com.vraptor.FileUtils.create;
+import static br.com.vraptor.FileUtils.writeFile;
 
 import java.io.File;
-import java.util.ArrayList;
+import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
-public final class Scaffold {
+import org.jvnet.inflector.Noun;
 
-	public static void main(String[] args) throws Exception {
-		if (args.length == 1) {
-			String projectName = args[0];
-			
-			Generator.create(projectName);
-			
-			String mainJava = projectName + Generator.buildDirectoryName("src", "main", "java");
-			String mainResources = projectName + Generator.buildDirectoryName("src", "main", "resources");
-			
-			String testJava = projectName + Generator.buildDirectoryName("src", "test", "java");
-			String testResources = projectName + Generator.buildDirectoryName("src", "test", "resources");
-			
-			String webapp = projectName + Generator.buildDirectoryName("src", "main", "webapp");
-			
-			String appPath = mainJava.concat(File.separator).concat("app");
-			
-			Generator.create(mainJava);
-			Generator.create(mainResources);
-			Generator.create(testJava);
-			Generator.create(testResources);
-			Generator.create(webapp);
-			Generator.create(appPath);
-			
-			Generator.create(appPath + Generator.buildDirectoryName("models"));
-			Generator.create(appPath + Generator.buildDirectoryName("controllers"));
-			Generator.create(appPath + Generator.buildDirectoryName("infrastructure"));
-			
-			Generator.create(mainResources + Generator.buildDirectoryName("META-INF"));
-			Generator.create(webapp + Generator.buildDirectoryName("decorators"));
-			String webInf = webapp + Generator.buildDirectoryName("WEB-INF");
-			Generator.create(webInf);
-			Generator.create(webInf + Generator.buildDirectoryName("freemarker"));
-			
-			generatePom(projectName);
-			copy("/scaffold/FreemarkerPathResolver.java", projectName + "/src/main/java/app/infrastructure/FreemarkerPathResolver.java");
-			copy("/scaffold/index.jsp", projectName + "/src/main/webapp/index.jsp");
-			copy("/scaffold/WEB-INF/web.xml", projectName + "/src/main/webapp/WEB-INF/web.xml");
-			copy("/scaffold/WEB-INF/decorators.xml", projectName + "/src/main/webapp/WEB-INF/decorators.xml");
-			copy("/scaffold/decorators/main.ftl", projectName + "/src/main/webapp/decorators/main.ftl");
-			copy("/scaffold/log4j.xml", projectName + "/src/main/resources/log4j.xml");
-			copy("/scaffold/META-INF/persistence.xml", projectName + "/src/main/resources/META-INF/persistence.xml");
-		}
+import freemarker.template.Template;
+import freemarker.template.TemplateException;
+import freemarker.template.utility.StringUtil;
 
-		if (args.length > 1) {
-			String model = args[1];
-			List<AttributeWrapper> attributes = new ArrayList<AttributeWrapper>();
-			for(int i = 2; i < args.length; i++) {
-				String[] attribute = args[i].split(":");
-				attributes.add(new AttributeWrapper(attribute[0], attribute[1]));
-			}
-			generateModel(model, attributes);
-			generateController(model);
-			generateViews(model, attributes);
-		}
+public class Scaffold {
+	
+	private String project;
+	private String model;
+	private List<AttributeWrapper> attributes;
+	
+	public Scaffold(String project) {
+		this.project = project;
+		//temp im gonna sleep right now
+		this.model = project.toLowerCase();
+	}
+	
+	public void createProject() throws IOException {
+		create(project);
+	}
+	
+	public void createMainJava() throws IOException {
+		String mainJava = project + buildDirectoryName("src", "main", "java");
+		String appPath = mainJava + buildDirectoryName("app");
+		String infrastructure = appPath + buildDirectoryName("infrastructure");
+		create(mainJava);
+		create(appPath);
+		create(appPath + buildDirectoryName("models"));
+		create(appPath + buildDirectoryName("controllers"));
+		create(infrastructure);
+		copy("/scaffold/FreemarkerPathResolver.java", infrastructure + buildDirectoryName("FreemarkerPathResolver.java"));
+	}
+	
+	public void createMainResources() throws IOException {
+		String mainResources = project + buildDirectoryName("src", "main", "resources");
+		String metaInf = mainResources + buildDirectoryName("META-INF");
+		create(mainResources);
+		copy("/scaffold/log4j.xml", mainResources + buildDirectoryName("log4j.xml"));
+		create(metaInf);
+		copy("/scaffold/META-INF/persistence.xml", metaInf + buildDirectoryName("persistence.xml"));
+	}
+	
+	public void createWebApp() throws IOException {
+		String webapp = project + buildDirectoryName("src", "main", "webapp");
+		String webInf = webapp + buildDirectoryName("WEB-INF");
+		String decorators = webapp + buildDirectoryName("decorators");
+		
+		create(webapp);
+		copy("/scaffold/index.jsp", webapp + buildDirectoryName("index.jsp"));
+		
+		create(webInf);
+		copy("/scaffold/WEB-INF/decorators.xml", webInf + buildDirectoryName("decorators.xml"));
+		copy("/scaffold/WEB-INF/web.xml",  webInf + buildDirectoryName("web.xml"));
+		create(webInf + buildDirectoryName("freemarker"));
+		
+		create(decorators);
+		copy("/scaffold/decorators/main.ftl", decorators + buildDirectoryName("main.ftl"));
+	}
+	
+	public void createTestJava() {
+		create(project + buildDirectoryName("src", "test", "java"));
+	}
+	
+	public void createTestResources() {
+		create(project + buildDirectoryName("src", "test", "resources"));
+	}
+	
+	public void createPom() throws IOException, TemplateException {
+		String pom = "pom.xml";
+		Template template = TemplateHandler.getInstance().loadTemplate(pom);
+		
+		Map<String, String> content = new HashMap<String, String>();
+		content.put("GROUP_ID", project);
+		content.put("ARTIFACT_ID", project);
+		content.put("NAME", project);
+
+		writeFile(template, content, project + buildDirectoryName(pom));
+	}
+	
+	public void generateModel() throws IOException, TemplateException {
+		Template templateModel = TemplateHandler.getInstance().loadTemplate("TemplateModel.ftl");
+		Map<String, Object> content = new HashMap<String, Object>();
+		content.put("model", model);
+		content.put("attributes", attributes);
+		String filename = "src/main/java/app/models/" + StringUtil.capitalize(model) + ".java";
+
+		new File("src/main/java/app/models").mkdirs();
+		writeFile(templateModel, content, filename);
+	}
+
+	public void generateController() throws IOException, TemplateException {
+		Template templateModel = TemplateHandler.getInstance().loadTemplate("TemplateController.ftl");
+		Map<String, String> content = new HashMap<String, String>();
+		content.put("model", model);
+		content.put("path", "/" + Noun.pluralOf(model));
+		String filename = "src/main/java/app/controllers/" + StringUtil.capitalize(model) + "Controller.java";
+		
+		new File("src/main/java/app/controllers").mkdirs();
+		writeFile(templateModel, content, filename);
+	} 
+	
+	public void generateViews() throws IOException, TemplateException {
+		Template templateModel = TemplateHandler.getInstance().loadTemplate("view/index.ftl");
+		
+		Map<String, Object> content = new HashMap<String, Object>();
+		content.put("attributes", attributes);
+		content.put("model", model);
+		
+		String filename = "src/main/webapp/WEB-INF/freemarker/" + model.toLowerCase();
+		new File(filename).mkdirs();
+		writeFile(templateModel, content, filename  + "/index.ftl");
+	}
+
+	public void setAttributes(List<AttributeWrapper> attributes) {
+		this.attributes = attributes;
 	}
 }
