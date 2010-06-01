@@ -6,20 +6,12 @@ public class AttributeWrapper {
 	private String type;
 
 	public AttributeWrapper(String name, String type) {
-		setName(name);
-		setType(type);
-	}
-
-	public void setName(String name) {
 		this.name = name;
+		this.type = type;
 	}
 
 	public String getName() {
 		return name;
-	}
-
-	public void setType(String type) {
-		this.type = type;
 	}
 
 	public String getType() {

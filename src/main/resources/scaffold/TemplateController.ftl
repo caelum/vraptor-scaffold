@@ -16,7 +16,7 @@ import br.com.caelum.vraptor.view.Results;
 
 @Resource
 public class ${model?cap_first}Controller {
-	
+
 	private Result result;
 	private EntityManager entityManager;
 	

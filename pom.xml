@@ -27,7 +27,7 @@
 					</descriptorRefs>
 					<archive>
 						<manifest>
-							<mainClass>br.com.vraptor.Scaffold</mainClass>
+							<mainClass>br.com.vraptor.Generator</mainClass>
 						</manifest>
 					</archive>
 				</configuration>
