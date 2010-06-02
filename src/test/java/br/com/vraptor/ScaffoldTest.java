@@ -124,7 +124,7 @@ public class ScaffoldTest {
 		assertTrue("Should exists controller for product.", productController.exists());
 	}
 
-	@Test
+	@Test 
 	public void shouldCreateModelFolder() throws Exception {
 		Generator.main(args);
 		assertTrue("Should exists model folder.", new File(projectName + "/src/main/java/app/models").exists());

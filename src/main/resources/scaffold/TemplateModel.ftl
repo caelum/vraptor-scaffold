@@ -1,12 +1,13 @@
 package app.models;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
 @Entity
 public class ${model?cap_first} {
 
-	@Id
+	@Id @GeneratedValue
 	private Long id;
 	<@generate_attributes />
 	

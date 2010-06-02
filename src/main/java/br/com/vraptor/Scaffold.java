@@ -1,6 +1,8 @@
 package br.com.vraptor;
 
 import static br.com.vraptor.FileUtils.writeFile;
+import static br.com.vraptor.FileUtils.create;
+import static br.com.vraptor.FileUtils.buildDirectoryName;
 
 import java.io.File;
 import java.io.IOException;
@@ -47,14 +49,19 @@ public class Scaffold {
 	} 
 	
 	public void generateViews() throws IOException, TemplateException {
-		Template templateModel = TemplateHandler.getInstance().loadTemplate("view/index.ftl");
+		Template indexTemplate = TemplateHandler.getInstance().loadTemplate("view/index.ftl");
+		Template newTemplate = TemplateHandler.getInstance().loadTemplate("view/new.ftl");
 		
 		Map<String, Object> content = new HashMap<String, Object>();
 		content.put("attributes", attributes);
 		content.put("model", model);
+		content.put("modelPlural", Noun.pluralOf(model));
 		
-		String filename = "src/main/webapp/WEB-INF/freemarker/" + model.toLowerCase();
-		new File(filename).mkdirs();
-		writeFile(templateModel, content, filename  + "/index.ftl");
+		String viewDirectory = Path.VIEW_DIRECTORY +  buildDirectoryName(model);
+		
+		create(viewDirectory);
+		
+		writeFile(indexTemplate, content, viewDirectory  + "/index.ftl");
+		writeFile(newTemplate, content, viewDirectory  + "/new" + StringUtil.capitalize(model) + ".ftl");
 	}
 }
