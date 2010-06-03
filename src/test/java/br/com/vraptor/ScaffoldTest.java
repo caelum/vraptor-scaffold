@@ -33,37 +33,6 @@ public class ScaffoldTest {
 	}
 
 	@Test
-	public void shouldCreateProjectFolder() throws Exception {
-		Generator.main(args);
-		assertTrue("Should exists project folder.", new File(projectName).exists());
-	}
-
-	@Test
-	public void shouldCreateJavaSourceFolder() throws Exception {
-		Generator.main(args);
-		assertTrue("Should exists java source folder.", new File(projectName + "/src/main/java").exists());
-	}
-
-	@Test
-	public void shouldCreateMainResourcesFolder() throws Exception {
-		Generator.main(args);
-		assertTrue("Should exists main resource folder.", new File(projectName + "/src/main/resources").exists());
-	}
-
-	@Test
-	public void shouldCreateJavaTestSourceFolder() throws Exception {
-		Generator.main(args);
-		assertTrue("Should exists java test source folder.", new File(projectName + "/src/test/java").exists());
-	}
-
-	@Test
-	public void shouldCreateTestResourcesFolder() throws Exception {
-		Generator.main(args);
-		assertTrue("Should exists test resources folder.", new File(projectName
-				+ "/src/test/resources").exists());
-	}
-
-	@Test
 	public void shouldCreateWebXml() throws Exception {
 		Generator.main(args);
 		assertFile("Should exists web.xml.", projectName + "/src/main/webapp/WEB-INF/web.xml", 
@@ -80,12 +49,6 @@ public class ScaffoldTest {
 	public void shouldCreateDecorator() throws Exception {
 		Generator.main(args);
 		assertTrue("Should exists decorator.", new File(projectName + "/src/main/webapp/decorators/main.ftl").exists());
-	}
-
-	@Test
-	public void shouldGeneratePomXml() throws Exception {
-		Generator.main(args);
-		assertTrue("Should exists pom.xml.", new File(projectName + "/pom.xml").exists());
 	}
 
 	@Test

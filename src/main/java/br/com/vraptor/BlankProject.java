@@ -57,8 +57,8 @@ public class BlankProject {
 		copy("/scaffold/WEB-INF/decorators.xml", webInf + buildDirectoryName("decorators.xml"));
 		copy("/scaffold/WEB-INF/web.xml",  webInf + buildDirectoryName("web.xml"));
 		create(webInf + buildDirectoryName("freemarker"));
-		
 		create(decorators);
+		
 		copy("/scaffold/decorators/main.ftl", decorators + buildDirectoryName("main.ftl"));
 	}
 	
