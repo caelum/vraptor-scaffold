@@ -1,10 +1,9 @@
 package br.com.vraptor;
 
-import static br.com.vraptor.FileUtils.writeFile;
-import static br.com.vraptor.FileUtils.create;
 import static br.com.vraptor.FileUtils.buildDirectoryName;
+import static br.com.vraptor.FileUtils.create;
+import static br.com.vraptor.FileUtils.writeFile;
 
-import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
@@ -31,9 +30,10 @@ public class Scaffold {
 		Map<String, Object> content = new HashMap<String, Object>();
 		content.put("model", model);
 		content.put("attributes", attributes);
-		String filename = "src/main/java/app/models/" + StringUtil.capitalize(model) + ".java";
+		
+		String directory = "src" + buildDirectoryName("main", "java", "app", "models");
+		String filename = directory + "/" + StringUtil.capitalize(model) + ".java";
 
-		new File("src/main/java/app/models").mkdirs();
 		writeFile(templateModel, content, filename);
 	}
 
@@ -42,9 +42,10 @@ public class Scaffold {
 		Map<String, String> content = new HashMap<String, String>();
 		content.put("model", model);
 		content.put("path", "/" + Noun.pluralOf(model));
-		String filename = "src/main/java/app/controllers/" + StringUtil.capitalize(model) + "Controller.java";
 		
-		new File("src/main/java/app/controllers").mkdirs();
+		String directory = "src" + buildDirectoryName("main", "java", "app", "controllers");
+		String filename = directory + "/" + StringUtil.capitalize(model) + "Controller.java";
+		
 		writeFile(templateModel, content, filename);
 	} 
 	
@@ -57,7 +58,7 @@ public class Scaffold {
 		content.put("model", model);
 		content.put("modelPlural", Noun.pluralOf(model));
 		
-		String viewDirectory = Path.VIEW_DIRECTORY +  buildDirectoryName(model);
+		String viewDirectory = buildDirectoryName("src", "main", "webapp", "WEB-INF", "freemarker") +  buildDirectoryName(model);
 		
 		create(viewDirectory);
 		

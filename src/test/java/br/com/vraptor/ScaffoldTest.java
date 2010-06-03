@@ -1,5 +1,6 @@
 package br.com.vraptor;
 
+import static br.com.vraptor.FileUtils.buildDirectoryName;
 import static org.junit.Assert.assertTrue;
 
 import java.io.File;
@@ -29,7 +30,6 @@ public class ScaffoldTest {
 		FileUtils.deleteDirectory(new File(projectName));
 		FileUtils.deleteDirectory(new File("src/main/java/app"));
 		FileUtils.deleteDirectory(new File("src/main/webapp"));
-
 	}
 
 	@Test
@@ -82,7 +82,6 @@ public class ScaffoldTest {
 		assertTrue("Should exists decorator.", new File(projectName + "/src/main/webapp/decorators/main.ftl").exists());
 	}
 
-
 	@Test
 	public void shouldGeneratePomXml() throws Exception {
 		Generator.main(args);
@@ -111,16 +110,20 @@ public class ScaffoldTest {
 
 	@Test
 	public void shouldGenerateModel() throws Exception {
+		String directory = "src" + buildDirectoryName("main", "java", "app", "models");
+		new File(directory).mkdirs();
 		args = new String[] { "scaffold", "product", "name:string", "value:double" };
 		Generator.main(args);
-		assertTrue("Should exists model for product.", new File("src/main/java/app/models/Product.java").exists());
+		assertTrue("Should exists model for product.", new File(directory + "/Product.java").exists());
 	}
 	
 	@Test
 	public void shouldGenerateController() throws Exception {
+		String directory = "src" + buildDirectoryName("main", "java", "app", "controllers");
+		new File(directory).mkdirs();
 		args = new String[] { "scaffold", "product", "name:string", "value:double" };
 		Generator.main(args);
-		File productController = new File("src/main/java/app/controllers/ProductController.java");
+		File productController = new File(directory + "/ProductController.java");
 		assertTrue("Should exists controller for product.", productController.exists());
 	}
 
