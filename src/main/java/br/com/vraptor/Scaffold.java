@@ -11,58 +11,47 @@ import java.util.Map;
 
 import org.jvnet.inflector.Noun;
 
-import freemarker.template.Template;
 import freemarker.template.TemplateException;
 import freemarker.template.utility.StringUtil;
 
 public class Scaffold {
 	
 	private String model;
-	private List<AttributeWrapper> attributes;
+	private Map<String, Object> content;
 	
 	public Scaffold(String model, List<AttributeWrapper> attributes) {
 		this.model = model.toLowerCase();
-		this.attributes = attributes;
-	}
-	
-	public void generateModel() throws IOException, TemplateException {
-		Template templateModel = TemplateHandler.getInstance().loadTemplate("TemplateModel.ftl");
-		Map<String, Object> content = new HashMap<String, Object>();
-		content.put("model", model);
-		content.put("attributes", attributes);
 		
-		String directory = "src" + buildDirectoryName("main", "java", "app", "models");
-		String filename = directory + "/" + StringUtil.capitalize(model) + ".java";
-
-		writeFile(templateModel, content, filename);
-	}
-
-	public void generateController() throws IOException, TemplateException {
-		Template templateModel = TemplateHandler.getInstance().loadTemplate("TemplateController.ftl");
-		Map<String, String> content = new HashMap<String, String>();
-		content.put("model", model);
-		content.put("path", "/" + Noun.pluralOf(model));
-		
-		String directory = "src" + buildDirectoryName("main", "java", "app", "controllers");
-		String filename = directory + "/" + StringUtil.capitalize(model) + "Controller.java";
-		
-		writeFile(templateModel, content, filename);
-	} 
-	
-	public void generateViews() throws IOException, TemplateException {
-		Template indexTemplate = TemplateHandler.getInstance().loadTemplate("view/index.ftl");
-		Template newTemplate = TemplateHandler.getInstance().loadTemplate("view/new.ftl");
-		
-		Map<String, Object> content = new HashMap<String, Object>();
+		content = new HashMap<String, Object>();
 		content.put("attributes", attributes);
 		content.put("model", model);
 		content.put("modelPlural", Noun.pluralOf(model));
+		content.put("path", "/" + Noun.pluralOf(model));
+	}
+	
+	public void generateModel() throws IOException, TemplateException {
+		String directory = "src" + buildDirectoryName("main", "java", "app", "models");
+		String filename = directory + "/" + StringUtil.capitalize(model) + ".java";
 		
+		templateToFile("TemplateModel.ftl", filename);
+	}
+
+	public void generateController() throws IOException, TemplateException {
+		String directory = "src" + buildDirectoryName("main", "java", "app", "controllers");
+		String filename = directory + "/" + StringUtil.capitalize(model) + "Controller.java";
+		
+		templateToFile("TemplateController.ftl", filename);
+	} 
+	
+	public void generateViews() throws IOException, TemplateException {
 		String viewDirectory = buildDirectoryName("src", "main", "webapp", "WEB-INF", "freemarker") +  buildDirectoryName(model);
-		
 		create(viewDirectory);
 		
-		writeFile(indexTemplate, content, viewDirectory  + "/index.ftl");
-		writeFile(newTemplate, content, viewDirectory  + "/new" + StringUtil.capitalize(model) + ".ftl");
+		templateToFile("view/index.ftl", viewDirectory  + "/index.ftl");
+		templateToFile("view/new.ftl", viewDirectory  + "/new" + StringUtil.capitalize(model) + ".ftl");
+	}
+	
+	private void templateToFile(String template, String filename) throws IOException, TemplateException {
+		writeFile(TemplateHandler.getInstance().loadTemplate(filename), content, filename);
 	}
 }
