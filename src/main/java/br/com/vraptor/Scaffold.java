@@ -4,6 +4,7 @@ import static br.com.vraptor.FileUtils.buildDirectoryName;
 import static br.com.vraptor.FileUtils.create;
 import static br.com.vraptor.FileUtils.writeFile;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
@@ -31,6 +32,7 @@ public class Scaffold {
 	
 	public void generateModel() throws IOException, TemplateException {
 		String directory = "src" + buildDirectoryName("main", "java", "app", "models");
+		new File(directory).exists();
 		String filename = directory + "/" + StringUtil.capitalize(model) + ".java";
 		
 		templateToFile("TemplateModel.ftl", filename);
@@ -52,6 +54,6 @@ public class Scaffold {
 	}
 	
 	private void templateToFile(String template, String filename) throws IOException, TemplateException {
-		writeFile(TemplateHandler.getInstance().loadTemplate(filename), content, filename);
+		writeFile(TemplateHandler.getInstance().loadTemplate(template), content, filename);
 	}
 }
