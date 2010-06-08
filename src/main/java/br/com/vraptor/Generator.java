@@ -3,7 +3,7 @@ package br.com.vraptor;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Generator {
+public final class Generator {
 	
 	public static void main(String[] args) throws Exception {
 		if (args.length == 1) {

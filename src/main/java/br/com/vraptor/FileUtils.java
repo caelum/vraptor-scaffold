@@ -15,7 +15,7 @@ import org.apache.commons.io.IOUtils;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
 
-public class FileUtils {
+public final class FileUtils {
 
 	public static void copy(String src, String dst) throws IOException {
 		InputStream in = FileUtils.class.getResourceAsStream(src);
