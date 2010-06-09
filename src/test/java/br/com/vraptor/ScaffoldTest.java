@@ -52,4 +52,9 @@ public class ScaffoldTest {
 		File controller = new File(directory + "/ProductController.java");
 		assertTrue("Should exists controller to product.", controller.exists());
 	}
+	
+	@Test
+	public void shouldGenerateView() throws Exception {
+		scaffold.generateViews();
+	}
 }

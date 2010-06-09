@@ -43,4 +43,30 @@ public class ${model?cap_first}Controller {
 	public ${model?cap_first} new${model?cap_first}() {
 		return new ${model?cap_first}();
 	}
+	
+	@Put
+	@Path("${path}")
+	public void update(${model?cap_first} ${model}) {
+		entityManager.merge(${model});
+		result.use(Results.logic()).redirectTo(${model?cap_first}Controller.class).index();  
+	}
+	
+	@Get
+	@Path("${path}/{${model}.id}/edit")
+	public ${model?cap_first} edit(${model?cap_first} ${model}) {
+		return entityManager.find(${model?cap_first}.class, ${model}.getId());
+	}
+
+	@Get
+	@Path("${path}/{${model}.id}/show")
+	public ${model?cap_first} show(${model?cap_first} ${model}) {
+		return  entityManager.find(${model?cap_first}.class, ${model}.getId());
+	}
+
+	@Delete
+	@Path("${path}")
+	public void destroy(${model?cap_first} ${model}) {
+		entityManager.remove(entityManager.find(${model?cap_first}.class, ${model}.getId()));
+		result.use(Results.logic()).redirectTo(${model?cap_first}Controller.class).index();  
+	}
 }
