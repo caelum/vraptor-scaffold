@@ -32,8 +32,6 @@ public class Scaffold {
 	
 	public void generateModel() throws IOException, TemplateException {
 		String directory = "src" + buildDirectoryName("main", "java", "app", "models");
-		new File(directory).exists();
-		
 		String filename = directory + buildDirectoryName(StringUtil.capitalize(model) + ".java");
 		
 		templateToFile("TemplateModel.ftl", filename);

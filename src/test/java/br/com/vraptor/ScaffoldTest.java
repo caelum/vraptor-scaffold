@@ -19,13 +19,14 @@ import org.junit.Test;
 public class ScaffoldTest {
 
 	private Scaffold scaffold;
+	private String model = "product";
 	
 	@Before
 	public void before() {
 		List<AttributeWrapper> attributes = new ArrayList<AttributeWrapper>();
 		attributes.add(new AttributeWrapper("name", "string"));
 		attributes.add(new AttributeWrapper("value", "double"));
-		scaffold = new Scaffold("product", attributes);
+		scaffold = new Scaffold(model, attributes);
 	}
 
 	@After
@@ -55,6 +56,51 @@ public class ScaffoldTest {
 	
 	@Test
 	public void shouldGenerateView() throws Exception {
+		String directory = "src" + buildDirectoryName("main", "webapp", "WEB-INF", "freemarker") +  buildDirectoryName(model);
+		new File(directory).mkdirs();
 		scaffold.generateViews();
+		
+		File controller = new File(directory + "/newProduct.ftl");
+		assertTrue("Should exists view to create.", controller.exists());
+	}
+	
+	@Test
+	public void shouldGenerateViewToCreate() throws Exception {
+		String directory = "src" + buildDirectoryName("main", "webapp", "WEB-INF", "freemarker") +  buildDirectoryName(model);
+		new File(directory).mkdirs();
+		scaffold.generateViews();
+		
+		File view = new File(directory + "/newProduct.ftl");
+		assertTrue("Should exists view.", view.exists());
+	}
+	
+	@Test
+	public void shouldGenerateViewToEdit() throws Exception {
+		String directory = "src" + buildDirectoryName("main", "webapp", "WEB-INF", "freemarker") +  buildDirectoryName(model);
+		new File(directory).mkdirs();
+		scaffold.generateViews();
+		
+		File view = new File(directory + "/edit.ftl");
+		assertTrue("Should exists view.", view.exists());
+	}
+	
+	@Test
+	public void shouldGenerateViewToList() throws Exception {
+		String directory = "src" + buildDirectoryName("main", "webapp", "WEB-INF", "freemarker") +  buildDirectoryName(model);
+		new File(directory).mkdirs();
+		scaffold.generateViews();
+		
+		File view = new File(directory + "/index.ftl");
+		assertTrue("Should exists view.", view.exists());
+	}
+	
+	@Test
+	public void shouldGenerateViewToShow() throws Exception {
+		String directory = "src" + buildDirectoryName("main", "webapp", "WEB-INF", "freemarker") +  buildDirectoryName(model);
+		new File(directory).mkdirs();
+		scaffold.generateViews();
+		
+		File view = new File(directory + "/show.ftl");
+		assertTrue("Should exists view.", view.exists());
 	}
 }
