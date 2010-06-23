@@ -3,3 +3,6 @@ target
 .project
 .settings
 .refactorings
+.bundle
+*.gem
+.rvmrc

@@ -4,7 +4,6 @@ import static br.com.vraptor.FileUtils.buildDirectoryName;
 import static br.com.vraptor.FileUtils.create;
 import static br.com.vraptor.FileUtils.writeFile;
 
-import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
