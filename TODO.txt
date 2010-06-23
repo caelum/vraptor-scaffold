@@ -1,0 +1,2 @@
+change java source to ruby. :)
+Use thor to generate templates
