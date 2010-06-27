@@ -1,10 +1,11 @@
-source 'http://rubygems.org'
+source :rubygems
 
-gem "thor"
-gem "rake"
-gem "rubygems"
+gem "thor", ">=0.13.6"
+gem "rake", ">=0.8.7"
+
+gem "ruby-debug", :group => [:development, :test]
 
 group :test do
-  gem "ZenTest"
-  gem "rspec"
+  gem "ZenTest", ">=4.3.3"
+  gem "rspec", ">=1.3.0" ,:require => "spec"
 end

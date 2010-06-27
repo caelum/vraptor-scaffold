@@ -1,7 +1,4 @@
-require 'rubygems'
-require 'thor'
-require 'thor/actions'
-require 'thor/group'
+require 'load_paths'
 
 class Vraptor < Thor::Group
 	include Thor::Actions
