@@ -18,7 +18,7 @@ Gem::Specification.new do |s|
   s.executables        = ['vraptor']
   
   s.files = [
-     "lib/vraptor-scaffold.jar",
-     "lib/vraptor.rb",
+     "lib/vraptor-scaffold.rb",
+     "lib/generators/app_generator.rb"
   ]
 end

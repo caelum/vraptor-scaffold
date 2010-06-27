@@ -1,7 +1,7 @@
 #!/usr/bin/env ruby
 
-require File.dirname(__FILE__) + '/../lib/vraptor'
+require File.dirname(__FILE__) + '/../lib/vraptor-scaffold'
 
 begin
-	Vraptor.execute(ARGV)
+	VraptorScaffold::Main.execute(ARGV.dup)
 end
