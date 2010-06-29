@@ -1,6 +1,6 @@
 source :rubygems
 
-gem "thor", ">=0.13.6"
+gem "thor", ">=0.13.7"
 gem "rake", ">=0.8.7"
 
 gem "ruby-debug", :group => [:development, :test]
