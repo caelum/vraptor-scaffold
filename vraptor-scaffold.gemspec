@@ -23,7 +23,9 @@ Gem::Specification.new do |s|
      "Rakefile",
      "lib/vraptor-scaffold.rb",
      "lib/generators/app_generator.rb",
+     "lib/generators/templates/FreemarkerPathResolver.java",
      "lib/generators/templates/log4j.xml",
-     "lib/generators/templates/FreemarkerPathResolver.java"
+     "lib/generators/templates/persistence.xml",
+     "lib/generators/templates/pom.xml"
   ]
 end
