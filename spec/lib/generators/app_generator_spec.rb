@@ -50,6 +50,26 @@ describe AppGenerator do
         to = "#{@app}/infrastructure/FreemarkerPathResolver.java"
         FileUtils.compare_file(from, to).should be_true
       end
-    end   
+    end
+    
+    context "creating main resources" do
+      before(:all) do
+        @main_resources = "#{@project_name}/src/main/resources"
+      end 
+      
+      it "should create resource folder" do
+         File.exist?(@main_resources).should be_true 
+      end
+      
+      it "should create log4j" do
+        from = "#{AppGenerator.source_root}/templates/log4j.xml"
+        to = "#{@main_resources}/log4j.xml"
+        FileUtils.compare_file(from, to).should be_true
+      end
+      
+      it "should create META-INF" do
+         File.exist?("#{@main_resources}/META-INF").should be_true 
+      end
+    end  
   end
 end

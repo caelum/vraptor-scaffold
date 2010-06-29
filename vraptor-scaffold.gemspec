@@ -18,7 +18,12 @@ Gem::Specification.new do |s|
   s.executables        = ['vraptor']
   
   s.files = [
+     "load_paths.rb",
+     "Gemfile",
+     "Rakefile",
      "lib/vraptor-scaffold.rb",
-     "lib/generators/app_generator.rb"
+     "lib/generators/app_generator.rb",
+     "lib/generators/templates/log4j.xml",
+     "lib/generators/templates/FreemarkerPathResolver.java"
   ]
 end
