@@ -16,7 +16,10 @@ describe AppGenerator do
       File.exist?(@project_name).should be_true 
     end
     
-    xit "should create pom" do
+    it "should create pom" do
+    	from = "#{AppGenerator.source_root}/templates/pom.xml"
+        to = "#{@project_name}/pom.xml"
+        FileUtils.compare_file(from, to).should be_true
     end
     
     context "creating main java" do
@@ -55,6 +58,7 @@ describe AppGenerator do
     context "creating main resources" do
       before(:all) do
         @main_resources = "#{@project_name}/src/main/resources"
+        @meta_inf = "#{@main_resources}/META-INF"
       end 
       
       it "should create resource folder" do
@@ -68,8 +72,28 @@ describe AppGenerator do
       end
       
       it "should create META-INF" do
-         File.exist?("#{@main_resources}/META-INF").should be_true 
+         File.exist?(@meta_inf).should be_true 
       end
-    end  
+      
+       it "should create log4j" do
+        from = "#{AppGenerator.source_root}/templates/persistence.xml"
+        to = "#{@meta_inf}/persistence.xml"
+        FileUtils.compare_file(from, to).should be_true
+      end
+    end 
+    context "creating webapp" do
+      before(:all) do
+        @webapp = "#{@project_name}/src/main/webapp"
+        @web_inf = "#{@webapp}/WEB-INF"
+      end 
+      
+      it "should create webapp folder" do
+         File.exist?(@webapp).should be_true 
+      end
+      
+      it "should create WEB-INF folder" do
+         File.exist?(@web_inf).should be_true 
+      end
+    end   
   end
 end

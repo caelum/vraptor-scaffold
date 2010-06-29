@@ -8,11 +8,17 @@ class AppGenerator < Thor::Group
   def build(project_name)
     self.destination_root=(project_name)
     empty_directory "."
+    create_pom
     create_main_java
     create_main_resources
+    create_webapp
   end
   
   private
+  	def create_pom
+  		template("templates/pom.xml", "pom.xml")
+  	end
+  
     def create_main_java
       main_java = "src/main/java"
       empty_directory main_java
@@ -41,7 +47,16 @@ class AppGenerator < Thor::Group
       empty_directory main_resources
       inside main_resources do
         template_from_root("log4j.xml", "#{main_resources}/log4j.xml")
-        empty_directory "META-INF"
+        meta_inf = empty_directory "META-INF"
+        template_from_root("persistence.xml", "#{meta_inf}/persistence.xml")
+      end
+    end
+    
+    def create_webapp
+      webapp = "src/main/webapp"
+      empty_directory webapp
+      inside webapp do
+        empty_directory "WEB-INF"
       end
     end
     
