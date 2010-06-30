@@ -23,6 +23,7 @@ Gem::Specification.new do |s|
      "lib/load_paths.rb",
      "lib/vraptor-scaffold.rb",
      "lib/generators/app_generator.rb",
+     "lib/generators/scaffold_generator.rb",
      "lib/generators/templates/decorators.xml",
      "lib/generators/templates/FreemarkerPathResolver.java",
      "lib/generators/templates/index.jsp",

@@ -17,7 +17,7 @@ describe AppGenerator do
     end
     
     it "should create pom" do
-    	from = File.expand_path(File.dirname(__FILE__) + "/templates/pom.xml")
+      from = File.expand_path(File.dirname(__FILE__) + "/templates/pom.xml")
       to = "#{@project_name}/pom.xml"
       FileUtils.compare_file(from, to).should be_true
     end
