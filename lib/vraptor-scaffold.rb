@@ -1,4 +1,4 @@
-require File.dirname(__FILE__) + '/../load_paths'
+require File.dirname(__FILE__) + '/load_paths'
 require File.dirname(__FILE__) + '/../lib/generators/app_generator'
 
 module VraptorScaffold

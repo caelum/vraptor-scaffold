@@ -6,7 +6,8 @@ class AppGenerator < Thor::Group
   end
       
   def build(project_name)
-    self.destination_root=(project_name)
+    @project_name = project_name
+    self.destination_root=(@project_name)
     empty_directory "."
     create_pom
     create_main_java
