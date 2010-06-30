@@ -17,9 +17,9 @@ describe AppGenerator do
     end
     
     it "should create pom" do
-    	from = "#{AppGenerator.source_root}/templates/pom.xml"
-        to = "#{@project_name}/pom.xml"
-        FileUtils.compare_file(from, to).should be_true
+    	from = "#{AppGenerator.source_root}/templates/pom.erb"
+      to = "#{@project_name}/pom.xml"
+      FileUtils.compare_file(from, to).should be_true
     end
     
     context "creating main java" do
@@ -85,15 +85,62 @@ describe AppGenerator do
       before(:all) do
         @webapp = "#{@project_name}/src/main/webapp"
         @web_inf = "#{@webapp}/WEB-INF"
+        @decorators = "#{@webapp}/decorators"
       end 
       
       it "should create webapp folder" do
          File.exist?(@webapp).should be_true 
       end
       
+      it "should create index" do
+        from = "#{AppGenerator.source_root}/templates/index.jsp"
+        to = "#{@webapp}/index.jsp"
+        FileUtils.compare_file(from, to).should be_true
+      end
+      
+      it "should create decorators folder" do
+         File.exist?(@decorators).should be_true 
+      end
+      
+      it "should create decorator file" do
+        from = "#{AppGenerator.source_root}/templates/main.ftl"
+        to = "#{@decorators}/main.ftl"
+        FileUtils.compare_file(from, to).should be_true
+      end
+      
       it "should create WEB-INF folder" do
          File.exist?(@web_inf).should be_true 
       end
-    end   
+      
+      it "should create decorators.xml" do
+        from = "#{AppGenerator.source_root}/templates/decorators.xml"
+        to = "#{@web_inf}/decorators.xml"
+        FileUtils.compare_file(from, to).should be_true
+      end
+      
+      it "should create web.xml" do
+        from = "#{AppGenerator.source_root}/templates/web.xml"
+        to = "#{@web_inf}/web.xml"
+        FileUtils.compare_file(from, to).should be_true
+      end
+      
+      it "should create freemarker folder" do
+         File.exist?("#{@web_inf}/freemarker").should be_true 
+      end
+    end
+    context "creating test" do
+      before(:all) do
+        @test_java = "#{@project_name}/src/test/java"
+        @test_resource = "#{@project_name}/src/test/java"
+      end
+      
+      it "should create test source folder" do
+        File.exist?(@test_java).should be_true 
+      end
+      
+      it "should create test resource folder" do
+        File.exist?(@test_resource).should be_true 
+      end
+    end    
   end
 end

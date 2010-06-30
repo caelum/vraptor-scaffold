@@ -12,11 +12,13 @@ class AppGenerator < Thor::Group
     create_main_java
     create_main_resources
     create_webapp
+    empty_directory "src/test/java"
+    empty_directory "src/test/resources"
   end
   
   private
   	def create_pom
-  		template("templates/pom.xml", "pom.xml")
+  		template("templates/pom.erb", "pom.xml")
   	end
   
     def create_main_java
@@ -56,7 +58,25 @@ class AppGenerator < Thor::Group
       webapp = "src/main/webapp"
       empty_directory webapp
       inside webapp do
-        empty_directory "WEB-INF"
+        template_from_root("index.jsp", "#{webapp}/index.jsp")
+        create_decorators
+        create_web_inf
+      end
+    end
+    
+    def create_decorators
+      decorators = empty_directory "decorators"
+      inside decorators do
+        template_from_root("main.ftl", "#{decorators}/main.ftl")
+      end
+    end
+    
+    def create_web_inf
+      web_inf = empty_directory "WEB-INF"
+      inside "WEB-INF" do
+        template_from_root("decorators.xml", "#{web_inf}/decorators.xml")
+        template_from_root("web.xml", "#{web_inf}/web.xml")
+        empty_directory "freemarker"
       end
     end
     
