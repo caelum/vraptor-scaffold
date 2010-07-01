@@ -9,8 +9,9 @@ public class <%= @model %> {
 
 	@Id @GeneratedValue
 	private Long id;
-	<@generate_attributes />
-	
+<% @attributes.each_key do |key| %>
+	private <%= @attributes[key] %> <%= key %>;
+<% end %>
 	public void setId(Long id) {
 		this.id = id;
 	}
@@ -18,24 +19,13 @@ public class <%= @model %> {
 	public Long getId() {
 		return id;
 	}
+<% @attributes.each_key do |key| %>
+	public void set<%= key.to_s.capitalize %> (<%= @attributes[key] %> <%= key %>) {
+		this.<%= key %> = <%= key %>;
+	}
 	
-	<@generate_getters_setters/>
+	public <%= @attributes[key] %> get<%= key.to_s.capitalize %>() {
+		return <%= key %>;
+	}
+<% end %>
 }
-
-<#macro generate_attributes>
-	<#list attributes as attribute>
-  	private ${attribute.type?cap_first} ${attribute.name};
-	</#list> 
-</#macro>
-
-<#macro generate_getters_setters>
-	<#list attributes as attribute>
-	public void set${attribute.name?cap_first}(${attribute.type?cap_first} ${attribute.name}) {
-		this.${attribute.name} = ${attribute.name};
-	}
-
-	public ${attribute.type?cap_first} get${attribute.name?cap_first}() {
-		return ${attribute.name};
-	}
-	</#list>
-</#macro>
