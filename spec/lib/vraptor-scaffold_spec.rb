@@ -21,4 +21,17 @@ describe VraptorScaffold::Main do
       VraptorScaffold::Main.execute(@args)
     end
   end
+  
+  context "scaffold model" do
+    before(:each) do
+      @generator = mock(ScaffoldGenerator)
+      ScaffoldGenerator.stub!(:new).and_return(@generator)
+      @args = ["scaffold", "product", "name:string", "value:doulbe"]
+    end
+    
+    it "should call scaffold generator" do
+      @generator.should_receive(:build).with(["product", "name:string", "value:doulbe"])
+      VraptorScaffold::Main.execute(@args)
+    end
+  end
 end
