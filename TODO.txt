@@ -1,2 +1,3 @@
-change java source to ruby. :)
-Use thor to generate templates
+change java source to ruby. :) (almost done)
+Fix pom when create app with path Ex: /home/rodolfo/src/app
+add dependency to gemspec
