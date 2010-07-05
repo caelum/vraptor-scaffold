@@ -5,27 +5,31 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
 @Entity
-public class <%= @model %> {
+public class <%= @model.capitalize %> {
 
 	@Id @GeneratedValue
 	private Long id;
-<% @attributes.each_key do |key| %>
-	private <%= @attributes[key] %> <%= key %>;
-<% end %>
+	
+<% @attributes.each do |att| -%>
+	private <%= att.type %> <%= att.name %>;
+<% end -%>
+  
 	public void setId(Long id) {
 		this.id = id;
 	}
-
+	
 	public Long getId() {
 		return id;
 	}
-<% @attributes.each_key do |key| %>
-	public void set<%= key.to_s.capitalize %> (<%= @attributes[key] %> <%= key %>) {
-		this.<%= key %> = <%= key %>;
+	
+<% @attributes.each do |att| -%>
+	public void set<%= att.name.capitalize %>(<%= att.type %> <%= att.name %>) {
+		this.<%= att.name %> = <%= att.name %>;
 	}
 	
-	public <%= @attributes[key] %> get<%= key.to_s.capitalize %>() {
-		return <%= key %>;
+	public <%= att.type %> get<%= att.name.capitalize %>() {
+		return <%= att.name %>;
 	}
-<% end %>
+	
+<% end -%>
 }

@@ -4,7 +4,7 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 
-import app.models.${model?cap_first};
+import app.models.<%= @model.capitalize %>;
 import br.com.caelum.vraptor.Delete;
 import br.com.caelum.vraptor.Get;
 import br.com.caelum.vraptor.Path;
@@ -15,58 +15,58 @@ import br.com.caelum.vraptor.Result;
 import br.com.caelum.vraptor.view.Results;
 
 @Resource
-public class ${model?cap_first}Controller {
+public class <%= @model.capitalize %>Controller {
 
 	private Result result;
 	private EntityManager entityManager;
 	
-	public ${model?cap_first}Controller(Result result, EntityManager entityManager) {
+	public <%= @model.capitalize %>Controller(Result result, EntityManager entityManager) {
 		this.entityManager = entityManager;
 		this.result = result;
 	}
 	
 	@Get
-	@Path("${path}")
-	public List<${model?cap_first}> index() {
-		return entityManager.createQuery("from ${model?cap_first}").getResultList();
+	@Path("<%= @path %>")
+	public List<<%= @model.capitalize %>> index() {
+		return entityManager.createQuery("from <%= @model.capitalize %>").getResultList();
 	}
 	
 	@Post
-	@Path("${path}")
-	public void create(${model?cap_first} ${model}) {
-		entityManager.persist(${model});
-		result.use(Results.logic()).redirectTo(${model?cap_first}Controller.class).index();  
+	@Path("<%= @path %>")
+	public void create(<%= @model.capitalize %> <%= @model %>) {
+		entityManager.persist(<%= @model %>);
+		result.use(Results.logic()).redirectTo($<%= @model.capitalize %>Controller.class).index();  
 	}
 	
 	@Get
-	@Path("${path}/new")
-	public ${model?cap_first} new${model?cap_first}() {
-		return new ${model?cap_first}();
+	@Path("<%= "#{@path}/new" %>")
+	public <%= @model.capitalize %> new<%= @model.capitalize %>() {
+		return new <%= @model.capitalize %>();
 	}
 	
 	@Put
-	@Path("${path}")
-	public void update(${model?cap_first} ${model}) {
-		entityManager.merge(${model});
-		result.use(Results.logic()).redirectTo(${model?cap_first}Controller.class).index();  
+	@Path("<%= @path %>")
+	public void update(<%= @model.capitalize %> <%= @model %>) {
+		entityManager.merge(<%= @model %>);
+		result.use(Results.logic()).redirectTo(<%= @model.capitalize %>Controller.class).index();  
 	}
 	
 	@Get
-	@Path("${path}/{${model}.id}/edit")
-	public ${model?cap_first} edit(${model?cap_first} ${model}) {
-		return entityManager.find(${model?cap_first}.class, ${model}.getId());
+	@Path("<%= "#{@path}/#{@model}.id/edit" %>")
+	public <%= @model.capitalize %> edit(<%= @model.capitalize %> <%= @model %>) {
+		return entityManager.find(<%= @model.capitalize %>.class, <%= @model %>.getId());
 	}
 
 	@Get
-	@Path("${path}/{${model}.id}/show")
-	public ${model?cap_first} show(${model?cap_first} ${model}) {
-		return  entityManager.find(${model?cap_first}.class, ${model}.getId());
+	@Path("<%= "#{@path}/#{@model}.id/show" %>")
+	public <%= @model.capitalize %> show(<%= @model.capitalize %> <%= @model %>) {
+		return  entityManager.find(<%= @model.capitalize %>, <%= @model %>.getId());
 	}
 
 	@Delete
-	@Path("${path}")
-	public void destroy(${model?cap_first} ${model}) {
-		entityManager.remove(entityManager.find(${model?cap_first}.class, ${model}.getId()));
-		result.use(Results.logic()).redirectTo(${model?cap_first}Controller.class).index();  
+	@Path("<%= @path %>")
+	public void destroy(<%= @model.capitalize %> <%= @model %>) {
+		entityManager.remove(entityManager.find(<%= @model.capitalize %>.class, <%= @model %>.getId()));
+		result.use(Results.logic()).redirectTo(<%= @model.capitalize %>Controller.class).index();  
 	}
 }

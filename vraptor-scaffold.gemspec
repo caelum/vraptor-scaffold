@@ -23,6 +23,7 @@ Gem::Specification.new do |s|
      "lib/load_paths.rb",
      "lib/vraptor-scaffold.rb",
      "lib/generators/app_generator.rb",
+     "lib/generators/attribute.rb",
      "lib/generators/scaffold_generator.rb",
      "lib/generators/templates/decorators.xml",
      "lib/generators/templates/FreemarkerPathResolver.java",
@@ -31,6 +32,8 @@ Gem::Specification.new do |s|
      "lib/generators/templates/main.ftl",
      "lib/generators/templates/persistence.xml",
      "lib/generators/templates/pom.erb",
-     "lib/generators/templates/web.xml"
+     "lib/generators/templates/web.xml",
+     "lib/generators/templates/scaffold/controller.erb",
+     "lib/generators/templates/scaffold/model.erb"
   ]
 end
