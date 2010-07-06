@@ -1,4 +1,4 @@
-require File.expand_path(File.dirname(__FILE__) + "/../../spec_helper")
+require File.expand_path(File.dirname(__FILE__) + "/../../../spec_helper")
 
 describe ScaffoldGenerator do
   
@@ -12,13 +12,13 @@ describe ScaffoldGenerator do
   end
   
   it "should create controller" do
-    from = File.expand_path(File.dirname(__FILE__) + "/templates/scaffold/ProductController.java")
+    from = File.expand_path(File.dirname(__FILE__) + "/templates/ProductController.java")
     to = "src/main/java/app/controllers/ProductController.java"
     FileUtils.compare_file(from, to).should be_true
   end
   
   it "should create model" do
-    from = File.expand_path(File.dirname(__FILE__) + "/templates/scaffold/Product.java")
+    from = File.expand_path(File.dirname(__FILE__) + "/templates/Product.java")
     to = "src/main/java/app/models/Product.java"
     FileUtils.compare_file(from, to).should be_true
   end
