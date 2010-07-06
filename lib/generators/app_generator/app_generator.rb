@@ -1,10 +1,9 @@
-class AppGenerator < Thor::Group
-  include Thor::Actions
+class AppGenerator < VraptorScaffold::Base
   
-  def self.source_root
-    File.dirname(__FILE__)
-  end
-      
+   def self.source_root
+      File.dirname(__FILE__)
+   end
+  
   def build(project_name)
     @project_name = project_name
     self.destination_root=(@project_name)
