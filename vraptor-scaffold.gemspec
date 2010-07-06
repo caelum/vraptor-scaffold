@@ -34,6 +34,10 @@ Gem::Specification.new do |s|
      "lib/generators/templates/pom.erb",
      "lib/generators/templates/web.xml",
      "lib/generators/templates/scaffold/controller.erb",
-     "lib/generators/templates/scaffold/model.erb"
+     "lib/generators/templates/scaffold/model.erb",
+     "lib/generators/templates/scaffold/views/index.erb",
+     "lib/generators/templates/scaffold/views/show.erb",
+     "lib/generators/templates/scaffold/views/new.erb",
+     "lib/generators/templates/scaffold/views/edit.erb"
   ]
 end

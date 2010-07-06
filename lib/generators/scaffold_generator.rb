@@ -15,5 +15,9 @@ class ScaffoldGenerator < Thor::Group
     end
     template("templates/scaffold/controller.erb", "src/main/java/app/controllers/#{@model.capitalize}Controller.java")
     template("templates/scaffold/model.erb", "src/main/java/app/models/#{@model.capitalize}.java")
+    template("templates/scaffold/views/index.erb", "src/main/webapp/WEB-INF/freemarker/#{@model}/index.ftl")
+     template("templates/scaffold/views/index.erb", "src/main/webapp/WEB-INF/freemarker/#{@model}/show.ftl")
+      template("templates/scaffold/views/index.erb", "src/main/webapp/WEB-INF/freemarker/#{@model}/new.ftl")
+       template("templates/scaffold/views/index.erb", "src/main/webapp/WEB-INF/freemarker/#{@model}/edit.ftl")
   end
 end

@@ -35,7 +35,7 @@ public class ProductController {
 	@Path("/products")
 	public void create(Product product) {
 		entityManager.persist(product);
-		result.use(Results.logic()).redirectTo($ProductController.class).index();  
+		result.use(Results.logic()).redirectTo(ProductController.class).index();  
 	}
 	
 	@Get
@@ -60,7 +60,7 @@ public class ProductController {
 	@Get
 	@Path("/products/product.id/show")
 	public Product show(Product product) {
-		return  entityManager.find(Product, product.getId());
+		return entityManager.find(Product.class, product.getId());
 	}
 
 	@Delete

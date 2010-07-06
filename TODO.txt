@@ -1,3 +1,8 @@
-change java source to ruby. :) (almost done)
 Fix pom when create app with path Ex: /home/rodolfo/src/app
 add dependency to gemspec
+change log4j.xml to lo4j.properties
+display name web.xml with app name
+gemfile not found when intall gem
+changelog
+create others persistence unit
+rake (rspec, rcov and Jeweler)

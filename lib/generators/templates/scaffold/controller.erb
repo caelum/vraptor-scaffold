@@ -35,7 +35,7 @@ public class <%= @model.capitalize %>Controller {
 	@Path("<%= @path %>")
 	public void create(<%= @model.capitalize %> <%= @model %>) {
 		entityManager.persist(<%= @model %>);
-		result.use(Results.logic()).redirectTo($<%= @model.capitalize %>Controller.class).index();  
+		result.use(Results.logic()).redirectTo(<%= @model.capitalize %>Controller.class).index();  
 	}
 	
 	@Get
@@ -60,7 +60,7 @@ public class <%= @model.capitalize %>Controller {
 	@Get
 	@Path("<%= "#{@path}/#{@model}.id/show" %>")
 	public <%= @model.capitalize %> show(<%= @model.capitalize %> <%= @model %>) {
-		return  entityManager.find(<%= @model.capitalize %>, <%= @model %>.getId());
+		return entityManager.find(<%= @model.capitalize %>.class, <%= @model %>.getId());
 	}
 
 	@Delete
