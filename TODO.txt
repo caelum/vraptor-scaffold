@@ -6,3 +6,4 @@ gemfile not found when intall gem
 changelog
 create others persistence unit
 rake (rspec, rcov and Jeweler)
+new java keywork(how to call new method in controller?)

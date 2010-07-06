@@ -1,0 +1,72 @@
+package app.controllers;
+
+import java.util.List;
+
+import javax.persistence.EntityManager;
+
+import app.models.<%= class_name %>;
+import br.com.caelum.vraptor.Delete;
+import br.com.caelum.vraptor.Get;
+import br.com.caelum.vraptor.Path;
+import br.com.caelum.vraptor.Post;
+import br.com.caelum.vraptor.Put;
+import br.com.caelum.vraptor.Resource;
+import br.com.caelum.vraptor.Result;
+import br.com.caelum.vraptor.view.Results;
+
+@Resource
+public class <%= controller_class_name %> {
+
+	private Result result;
+	private EntityManager entityManager;
+	
+	public <%= controller_class_name %>(Result result, EntityManager entityManager) {
+		this.entityManager = entityManager;
+		this.result = result;
+	}
+	
+	@Get
+	@Path("<%= path %>")
+	public List<<%= class_name %>> index() {
+		return entityManager.createQuery("from <%= class_name %>").getResultList();
+	}
+	
+	@Post
+	@Path("<%= path %>")
+	public void create(<%= class_name %> <%= @model %>) {
+		entityManager.persist(<%= @model %>);
+		result.use(Results.logic()).redirectTo(<%= controller_class_name %>.class).index();  
+	}
+	
+	@Get
+	@Path("<%= "#{path}/new" %>")
+	public <%= class_name %> new<%= class_name %>() {
+		return new <%= class_name %>();
+	}
+	
+	@Put
+	@Path("<%= path %>")
+	public void update(<%= class_name %> <%= @model %>) {
+		entityManager.merge(<%= @model %>);
+		result.use(Results.logic()).redirectTo(<%= controller_class_name %>.class).index();  
+	}
+	
+	@Get
+	@Path("<%= "#{path}/#{@model}.id/edit" %>")
+	public <%= class_name %> edit(<%= @model.capitalize %> <%= @model %>) {
+		return entityManager.find(<%= @model.capitalize %>.class, <%= @model %>.getId());
+	}
+
+	@Get
+	@Path("<%= "#{path}/#{@model}.id/show" %>")
+	public <%= class_name %> show(<%= @model.capitalize %> <%= @model %>) {
+		return entityManager.find(<%= @model.capitalize %>.class, <%= @model %>.getId());
+	}
+
+	@Delete
+	@Path("<%= path %>")
+	public void destroy(<%= class_name %> <%= @model %>) {
+		entityManager.remove(entityManager.find(<%= class_name %>.class, <%= @model %>.getId()));
+		result.use(Results.logic()).redirectTo(<%= controller_class_name %>.class).index();  
+	}
+}

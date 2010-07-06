@@ -11,12 +11,6 @@ describe ScaffoldGenerator do
     FileUtils.remove_dir("src") 
   end
   
-  it "should create controller" do
-    from = File.expand_path(File.dirname(__FILE__) + "/templates/ProductController.java")
-    to = "src/main/java/app/controllers/ProductController.java"
-    FileUtils.compare_file(from, to).should be_true
-  end
-  
   it "should create index view" do
     File.exist?("src/main/webapp/WEB-INF/freemarker/product/index.ftl").should be_true 
   end

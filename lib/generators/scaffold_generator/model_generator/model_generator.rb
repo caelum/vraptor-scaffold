@@ -5,10 +5,6 @@ class ModelGenerator < BaseScaffold
   end
   
   def build
-    template("templates/model.erb", "src/main/java/app/models/#{@model.capitalize}.java")
-  end
-  
-  def class_name
-    @model.capitalize
+    template("templates/model.erb", "src/main/java/app/models/#{class_name}.java")
   end
 end

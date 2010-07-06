@@ -6,6 +6,10 @@ class BaseScaffold < VraptorScaffold::Base
     parse_attributes args
   end
   
+  def class_name
+    @model.capitalize
+  end
+  
   private 
     def parse_attributes(args)
       @attributes = []
