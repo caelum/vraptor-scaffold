@@ -17,12 +17,6 @@ describe ScaffoldGenerator do
     FileUtils.compare_file(from, to).should be_true
   end
   
-  it "should create model" do
-    from = File.expand_path(File.dirname(__FILE__) + "/templates/Product.java")
-    to = "src/main/java/app/models/Product.java"
-    FileUtils.compare_file(from, to).should be_true
-  end
-  
   it "should create index view" do
     File.exist?("src/main/webapp/WEB-INF/freemarker/product/index.ftl").should be_true 
   end
