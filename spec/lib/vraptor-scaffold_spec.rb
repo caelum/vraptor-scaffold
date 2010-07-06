@@ -22,7 +22,7 @@ describe VraptorScaffold::Main do
     end
   end
   
-  context "scaffold model" do
+  context "scaffold" do
     before(:each) do
       @generator = mock(ScaffoldGenerator)
       ScaffoldGenerator.stub!(:new).and_return(@generator)
