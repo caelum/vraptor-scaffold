@@ -1,8 +1,5 @@
-target
-.classpath
-.project
-.settings
-.refactorings
 .bundle
 *.gem
 .rvmrc
+coverage
+pgk
