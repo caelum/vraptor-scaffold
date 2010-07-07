@@ -1,12 +1,17 @@
 <body>
-	<form action="${"$"}${"{base}"}/${modelPlural}" method="post">
-		<@generate_input />
-		<input type="submit" value="update">
-	</form>
 
-	<#macro generate_input>
-		<#list attributes as attribute>
-			<input type="text" name="${model}.${attribute.name}">
-		</#list> 
-	</#macro>
+<form action="${base}/products" method="post">
+<input type="hidden" name="product.id" value="${product.id}">
+<div class="field">
+    Name:<br />
+    <input type="text" name="product.name" value="${product.name}">
+  </div>
+  <div class="actions">
+    <input type="submit" value="save">
+  </div>
+</form>
+
+<%= link_to 'Back', clients_path %>
+	
 </body>
+

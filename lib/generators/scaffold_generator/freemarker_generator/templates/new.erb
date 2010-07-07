@@ -1,11 +1,17 @@
-<form action="${"$"}${"{base}"}/${modelPlural}" method="post">
-	<@generate_text />
-	<input type="submit" value="save">
+<body>
+
+<form action="${base}/products" method="post">
+
+<div class="field">
+    Name:<br />
+    <input type="text" name="product.name">
+  </div>
+  <div class="actions">
+    <input type="submit" value="save">
+  </div>
 </form>
 
-<#macro generate_text>
-	<#list attributes as attribute>
-		<input type="text" name="${model}.${attribute.name}">
-	</#list> 
-</#macro>
+<%= link_to 'Back', clients_path %>
 	
+</body>
+

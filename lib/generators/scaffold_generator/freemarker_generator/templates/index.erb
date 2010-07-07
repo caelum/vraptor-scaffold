@@ -1,29 +1,24 @@
-<h1>Listing ${modelPlural}</h1>
+<body>
+<h1>Listing clients</h1>
+
 <table>
-	<tr>
-		<@generate_tds />
-	</tr>
-	<tr>
-	${"<#list ${model}List as ${model}>"}
-		<@generate_tds_value />
-	${"</#list>"}
-	</tr>
+  <tr>
+    <th>Name</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @clients.each do |client| %>
+  <tr>
+    <td><%= client.name %></td>
+    <td><%= link_to 'Show', client %></td>
+    <td><%= link_to 'Edit', edit_client_path(client) %></td>
+    <td><%= link_to 'Destroy', client, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
 </table>
-	
+
 <br />
-
-<a href="${modelPlural}/new">Novo</a> 
-
-<#macro generate_tds>
-	<#list attributes as attribute>
-		<td>${attribute.name}</td>
-	</#list> 
-</#macro>
-
-<#macro generate_tds_value>
-	<tr>
-		<#list attributes as attribute>
-			<td>${"$"}${"{"}${model}.${attribute.name}${"!\"\"}"}</td>
-		</#list> 
-	</tr>
-</#macro>
+	<a href="${base}/products/novo">New product</a> 
+</body>
