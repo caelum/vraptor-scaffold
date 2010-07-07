@@ -3,5 +3,4 @@ change log4j.xml to lo4j.properties
 display name web.xml with app name
 changelog
 create others persistence unit
-rake (rcov)
 new java keywork(how to call new method in controller?)

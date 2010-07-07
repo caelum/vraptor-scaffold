@@ -3,7 +3,7 @@ require File.expand_path(File.dirname(__FILE__) + "/../../../../spec_helper")
 describe ModelGenerator do
   
   before(:each) do
-    @generator = ModelGenerator.new(["product", "name:string", "value:double"])
+    @generator = ModelGenerator.new("product", build_attributes)
     @generator.build
   end
   

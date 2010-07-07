@@ -3,7 +3,7 @@ require File.expand_path(File.dirname(__FILE__) + "/../../../../spec_helper")
 describe FreemarkerGenerator do
   
   before(:each) do
-    @generator = FreemarkerGenerator.new(["product", "name:string", "value:double"])
+    @generator = FreemarkerGenerator.new("product", build_attributes)
     @generator.build
   end
   

@@ -24,7 +24,7 @@
 
 == Authors
 
- Rodolfo Liviero [mailto:rodolfoliviero@gmail.com]
+-- Rodolfo Liviero [mailto:rodolfoliviero@gmail.com]
 
 == Copyright
 

@@ -19,11 +19,14 @@ Gem::Specification.new do |s|
      "README.rdoc"
   ]
   s.files = [
-    ".gitignore",
+    ".document",
+     ".gitignore",
      "Gemfile",
+     "LICENSE",
      "README.rdoc",
      "Rakefile",
      "TODO.txt",
+     "VERSION.yml",
      "bin/vraptor",
      "lib/generators/app_generator/app_generator.rb",
      "lib/generators/app_generator/templates/FreemarkerPathResolver.java",
@@ -64,19 +67,20 @@ Gem::Specification.new do |s|
      "vraptor-scaffold.gemspec"
   ]
   s.homepage = %q{http://github.com/rodolfoliviero/vraptor-scaffold}
+  s.post_install_message = %q{Thank you for installing vraptor-scaffold. Please read http://github.com/rodolfoliviero/vraptor-scaffold/blob/master/README.rdoc for more information.}
   s.rdoc_options = ["--charset=UTF-8"]
   s.require_paths = ["lib"]
   s.rubygems_version = %q{1.3.7}
   s.summary = %q{Scaffold for vraptor 3.}
   s.test_files = [
-    "spec/lib/vraptor-scaffold_spec.rb",
+    "spec/spec_helper.rb",
      "spec/lib/generators/app_generator/app_generator_spec.rb",
-     "spec/lib/generators/scaffold_generator/controller_generator/controller_generator_spec.rb",
-     "spec/lib/generators/scaffold_generator/scaffold_generator_spec.rb",
+     "spec/lib/generators/attribute_spec.rb",
      "spec/lib/generators/scaffold_generator/model_generator/model_generator_spec.rb",
      "spec/lib/generators/scaffold_generator/freemarker_generator/freemarker_generator_spec.rb",
-     "spec/lib/generators/attribute_spec.rb",
-     "spec/spec_helper.rb"
+     "spec/lib/generators/scaffold_generator/scaffold_generator_spec.rb",
+     "spec/lib/generators/scaffold_generator/controller_generator/controller_generator_spec.rb",
+     "spec/lib/vraptor-scaffold_spec.rb"
   ]
 
   if s.respond_to? :specification_version then

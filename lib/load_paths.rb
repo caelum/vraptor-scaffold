@@ -1,6 +1,6 @@
 require 'rubygems'
-require "bundler"
-Bundler.setup
+require "bundler/setup"
+
 require 'thor/actions'
 require 'thor/group'
 require 'active_support/inflector'
