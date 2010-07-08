@@ -4,3 +4,4 @@ display name web.xml with app name
 create others persistence unit
 new java keyword(how to call new method in controller?)
 create "partial" to form
+update jpa to jpa2(hibernate 3.5.?-FINAL)

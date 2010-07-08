@@ -91,9 +91,18 @@ Gem::Specification.new do |s|
     s.specification_version = 3
 
     if Gem::Version.new(Gem::VERSION) >= Gem::Version.new('1.2.0') then
+      s.add_runtime_dependency(%q<thor>, [">= 0.13.7"])
+      s.add_runtime_dependency(%q<rake>, [">= 0.8.7"])
+      s.add_runtime_dependency(%q<activesupport>, [">= 2.3.8"])
     else
+      s.add_dependency(%q<thor>, [">= 0.13.7"])
+      s.add_dependency(%q<rake>, [">= 0.8.7"])
+      s.add_dependency(%q<activesupport>, [">= 2.3.8"])
     end
   else
+    s.add_dependency(%q<thor>, [">= 0.13.7"])
+    s.add_dependency(%q<rake>, [">= 0.8.7"])
+    s.add_dependency(%q<activesupport>, [">= 2.3.8"])
   end
 end
 
