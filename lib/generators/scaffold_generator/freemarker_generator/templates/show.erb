@@ -1,10 +1,13 @@
 <body>
-<p>
-  <b>Nome:</b>
-   ${product.name}
-</p>
 
-<a href="${base}/products/${product.id}/edit">Edit</a>
-<a href="${base}/products">Back</a>
+<% @attributes.each do |att| -%>
+<p>
+  <b><%= att.name.capitalize %>:</b>
+  <%= "${#{@model}.#{att.name}!\"\"}" %>
+</p>
+<% end -%>
+
+<a href="<%= "#{path}/${#{@model}.id}/edit" %>">Edit</a>
+<a href="<%= path %>">Back</a>
 
 </body>

@@ -1,24 +1,28 @@
 <body>
-<h1>Listing clients</h1>
+<h1>Listing <%= class_name.pluralize %></h1>
 
 <table>
   <tr>
-    <th>Name</th>
-    <th></th>
-    <th></th>
-    <th></th>
+<% @attributes.each do |att| -%>
+   <th><%= att.name %></th>
+<% end -%>
+   <th></th>
+   <th></th>
+   <th></th>
   </tr>
 
-<% @clients.each do |client| %>
+<#list <%= "#{@model}List as #@model" %>>
   <tr>
-    <td><%= client.name %></td>
-    <td><%= link_to 'Show', client %></td>
-    <td><%= link_to 'Edit', edit_client_path(client) %></td>
-    <td><%= link_to 'Destroy', client, :confirm => 'Are you sure?', :method => :delete %></td>
-  </tr>
-<% end %>
+  <% @attributes.each do |att| -%>
+    <td><%= "${#{@model}.#{att.name}!\"\"}" %></td>
+  <% end -%>
+    <td><a href="<%= "#{path}/${#{@model}.id}/show" %>">show</a></td>
+    <td><a href="<%= "#{path}/${#{@model}.id}/edit" %>">edit</a></td>
+    <td><a href="<%= "#{path}/${#{@model}.id}" %>">destroy</a></td>
+    </tr>
+</#list>
 </table>
 
 <br />
-	<a href="${base}/products/novo">New product</a> 
+<a href="<%= path %>/new">New <%= @model.pluralize %></a> 
 </body>

@@ -32,10 +32,12 @@ Gem::Specification.new do |s|
      "lib/generators/app_generator/templates/FreemarkerPathResolver.java",
      "lib/generators/app_generator/templates/decorators.xml",
      "lib/generators/app_generator/templates/index.jsp",
+     "lib/generators/app_generator/templates/javascripts/jquery-1.4.2.min.js",
      "lib/generators/app_generator/templates/log4j.xml",
      "lib/generators/app_generator/templates/main.ftl",
      "lib/generators/app_generator/templates/persistence.xml",
      "lib/generators/app_generator/templates/pom.erb",
+     "lib/generators/app_generator/templates/stylesheets/scaffold.css",
      "lib/generators/app_generator/templates/web.xml",
      "lib/generators/attribute.rb",
      "lib/generators/base.rb",
@@ -73,14 +75,14 @@ Gem::Specification.new do |s|
   s.rubygems_version = %q{1.3.7}
   s.summary = %q{Scaffold for vraptor 3.}
   s.test_files = [
-    "spec/spec_helper.rb",
+    "spec/lib/vraptor-scaffold_spec.rb",
      "spec/lib/generators/app_generator/app_generator_spec.rb",
-     "spec/lib/generators/attribute_spec.rb",
+     "spec/lib/generators/scaffold_generator/controller_generator/controller_generator_spec.rb",
+     "spec/lib/generators/scaffold_generator/scaffold_generator_spec.rb",
      "spec/lib/generators/scaffold_generator/model_generator/model_generator_spec.rb",
      "spec/lib/generators/scaffold_generator/freemarker_generator/freemarker_generator_spec.rb",
-     "spec/lib/generators/scaffold_generator/scaffold_generator_spec.rb",
-     "spec/lib/generators/scaffold_generator/controller_generator/controller_generator_spec.rb",
-     "spec/lib/vraptor-scaffold_spec.rb"
+     "spec/lib/generators/attribute_spec.rb",
+     "spec/spec_helper.rb"
   ]
 
   if s.respond_to? :specification_version then

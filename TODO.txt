@@ -4,3 +4,5 @@ display name web.xml with app name
 changelog
 create others persistence unit
 new java keywork(how to call new method in controller?)
+change database to derby
+create "partial" to form

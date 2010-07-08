@@ -20,7 +20,7 @@ describe FreemarkerGenerator do
   end
   
   it "should create new view" do
-    File.exist?("src/main/webapp/WEB-INF/freemarker/product/new.ftl").should be_true 
+    File.exist?("src/main/webapp/WEB-INF/freemarker/product/newProduct.ftl").should be_true 
   end
   
   it "should create edit view" do

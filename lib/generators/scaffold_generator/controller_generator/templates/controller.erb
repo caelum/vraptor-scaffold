@@ -52,13 +52,13 @@ public class <%= controller_class_name %> {
 	}
 	
 	@Get
-	@Path("<%= "#{path}/#{@model}.id/edit" %>")
+	@Path("<%= "#{path}/{#{@model}.id}/edit" %>")
 	public <%= class_name %> edit(<%= @model.capitalize %> <%= @model %>) {
 		return entityManager.find(<%= @model.capitalize %>.class, <%= @model %>.getId());
 	}
 
 	@Get
-	@Path("<%= "#{path}/#{@model}.id/show" %>")
+	@Path("<%= "#{path}/{#{@model}.id}/show" %>")
 	public <%= class_name %> show(<%= @model.capitalize %> <%= @model %>) {
 		return entityManager.find(<%= @model.capitalize %>.class, <%= @model %>.getId());
 	}

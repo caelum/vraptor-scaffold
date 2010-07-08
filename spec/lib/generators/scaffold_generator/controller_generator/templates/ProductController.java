@@ -52,13 +52,13 @@ public class ProductController {
 	}
 	
 	@Get
-	@Path("/products/product.id/edit")
+	@Path("/products/{product.id}/edit")
 	public Product edit(Product product) {
 		return entityManager.find(Product.class, product.getId());
 	}
 
 	@Get
-	@Path("/products/product.id/show")
+	@Path("/products/{product.id}/show")
 	public Product show(Product product) {
 		return entityManager.find(Product.class, product.getId());
 	}

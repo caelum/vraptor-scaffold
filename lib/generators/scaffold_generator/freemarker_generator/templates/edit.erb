@@ -1,17 +1,19 @@
 <body>
 
-<form action="${base}/products" method="post">
-<input type="hidden" name="product.id" value="${product.id}">
-<div class="field">
-    Name:<br />
-    <input type="text" name="product.name" value="${product.name}">
+<form action="<%= path %>" method="put">
+<input type="hidden" name="<%= "#{@model}.id" %>" value="<%= "${#{@model}.id}" %>">
+<% @attributes.each do |att| -%>
+  <div class="field">
+    <%= att.name.capitalize %>:<br />
+    <input type="text" name="<%= "#{@model}.#{att.name}" %>" value="<%= "${#{@model}.#{att.name}}" %>">
   </div>
+<% end -%>
   <div class="actions">
-    <input type="submit" value="save">
+    <input type="submit" value="update">
   </div>
 </form>
 
-<%= link_to 'Back', clients_path %>
+<a href="<%= path %>">Back</a>
 	
 </body>
 
