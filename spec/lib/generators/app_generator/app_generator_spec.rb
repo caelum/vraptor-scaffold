@@ -127,6 +127,18 @@ describe AppGenerator do
       it "should create freemarker folder" do
          File.exist?("#{@web_inf}/freemarker").should be_true 
       end
+      
+      it "should create scaffold css" do
+        from = "#{AppGenerator.source_root}/templates/stylesheets/scaffold.css"
+        to = "#{@webapp}/stylesheets/scaffold.css"
+        FileUtils.compare_file(from, to).should be_true
+      end
+      
+      it "should create jquery js" do
+        from = "#{AppGenerator.source_root}/templates/javascripts/jquery-1.4.2.min.js"
+        to = "#{@webapp}/javascripts/jquery-1.4.2.min.js"
+        FileUtils.compare_file(from, to).should be_true
+      end
     end
     context "creating test" do
       before(:all) do

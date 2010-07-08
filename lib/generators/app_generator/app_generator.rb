@@ -60,7 +60,23 @@ class AppGenerator < VraptorScaffold::Base
       inside webapp do
         template_from_root("index.jsp", "#{webapp}/index.jsp")
         create_decorators
+        create_js
+        create_css
         create_web_inf
+      end
+    end
+    
+    def create_css
+      css = empty_directory "stylesheets"
+      inside "stylesheets" do
+        template_from_root("stylesheets/scaffold.css", "#{css}/scaffold.css")
+      end
+    end
+    
+     def create_js
+      js = empty_directory "javascripts"
+      inside "javascripts" do
+        template_from_root("javascripts/jquery-1.4.2.min.js", "#{js}/jquery-1.4.2.min.js")
       end
     end
     

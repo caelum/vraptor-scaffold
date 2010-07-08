@@ -2,11 +2,13 @@
 <html>
     <head>
     	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>${title}</title>
-        ${head}
+    	<link rel="stylesheet" type="text/css" href="${base}/stylesheets/scaffold.css" />  
+      <title>${title}</title>
+      ${head}
     </head>
 
     <body>
-         ${body}
+      ${body}
+      <script type="text/javascript" src="${base}/javascripts/jquery-1.4.2.min.js"></script>
     </body>
 </html>

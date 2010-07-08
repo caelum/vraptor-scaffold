@@ -6,11 +6,13 @@
  
 == Usage
 
- vraptor new project
- cd project
- vraptor scaffold model attribute:type attribute:type
- mvn jetty:run
-
+ vraptor new store
+ cd store
+ vraptor scaffold product name:string
+ mvn compile war:inplace jetty:run
+ 
+ http://localhost:8080/products
+ 
 == Dependency
 - Java 6 
 - Maven 2
@@ -29,4 +31,3 @@
 == Copyright
 
  Copyright (c) 2010 Rodolfo Liviero. See LICENSE for details.
-

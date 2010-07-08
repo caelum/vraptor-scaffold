@@ -3,3 +3,4 @@
 .rvmrc
 coverage
 pgk
+Gemfile.lock

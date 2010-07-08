@@ -18,11 +18,16 @@
   <% end -%>
     <td><a href="<%= "#{path}/${#{@model}.id}/show" %>">show</a></td>
     <td><a href="<%= "#{path}/${#{@model}.id}/edit" %>">edit</a></td>
-    <td><a href="<%= "#{path}/${#{@model}.id}" %>">destroy</a></td>
+    <td>
+      <form action="<%= path %>" method="post">
+    	  <input name="<%= "#{@model}.id" %>" value="<%= "${#{@model}.id}" %>" type="hidden" />
+    	  <button type="submit" name="_method" value="delete" onclick="return confirm('Are you sure?')">destroy</button>
+	    </form>
+	  </td>
     </tr>
 </#list>
 </table>
 
 <br />
-<a href="<%= path %>/new">New <%= @model.pluralize %></a> 
+<a href="<%= path %>/new">New <%= class_name %></a> 
 </body>
