@@ -26,6 +26,7 @@ Gem::Specification.new do |s|
      "README.rdoc",
      "Rakefile",
      "TODO.txt",
+     "VERSION",
      "VERSION.yml",
      "bin/vraptor",
      "lib/generators/app_generator/app_generator.rb",
