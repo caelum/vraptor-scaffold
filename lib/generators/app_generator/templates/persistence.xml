@@ -9,8 +9,8 @@
 		
 		<properties>
 			<property name="hibernate.connection.driver_class" value="org.hsqldb.jdbcDriver" />
-			<property name="hibernate.connection.url" value="jdbc:hsqldb:mem:testdb" />
-			<property name="hibernate.hbm2ddl.auto" value="create" />
+			<property name="hibernate.connection.url" value="jdbc:hsqldb:file:tmp/devdb" />
+			<property name="hibernate.hbm2ddl.auto" value="update" />
 			<property name="hibernate.query.substitutions" value="true=1, false=0"/>
 		</properties>
 	</persistence-unit>
