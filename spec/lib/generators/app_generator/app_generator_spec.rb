@@ -124,8 +124,8 @@ describe AppGenerator do
         FileUtils.compare_file(from, to).should be_true
       end
       
-      it "should create freemarker folder" do
-         File.exist?("#{@web_inf}/freemarker").should be_true 
+      it "should create views folder" do
+         File.exist?("#{@web_inf}/views").should be_true 
       end
       
       it "should create scaffold css" do

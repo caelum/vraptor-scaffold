@@ -75,14 +75,14 @@ Gem::Specification.new do |s|
   s.rubygems_version = %q{1.3.7}
   s.summary = %q{Scaffold for vraptor 3.}
   s.test_files = [
-    "spec/lib/vraptor-scaffold_spec.rb",
+    "spec/spec_helper.rb",
      "spec/lib/generators/app_generator/app_generator_spec.rb",
-     "spec/lib/generators/scaffold_generator/controller_generator/controller_generator_spec.rb",
-     "spec/lib/generators/scaffold_generator/scaffold_generator_spec.rb",
+     "spec/lib/generators/attribute_spec.rb",
      "spec/lib/generators/scaffold_generator/model_generator/model_generator_spec.rb",
      "spec/lib/generators/scaffold_generator/freemarker_generator/freemarker_generator_spec.rb",
-     "spec/lib/generators/attribute_spec.rb",
-     "spec/spec_helper.rb"
+     "spec/lib/generators/scaffold_generator/scaffold_generator_spec.rb",
+     "spec/lib/generators/scaffold_generator/controller_generator/controller_generator_spec.rb",
+     "spec/lib/vraptor-scaffold_spec.rb"
   ]
 
   if s.respond_to? :specification_version then

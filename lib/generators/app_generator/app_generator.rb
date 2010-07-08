@@ -92,7 +92,7 @@ class AppGenerator < VraptorScaffold::Base
       inside "WEB-INF" do
         template_from_root("decorators.xml", "#{web_inf}/decorators.xml")
         template_from_root("web.xml", "#{web_inf}/web.xml")
-        empty_directory "freemarker"
+        empty_directory "views"
       end
     end
     
