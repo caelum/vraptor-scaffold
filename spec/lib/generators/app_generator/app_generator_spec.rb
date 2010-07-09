@@ -3,28 +3,28 @@ require File.expand_path(File.dirname(__FILE__) + "/../../../spec_helper")
 describe AppGenerator do
   
   before(:all) do
-    @project_name = "vraptor-scaffold"
-    AppGenerator.new.build(@project_name)
+    @project_path = "src/vraptor-scaffold"
+    AppGenerator.new.build(@project_path)
   end
   
   after(:all) do
-    FileUtils.remove_dir(@project_name)
+    FileUtils.remove_dir(@project_path)
   end
    
   context "build new application" do
     it "should create directory with project name" do
-      File.exist?(@project_name).should be_true 
+      File.exist?(@project_path).should be_true 
     end
     
     it "should create pom" do
       from = File.expand_path(File.dirname(__FILE__) + "/templates/pom.xml")
-      to = "#{@project_name}/pom.xml"
+      to = "#{@project_path}/pom.xml"
       FileUtils.compare_file(from, to).should be_true
     end
     
     context "creating main java" do
       before(:all) do
-        @main_java = "#{@project_name}/src/main/java"
+        @main_java = "#{@project_path}/src/main/java"
         @app = "#{@main_java}/app"
       end
        
@@ -57,7 +57,7 @@ describe AppGenerator do
     
     context "creating main resources" do
       before(:all) do
-        @main_resources = "#{@project_name}/src/main/resources"
+        @main_resources = "#{@project_path}/src/main/resources"
         @meta_inf = "#{@main_resources}/META-INF"
       end 
       
@@ -83,7 +83,7 @@ describe AppGenerator do
     end 
     context "creating webapp" do
       before(:all) do
-        @webapp = "#{@project_name}/src/main/webapp"
+        @webapp = "#{@project_path}/src/main/webapp"
         @web_inf = "#{@webapp}/WEB-INF"
         @decorators = "#{@webapp}/decorators"
       end 
@@ -142,8 +142,8 @@ describe AppGenerator do
     end
     context "creating test" do
       before(:all) do
-        @test_java = "#{@project_name}/src/test/java"
-        @test_resource = "#{@project_name}/src/test/java"
+        @test_java = "#{@project_path}/src/test/java"
+        @test_resource = "#{@project_path}/src/test/java"
       end
       
       it "should create test source folder" do

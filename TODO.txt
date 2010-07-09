@@ -1,4 +1,3 @@
-Fix pom when create app with path Ex: /home/rodolfo/src/app
 change log4j.xml to lo4j.properties
 display name web.xml with app name
 create others persistence unit

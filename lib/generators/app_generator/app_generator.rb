@@ -4,9 +4,9 @@ class AppGenerator < VraptorScaffold::Base
       File.dirname(__FILE__)
    end
   
-  def build(project_name)
-    @project_name = project_name
-    self.destination_root=(@project_name)
+  def build(project_path)
+    @project_name = project_path.split("/").last
+    self.destination_root=(project_path)
     empty_directory "."
     create_pom
     create_main_java
