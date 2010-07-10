@@ -31,7 +31,7 @@ class ScaffoldGenerator
     end
     
     def validate_parse_attribute(parsedAttribute) 
-      type = parsedAttribute.last
+      type = parsedAttribute.last.downcase 
       unless Attribute.valid_types.include?(type)
         puts "Attribute #{type} is not supported. The supported attributes types are: #{Attribute.valid_types.join(" ")}"
         Kernel::exit

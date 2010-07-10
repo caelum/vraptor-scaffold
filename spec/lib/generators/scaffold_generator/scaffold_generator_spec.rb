@@ -3,7 +3,7 @@ require File.expand_path(File.dirname(__FILE__) + "/../../../spec_helper")
 describe ScaffoldGenerator do
   
   before(:each) do
-    @args = ["product", "name:string", "value:double"]
+    @args = ["product", "name:String", "value:double"]
   end
   
   context "invalid scaffold command" do
