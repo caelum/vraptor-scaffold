@@ -42,6 +42,10 @@
 			<param-name>default_encoding</param-name>
 			<param-value>ISO-8859-1</param-value>
 		</init-param>
+		<init-param>
+			<param-name>auto_import</param-name>
+			<param-value>macros/html.ftl as html</param-value>
+		</init-param>
 		<load-on-startup>1</load-on-startup>
 	</servlet>
 

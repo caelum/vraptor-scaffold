@@ -108,6 +108,12 @@ describe AppGenerator do
         FileUtils.compare_file(from, to).should be_true
       end
       
+      it "should create html macro file" do
+        from = "#{AppGenerator.source_root}/templates/macros/html.ftl"
+        to = "#{@webapp}/macros/html.ftl"
+        FileUtils.compare_file(from, to).should be_true
+      end
+      
       it "should create WEB-INF folder" do
          File.exist?(@web_inf).should be_true 
       end

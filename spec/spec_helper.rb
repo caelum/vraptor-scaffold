@@ -3,5 +3,5 @@ require 'spec/autorun'
 require File.dirname(__FILE__) + '/../lib/vraptor-scaffold'
 
 def build_attributes
-	attributes = [Attribute.new("name", "string"), Attribute.new("value", "double")]
+	[Attribute.new("name", "string"), Attribute.new("flag", "boolean")]
 end

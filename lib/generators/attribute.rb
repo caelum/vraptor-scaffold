@@ -3,7 +3,18 @@ class Attribute
   
   def initialize(name, type)
     @name = name
-    @type = type.capitalize
+    set_type(type)
+  end
+  
+  def set_type(type)
+    @type = type
+    @type = @type.capitalize unless type.eql? "boolean"
+  end
+  
+  def html_input
+    input = "text"
+    input = "checkbox" if type.eql? "boolean"
+    input
   end
   
   def self.valid_types

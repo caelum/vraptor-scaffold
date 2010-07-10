@@ -11,7 +11,7 @@ public class Product {
 	private Long id;
 	
 	private String name;
-	private Double value;
+	private boolean flag;
   
 	public void setId(Long id) {
 		this.id = id;
@@ -29,12 +29,12 @@ public class Product {
 		return name;
 	}
 	
-	public void setValue(Double value) {
-		this.value = value;
+	public void setFlag(boolean flag) {
+		this.flag = flag;
 	}
 	
-	public Double getValue() {
-		return value;
+	public boolean getFlag() {
+		return flag;
 	}
 	
 }

@@ -30,7 +30,35 @@ describe Attribute do
     it "should support long" do
       Attribute.valid_types.include?"long".should be_true
     end
-      
   end
   
+  context "html_input" do
+    it "should know html input to boolean" do
+      Attribute.new("flag", "boolean").html_input.should eql("checkbox")
+    end
+    
+    it "should know html input to string" do
+      Attribute.new("name", "string").html_input.should eql("text")
+    end
+    
+    it "should know html input to double" do
+      Attribute.new("name", "double").html_input.should eql("text")
+    end
+    
+    it "should know html input to float" do
+      Attribute.new("name", "float").html_input.should eql("text")
+    end
+    
+    it "should know html input to short" do
+      Attribute.new("name", "short").html_input.should eql("text")
+    end
+    
+    it "should know html input to integer" do
+      Attribute.new("name", "integer").html_input.should eql("text")
+    end
+    
+    it "should know html input to long" do
+      Attribute.new("name", "long").html_input.should eql("text")
+    end
+  end
 end

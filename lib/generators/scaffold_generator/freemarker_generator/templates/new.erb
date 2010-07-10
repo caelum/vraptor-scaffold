@@ -4,7 +4,7 @@
 <% @attributes.each do |att| -%>
   <div class="field">
     <%= att.name.capitalize %>:<br />
-    <input type="text" name="<%= "#{@model}.#{att.name}" %>">
+    <%= "<@html.#{att.html_input} \"#{@model}.#{att.name}\"/>"  %>
   </div>
 <% end -%>
   <div class="actions">

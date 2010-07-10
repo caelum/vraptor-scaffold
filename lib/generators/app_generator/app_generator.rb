@@ -62,7 +62,15 @@ class AppGenerator < VraptorScaffold::Base
         create_decorators
         create_js
         create_css
+        create_macros
         create_web_inf
+      end
+    end
+    
+    def create_macros
+      macros = empty_directory "macros"
+      inside "macros" do
+        template_from_root("macros/html.ftl", "#{macros}/html.ftl")
       end
     end
     

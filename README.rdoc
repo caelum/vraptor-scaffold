@@ -40,6 +40,8 @@ src/main/webapp
     Web root folder.
 src/main/webapp/decorators
     Decorators will be placed here.
+src/main/webapp/macros
+    Freemarker macros will be placed here.
 src/main/webapp/javascripts
     JavaScript will be placed here.
 src/main/webapp/stylesheets
