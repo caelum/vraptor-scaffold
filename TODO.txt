@@ -8,3 +8,4 @@ datetime, date and time support.(jquery-ui?)
 relationship support(many-to-one, one-to-many, many-to-many)
 active record is possible?
 generators help
+usage file to each generator

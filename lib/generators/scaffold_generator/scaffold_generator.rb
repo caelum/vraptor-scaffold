@@ -3,12 +3,9 @@ class ScaffoldGenerator
   attr_accessor :attributes, :model
   
   def initialize(args)
-    unless File.exist?("pom.xml")
-      puts "To run scaffold please go to project root folder."
-      Kernel::exit
-    end
   	@model = args.shift.downcase 
-  	parse_attributes(args)
+    @attributes = []
+    validate_scaffold_command(args)
   end
   
   def build
@@ -18,11 +15,27 @@ class ScaffoldGenerator
   end
   
   private 
-    def parse_attributes(args)
-      @attributes = []
+    def validate_scaffold_command(args)
+      unless File.exist?("pom.xml")
+        puts "To run scaffold please go to the project root folder."
+        Kernel::exit
+      end
+      validate_parse_attributes(args)
+    end
+  
+    def validate_parse_attributes(args)
       args.each do |arg|
         parsedAttribute = arg.split(":")
-        @attributes << Attribute.new(parsedAttribute[0], parsedAttribute[1].capitalize)
+        validate_parse_attribute(parsedAttribute)
       end
+    end
+    
+    def validate_parse_attribute(parsedAttribute) 
+      type = parsedAttribute.last
+      unless Attribute.valid_types.include?(type)
+        puts "Attribute #{type} is not supported. The supported attributes types are: #{Attribute.valid_types.join(" ")}"
+        Kernel::exit
+      end
+      @attributes << Attribute.new(parsedAttribute.first, type)
     end
 end

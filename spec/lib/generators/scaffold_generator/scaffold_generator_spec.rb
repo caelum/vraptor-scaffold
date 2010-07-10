@@ -6,18 +6,22 @@ describe ScaffoldGenerator do
     @args = ["product", "name:string", "value:double"]
   end
   
-  context "outside project root" do
-     before(:each) do
+  context "invalid scaffold command" do
+    it "outside project root" do
       File.stub!(:exist?).with("pom.xml").and_return(false)
-     end
-    
-    it "should exit without run generators" do
       Kernel.should_receive(:exit)
       ScaffoldGenerator.new(@args)
     end
+    
+    it "invalid attribute type" do
+      File.stub!(:exist?).and_return(true)
+      args = ["product", "name:string", "value:char"] 
+      Kernel.should_receive(:exit)
+      ScaffoldGenerator.new(args)
+    end
   end
   
-  context "in project root" do
+  context "valid scaffold command" do
     
     before(:each) do
       File.stub!(:exist?).and_return(true)

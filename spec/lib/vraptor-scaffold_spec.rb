@@ -16,7 +16,7 @@ describe VraptorScaffold::Main do
     end
     
     it "cannot call app generator when not typed new" do
-      @args.delete("new")
+      @args.shift
       @generator.should_not_receive(:build)
       VraptorScaffold::Main.execute(@args)
     end
