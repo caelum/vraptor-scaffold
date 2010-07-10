@@ -12,19 +12,19 @@ describe FreemarkerGenerator do
   end
   
   it "should create index view" do
-    File.exist?("src/main/webapp/WEB-INF/views/product/index.ftl").should be_true 
+    File.exist?("src/main/webapp/WEB-INF/views/products/index.ftl").should be_true 
   end
   
   it "should create show view" do
-    File.exist?("src/main/webapp/WEB-INF/views/product/show.ftl").should be_true 
+    File.exist?("src/main/webapp/WEB-INF/views/products/show.ftl").should be_true 
   end
   
   it "should create new view" do
-    File.exist?("src/main/webapp/WEB-INF/views/product/newProduct.ftl").should be_true 
+    File.exist?("src/main/webapp/WEB-INF/views/products/newProduct.ftl").should be_true 
   end
   
   it "should create edit view" do
-    File.exist?("src/main/webapp/WEB-INF/views/product/edit.ftl").should be_true 
+    File.exist?("src/main/webapp/WEB-INF/views/products/edit.ftl").should be_true 
   end
   
 end	

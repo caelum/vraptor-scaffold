@@ -66,8 +66,8 @@ describe AppGenerator do
       end
       
       it "should create log4j" do
-        from = "#{AppGenerator.source_root}/templates/log4j.xml"
-        to = "#{@main_resources}/log4j.xml"
+        from = "#{AppGenerator.source_root}/templates/log4j.properties"
+        to = "#{@main_resources}/log4j.properties"
         FileUtils.compare_file(from, to).should be_true
       end
       

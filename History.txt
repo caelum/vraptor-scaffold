@@ -5,6 +5,8 @@
   * Change hsqldb to use file insted of memory.
   * Fixed pom when creating project with path like /home/rodolfo/project.
   * Fixed runtime dependencies.
+  * Added command to start web server(jetty).
+  * Change log4j.xml to log4j.properties.
 
 == 0.0.1.beta2 / 2010-07-07
 

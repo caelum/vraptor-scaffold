@@ -48,7 +48,7 @@ class AppGenerator < VraptorScaffold::Base
       main_resources = "src/main/resources"
       empty_directory main_resources
       inside main_resources do
-        template_from_root("log4j.xml", "#{main_resources}/log4j.xml")
+        template_from_root("log4j.properties", "#{main_resources}/log4j.properties")
         meta_inf = empty_directory "META-INF"
         template_from_root("persistence.xml", "#{meta_inf}/persistence.xml")
       end
