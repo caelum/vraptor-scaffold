@@ -45,7 +45,7 @@ src/main/webapp/javascripts
 src/main/webapp/stylesheets
     CSS will be placed here.
 src/main/webapp/WEB-INF/views
-    Views will be placed here. Ex: products/index.ftl
+    Views will be placed here. Ex: product/index.ftl
 
 == Dependencies
 - Java 6 
