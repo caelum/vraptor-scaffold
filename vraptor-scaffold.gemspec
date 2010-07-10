@@ -34,7 +34,7 @@ Gem::Specification.new do |s|
      "lib/generators/app_generator/templates/decorators.xml",
      "lib/generators/app_generator/templates/index.jsp",
      "lib/generators/app_generator/templates/javascripts/jquery-1.4.2.min.js",
-     "lib/generators/app_generator/templates/log4j.xml",
+     "lib/generators/app_generator/templates/log4j.properties",
      "lib/generators/app_generator/templates/main.ftl",
      "lib/generators/app_generator/templates/persistence.xml",
      "lib/generators/app_generator/templates/pom.erb",

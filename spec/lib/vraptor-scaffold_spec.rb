@@ -2,10 +2,6 @@ require File.expand_path(File.dirname(__FILE__) + "/../spec_helper")
 
 describe VraptorScaffold::Main do
   
-   before(:each) do
-     #self.stub!(:exec)
-    end 
-  
   context "new application" do
     before(:each) do
       @project_name = "vraptor-scaffold"

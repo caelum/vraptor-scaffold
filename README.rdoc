@@ -1,68 +1,64 @@
 = Vraptor Scaffold
+Scaffold for vraptor3.
 
 == Installation
-
- gem install vraptor-scaffold --pre
+gem install vraptor-scaffold --pre
  
 == Getting Started
-
- At the command line client:
+At the command line client:
  
- - vraptor new myapp
- - Change directory into myapp
- - vraptor scaffold product name:string value:double
- - vraptor start 
- - Go http://localhost:8080/products
+- vraptor new myapp
+- Change directory into myapp
+- vraptor scaffold product name:string value:double
+- vraptor start 
+- Go http://localhost:8080/products
  
 == Werb Server
-
- The default web server is jetty but you can import the project in your Favorite ide and run your project with tomcat or jboss as for example.
-
-== Architecture Overview
- When you run vraptor new command will be created a java web application with vraptor3, jpa(hibernate), freemarker, sitemesh, maven2, and jquery.
- 
- Vraptor3 = Controller
- Jpa = ORM
- Freemarker = Template Engine
- Sitemesh = Decorator
- Maven2 = Project Management 
- Jquery = JavaScript
-    
- Tests will use junit, mockito and dbunit.
- 
- src/main/java/app/controllers
-    Controllers will be placed here.
- src/main/java/app/models
-    Models will be placed here.
- src/main/webapp 
-    webapp root folder.
- src/main/webapp/decorators
-    Decorators will be placed here.
- src/main/webapp/javascripts
-    JavaScript will be placed here.
- src/main/webapp/stylesheets
-    CSS will be placed here.
- src/main/webapp/WEB-INF/views
-    Views will be placed here. Ex: products/index.ftl
+The default web server is jetty but you can import the project in your favorite ide
+and run your project with tomcat or jboss as for example.
 
 == Supported Java Types
- The only supported types for now are: boolean, double, float, short, integer, long and string.
+The only supported types for now are: boolean, double, float, short, integer, long and string.
+
+== Architecture Overview
+When you run vraptor new command will be created a java web application with:
  
+- Vraptor3 = Controller
+- Jpa(Hibernate) = ORM
+- Freemarker = Template Engine
+- Sitemesh = Decorator
+- Maven2 = Project Management 
+- Jquery = JavaScript
+    
+Tests will use junit, mockito and dbunit.
+ 
+src/main/java/app/controllers
+    Controllers will be placed here.
+src/main/java/app/models
+    Models will be placed here.
+src/main/webapp 
+    Web root folder.
+src/main/webapp/decorators
+    Decorators will be placed here.
+src/main/webapp/javascripts
+    JavaScript will be placed here.
+src/main/webapp/stylesheets
+    CSS will be placed here.
+src/main/webapp/WEB-INF/views
+    Views will be placed here. Ex: products/index.ftl
+
 == Dependencies
 - Java 6 
 - Maven 2
 
 == Note on Patches/Pull Requests
-
 - Fork the project.
 - Make your feature addition or bug fix.
 - Add tests for it.
 - Send me a pull request.
 
 == Author
-
 -- Rodolfo Liviero [mailto:rodolfoliviero@gmail.com]
 
 == Copyright
-
 Copyright (c) 2010 Rodolfo Liviero. See LICENSE for details.
