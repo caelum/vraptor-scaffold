@@ -3,7 +3,11 @@ class ScaffoldGenerator
   attr_accessor :attributes, :model
   
   def initialize(args)
-  	@model = args.delete_at(0).downcase 
+    unless File.exist?("pom.xml")
+      puts "To run scaffold please go to project root folder."
+      Kernel::exit
+    end
+  	@model = args.shift.downcase 
   	parse_attributes(args)
   end
   

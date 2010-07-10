@@ -1,6 +1,10 @@
 change log4j.xml to lo4j.properties
 display name web.xml with app name
-create others persistence unit
+create others persistence unit(maven profile?)
 new java keyword(how to call new method in controller?)
 create "partial" to form
 update jpa to jpa2(hibernate 3.5.?-FINAL)
+datetime, date and time support.(jquery-ui?)
+relationship support(many-to-one, one-to-many, many-to-many)
+active record is possible?
+generators help

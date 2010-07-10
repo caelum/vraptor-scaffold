@@ -12,8 +12,11 @@
  mvn compile war:inplace jetty:run
  
  http://localhost:8080/products
+
+== Supported Java Type
+ The only supported types for now are: boolean, double, float, short, integer, long and string.
  
-== Dependency
+== Dependencies
 - Java 6 
 - Maven 2
 
