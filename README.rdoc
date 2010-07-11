@@ -50,6 +50,8 @@ src/main/webapp/WEB-INF/views
     Views will be placed here. Ex: product/index.ftl
 
 == Dependencies
+Ensures that you already have installed:
+
 - Java 6 
 - Maven 2
 

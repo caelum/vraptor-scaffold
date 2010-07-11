@@ -1,4 +1,4 @@
-=== 0.0.1.beta3 / 2010-??-??
+=== 0.0.1.beta3 / 2010-07-11
 
 == New Features
 * Added command to start web server(jetty).
