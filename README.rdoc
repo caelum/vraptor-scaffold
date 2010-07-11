@@ -2,7 +2,8 @@
 Scaffold for vraptor3.
 
 == Installation
-<pre><code>gem install vraptor-scaffold --pre</code></pre>
+
+ <pre><code> gem install vraptor-scaffold --pre </code></pre>
  
 == Getting Started
 At the command line client:
