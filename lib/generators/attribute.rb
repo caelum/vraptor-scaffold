@@ -8,13 +8,17 @@ class Attribute
   
   def set_type(type)
     @type = type
-    @type = @type.capitalize unless type.eql? "boolean"
+    @type = @type.capitalize unless boolean?
   end
   
   def html_input
     input = "text"
-    input = "checkbox" if type.eql? "boolean"
+    input = "checkbox" if boolean?
     input
+  end
+  
+  def boolean?
+    type.eql? "boolean"
   end
   
   def self.valid_types

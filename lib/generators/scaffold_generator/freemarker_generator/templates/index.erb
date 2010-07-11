@@ -14,7 +14,10 @@
 <#list <%= "#{@model}List as #@model" %>>
   <tr>
   <% @attributes.each do |att| -%>
-    <td><%= "${#{@model}.#{att.name}!\"\"}" %></td>
+    <td>
+      <%= "${#{@model}.#{att.name}!\"\"}" unless att.boolean? %>
+      <%= "${#{@model}.#{att.name}?string}" if att.boolean? %>
+    </td>
   <% end -%>
     <td><a href="<%= "#{path}/${#{@model}.id}/show" %>">show</a></td>
     <td><a href="<%= "#{path}/${#{@model}.id}/edit" %>">edit</a></td>

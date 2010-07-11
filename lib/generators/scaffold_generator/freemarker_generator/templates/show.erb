@@ -3,7 +3,8 @@
 <% @attributes.each do |att| -%>
 <p>
   <b><%= att.name.capitalize %>:</b>
-  <%= "${#{@model}.#{att.name}!\"\"}" %>
+   <%= "${#{@model}.#{att.name}!\"\"}" unless att.boolean? %>
+   <%= "${#{@model}.#{att.name}?string}" if att.boolean? %>
 </p>
 <% end -%>
 

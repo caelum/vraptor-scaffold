@@ -61,4 +61,22 @@ describe Attribute do
       Attribute.new("name", "long").html_input.should eql("text")
     end
   end
+  
+   context "set type" do
+    it "should set corret type to boolean" do
+      Attribute.new("flag", "boolean").type.should eql("boolean")
+    end
+    
+     it "should set corret type otherwise" do
+      Attribute.new("id", "long").type.should eql("Long")
+    end
+  end
+  
+  it "should be boolean when type is boolean" do
+    Attribute.new("flag", "boolean").boolean?.should be_true
+  end
+  
+  it "cannot be boolean otherwise" do
+    Attribute.new("flag", "short").boolean?.should be_false
+  end
 end

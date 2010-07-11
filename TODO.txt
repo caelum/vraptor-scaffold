@@ -11,3 +11,4 @@ usage file to each generator
 gem description
 http://waffle.codehaus.org
 put all html input in macros
+i18n

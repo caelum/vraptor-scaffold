@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
 
   s.required_rubygems_version = Gem::Requirement.new("> 1.3.1") if s.respond_to? :required_rubygems_version=
   s.authors = ["Rodolfo Liviero"]
-  s.date = %q{2010-07-10}
+  s.date = %q{2010-07-11}
   s.default_executable = %q{vraptor}
   s.description = %q{}
   s.email = %q{rodolfoliviero@gmail.com}
@@ -35,6 +35,7 @@ Gem::Specification.new do |s|
      "lib/generators/app_generator/templates/index.jsp",
      "lib/generators/app_generator/templates/javascripts/jquery-1.4.2.min.js",
      "lib/generators/app_generator/templates/log4j.properties",
+     "lib/generators/app_generator/templates/macros/html.ftl",
      "lib/generators/app_generator/templates/main.ftl",
      "lib/generators/app_generator/templates/persistence.xml",
      "lib/generators/app_generator/templates/pom.erb",
