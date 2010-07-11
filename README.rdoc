@@ -33,21 +33,21 @@ When you run vraptor new command will be created a java web application with:
 Tests will use junit, mockito and dbunit.
  
 src/main/java/app/controllers
-    Controllers will be placed here.
+Controllers will be placed here.
 src/main/java/app/models
-    Models will be placed here.
+Models will be placed here.
 src/main/webapp 
-    Web root folder.
+Web root folder.
 src/main/webapp/decorators
-    Decorators will be placed here.
+Decorators will be placed here.
 src/main/webapp/macros
-    Freemarker macros will be placed here.
+Freemarker macros will be placed here.
 src/main/webapp/javascripts
-    JavaScript will be placed here.
+Javascripts will be placed here.
 src/main/webapp/stylesheets
-    CSS will be placed here.
+CSS will be placed here.
 src/main/webapp/WEB-INF/views
-    Views will be placed here. Ex: product/index.ftl
+Views will be placed here. Ex: product/index.ftl
 
 == Dependencies
 - Java 6 
