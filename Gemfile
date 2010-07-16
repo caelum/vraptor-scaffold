@@ -1,8 +1,8 @@
 source :rubygems
 
-gem "thor", ">=0.13.7"
+gem "thor", ">=0.13.8"
 gem "rake", ">=0.8.7"
-gem "activesupport", ">=2.3.8"
+gem "activesupport", ">=3.0.0.beta4"
 
 gem "ruby-debug", :group => [:development, :test]
 

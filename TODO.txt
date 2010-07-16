@@ -12,3 +12,5 @@ gem description
 http://waffle.codehaus.org
 put all html input in macros
 i18n
+fix ie bug when submit to method delete or put
+error message
