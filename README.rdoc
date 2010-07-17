@@ -1,5 +1,5 @@
 = Vraptor Scaffold
-Scaffold for vraptor3.
+Scaffold for vraptor 3.
 
 == Installation
  gem install vraptor-scaffold --pre
@@ -28,7 +28,7 @@ When you run vraptor new command will be created a java web application with:
 - Freemarker = Template Engine
 - Sitemesh = Decorator
 - Maven2 = Project Management 
-- Jquery = JavaScript
+- jQuery = JavaScript
     
 Tests will use junit, mockito and dbunit.
  

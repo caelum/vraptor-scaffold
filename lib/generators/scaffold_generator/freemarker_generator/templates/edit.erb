@@ -2,7 +2,8 @@
 
 <form action="<%= path %>" method="post">
 
-<input type="hidden" name="<%= "#{@model}.id" %>" value="<%= "${#{@model}.id}" %>">
+  <input type="hidden" name="<%= "#{@model}.id" %>" value="<%= "${#{@model}.id}" %>"/>
+  <input type="hidden" name="_method" value="put"/>
 
 <% @attributes.each do |att| -%>
   <div class="field">
@@ -11,7 +12,7 @@
   </div>
 <% end -%>
   <div class="actions">
-    <button type="submit" name="_method" value="put">update</button>
+    <button type="submit">update</button>
   </div>
 </form>
 
