@@ -1,4 +1,4 @@
-=== 0.0.1.beta4 / 2010-07-??
+=== 0.0.1.beta4 / 2010-07-16
 
 == New Features
 * Added validator support with hibernate-validator.
