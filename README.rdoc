@@ -24,7 +24,7 @@ The only supported types for now are: boolean, double, float, short, integer, lo
 When you run vraptor new command will be created a java web application with:
  
 - Vraptor3 = Controller
-- Jpa(Hibernate) = ORM
+- Jpa(Hibernate and Hibernate Validator) = ORM
 - Freemarker = Template Engine
 - Sitemesh = Decorator
 - Maven2 = Project Management 

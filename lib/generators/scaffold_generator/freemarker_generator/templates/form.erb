@@ -1,0 +1,26 @@
+<#if errors??>
+	<#list errors as error>
+		 ${error.category} - ${error.message}<br />
+	</#list>
+</#if>
+
+<form action="<%= path %>" method="post">
+  
+  <#if <%= "#{@model}.id" %>??>
+    <input type="hidden" name="<%= "#{@model}.id" %>" value="<%= "${#{@model}.id}" %>"/>
+    <input type="hidden" name="_method" value="put"/>
+  </#if>
+
+<% @attributes.each do |att| -%>
+  <div class="field">
+    <%= att.name.capitalize %>:<br />
+    <%= "<@html.#{att.html_input} \"#{@model}.#{att.name}\" #{@model}.#{att.name}/>"  %>
+  </div>
+<% end -%>
+  <div class="actions">
+    <button type="submit">send</button>
+  </div>
+</form>
+
+<a href="<%= path %>">Back</a>
+

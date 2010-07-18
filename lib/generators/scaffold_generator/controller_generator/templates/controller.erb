@@ -12,17 +12,19 @@ import br.com.caelum.vraptor.Post;
 import br.com.caelum.vraptor.Put;
 import br.com.caelum.vraptor.Resource;
 import br.com.caelum.vraptor.Result;
-import br.com.caelum.vraptor.view.Results;
+import br.com.caelum.vraptor.Validator;
 
 @Resource
 public class <%= controller_class_name %> {
 
-	private Result result;
-	private EntityManager entityManager;
+	private final Result result;
+	private final EntityManager entityManager;
+	private final Validator validator;
 	
-	public <%= controller_class_name %>(Result result, EntityManager entityManager) {
+	public <%= controller_class_name %>(Result result, EntityManager entityManager, Validator validator) {
 		this.entityManager = entityManager;
 		this.result = result;
+		this.validator = validator;
 	}
 	
 	@Get
@@ -34,27 +36,31 @@ public class <%= controller_class_name %> {
 	@Post
 	@Path("<%= path %>")
 	public void create(<%= class_name %> <%= @model %>) {
+		validator.validate(<%= @model %>);
+		validator.onErrorForwardTo(this).form(<%= @model %>);
 		entityManager.persist(<%= @model %>);
-		result.use(Results.logic()).redirectTo(<%= controller_class_name %>.class).index();  
+		result.redirectTo(this).index();
 	}
 	
 	@Get
 	@Path("<%= "#{path}/new" %>")
-	public <%= class_name %> new<%= class_name %>() {
-		return new <%= class_name %>();
+	public void new<%= class_name %>() {
+		result.forwardTo(this).form(new <%= class_name %>());
 	}
 	
 	@Put
 	@Path("<%= path %>")
 	public void update(<%= class_name %> <%= @model %>) {
+		validator.validate(<%= @model %>);
+		validator.onErrorForwardTo(this).form(<%= @model %>);
 		entityManager.merge(<%= @model %>);
-		result.use(Results.logic()).redirectTo(<%= controller_class_name %>.class).index();  
+		result.redirectTo(this).index();
 	}
 	
 	@Get
 	@Path("<%= "#{path}/{#{@model}.id}/edit" %>")
-	public <%= class_name %> edit(<%= @model.capitalize %> <%= @model %>) {
-		return entityManager.find(<%= @model.capitalize %>.class, <%= @model %>.getId());
+	public void edit(<%= @model.capitalize %> <%= @model %>) {
+		result.forwardTo(this).form(entityManager.find(<%= @model.capitalize %>.class, <%= @model %>.getId()));
 	}
 
 	@Get
@@ -67,6 +73,10 @@ public class <%= controller_class_name %> {
 	@Path("<%= path %>")
 	public void destroy(<%= class_name %> <%= @model %>) {
 		entityManager.remove(entityManager.find(<%= class_name %>.class, <%= @model %>.getId()));
-		result.use(Results.logic()).redirectTo(<%= controller_class_name %>.class).index();  
+		result.redirectTo(this).index();  
+	}
+	
+	public <%= class_name %> form(<%= class_name %> <%= @model %>) {
+		return <%= @model %>;
 	}
 }

@@ -71,6 +71,12 @@ describe AppGenerator do
         FileUtils.compare_file(from, to).should be_true
       end
       
+      it "should create messages resource" do
+        from = "#{AppGenerator.source_root}/templates/messages.properties"
+        to = "#{@main_resources}/messages.properties"
+        FileUtils.compare_file(from, to).should be_true
+      end
+      
       it "should create META-INF" do
          File.exist?(@meta_inf).should be_true 
       end

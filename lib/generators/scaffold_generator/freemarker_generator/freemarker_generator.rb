@@ -7,12 +7,11 @@ class FreemarkerGenerator < BaseScaffold
   def build
     create_view("index")
     create_view("show")
-    create_view("new", "new#{class_name}")
-    create_view("edit")
+    create_view("form")
   end
   
-  def create_view(template_name, file_name=template_name)
-  	 template("templates/#{template_name}.erb", "src/main/webapp/WEB-INF/views/#{@model}/#{file_name}.ftl")
+  def create_view(name)
+  	 template("templates/#{name}.erb", "src/main/webapp/WEB-INF/views/#{@model}/#{name}.ftl")
   end
   
   def path

@@ -19,12 +19,8 @@ describe FreemarkerGenerator do
     File.exist?("src/main/webapp/WEB-INF/views/product/show.ftl").should be_true 
   end
   
-  it "should create new view" do
-    File.exist?("src/main/webapp/WEB-INF/views/product/newProduct.ftl").should be_true 
-  end
-
-  it "should create edit view" do
-    File.exist?("src/main/webapp/WEB-INF/views/product/edit.ftl").should be_true 
+   it "should create form view" do
+    File.exist?("src/main/webapp/WEB-INF/views/product/form.ftl").should be_true 
   end
   
 end	

@@ -1,4 +1,11 @@
 === 0.0.1.beta4 / 2010-07-??
+
+== New Features
+* Added validator support with hibernate-validator.
+* Error Messages.
+* Redirect to form when occur validation erros.
+* Added joda time dependency.
+* Create messages.properties(i18n).
   
 == Bugfixes
 * Fixed i.e problems.

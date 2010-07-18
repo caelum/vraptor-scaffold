@@ -12,17 +12,19 @@ import br.com.caelum.vraptor.Post;
 import br.com.caelum.vraptor.Put;
 import br.com.caelum.vraptor.Resource;
 import br.com.caelum.vraptor.Result;
-import br.com.caelum.vraptor.view.Results;
+import br.com.caelum.vraptor.Validator;
 
 @Resource
 public class ProductController {
 
-	private Result result;
-	private EntityManager entityManager;
+	private final Result result;
+	private final EntityManager entityManager;
+	private final Validator validator;
 	
-	public ProductController(Result result, EntityManager entityManager) {
+	public ProductController(Result result, EntityManager entityManager, Validator validator) {
 		this.entityManager = entityManager;
 		this.result = result;
+		this.validator = validator;
 	}
 	
 	@Get
@@ -34,27 +36,31 @@ public class ProductController {
 	@Post
 	@Path("/products")
 	public void create(Product product) {
+		validator.validate(product);
+		validator.onErrorForwardTo(this).form(product);
 		entityManager.persist(product);
-		result.use(Results.logic()).redirectTo(ProductController.class).index();  
+		result.redirectTo(this).index();
 	}
 	
 	@Get
 	@Path("/products/new")
-	public Product newProduct() {
-		return new Product();
+	public void newProduct() {
+		result.forwardTo(this).form(new Product());
 	}
 	
 	@Put
 	@Path("/products")
 	public void update(Product product) {
+		validator.validate(product);
+		validator.onErrorForwardTo(this).form(product);
 		entityManager.merge(product);
-		result.use(Results.logic()).redirectTo(ProductController.class).index();  
+		result.redirectTo(this).index();
 	}
 	
 	@Get
 	@Path("/products/{product.id}/edit")
-	public Product edit(Product product) {
-		return entityManager.find(Product.class, product.getId());
+	public void edit(Product product) {
+		result.forwardTo(this).form(entityManager.find(Product.class, product.getId()));
 	}
 
 	@Get
@@ -67,6 +73,10 @@ public class ProductController {
 	@Path("/products")
 	public void destroy(Product product) {
 		entityManager.remove(entityManager.find(Product.class, product.getId()));
-		result.use(Results.logic()).redirectTo(ProductController.class).index();  
+		result.redirectTo(this).index();  
+	}
+	
+	public Product form(Product product) {
+		return product;
 	}
 }
