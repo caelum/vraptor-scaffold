@@ -13,7 +13,7 @@ At the command line client:
 - vraptor start 
 - Go http://localhost:8080/products
  
-== Werb Server
+== Web Server
 The default web server is jetty but you can import the project in your favorite ide
 and run your project with tomcat or jboss as for example.
 
