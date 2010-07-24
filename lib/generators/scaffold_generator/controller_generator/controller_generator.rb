@@ -9,7 +9,7 @@ class ControllerGenerator < BaseScaffold
   end
   
   def controller_class_name
-    "#{@model.capitalize}Controller"
+    "#{class_name}Controller"
   end
   
   def path

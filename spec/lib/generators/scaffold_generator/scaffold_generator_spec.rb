@@ -29,16 +29,20 @@ describe ScaffoldGenerator do
     
       @model_generator = mock(ModelGenerator)
       ModelGenerator.stub!(:new).with(@generator.model, @generator.attributes).and_return(@model_generator)
-    
+      
+      @repository_generator = mock(RepositoryGenerator)
+      RepositoryGenerator.stub!(:new).with(@generator.model, @generator.attributes).and_return(@repository_generator)
+      
       @controller_generator = mock(ControllerGenerator)
       ControllerGenerator.stub!(:new).with(@generator.model, @generator.attributes).and_return(@controller_generator)
       
       @freemarker_generator = mock(FreemarkerGenerator)
       FreemarkerGenerator.stub!(:new).with(@generator.model, @generator.attributes).and_return(@freemarker_generator)
     
-    @model_generator.stub!(:build)
-    @controller_generator.stub!(:build)
-    @freemarker_generator.stub!(:build)
+      @model_generator.stub!(:build)
+      @repository_generator.stub!(:build)
+      @controller_generator.stub!(:build)
+      @freemarker_generator.stub!(:build)
   end
     
     it "should call model generator" do
@@ -53,6 +57,11 @@ describe ScaffoldGenerator do
     
    it "should call freemarker generator" do
       @freemarker_generator.should_receive(:build)
+      @generator.build
+    end
+    
+    it "should call repository generator" do
+      @repository_generator.should_receive(:build)
       @generator.build
     end
   end
