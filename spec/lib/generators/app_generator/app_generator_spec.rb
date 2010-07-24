@@ -53,6 +53,12 @@ describe AppGenerator do
         to = "#{@app}/infrastructure/FreemarkerPathResolver.java"
         FileUtils.compare_file(from, to).should be_true
       end
+      
+       it "should create generic repository" do
+        from = "#{AppGenerator.source_root}/templates/Repository.java"
+        to = "#{@app}/repositories/Repository.java"
+        FileUtils.compare_file(from, to).should be_true
+      end
     end
     
     context "creating main resources" do

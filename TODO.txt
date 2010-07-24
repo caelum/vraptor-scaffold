@@ -2,11 +2,9 @@ create others persistence unit(maven profile?)
 update jpa to jpa2(hibernate 3.5.?-FINAL)
 datetime, date and time support.(jquery-ui?)
 relationship support(many-to-one, one-to-many, many-to-many)
-active record is possible?
 generators help
 usage file to each generator
 gem description
-http://waffle.codehaus.org
 put all html input in macros
 i18n messages
 xstream
@@ -15,3 +13,7 @@ it works on windowns?
 hibernate joda-time support
 top leval package
 scaml support
+jetty goal
+http://docs.codehaus.org/display/JETTY/Maven+Jetty+Plugin
+generate equals end hashcode
+unit tests to generated code

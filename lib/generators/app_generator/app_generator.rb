@@ -35,6 +35,7 @@ class AppGenerator < VraptorScaffold::Base
         empty_directory "controllers"
         empty_directory "models"
         create_app_infra
+        create_app_repository
       end
     end
     
@@ -42,6 +43,12 @@ class AppGenerator < VraptorScaffold::Base
       infra_path = empty_directory "infrastructure"
       template = "FreemarkerPathResolver.java"
       template_from_root(template, "#{infra_path}/#{template}")
+    end
+    
+    def create_app_repository
+      repository_path = empty_directory "repositories"
+      template = "Repository.java"
+      template_from_root(template, "#{repository_path}/#{template}")
     end
     
     def create_main_resources
