@@ -14,7 +14,7 @@ public abstract class Repository<T> {
 		this.entityManager = entityManager;
 	}
 	
-	public void save(Object entity) {
+	public void create(Object entity) {
 		entityManager.persist(entity);
 	}
 	
@@ -22,7 +22,7 @@ public abstract class Repository<T> {
 		entityManager.merge(entity);
 	}
 	
-	public void delete(Object entity) {
+	public void destroy(Object entity) {
 		entityManager.remove(entity);
 	}
 	

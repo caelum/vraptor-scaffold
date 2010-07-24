@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
 
   s.required_rubygems_version = Gem::Requirement.new("> 1.3.1") if s.respond_to? :required_rubygems_version=
   s.authors = ["Rodolfo Liviero"]
-  s.date = %q{2010-07-18}
+  s.date = %q{2010-07-24}
   s.default_executable = %q{vraptor}
   s.description = %q{}
   s.email = %q{rodolfoliviero@gmail.com}
@@ -31,6 +31,7 @@ Gem::Specification.new do |s|
      "bin/vraptor",
      "lib/generators/app_generator/app_generator.rb",
      "lib/generators/app_generator/templates/FreemarkerPathResolver.java",
+     "lib/generators/app_generator/templates/Repository.java",
      "lib/generators/app_generator/templates/decorators.xml",
      "lib/generators/app_generator/templates/index.jsp",
      "lib/generators/app_generator/templates/javascripts/jquery-1.4.2.min.js",
@@ -53,6 +54,8 @@ Gem::Specification.new do |s|
      "lib/generators/scaffold_generator/freemarker_generator/templates/show.erb",
      "lib/generators/scaffold_generator/model_generator/model_generator.rb",
      "lib/generators/scaffold_generator/model_generator/templates/model.erb",
+     "lib/generators/scaffold_generator/repository_generator/repository_generator.rb",
+     "lib/generators/scaffold_generator/repository_generator/templates/repository.erb",
      "lib/generators/scaffold_generator/scaffold_generator.rb",
      "lib/load_paths.rb",
      "lib/vraptor-scaffold.rb",
@@ -64,6 +67,8 @@ Gem::Specification.new do |s|
      "spec/lib/generators/scaffold_generator/freemarker_generator/freemarker_generator_spec.rb",
      "spec/lib/generators/scaffold_generator/model_generator/model_generator_spec.rb",
      "spec/lib/generators/scaffold_generator/model_generator/templates/Product.java",
+     "spec/lib/generators/scaffold_generator/repository_generator/repository_generator_spec.rb",
+     "spec/lib/generators/scaffold_generator/repository_generator/templates/ProductRepository.java",
      "spec/lib/generators/scaffold_generator/scaffold_generator_spec.rb",
      "spec/lib/vraptor-scaffold_spec.rb",
      "spec/spec.opts",
@@ -80,6 +85,7 @@ Gem::Specification.new do |s|
     "spec/lib/vraptor-scaffold_spec.rb",
      "spec/lib/generators/app_generator/app_generator_spec.rb",
      "spec/lib/generators/scaffold_generator/controller_generator/controller_generator_spec.rb",
+     "spec/lib/generators/scaffold_generator/repository_generator/repository_generator_spec.rb",
      "spec/lib/generators/scaffold_generator/scaffold_generator_spec.rb",
      "spec/lib/generators/scaffold_generator/model_generator/model_generator_spec.rb",
      "spec/lib/generators/scaffold_generator/freemarker_generator/freemarker_generator_spec.rb",

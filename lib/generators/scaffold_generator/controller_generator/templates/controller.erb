@@ -2,9 +2,8 @@ package app.controllers;
 
 import java.util.List;
 
-import javax.persistence.EntityManager;
-
 import app.models.<%= class_name %>;
+import app.repositories.<%= class_name %>Repository;
 import br.com.caelum.vraptor.Delete;
 import br.com.caelum.vraptor.Get;
 import br.com.caelum.vraptor.Path;
@@ -18,19 +17,19 @@ import br.com.caelum.vraptor.Validator;
 public class <%= controller_class_name %> {
 
 	private final Result result;
-	private final EntityManager entityManager;
+	private final <%= class_name %>Repository repository;
 	private final Validator validator;
 	
-	public <%= controller_class_name %>(Result result, EntityManager entityManager, Validator validator) {
-		this.entityManager = entityManager;
+	public <%= controller_class_name %>(Result result, <%= class_name %>Repository repository, Validator validator) {
 		this.result = result;
+		this.repository = repository;
 		this.validator = validator;
 	}
 	
 	@Get
 	@Path("<%= path %>")
 	public List<<%= class_name %>> index() {
-		return entityManager.createQuery("from <%= class_name %>").getResultList();
+		return repository.findAll();
 	}
 	
 	@Post
@@ -38,7 +37,7 @@ public class <%= controller_class_name %> {
 	public void create(<%= class_name %> <%= @model %>) {
 		validator.validate(<%= @model %>);
 		validator.onErrorForwardTo(this).form(<%= @model %>);
-		entityManager.persist(<%= @model %>);
+		repository.create(<%= @model %>);
 		result.redirectTo(this).index();
 	}
 	
@@ -53,26 +52,26 @@ public class <%= controller_class_name %> {
 	public void update(<%= class_name %> <%= @model %>) {
 		validator.validate(<%= @model %>);
 		validator.onErrorForwardTo(this).form(<%= @model %>);
-		entityManager.merge(<%= @model %>);
+		repository.update(<%= @model %>);
 		result.redirectTo(this).index();
 	}
 	
 	@Get
 	@Path("<%= "#{path}/{#{@model}.id}/edit" %>")
 	public void edit(<%= @model.capitalize %> <%= @model %>) {
-		result.forwardTo(this).form(entityManager.find(<%= @model.capitalize %>.class, <%= @model %>.getId()));
+		result.forwardTo(this).form(repository.find(<%= @model %>.getId()));
 	}
 
 	@Get
 	@Path("<%= "#{path}/{#{@model}.id}/show" %>")
 	public <%= class_name %> show(<%= @model.capitalize %> <%= @model %>) {
-		return entityManager.find(<%= @model.capitalize %>.class, <%= @model %>.getId());
+		return repository.find(<%= @model %>.getId());
 	}
 
 	@Delete
 	@Path("<%= path %>")
 	public void destroy(<%= class_name %> <%= @model %>) {
-		entityManager.remove(entityManager.find(<%= class_name %>.class, <%= @model %>.getId()));
+		repository.destroy(repository.find(<%= @model %>.getId()));
 		result.redirectTo(this).index();  
 	}
 	
