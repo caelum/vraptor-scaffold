@@ -5,6 +5,9 @@
 * Scaffold Repository to each Model.
 * Now controllers use repository instead entity manager.
 
+== Improvements
+* Better freemarker views.
+
 === 0.0.1.beta4 / 2010-07-16
 
 == New Features

@@ -36,30 +36,30 @@ public class ProductController {
 	@Path("/products")
 	public void create(Product product) {
 		validator.validate(product);
-		validator.onErrorForwardTo(this).form(product);
+		validator.onErrorUsePageOf(this).newProduct();
 		repository.create(product);
 		result.redirectTo(this).index();
 	}
 	
 	@Get
 	@Path("/products/new")
-	public void newProduct() {
-		result.forwardTo(this).form(new Product());
+	public Product newProduct() {
+		return new Product();
 	}
 	
 	@Put
 	@Path("/products")
 	public void update(Product product) {
 		validator.validate(product);
-		validator.onErrorForwardTo(this).form(product);
+		validator.onErrorUsePageOf(this).edit(product);
 		repository.update(product);
 		result.redirectTo(this).index();
 	}
 	
 	@Get
 	@Path("/products/{product.id}/edit")
-	public void edit(Product product) {
-		result.forwardTo(this).form(repository.find(product.getId()));
+	public Product edit(Product product) {
+		return repository.find(product.getId());
 	}
 
 	@Get
@@ -75,7 +75,4 @@ public class ProductController {
 		result.redirectTo(this).index();  
 	}
 	
-	public Product form(Product product) {
-		return product;
-	}
 }
