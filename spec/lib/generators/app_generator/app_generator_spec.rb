@@ -8,7 +8,7 @@ describe AppGenerator do
   end
   
   after(:all) do
-    FileUtils.remove_dir(@project_path)
+    FileUtils.remove_dir("src")
   end
    
   context "build new application" do

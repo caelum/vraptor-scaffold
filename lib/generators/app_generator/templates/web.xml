@@ -11,6 +11,11 @@
 		<param-value>br.com.caelum.vraptor.util.jpa.JPACustomProvider</param-value>
 	</context-param>
 	
+	<context-param>
+		<param-name>br.com.caelum.vraptor.encoding</param-name>
+		<param-value>UTF-8</param-value>
+	</context-param>
+	
 	<filter>
         <filter-name>sitemesh</filter-name>
         <filter-class>com.opensymphony.sitemesh.webapp.SiteMeshFilter</filter-class>
@@ -40,7 +45,7 @@
 		</init-param>
 		<init-param>
 			<param-name>default_encoding</param-name>
-			<param-value>ISO-8859-1</param-value>
+			<param-value>UTF-8</param-value>
 		</init-param>
 		<init-param>
 			<param-name>auto_import</param-name>
