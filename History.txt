@@ -4,6 +4,7 @@
 * Added Generic Repository.
 * Scaffold Repository to each Model.
 * Now controllers use repository instead entity manager.
+* Generated models come with hashCode and equals.
 
 == Improvements
 * Better freemarker views.

@@ -15,6 +15,5 @@ top leval package
 scaml support
 jetty goal
 http://docs.codehaus.org/display/JETTY/Maven+Jetty+Plugin
-generate equals end hashcode
 unit tests to generated code
 support to change default encondig when create new app like --enconding=ISO-8859-1

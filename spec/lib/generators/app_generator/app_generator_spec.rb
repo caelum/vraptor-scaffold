@@ -44,6 +44,12 @@ describe AppGenerator do
         File.exist?("#{@app}/models").should be_true 
       end
       
+      it "should create generic entity" do
+        from = "#{AppGenerator.source_root}/templates/Entity.java"
+        to = "#{@app}/models/Entity.java"
+        FileUtils.compare_file(from, to).should be_true
+      end
+      
       it "should create infrastructure folder" do
         File.exist?("#{@app}/infrastructure").should be_true 
       end

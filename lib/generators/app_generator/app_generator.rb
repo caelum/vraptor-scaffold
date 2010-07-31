@@ -33,10 +33,16 @@ class AppGenerator < VraptorScaffold::Base
       empty_directory "app"
       inside "app" do
         empty_directory "controllers"
-        empty_directory "models"
+        create_app_models
         create_app_infra
         create_app_repository
       end
+    end
+    
+    def create_app_models
+      models_path = empty_directory "models"
+      template = "Entity.java"
+      template_from_root(template, "#{models_path}/#{template}")
     end
     
     def create_app_infra

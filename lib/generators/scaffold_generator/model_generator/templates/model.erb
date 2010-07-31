@@ -1,26 +1,11 @@
 package app.models;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-
-@Entity
-public class <%= class_name %> {
-
-	@Id @GeneratedValue
-	private Long id;
+@javax.persistence.Entity
+public class <%= class_name %> extends Entity {
 	
 <% @attributes.each do |att| -%>
 	private <%= att.type %> <%= att.name %>;
 <% end -%>
-  
-	public void setId(Long id) {
-		this.id = id;
-	}
-	
-	public Long getId() {
-		return id;
-	}
 	
 <% @attributes.each do |att| -%>
 	public void set<%= att.name.capitalize %>(<%= att.type %> <%= att.name %>) {
