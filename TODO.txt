@@ -1,18 +1,19 @@
-create others persistence unit(maven profile?)
-update jpa to jpa2(hibernate 3.5.?-FINAL)
+unit tests to generated code
 datetime, date and time support.(jquery-ui?)
 relationship support(many-to-one, one-to-many, many-to-many)
+
+gem description
 generators help
 usage file to each generator
-gem description
+create others persistence unit(maven profile?)
+update jpa to jpa2(hibernate 3.5.?-FINAL)
+
 put all html input in macros
 i18n messages
-xstream
 it works on windowns?
 hibernate joda-time support
 top leval package
 scaml support
 jetty goal
-http://docs.codehaus.org/display/JETTY/Maven+Jetty+Plugin
-unit tests to generated code
 support to change default encondig when create new app like --enconding=ISO-8859-1
+cuke for duke

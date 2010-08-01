@@ -12,14 +12,21 @@ class AppGenerator < VraptorScaffold::Base
     create_main_java
     create_main_resources
     create_webapp
-    empty_directory "src/test/java"
-    empty_directory "src/test/resources"
+    create_test
   end
   
   private
   	def create_pom
   		template("templates/pom.erb", "pom.xml")
   	end
+  	
+  	def create_test
+  	  empty_directory "src/test/java"
+      empty_directory "src/test/java/app"
+      empty_directory "src/test/java/app/controllers"
+      empty_directory "src/test/java/app/models"
+      empty_directory "src/test/resources"
+	  end
   
     def create_main_java
       main_java = "src/main/java"

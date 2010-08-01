@@ -168,10 +168,23 @@ describe AppGenerator do
       before(:all) do
         @test_java = "#{@project_path}/src/test/java"
         @test_resource = "#{@project_path}/src/test/java"
+        @app = "#{@test_java}/app"
       end
       
       it "should create test source folder" do
         File.exist?(@test_java).should be_true 
+      end
+      
+      it "should create app folder" do
+        File.exist?(@app).should be_true 
+      end
+      
+      it "should create controllers folder" do
+        File.exist?("#{@app}/controllers").should be_true 
+      end
+      
+      it "should create models folder" do
+        File.exist?("#{@app}/models").should be_true 
       end
       
       it "should create test resource folder" do
