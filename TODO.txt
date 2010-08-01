@@ -8,7 +8,6 @@ gem description
 put all html input in macros
 i18n messages
 xstream
-context.xml
 it works on windowns?
 hibernate joda-time support
 top leval package

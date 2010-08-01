@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
 
   s.required_rubygems_version = Gem::Requirement.new("> 1.3.1") if s.respond_to? :required_rubygems_version=
   s.authors = ["Rodolfo Liviero"]
-  s.date = %q{2010-07-24}
+  s.date = %q{2010-08-01}
   s.default_executable = %q{vraptor}
   s.description = %q{}
   s.email = %q{rodolfoliviero@gmail.com}
@@ -30,6 +30,7 @@ Gem::Specification.new do |s|
      "VERSION.yml",
      "bin/vraptor",
      "lib/generators/app_generator/app_generator.rb",
+     "lib/generators/app_generator/templates/Entity.java",
      "lib/generators/app_generator/templates/FreemarkerPathResolver.java",
      "lib/generators/app_generator/templates/Repository.java",
      "lib/generators/app_generator/templates/decorators.xml",
@@ -100,21 +101,21 @@ Gem::Specification.new do |s|
     s.specification_version = 3
 
     if Gem::Version.new(Gem::VERSION) >= Gem::Version.new('1.2.0') then
-      s.add_runtime_dependency(%q<thor>, [">= 0.13.8"])
+      s.add_runtime_dependency(%q<thor>, [">= 0.14.0"])
       s.add_runtime_dependency(%q<rake>, [">= 0.8.7"])
       s.add_runtime_dependency(%q<activesupport>, [">= 3.0.0.beta4"])
-      s.add_runtime_dependency(%q<bundler>, [">= 1.0.0.beta.5"])
+      s.add_runtime_dependency(%q<bundler>, [">= 1.0.0.rc.2"])
     else
-      s.add_dependency(%q<thor>, [">= 0.13.8"])
+      s.add_dependency(%q<thor>, [">= 0.14.0"])
       s.add_dependency(%q<rake>, [">= 0.8.7"])
       s.add_dependency(%q<activesupport>, [">= 3.0.0.beta4"])
-      s.add_dependency(%q<bundler>, [">= 1.0.0.beta.5"])
+      s.add_dependency(%q<bundler>, [">= 1.0.0.rc.2"])
     end
   else
-    s.add_dependency(%q<thor>, [">= 0.13.8"])
+    s.add_dependency(%q<thor>, [">= 0.14.0"])
     s.add_dependency(%q<rake>, [">= 0.8.7"])
     s.add_dependency(%q<activesupport>, [">= 3.0.0.beta4"])
-    s.add_dependency(%q<bundler>, [">= 1.0.0.beta.5"])
+    s.add_dependency(%q<bundler>, [">= 1.0.0.rc.2"])
   end
 end
 

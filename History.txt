@@ -9,6 +9,7 @@
 == Improvements
 * Better freemarker views.
 * UTF-8 default enconding.
+* Update jetty maven plugin version.(6 to 7).
 
 === 0.0.1.beta4 / 2010-07-16
 

@@ -8,7 +8,7 @@ import javax.persistence.EntityManager;
 
 public abstract class Repository<T> {
 	
-	protected EntityManager entityManager;
+	protected final EntityManager entityManager;
 	
 	public Repository(EntityManager entityManager) {
 		this.entityManager = entityManager;
