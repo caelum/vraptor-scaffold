@@ -1,10 +1,11 @@
 === 0.0.1.beta4 / 2010-07-?
 
 == New Features
-* Added Generic Repository.
-* Scaffold Repository to each Model.
+* Added generic repository.
+* Scaffold repository to each model.
 * Now controllers use repository instead entity manager.
 * Generated models come with hashCode and equals.
+* Generating fake tests to models, controllers and repositories.
 
 == Improvements
 * Better freemarker views.

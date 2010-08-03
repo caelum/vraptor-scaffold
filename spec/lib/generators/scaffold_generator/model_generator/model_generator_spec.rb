@@ -17,4 +17,7 @@ describe ModelGenerator do
     FileUtils.compare_file(from, to).should be_true
   end
   
+   it "should create model test" do
+    File.exist?("src/test/java/app/models/ProductTest.java").should be_true 
+  end
 end	

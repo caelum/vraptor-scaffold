@@ -17,4 +17,8 @@ describe ControllerGenerator do
     FileUtils.compare_file(from, to).should be_true
   end
   
+  it "should create controller test" do
+    File.exist?("src/test/java/app/controllers/ProductControllerTest.java").should be_true 
+  end
+  
 end	

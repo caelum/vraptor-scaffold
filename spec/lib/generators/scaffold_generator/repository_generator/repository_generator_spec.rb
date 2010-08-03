@@ -17,4 +17,7 @@ describe RepositoryGenerator do
     FileUtils.compare_file(from, to).should be_true
   end
   
+   it "should create repository" do
+    File.exist?("src/test/java/app/repositories/ProductRepositoryTest.java").should be_true
+  end
 end	
