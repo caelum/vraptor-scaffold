@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
 
   s.required_rubygems_version = Gem::Requirement.new("> 1.3.1") if s.respond_to? :required_rubygems_version=
   s.authors = ["Rodolfo Liviero"]
-  s.date = %q{2010-08-01}
+  s.date = %q{2010-08-04}
   s.default_executable = %q{vraptor}
   s.description = %q{}
   s.email = %q{rodolfoliviero@gmail.com}
@@ -49,6 +49,7 @@ Gem::Specification.new do |s|
      "lib/generators/scaffold_generator/base_scaffold.rb",
      "lib/generators/scaffold_generator/controller_generator/controller_generator.rb",
      "lib/generators/scaffold_generator/controller_generator/templates/controller.erb",
+     "lib/generators/scaffold_generator/controller_generator/templates/controller_test.erb",
      "lib/generators/scaffold_generator/freemarker_generator/freemarker_generator.rb",
      "lib/generators/scaffold_generator/freemarker_generator/templates/edit.erb",
      "lib/generators/scaffold_generator/freemarker_generator/templates/form.erb",
@@ -57,8 +58,10 @@ Gem::Specification.new do |s|
      "lib/generators/scaffold_generator/freemarker_generator/templates/show.erb",
      "lib/generators/scaffold_generator/model_generator/model_generator.rb",
      "lib/generators/scaffold_generator/model_generator/templates/model.erb",
+     "lib/generators/scaffold_generator/model_generator/templates/model_test.erb",
      "lib/generators/scaffold_generator/repository_generator/repository_generator.rb",
      "lib/generators/scaffold_generator/repository_generator/templates/repository.erb",
+     "lib/generators/scaffold_generator/repository_generator/templates/repository_test.erb",
      "lib/generators/scaffold_generator/scaffold_generator.rb",
      "lib/load_paths.rb",
      "lib/vraptor-scaffold.rb",
