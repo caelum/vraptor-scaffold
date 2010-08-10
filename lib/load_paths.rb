@@ -1,5 +1,4 @@
 require 'rubygems'
-require "bundler/setup"
 
 require 'thor/actions'
 require 'thor/group'
