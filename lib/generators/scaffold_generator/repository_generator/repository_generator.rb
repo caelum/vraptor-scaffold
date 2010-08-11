@@ -8,8 +8,4 @@ class RepositoryGenerator < BaseScaffold
     template("templates/repository.erb", "src/main/java/app/repositories/#{repository_class_name}.java")
     template("templates/repository_test.erb", "src/test/java/app/repositories/#{repository_class_name}Test.java")
   end
-  
-  def repository_class_name
-    "#{class_name}Repository"
-  end
 end

@@ -9,10 +9,6 @@ class ControllerGenerator < BaseScaffold
     template("templates/controller_test.erb", "src/test/java/app/controllers/#{controller_class_name}Test.java")
   end
   
-  def controller_class_name
-    "#{class_name}Controller"
-  end
-  
   def path
     "/#{@model.pluralize}"
   end
