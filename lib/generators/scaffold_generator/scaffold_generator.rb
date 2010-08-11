@@ -21,17 +21,17 @@ class ScaffoldGenerator
         puts "To run scaffold please go to the project root folder."
         Kernel::exit
       end
-      validate_parse_attributes(args)
+      validate_attributes(args)
     end
   
-    def validate_parse_attributes(args)
+    def validate_attributes(args)
       args.each do |arg|
         parsedAttribute = arg.split(":")
-        validate_parse_attribute(parsedAttribute)
+        parse_attribute(parsedAttribute)
       end
     end
     
-    def validate_parse_attribute(parsedAttribute) 
+    def parse_attribute(parsedAttribute) 
       type = parsedAttribute.last.downcase 
       unless Attribute.valid_types.include?(type)
         puts "Attribute #{type} is not supported. The supported attributes types are: #{Attribute.valid_types.join(" ")}"
