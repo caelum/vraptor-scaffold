@@ -6,6 +6,6 @@ class ModelGenerator < BaseScaffold
   
   def build
     template("templates/model.erb", "src/main/java/app/models/#{class_name}.java")
-    template("templates/model_test.erb", "src/test/java/app/models/#{class_name}Test.java")
+    template("templates/model_test.erb", "src/test/java/app/models/#{test_class_name}.java")
   end
 end

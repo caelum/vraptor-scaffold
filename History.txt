@@ -1,4 +1,6 @@
-=== 0.0.1.beta4 / 2010-07-?
+=== 0.0.1.rc / 2010-08-??
+
+=== 0.0.1.beta4 / 2010-08-04
 
 == New Features
 * Added generic repository.
