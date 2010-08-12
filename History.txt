@@ -1,5 +1,8 @@
 === 0.0.1.rc / 2010-08-??
 
+== Bugfixes
+* Works on windows OS.
+
 === 0.0.1.beta4 / 2010-08-04
 
 == New Features

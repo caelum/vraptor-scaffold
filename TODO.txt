@@ -1,3 +1,4 @@
+text support
 unit tests to generated code
 datetime, date and time support.(jquery-ui?)
 relationship support(many-to-one, one-to-many, many-to-many)
@@ -10,7 +11,6 @@ update jpa to jpa2(hibernate 3.5.?-FINAL)
 
 put all html input in macros
 i18n messages
-it works on windowns?
 hibernate joda-time support
 top leval package
 scaml support
