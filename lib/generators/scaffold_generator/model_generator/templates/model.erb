@@ -4,15 +4,15 @@ package app.models;
 public class <%= class_name %> extends Entity {
 	
 <% @attributes.each do |att| -%>
-	private <%= att.type %> <%= att.name %>;
+	private <%= att.java_type %> <%= att.name %>;
 <% end -%>
 	
 <% @attributes.each do |att| -%>
-	public void set<%= att.name.capitalize %>(<%= att.type %> <%= att.name %>) {
+	public void set<%= att.name.capitalize %>(<%= att.java_type %> <%= att.name %>) {
 		this.<%= att.name %> = <%= att.name %>;
 	}
 	
-	public <%= att.type %> get<%= att.name.capitalize %>() {
+	public <%= att.java_type %> get<%= att.name.capitalize %>() {
 		return <%= att.name %>;
 	}
 	

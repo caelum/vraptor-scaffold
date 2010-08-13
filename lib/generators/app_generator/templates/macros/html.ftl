@@ -1,13 +1,17 @@
 <#macro checkbox name checked=false>
 	<#if checked>
-  		<input type="checkbox" name="${name}" checked/>
+  		<input id="${name}" type="checkbox" name="${name}" checked/>
 	<#else>
-  		<input type="checkbox" name="${name}"/>
+  		<input id="${name}" type="checkbox" name="${name}"/>
 	</#if>  
 </#macro>
 
 <#macro text name value="">
-    <input type="text" name="${name}" value="${value}"/>
+    <input type="text" id="${name}" name="${name}" value="${value}"/>
+</#macro>
+
+<#macro textarea name value="">
+    <textarea id="${name}" name="${name}" cols="40" rows="20">${value}</textarea>
 </#macro>
 
 <#macro css name>
