@@ -4,6 +4,12 @@ Scaffold for vraptor 3.
 == Installation
  gem install vraptor-scaffold --pre
  
+== Dependencies
+Ensures that you already have installed:
+
+- Java 6 
+- Maven 2
+ 
 == Getting Started
 At the command line client:
  
@@ -24,7 +30,7 @@ The default web server is jetty but you can import the project in your favorite 
 and run your project with tomcat or jboss as for example.
 
 == Supported Java Types
-The only supported types for now are: boolean, double, float, short, integer, long and string.
+The only supported types for now are: boolean, double, float, short, integer, long, string and text.
 
 == Architecture Overview
 When you run vraptor new command will be created a java web application with:
@@ -36,6 +42,7 @@ When you run vraptor new command will be created a java web application with:
 - Maven2 = Project Management 
 - jQuery = JavaScript
 - Junit
+- Hamcrest
 - Mockito    
 
 == Description of Contents
@@ -76,11 +83,12 @@ src/test/java/app/models
 src/test/java/app/repositories
   Tests to repositories will be placed here.
 
-== Dependencies
-Ensures that you already have installed:
-
-- Java 6 
-- Maven 2
+== Where next?
+- More views generators like velocity, jsp and scaml.
+- More ORM generators with openJPA and TopLink.
+- Relationship(ManyToOne, OneToMany, etc) and date(LocalDate, LocalDateTime, LocalTime) support.
+- JPA2 support
+- And More.
 
 == Note on Patches/Pull Requests
 - Fork the project.

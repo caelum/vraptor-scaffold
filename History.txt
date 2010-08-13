@@ -1,5 +1,9 @@
 === 0.0.1.rc / 2010-08-??
 
+== New Features
+* Added Hamcrest 1.1
+* Added text support(textarea).
+
 == Bugfixes
 * Works on windows OS.
 

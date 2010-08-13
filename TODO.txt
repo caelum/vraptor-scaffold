@@ -1,5 +1,4 @@
-text support
-unit tests to generated code
+better unit tests to generated code
 datetime, date and time support.(jquery-ui?)
 relationship support(many-to-one, one-to-many, many-to-many)
 
