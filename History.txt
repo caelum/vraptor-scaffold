@@ -4,6 +4,9 @@
 * Added Hamcrest 1.1
 * Added text support(textarea).
 
+== Improvements
+* Create forder to put images.
+
 == Bugfixes
 * Works on windows OS.
 

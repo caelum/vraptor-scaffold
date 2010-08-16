@@ -163,6 +163,10 @@ describe AppGenerator do
         to = "#{@webapp}/javascripts/jquery-1.4.2.min.js"
         FileUtils.compare_file(from, to).should be_true
       end
+      
+      it "should create images folder" do
+         File.exist?("#{@webapp}/images").should be_true 
+      end
     end
     context "creating test" do
       before(:all) do

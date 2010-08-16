@@ -81,6 +81,7 @@ class AppGenerator < VraptorScaffold::Base
       inside webapp do
         template_from_root("index.jsp", "#{webapp}/index.jsp")
         create_decorators
+        empty_directory "images"
         create_js
         create_css
         create_macros
