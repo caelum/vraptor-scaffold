@@ -6,16 +6,15 @@ begin
   Jeweler::Tasks.new do |gem|
     gem.name = "vraptor-scaffold"
     gem.summary = "Scaffold for vraptor 3."
-    gem.description = ""
+    gem.description = "Scaffold for vraptor 3 with jpa, freemarker, maven, mockito, junit and jquery."
     gem.email = "rodolfoliviero@gmail.com"
     gem.homepage = "http://github.com/rodolfoliviero/vraptor-scaffold"
     gem.authors = ["Rodolfo Liviero"]
     
     gem.add_dependency "thor", ">=0.14.0"
-	gem.add_dependency "rake", ">=0.8.7"
+    gem.add_dependency "rake", ">=0.8.7"
   	gem.add_dependency "activesupport", ">=3.0.0.rc"
-	
-	gem.post_install_message = "Thank you for installing vraptor-scaffold. Please read http://github.com/rodolfoliviero/vraptor-scaffold/blob/master/README.rdoc for more information."
+	  gem.post_install_message = "Thank you for installing vraptor-scaffold. Please read http://github.com/rodolfoliviero/vraptor-scaffold/blob/master/README.rdoc for more information."
   end
   Jeweler::GemcutterTasks.new
 rescue LoadError

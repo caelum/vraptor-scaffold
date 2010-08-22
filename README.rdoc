@@ -62,9 +62,6 @@ src/main/webapp
 src/main/webapp/decorators
   Decorators will be placed here.
   
-src/main/webapp/macros
-  Freemarker macros will be placed here.
-  
 src/main/webapp/javascripts
   JavaScripts will be placed here.
   
@@ -84,17 +81,21 @@ src/test/java/app/repositories
   Tests to repositories will be placed here.
 
 == Where next?
+- Anothers build framework like ant, gradle and ivy. 
 - More views generators like velocity, jsp and scaml.
 - More ORM generators with openJPA and TopLink.
 - Relationship(ManyToOne, OneToMany, etc) and date(LocalDate, LocalDateTime, LocalTime) support.
-- JPA2 support
-- And More.
+- JPA2 support.
 
 == Note on Patches/Pull Requests
-- Fork the project.
-- Make your feature addition or bug fix.
-- Add tests for it.
-- Send me a pull request.
+ 
+* Fork the project.
+* Make your feature addition or bug fix.
+* Add tests for it. This is important so I don't break it in a
+  future version unintentionally.
+* Commit, do not mess with rakefile, version, or history.
+  (if you want to have your own version, that is fine but bump version in a commit by itself I can ignore when I pull)
+* Send me a pull request. Bonus points for topic branches.
 
 == Author
 -- Rodolfo Liviero [mailto:rodolfoliviero@gmail.com]
