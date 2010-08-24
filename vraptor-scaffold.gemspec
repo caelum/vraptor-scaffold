@@ -5,13 +5,13 @@
 
 Gem::Specification.new do |s|
   s.name = %q{vraptor-scaffold}
-  s.version = "0.0.1.beta5"
+  s.version = "0.0.1.rc"
 
   s.required_rubygems_version = Gem::Requirement.new("> 1.3.1") if s.respond_to? :required_rubygems_version=
   s.authors = ["Rodolfo Liviero"]
-  s.date = %q{2010-08-04}
+  s.date = %q{2010-08-24}
   s.default_executable = %q{vraptor}
-  s.description = %q{}
+  s.description = %q{Scaffold for vraptor 3 with jpa, freemarker, maven, mockito, junit and jquery.}
   s.email = %q{rodolfoliviero@gmail.com}
   s.executables = ["vraptor"]
   s.extra_rdoc_files = [
@@ -44,8 +44,8 @@ Gem::Specification.new do |s|
      "lib/generators/app_generator/templates/pom.erb",
      "lib/generators/app_generator/templates/stylesheets/scaffold.css",
      "lib/generators/app_generator/templates/web.xml",
-     "lib/generators/attribute.rb",
      "lib/generators/base.rb",
+     "lib/generators/scaffold_generator/attribute.rb",
      "lib/generators/scaffold_generator/base_scaffold.rb",
      "lib/generators/scaffold_generator/controller_generator/controller_generator.rb",
      "lib/generators/scaffold_generator/controller_generator/templates/controller.erb",
@@ -67,7 +67,8 @@ Gem::Specification.new do |s|
      "lib/vraptor-scaffold.rb",
      "spec/lib/generators/app_generator/app_generator_spec.rb",
      "spec/lib/generators/app_generator/templates/pom.xml",
-     "spec/lib/generators/attribute_spec.rb",
+     "spec/lib/generators/scaffold_generator/attribute_spec.rb",
+     "spec/lib/generators/scaffold_generator/base_scaffold_spec.rb",
      "spec/lib/generators/scaffold_generator/controller_generator/controller_generator_spec.rb",
      "spec/lib/generators/scaffold_generator/controller_generator/templates/ProductController.java",
      "spec/lib/generators/scaffold_generator/freemarker_generator/freemarker_generator_spec.rb",
@@ -88,15 +89,16 @@ Gem::Specification.new do |s|
   s.rubygems_version = %q{1.3.7}
   s.summary = %q{Scaffold for vraptor 3.}
   s.test_files = [
-    "spec/lib/vraptor-scaffold_spec.rb",
+    "spec/spec_helper.rb",
      "spec/lib/generators/app_generator/app_generator_spec.rb",
-     "spec/lib/generators/scaffold_generator/controller_generator/controller_generator_spec.rb",
      "spec/lib/generators/scaffold_generator/repository_generator/repository_generator_spec.rb",
-     "spec/lib/generators/scaffold_generator/scaffold_generator_spec.rb",
      "spec/lib/generators/scaffold_generator/model_generator/model_generator_spec.rb",
      "spec/lib/generators/scaffold_generator/freemarker_generator/freemarker_generator_spec.rb",
-     "spec/lib/generators/attribute_spec.rb",
-     "spec/spec_helper.rb"
+     "spec/lib/generators/scaffold_generator/attribute_spec.rb",
+     "spec/lib/generators/scaffold_generator/scaffold_generator_spec.rb",
+     "spec/lib/generators/scaffold_generator/base_scaffold_spec.rb",
+     "spec/lib/generators/scaffold_generator/controller_generator/controller_generator_spec.rb",
+     "spec/lib/vraptor-scaffold_spec.rb"
   ]
 
   if s.respond_to? :specification_version then
@@ -106,19 +108,16 @@ Gem::Specification.new do |s|
     if Gem::Version.new(Gem::VERSION) >= Gem::Version.new('1.2.0') then
       s.add_runtime_dependency(%q<thor>, [">= 0.14.0"])
       s.add_runtime_dependency(%q<rake>, [">= 0.8.7"])
-      s.add_runtime_dependency(%q<activesupport>, [">= 3.0.0.beta4"])
-      s.add_runtime_dependency(%q<bundler>, [">= 1.0.0.rc.2"])
+      s.add_runtime_dependency(%q<activesupport>, [">= 3.0.0.rc"])
     else
       s.add_dependency(%q<thor>, [">= 0.14.0"])
       s.add_dependency(%q<rake>, [">= 0.8.7"])
-      s.add_dependency(%q<activesupport>, [">= 3.0.0.beta4"])
-      s.add_dependency(%q<bundler>, [">= 1.0.0.rc.2"])
+      s.add_dependency(%q<activesupport>, [">= 3.0.0.rc"])
     end
   else
     s.add_dependency(%q<thor>, [">= 0.14.0"])
     s.add_dependency(%q<rake>, [">= 0.8.7"])
-    s.add_dependency(%q<activesupport>, [">= 3.0.0.beta4"])
-    s.add_dependency(%q<bundler>, [">= 1.0.0.rc.2"])
+    s.add_dependency(%q<activesupport>, [">= 3.0.0.rc"])
   end
 end
 
