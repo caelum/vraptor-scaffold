@@ -2,7 +2,6 @@ better unit tests to generated code
 datetime, date and time support.(jquery-ui?)
 relationship support(many-to-one, one-to-many, many-to-many)
 
-gem description
 generators help
 usage file to each generator
 create others persistence unit(maven profile?)

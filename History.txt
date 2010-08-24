@@ -1,4 +1,4 @@
-=== 0.0.1.rc / 2010-08-??
+=== 0.0.1.rc / 2010-08-23
 
 == New Features
 * Added Hamcrest 1.1
