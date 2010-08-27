@@ -6,7 +6,7 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 
-public abstract class Repository<T> {
+public abstract class Repository<T, I extends Serializable> {
 	
 	protected final EntityManager entityManager;
 	
@@ -14,20 +14,20 @@ public abstract class Repository<T> {
 		this.entityManager = entityManager;
 	}
 	
-	public void create(Object entity) {
+	public void create(T entity) {
 		entityManager.persist(entity);
 	}
 	
-	public void update(Object entity) {
+	public void update(T entity) {
 		entityManager.merge(entity);
 	}
 	
-	public void destroy(Object entity) {
+	public void destroy(T entity) {
 		entityManager.remove(entity);
 	}
 	
-	public T find(Serializable id) {
-		return (T) entityManager.find(getParameterizedClass(), id);
+	public T find(I id) {
+		return entityManager.find(getParameterizedClass(), id);
 	}
 	
 	@SuppressWarnings("unchecked")
