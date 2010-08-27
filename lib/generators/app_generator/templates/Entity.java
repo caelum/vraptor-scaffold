@@ -8,7 +8,7 @@ import javax.persistence.MappedSuperclass;
 public class Entity {
 	
 	@Id @GeneratedValue
-	protected Long id;
+	private Long id;
 	
 	public void setId(Long id) {
 		this.id = id;
