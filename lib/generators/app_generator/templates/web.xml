@@ -7,8 +7,8 @@
 	<display-name>vraptor-scaffold-project</display-name>
 	
 	<context-param>
-		<param-name>br.com.caelum.vraptor.provider</param-name>
-		<param-value>br.com.caelum.vraptor.util.jpa.JPACustomProvider</param-value>
+		<param-name>br.com.caelum.vraptor.packages</param-name>
+		<param-value>br.com.caelum.vraptor.util.jpa</param-value>
 	</context-param>
 	
 	<context-param>
