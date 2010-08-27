@@ -6,11 +6,11 @@ import br.com.caelum.vraptor.ioc.Component;
 import app.models.<%= class_name %>;
 
 @Component
-public class <%= repository_class_name %>Impl 
+public class <%= repository_impl_name %> 
     extends Repository<<%= class_name %>, Long>
-    implements <%= repository_class_name %> {
+    implements <%= repository_interface_name %> {
 
-	public <%= repository_class_name %>(EntityManager entityManager) {
+	public <%= repository_impl_name %>(EntityManager entityManager) {
 		super(entityManager);
 	}
 }

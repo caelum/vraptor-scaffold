@@ -14,12 +14,16 @@ class BaseScaffold < VraptorScaffold::Base
     "#{class_name}Test"
   end
   
-  def repository_class_name
+  def repository_interface_name
    	"#{class_name}Repository"
   end
   
+  def repository_impl_name
+   	"#{class_name}RepositoryImpl"
+  end
+  
   def repository_test_class_name
-   	"#{repository_class_name}Test"
+   	"#{repository_impl_name}Test"
   end
   
   def controller_class_name

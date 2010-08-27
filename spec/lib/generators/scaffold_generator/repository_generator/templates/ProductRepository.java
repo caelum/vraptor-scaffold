@@ -1,14 +1,22 @@
 package app.repositories;
 
-import javax.persistence.EntityManager;
+import java.util.List;
 
-import br.com.caelum.vraptor.ioc.Component;
 import app.models.Product;
 
-@Component
-public class ProductRepository extends Repository<Product> {
+public interface ProductRepository {
+	/*
+	 * Delete the methods you don't want to expose
+	 */
+	 
+	void create(Product entity);
+	
+	void update(Product entity);
+	
+	void destroy(Product entity);
+	
+	Product find(Long id);
+	
+	List<Product> findAll();
 
-	public ProductRepository(EntityManager entityManager) {
-		super(entityManager);
-	}
 }

@@ -3,7 +3,7 @@ package app.controllers;
 import java.util.List;
 
 import app.models.<%= class_name %>;
-import app.repositories.<%= repository_class_name %>;
+import app.repositories.<%= repository_interface_name %>;
 import br.com.caelum.vraptor.Delete;
 import br.com.caelum.vraptor.Get;
 import br.com.caelum.vraptor.Path;
@@ -17,10 +17,10 @@ import br.com.caelum.vraptor.Validator;
 public class <%= controller_class_name %> {
 
 	private final Result result;
-	private final <%= repository_class_name %> repository;
+	private final <%= repository_interface_name %> repository;
 	private final Validator validator;
 	
-	public <%= controller_class_name %>(Result result, <%= repository_class_name %> repository, Validator validator) {
+	public <%= controller_class_name %>(Result result, <%= repository_interface_name %> repository, Validator validator) {
 		this.result = result;
 		this.repository = repository;
 		this.validator = validator;

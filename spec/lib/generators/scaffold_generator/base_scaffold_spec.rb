@@ -14,12 +14,16 @@ describe BaseScaffold do
 		@base.test_class_name.should eql("ClientTest")
 	end
 	
-	it "should know repository class name" do
-		@base.repository_class_name.should eql("ClientRepository")
+	it "should know repository class name impl" do
+		@base.repository_impl_name.should eql("ClientRepositoryImpl")
+	end
+	
+	it "should know repository interface name" do
+		@base.repository_interface_name.should eql("ClientRepository")
 	end
 	
 	it "should know repository test class name" do
-		@base.repository_test_class_name.should eql("ClientRepositoryTest")
+		@base.repository_test_class_name.should eql("ClientRepositoryImplTest")
 	end
 	
 	it "should know controller class name" do
