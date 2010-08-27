@@ -6,6 +6,7 @@ class RepositoryGenerator < BaseScaffold
   
   def build
     template("templates/repository.erb", "src/main/java/app/repositories/#{repository_class_name}.java")
+    template("templates/repository_impl.erb", "src/main/java/app/repositories/#{repository_class_name}Impl.java")    
     template("templates/repository_test.erb", "src/test/java/app/repositories/#{repository_test_class_name}.java")
   end
 end

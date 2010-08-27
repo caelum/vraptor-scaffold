@@ -1,0 +1,16 @@
+package app.repositories;
+
+import javax.persistence.EntityManager;
+
+import br.com.caelum.vraptor.ioc.Component;
+import app.models.<%= class_name %>;
+
+@Component
+public class <%= repository_class_name %>Impl 
+    extends Repository<<%= class_name %>, Long>
+    implements <%= repository_class_name %> {
+
+	public <%= repository_class_name %>(EntityManager entityManager) {
+		super(entityManager);
+	}
+}

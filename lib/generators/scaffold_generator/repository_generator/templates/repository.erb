@@ -5,10 +5,19 @@ import javax.persistence.EntityManager;
 import br.com.caelum.vraptor.ioc.Component;
 import app.models.<%= class_name %>;
 
-@Component
-public class <%= repository_class_name %> extends Repository<<%= class_name %>, Long> {
+public interface <%= repository_class_name %> {
+	/*
+	 * Delete the methods you don't want to expose
+	 */
+	 
+	void create(<%= class_name %> entity);
+	
+	void update(<%= class_name %> entity);
+	
+	void destroy(<%= class_name %> entity);
+	
+	<%= class_name %> find(Long id);
+	
+	List<<%= class_name %>> findAll();
 
-	public <%= repository_class_name %>(EntityManager entityManager) {
-		super(entityManager);
-	}
 }
