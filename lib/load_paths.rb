@@ -14,4 +14,4 @@ require File.dirname(__FILE__) + '/../lib/generators/scaffold_generator/model_ge
 require File.dirname(__FILE__) + '/../lib/generators/scaffold_generator/repository_generator/repository_generator'
 require File.dirname(__FILE__) + '/../lib/generators/scaffold_generator/controller_generator/controller_generator'
 require File.dirname(__FILE__) + '/../lib/generators/scaffold_generator/freemarker_generator/freemarker_generator'
-
+require File.dirname(__FILE__) + '/../lib/generators/scaffold_generator/jsp_generator/jsp_generator'

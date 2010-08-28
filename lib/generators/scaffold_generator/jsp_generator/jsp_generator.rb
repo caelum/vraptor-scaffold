@@ -1,0 +1,3 @@
+class JspGenerator < BaseScaffold
+
+end
