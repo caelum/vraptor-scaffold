@@ -24,7 +24,7 @@ describe AppGenerator do
 
     context "creating main java" do
       before(:all) do
-        @main_java = "#{@project_path}/src/main/java"
+        @main_java = "#{@project_path}/#{Configuration::MAIN_SRC}"
         @app = "#{@main_java}/app"
       end
 
@@ -69,7 +69,7 @@ describe AppGenerator do
 
     context "creating main resources" do
       before(:all) do
-        @main_resources = "#{@project_path}/src/main/resources"
+        @main_resources = "#{@project_path}/#{Configuration::MAIN_RESOURCES}"
         @meta_inf = "#{@main_resources}/META-INF"
       end 
 
@@ -98,10 +98,11 @@ describe AppGenerator do
         to = "#{@meta_inf}/persistence.xml"
         FileUtils.compare_file(from, to).should be_true
       end
-    end 
+    end
+
     context "creating webapp" do
       before(:all) do
-        @webapp = "#{@project_path}/src/main/webapp"
+        @webapp = "#{@project_path}/#{Configuration::WEB_APP}"
         @web_inf = "#{@webapp}/WEB-INF"
         @decorators = "#{@webapp}/decorators"
       end 
@@ -168,10 +169,11 @@ describe AppGenerator do
         File.exist?("#{@webapp}/images").should be_true 
       end
     end
+
     context "creating test" do
       before(:all) do
-        @test_java = "#{@project_path}/src/test/java"
-        @test_resource = "#{@project_path}/src/test/java"
+        @test_java = "#{@project_path}/#{Configuration::TEST_SRC}"
+        @test_resource = "#{@project_path}/#{Configuration::TEST_RESOURCES}"
         @app = "#{@test_java}/app"
       end
 

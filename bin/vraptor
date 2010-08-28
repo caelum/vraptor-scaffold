@@ -3,5 +3,5 @@
 require File.dirname(__FILE__) + '/../lib/vraptor-scaffold'
 
 begin
-	VraptorScaffold::Main.execute(ARGV.dup)
+  VraptorScaffold::Main.execute(ARGV.dup)
 end

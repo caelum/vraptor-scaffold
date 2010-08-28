@@ -13,17 +13,17 @@ describe RepositoryGenerator do
 
   it "should create repository interface" do
     from = File.expand_path(File.dirname(__FILE__) + "/templates/ProductRepository.java")
-    to = "src/main/java/app/repositories/ProductRepository.java"
+    to = "#{Configuration::MAIN_SRC}/app/repositories/ProductRepository.java"
     FileUtils.compare_file(from, to).should be_true
   end
 
   it "should create repository impl" do
     from = File.expand_path(File.dirname(__FILE__) + "/templates/ProductRepositoryImpl.java")
-    to = "src/main/java/app/repositories/ProductRepositoryImpl.java"
+    to = "#{Configuration::MAIN_SRC}/app/repositories/ProductRepositoryImpl.java"
     FileUtils.compare_file(from, to).should be_true
   end
 
   it "should create repository test" do
-    File.exist?("src/test/java/app/repositories/ProductRepositoryImplTest.java").should be_true
+    File.exist?("#{Configuration::TEST_SRC}/app/repositories/ProductRepositoryImplTest.java").should be_true
   end
 end	

@@ -21,15 +21,15 @@ class AppGenerator < VraptorScaffold::Base
   end
 
   def create_test
-    empty_directory "src/test/java"
-    empty_directory "src/test/java/app"
-    empty_directory "src/test/java/app/controllers"
-    empty_directory "src/test/java/app/models"
-    empty_directory "src/test/resources"
+    empty_directory Configuration::TEST_SRC
+    empty_directory "#{Configuration::TEST_SRC}/app"
+    empty_directory "#{Configuration::TEST_SRC}/app/controllers"
+    empty_directory "#{Configuration::TEST_SRC}/app/models"
+    empty_directory "#{Configuration::TEST_RESOURCES}"
   end
 
   def create_main_java
-    main_java = "src/main/java"
+    main_java = Configuration::MAIN_SRC
     empty_directory main_java
     inside main_java do
       create_app
@@ -65,7 +65,7 @@ class AppGenerator < VraptorScaffold::Base
   end
 
   def create_main_resources
-    main_resources = "src/main/resources"
+    main_resources = Configuration::MAIN_RESOURCES
     empty_directory main_resources
     inside main_resources do
       template_from_root("log4j.properties", "#{main_resources}/log4j.properties")
@@ -76,7 +76,7 @@ class AppGenerator < VraptorScaffold::Base
   end
 
   def create_webapp
-    webapp = "src/main/webapp"
+    webapp = Configuration::WEB_APP
     empty_directory webapp
     inside webapp do
       template_from_root("index.jsp", "#{webapp}/index.jsp")

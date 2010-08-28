@@ -13,11 +13,11 @@ describe ModelGenerator do
 
   it "should create model" do
     from = File.expand_path(File.dirname(__FILE__) + "/templates/Product.java")
-    to = "src/main/java/app/models/Product.java"
+    to = "#{Configuration::MAIN_SRC}/app/models/Product.java"
     FileUtils.compare_file(from, to).should be_true
   end
 
   it "should create model test" do
-    File.exist?("src/test/java/app/models/ProductTest.java").should be_true 
+    File.exist?("#{Configuration::TEST_SRC}/app/models/ProductTest.java").should be_true 
   end
 end	
