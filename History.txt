@@ -1,3 +1,10 @@
+=== ?.?.?.?? / 2010-??-??
+
+== New Features
+
+== Improvements
+* Better use of Generics.
+
 === 0.0.1.rc / 2010-08-23
 
 == New Features
