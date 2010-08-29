@@ -1,31 +1,21 @@
 class AppGenerator < VraptorScaffold::Base
 
   def self.source_root
-    File.dirname(__FILE__)
+    File.join(File.dirname(__FILE__), "templates")
   end
 
-  def build(project_path)
-    @project_name = project_path.split("/").last
+  def initialize(project_path)
+    super
     self.destination_root=(project_path)
+    @project_name = project_path.split("/").last
+  end
+
+  def create_root_folder
     empty_directory "."
-    create_pom
-    create_main_java
-    create_main_resources
-    create_webapp
-    create_test
   end
 
-  private
   def create_pom
-    template("templates/pom.erb", "pom.xml")
-  end
-
-  def create_test
-    empty_directory Configuration::TEST_SRC
-    empty_directory "#{Configuration::TEST_SRC}/app"
-    empty_directory "#{Configuration::TEST_SRC}/app/controllers"
-    empty_directory "#{Configuration::TEST_SRC}/app/models"
-    empty_directory "#{Configuration::TEST_RESOURCES}"
+    template_from_root("pom.erb", "pom.xml")
   end
 
   def create_main_java
@@ -36,6 +26,40 @@ class AppGenerator < VraptorScaffold::Base
     end
   end
 
+  def create_main_resources
+    main_resources = Configuration::MAIN_RESOURCES
+    empty_directory main_resources
+    inside main_resources do
+      template_from_root("log4j.properties", "#{main_resources}/log4j.properties")
+      template_from_root("messages.properties", "#{main_resources}/messages.properties")
+      meta_inf = empty_directory "META-INF"
+      template_from_root("persistence.xml", "#{meta_inf}/persistence.xml")
+    end
+  end
+
+  def create_webapp
+    webapp = Configuration::WEB_APP
+    empty_directory webapp
+    inside webapp do
+      template_from_root("index.jsp", "#{webapp}/index.jsp")
+      create_decorators
+      empty_directory "images"
+      create_js
+      create_css
+      create_macros
+      create_web_inf
+    end
+  end
+
+  def create_test
+    empty_directory Configuration::TEST_SRC
+    empty_directory "#{Configuration::TEST_SRC}/app"
+    empty_directory "#{Configuration::TEST_SRC}/app/controllers"
+    empty_directory "#{Configuration::TEST_SRC}/app/models"
+    empty_directory "#{Configuration::TEST_RESOURCES}"
+  end
+
+  private
   def create_app
     empty_directory "app"
     inside "app" do
@@ -62,31 +86,6 @@ class AppGenerator < VraptorScaffold::Base
     repository_path = empty_directory "repositories"
     template = "Repository.java"
     template_from_root(template, "#{repository_path}/#{template}")
-  end
-
-  def create_main_resources
-    main_resources = Configuration::MAIN_RESOURCES
-    empty_directory main_resources
-    inside main_resources do
-      template_from_root("log4j.properties", "#{main_resources}/log4j.properties")
-      template_from_root("messages.properties", "#{main_resources}/messages.properties")
-      meta_inf = empty_directory "META-INF"
-      template_from_root("persistence.xml", "#{meta_inf}/persistence.xml")
-    end
-  end
-
-  def create_webapp
-    webapp = Configuration::WEB_APP
-    empty_directory webapp
-    inside webapp do
-      template_from_root("index.jsp", "#{webapp}/index.jsp")
-      create_decorators
-      empty_directory "images"
-      create_js
-      create_css
-      create_macros
-      create_web_inf
-    end
   end
 
   def create_macros
@@ -128,7 +127,7 @@ class AppGenerator < VraptorScaffold::Base
 
   def template_from_root(template, to)
     in_root do
-      template("templates/#{template}", to)
+      template(template, to)
     end
   end
 end

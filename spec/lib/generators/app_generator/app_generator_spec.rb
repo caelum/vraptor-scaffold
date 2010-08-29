@@ -4,7 +4,7 @@ describe AppGenerator do
 
   before(:all) do
     @project_path = "src/vraptor-scaffold"
-    AppGenerator.new.build(@project_path)
+    AppGenerator.new(@project_path).invoke_all
   end
 
   after(:all) do
@@ -45,7 +45,7 @@ describe AppGenerator do
       end
 
       it "should create generic entity" do
-        from = "#{AppGenerator.source_root}/templates/Entity.java"
+        from = "#{AppGenerator.source_root}/Entity.java"
         to = "#{@app}/models/Entity.java"
         FileUtils.compare_file(from, to).should be_true
       end
@@ -55,13 +55,13 @@ describe AppGenerator do
       end
 
       it "should create path resolver" do
-        from = "#{AppGenerator.source_root}/templates/FreemarkerPathResolver.java"
+        from = "#{AppGenerator.source_root}/FreemarkerPathResolver.java"
         to = "#{@app}/infrastructure/FreemarkerPathResolver.java"
         FileUtils.compare_file(from, to).should be_true
       end
 
       it "should create generic repository" do
-        from = "#{AppGenerator.source_root}/templates/Repository.java"
+        from = "#{AppGenerator.source_root}/Repository.java"
         to = "#{@app}/repositories/Repository.java"
         FileUtils.compare_file(from, to).should be_true
       end
@@ -78,13 +78,13 @@ describe AppGenerator do
       end
 
       it "should create log4j" do
-        from = "#{AppGenerator.source_root}/templates/log4j.properties"
+        from = "#{AppGenerator.source_root}/log4j.properties"
         to = "#{@main_resources}/log4j.properties"
         FileUtils.compare_file(from, to).should be_true
       end
 
       it "should create messages resource" do
-        from = "#{AppGenerator.source_root}/templates/messages.properties"
+        from = "#{AppGenerator.source_root}/messages.properties"
         to = "#{@main_resources}/messages.properties"
         FileUtils.compare_file(from, to).should be_true
       end
@@ -94,7 +94,7 @@ describe AppGenerator do
       end
 
       it "should create log4j" do
-        from = "#{AppGenerator.source_root}/templates/persistence.xml"
+        from = "#{AppGenerator.source_root}/persistence.xml"
         to = "#{@meta_inf}/persistence.xml"
         FileUtils.compare_file(from, to).should be_true
       end
@@ -112,7 +112,7 @@ describe AppGenerator do
       end
 
       it "should create index" do
-        from = "#{AppGenerator.source_root}/templates/index.jsp"
+        from = "#{AppGenerator.source_root}/index.jsp"
         to = "#{@webapp}/index.jsp"
         FileUtils.compare_file(from, to).should be_true
       end
@@ -122,13 +122,13 @@ describe AppGenerator do
       end
 
       it "should create decorator file" do
-        from = "#{AppGenerator.source_root}/templates/main.ftl"
+        from = "#{AppGenerator.source_root}/main.ftl"
         to = "#{@decorators}/main.ftl"
         FileUtils.compare_file(from, to).should be_true
       end
 
       it "should create html macro file" do
-        from = "#{AppGenerator.source_root}/templates/macros/html.ftl"
+        from = "#{AppGenerator.source_root}/macros/html.ftl"
         to = "#{@webapp}/macros/html.ftl"
         FileUtils.compare_file(from, to).should be_true
       end
@@ -138,13 +138,13 @@ describe AppGenerator do
       end
 
       it "should create decorators.xml" do
-        from = "#{AppGenerator.source_root}/templates/decorators.xml"
+        from = "#{AppGenerator.source_root}/decorators.xml"
         to = "#{@web_inf}/decorators.xml"
         FileUtils.compare_file(from, to).should be_true
       end
 
       it "should create web.xml" do
-        from = "#{AppGenerator.source_root}/templates/web.xml"
+        from = "#{AppGenerator.source_root}/web.xml"
         to = "#{@web_inf}/web.xml"
         FileUtils.compare_file(from, to).should be_true
       end
@@ -154,13 +154,13 @@ describe AppGenerator do
       end
 
       it "should create scaffold css" do
-        from = "#{AppGenerator.source_root}/templates/stylesheets/scaffold.css"
+        from = "#{AppGenerator.source_root}/stylesheets/scaffold.css"
         to = "#{@webapp}/stylesheets/scaffold.css"
         FileUtils.compare_file(from, to).should be_true
       end
 
       it "should create jquery js" do
-        from = "#{AppGenerator.source_root}/templates/javascripts/jquery-1.4.2.min.js"
+        from = "#{AppGenerator.source_root}/javascripts/jquery-1.4.2.min.js"
         to = "#{@webapp}/javascripts/jquery-1.4.2.min.js"
         FileUtils.compare_file(from, to).should be_true
       end
