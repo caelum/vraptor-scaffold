@@ -98,7 +98,7 @@ src/test/java/app/repositories
 * Send me a pull request. Bonus points for topic branches.
 
 == Author
--- Rodolfo Liviero [mailto:rodolfoliviero@gmail.com]
+-- Rodolfo Liviero [mailto:rodolfoliviero@gmail.com] @rodolfoliviero
 
 == Copyright
 Copyright (c) 2010 Rodolfo Liviero. See LICENSE for details.

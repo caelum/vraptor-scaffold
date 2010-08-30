@@ -18,7 +18,7 @@ class AppGenerator < VraptorScaffold::Base
   end
 
   def create_pom
-    template_from_root("pom.erb", "pom.xml")
+    template("pom.erb", "pom.xml")
   end
 
   def create_main_java
@@ -30,27 +30,15 @@ class AppGenerator < VraptorScaffold::Base
   end
 
   def create_main_resources
-    main_resources = Configuration::MAIN_RESOURCES
-    empty_directory main_resources
-    inside main_resources do
-      template_from_root("log4j.properties", "#{main_resources}/log4j.properties")
-      template_from_root("messages.properties", "#{main_resources}/messages.properties")
-      meta_inf = empty_directory "META-INF"
-      template_from_root("persistence.xml", "#{meta_inf}/persistence.xml")
-    end
+    directory("resources", Configuration::MAIN_RESOURCES)
   end
 
   def create_webapp
     webapp = Configuration::WEB_APP
-    empty_directory webapp
+	directory("webapp", webapp)
     inside webapp do
-      template_from_root("index.jsp", "#{webapp}/index.jsp")
       create_decorators
-      empty_directory "images"
-      create_js
-      create_css
       create_macros
-      create_web_inf
     end
   end
 
@@ -98,33 +86,10 @@ class AppGenerator < VraptorScaffold::Base
     end
   end
 
-  def create_css
-    css = empty_directory "stylesheets"
-    inside "stylesheets" do
-      template_from_root("stylesheets/scaffold.css", "#{css}/scaffold.css")
-    end
-  end
-
-  def create_js
-    js = empty_directory "javascripts"
-    inside "javascripts" do
-      template_from_root("javascripts/jquery-1.4.2.min.js", "#{js}/jquery-1.4.2.min.js")
-    end
-  end
-
   def create_decorators
     decorators = empty_directory "decorators"
     inside decorators do
       template_from_root("main.ftl", "#{decorators}/main.ftl")
-    end
-  end
-
-  def create_web_inf
-    web_inf = empty_directory "WEB-INF"
-    inside "WEB-INF" do
-      template_from_root("decorators.xml", "#{web_inf}/decorators.xml")
-      template_from_root("web.xml", "#{web_inf}/web.xml")
-      empty_directory "views"
     end
   end
 

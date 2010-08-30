@@ -78,13 +78,13 @@ describe AppGenerator do
       end
 
       it "should create log4j" do
-        from = "#{AppGenerator.source_root}/log4j.properties"
+        from = "#{AppGenerator.source_root}/resources/log4j.properties"
         to = "#{@main_resources}/log4j.properties"
         FileUtils.compare_file(from, to).should be_true
       end
 
       it "should create messages resource" do
-        from = "#{AppGenerator.source_root}/messages.properties"
+        from = "#{AppGenerator.source_root}/resources/messages.properties"
         to = "#{@main_resources}/messages.properties"
         FileUtils.compare_file(from, to).should be_true
       end
@@ -93,8 +93,8 @@ describe AppGenerator do
         File.exist?(@meta_inf).should be_true 
       end
 
-      it "should create log4j" do
-        from = "#{AppGenerator.source_root}/persistence.xml"
+      it "should create persistence.xml" do
+        from = "#{AppGenerator.source_root}/resources/META-INF/persistence.xml"
         to = "#{@meta_inf}/persistence.xml"
         FileUtils.compare_file(from, to).should be_true
       end
@@ -103,7 +103,7 @@ describe AppGenerator do
     context "creating webapp" do
       before(:all) do
         @webapp = "#{@project_path}/#{Configuration::WEB_APP}"
-        @web_inf = "#{@webapp}/WEB-INF"
+        @web_inf = "#{@project_path}/#{Configuration::WEB_INF}"
         @decorators = "#{@webapp}/decorators"
       end 
 
@@ -112,7 +112,7 @@ describe AppGenerator do
       end
 
       it "should create index" do
-        from = "#{AppGenerator.source_root}/index.jsp"
+        from = "#{AppGenerator.source_root}/webapp/index.jsp"
         to = "#{@webapp}/index.jsp"
         FileUtils.compare_file(from, to).should be_true
       end
@@ -138,13 +138,13 @@ describe AppGenerator do
       end
 
       it "should create decorators.xml" do
-        from = "#{AppGenerator.source_root}/decorators.xml"
+        from = "#{AppGenerator.source_root}/webapp/WEB-INF/decorators.xml"
         to = "#{@web_inf}/decorators.xml"
         FileUtils.compare_file(from, to).should be_true
       end
 
       it "should create web.xml" do
-        from = "#{AppGenerator.source_root}/web.xml"
+        from = "#{AppGenerator.source_root}/webapp/WEB-INF/web.xml"
         to = "#{@web_inf}/web.xml"
         FileUtils.compare_file(from, to).should be_true
       end
@@ -154,13 +154,13 @@ describe AppGenerator do
       end
 
       it "should create scaffold css" do
-        from = "#{AppGenerator.source_root}/stylesheets/scaffold.css"
+        from = "#{AppGenerator.source_root}/webapp/stylesheets/scaffold.css"
         to = "#{@webapp}/stylesheets/scaffold.css"
         FileUtils.compare_file(from, to).should be_true
       end
 
       it "should create jquery js" do
-        from = "#{AppGenerator.source_root}/javascripts/jquery-1.4.2.min.js"
+        from = "#{AppGenerator.source_root}/webapp/javascripts/jquery-1.4.2.min.js"
         to = "#{@webapp}/javascripts/jquery-1.4.2.min.js"
         FileUtils.compare_file(from, to).should be_true
       end
