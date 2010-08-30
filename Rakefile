@@ -13,7 +13,7 @@ begin
     
     gem.add_dependency "thor", ">=0.14.0"
     gem.add_dependency "rake", ">=0.8.7"
-    gem.add_dependency "activesupport", ">=3.0.0.rc"
+    gem.add_dependency "activesupport", ">=3.0.0"
     gem.post_install_message = "Thank you for installing vraptor-scaffold. Please read http://github.com/rodolfoliviero/vraptor-scaffold/blob/master/README.rdoc for more information."
   end
   Jeweler::GemcutterTasks.new
