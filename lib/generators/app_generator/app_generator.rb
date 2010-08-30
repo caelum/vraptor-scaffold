@@ -1,13 +1,16 @@
 class AppGenerator < VraptorScaffold::Base
 
+  argument :project_path
+  class_option :template_engine, :default => :jsp
+
   def self.source_root
     File.join(File.dirname(__FILE__), "templates")
   end
 
-  def initialize(project_path)
-    super
+  def initialize(args, opts=[])
+    super([args], opts)
     self.destination_root=(project_path)
-    @project_name = project_path.split("/").last
+    @project_name = @project_path.split("/").last
   end
 
   def create_root_folder

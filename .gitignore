@@ -6,3 +6,4 @@ pgk
 Gemfile.lock
 .idea
 doc
+*.swp

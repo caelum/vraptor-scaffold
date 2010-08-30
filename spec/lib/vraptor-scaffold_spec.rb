@@ -6,18 +6,18 @@ describe VraptorScaffold::Main do
     before(:each) do
       @project_name = "vraptor-scaffold"
       @generator = mock(AppGenerator)
-      AppGenerator.stub!(:new).with(@project_name).and_return(@generator)
+      AppGenerator.stub!(:new).with(@project_name, []).and_return(@generator)
       @args = ["new", @project_name]
     end 
 
-    it "should call app generator when typed new" do
-      @generator.should_receive(:invoke)
+    it "should invoke all app generator tasks when typed new" do
+      @generator.should_receive(:invoke_all)
       VraptorScaffold::Main.execute(@args)
     end
 
     it "cannot call app generator when not typed new" do
       @args.shift
-      @generator.should_not_receive(:invoke)
+      @generator.should_not_receive(:invoke_all)
       VraptorScaffold::Main.execute(@args)
     end
   end
