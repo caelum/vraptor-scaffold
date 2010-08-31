@@ -13,6 +13,7 @@ class ScaffoldGenerator
     RepositoryGenerator.new(model, attributes).build
     ControllerGenerator.new(model, attributes).build
     FreemarkerGenerator.new(model, attributes).build
+    #JspGenerator.new(model, attributes).build
   end
 
   private 

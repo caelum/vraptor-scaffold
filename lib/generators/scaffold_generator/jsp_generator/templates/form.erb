@@ -1,4 +1,4 @@
-<%='<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>'%>
+<<%='%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%'%>>
 <c:if test="${not empty errors}">
 	<c:forEach items="errors" var="error">
 		 ${error.category} - ${error.message}<br />
@@ -10,12 +10,12 @@
   <c:if test="${not empty <%= @model %>.id}">
     <input type="hidden" name="<%= @model %>.id" value="${<%=@model%>.id}"/>
     <input type="hidden" name="_method" value="put"/>
-  </#if>
+  </c:if>
 
 <% @attributes.each do |att| -%>
   <div class="field">
     <%= att.name.capitalize %>:<br />
-    <input type="hidden" name="<%= @model %>.<%=att.name%>" value="${<%=@model%>.<%=att.name%>}"/>
+    <input type="text" name="<%= @model %>.<%=att.name%>" value="${<%=@model%>.<%=att.name%>}"/>
   </div>
 <% end -%>
   <div class="actions">

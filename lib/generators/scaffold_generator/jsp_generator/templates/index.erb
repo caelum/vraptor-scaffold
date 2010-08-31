@@ -1,4 +1,4 @@
-<%='<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>'%>
+<<%='%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%'%>>
 <body>
 <h1>Listing <%= class_name.pluralize %></h1>
 
@@ -19,8 +19,8 @@
       <%= "${#{@model}.#{att.name}}" %>
     </td>
   <% end -%>
-    <td><a href="<%= "#{path}/${#{@model}.id}/show" %>">show</a></td>
-    <td><a href="<%= "#{path}/${#{@model}.id}/edit" %>">edit</a></td>
+    <td><a href="<%= path "/${#{@model}.id}/show" %>">show</a></td>
+    <td><a href="<%= path "/${#{@model}.id}/edit" %>">edit</a></td>
     <td>
       <form action="<%= path %>" method="post">
     	  <input name="<%= "#{@model}.id" %>" value="<%= "${#{@model}.id}" %>" type="hidden" />
@@ -29,9 +29,9 @@
 	    </form>
 	  </td>
     </tr>
-</#list>
+</c:forEach>
 </table>
 
 <br />
-<a href="<%= path %>/new">New <%= class_name %></a> 
+<a href="<%= path '/new' %>">New <%= class_name %></a> 
 </body>
