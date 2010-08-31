@@ -22,11 +22,8 @@ class AppGenerator < VraptorScaffold::Base
   end
 
   def create_main_java
-    main_java = Configuration::MAIN_SRC
-    empty_directory main_java
-    inside main_java do
-      create_app
-    end
+    empty_directory Configuration::MAIN_SRC
+    directory("src", Configuration::MAIN_SRC + "/app")
   end
 
   def create_main_resources
@@ -35,7 +32,7 @@ class AppGenerator < VraptorScaffold::Base
 
   def create_webapp
     webapp = Configuration::WEB_APP
-	directory("webapp", webapp)
+    directory("webapp", webapp)
     inside webapp do
       create_decorators
       create_macros
@@ -44,44 +41,14 @@ class AppGenerator < VraptorScaffold::Base
 
   def create_test
     empty_directory Configuration::TEST_SRC
-    empty_directory "#{Configuration::TEST_SRC}/app"
-    empty_directory "#{Configuration::TEST_SRC}/app/controllers"
-    empty_directory "#{Configuration::TEST_SRC}/app/models"
-    empty_directory "#{Configuration::TEST_RESOURCES}"
+    directory("src-test", Configuration::TEST_SRC + "/app")
+    directory("resources-test", Configuration::TEST_RESOURCES)
   end
 
   private
-  def create_app
-    empty_directory "app"
-    inside "app" do
-      empty_directory "controllers"
-      create_app_models
-      create_app_infra
-      create_app_repository
-    end
-  end
-
-  def create_app_models
-    models_path = empty_directory "models"
-    template = "Entity.java"
-    template_from_root(template, "#{models_path}/#{template}")
-  end
-
-  def create_app_infra
-    infra_path = empty_directory "infrastructure"
-    template = "FreemarkerPathResolver.java"
-    template_from_root(template, "#{infra_path}/#{template}")
-  end
-
-  def create_app_repository
-    repository_path = empty_directory "repositories"
-    template = "Repository.java"
-    template_from_root(template, "#{repository_path}/#{template}")
-  end
-
   def create_macros
     macros = empty_directory "macros"
-    inside "macros" do
+    inside macros do
       template_from_root("macros/html.ftl", "#{macros}/html.ftl")
     end
   end

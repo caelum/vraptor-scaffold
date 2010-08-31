@@ -45,7 +45,7 @@ describe AppGenerator do
       end
 
       it "should create generic entity" do
-        from = "#{AppGenerator.source_root}/Entity.java"
+        from = "#{AppGenerator.source_root}/src/models/Entity.java"
         to = "#{@app}/models/Entity.java"
         FileUtils.compare_file(from, to).should be_true
       end
@@ -55,13 +55,13 @@ describe AppGenerator do
       end
 
       it "should create path resolver" do
-        from = "#{AppGenerator.source_root}/FreemarkerPathResolver.java"
+        from = "#{AppGenerator.source_root}/src/infrastructure/FreemarkerPathResolver.java"
         to = "#{@app}/infrastructure/FreemarkerPathResolver.java"
         FileUtils.compare_file(from, to).should be_true
       end
 
       it "should create generic repository" do
-        from = "#{AppGenerator.source_root}/Repository.java"
+        from = "#{AppGenerator.source_root}/src/repositories/Repository.java"
         to = "#{@app}/repositories/Repository.java"
         FileUtils.compare_file(from, to).should be_true
       end
@@ -192,6 +192,10 @@ describe AppGenerator do
       it "should create models folder" do
         File.exist?("#{@app}/models").should be_true 
       end
+
+      it "should create respositories folder" do
+        File.exist?("#{@app}/repositories").should be_true 
+      end    
 
       it "should create test resource folder" do
         File.exist?(@test_resource).should be_true 
