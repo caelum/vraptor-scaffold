@@ -12,7 +12,7 @@
    <th></th>
   </tr>
 
-<c:forEach items="<%=@model%>List" var="<%=@model%>">
+<c:forEach items="${<%=@model%>List}" var="<%=@model%>">
   <tr>
   <% @attributes.each do |att| -%>
     <td>
