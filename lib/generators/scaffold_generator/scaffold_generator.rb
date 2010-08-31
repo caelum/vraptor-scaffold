@@ -12,8 +12,8 @@ class ScaffoldGenerator
     ModelGenerator.new(model, attributes).build
     RepositoryGenerator.new(model, attributes).build
     ControllerGenerator.new(model, attributes).build
-    #FreemarkerGenerator.new(model, attributes).build
-    JspGenerator.new(model, attributes).build
+    FreemarkerGenerator.new(model, attributes).build
+    #JspGenerator.new(model, attributes).build
   end
 
   private 
