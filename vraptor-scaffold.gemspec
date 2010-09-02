@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
 
   s.required_rubygems_version = Gem::Requirement.new("> 1.3.1") if s.respond_to? :required_rubygems_version=
   s.authors = ["Rodolfo Liviero"]
-  s.date = %q{2010-08-31}
+  s.date = %q{2010-09-02}
   s.default_executable = %q{vraptor}
   s.description = %q{Scaffold for vraptor 3 with jpa, freemarker, maven, mockito, junit and jquery.}
   s.email = %q{rodolfoliviero@gmail.com}
@@ -31,8 +31,10 @@ Gem::Specification.new do |s|
      "bin/vraptor",
      "lib/configuration.rb",
      "lib/generators/app_generator/app_generator.rb",
+     "lib/generators/app_generator/templates/decorators.erb",
      "lib/generators/app_generator/templates/macros/html.ftl",
      "lib/generators/app_generator/templates/main.ftl",
+     "lib/generators/app_generator/templates/main.jsp",
      "lib/generators/app_generator/templates/pom.erb",
      "lib/generators/app_generator/templates/resources-test/.empty_directory",
      "lib/generators/app_generator/templates/resources/META-INF/persistence.xml",
@@ -45,9 +47,9 @@ Gem::Specification.new do |s|
      "lib/generators/app_generator/templates/src/infrastructure/FreemarkerPathResolver.java",
      "lib/generators/app_generator/templates/src/models/Entity.java",
      "lib/generators/app_generator/templates/src/repositories/Repository.java",
-     "lib/generators/app_generator/templates/webapp/WEB-INF/decorators.xml",
      "lib/generators/app_generator/templates/webapp/WEB-INF/views/.empty_directory",
      "lib/generators/app_generator/templates/webapp/WEB-INF/web.xml",
+     "lib/generators/app_generator/templates/webapp/decorators/.empty_directory",
      "lib/generators/app_generator/templates/webapp/images/.empty_directory",
      "lib/generators/app_generator/templates/webapp/index.jsp",
      "lib/generators/app_generator/templates/webapp/javascripts/jquery-1.4.2.min.js",
@@ -82,6 +84,7 @@ Gem::Specification.new do |s|
      "lib/vraptor-scaffold.rb",
      "spec/lib/configuration_spec.rb",
      "spec/lib/generators/app_generator/app_generator_spec.rb",
+     "spec/lib/generators/app_generator/templates/decorators.xml",
      "spec/lib/generators/app_generator/templates/pom.xml",
      "spec/lib/generators/scaffold_generator/attribute_spec.rb",
      "spec/lib/generators/scaffold_generator/base_scaffold_spec.rb",
