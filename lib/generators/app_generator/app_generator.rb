@@ -32,12 +32,12 @@ class AppGenerator < VraptorScaffold::Base
 
   def create_webapp
     directory("webapp", Configuration::WEB_APP)
+    empty_directory Configuration::WEB_INF
   end
 
   def configure_template_engine
     templates = {"jsp" => JspTemplateEngine, "freemarker" => FreemarkerTemplateEngine}
     templates[options[:template_engine].to_s].new(project_path).configure
-    #TemplateEngine.new(project_path, options[:template_engine].to_s).configure
   end
 
   def create_test

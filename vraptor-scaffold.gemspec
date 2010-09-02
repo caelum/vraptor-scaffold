@@ -31,6 +31,8 @@ Gem::Specification.new do |s|
      "bin/vraptor",
      "lib/configuration.rb",
      "lib/generators/app_generator/app_generator.rb",
+     "lib/generators/app_generator/freemarker_template_engine.rb",
+     "lib/generators/app_generator/jsp_template_engine.rb",
      "lib/generators/app_generator/templates/decorators.erb",
      "lib/generators/app_generator/templates/macros/html.ftl",
      "lib/generators/app_generator/templates/main.ftl",

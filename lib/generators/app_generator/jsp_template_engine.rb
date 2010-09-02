@@ -10,9 +10,11 @@ class JspTemplateEngine < VraptorScaffold::Base
   end
 
   def configure
-    directory("tags", File.join(Configuration::WEB_INF, "tags"))
-    copy_file("main.jsp", File.join(Configuration::WEB_APP, "decorators/main.jsp"))
+    #directory("tags", File.join(Configuration::WEB_INF, "tags"))
+    copy_file("main.jsp", File.join(Configuration::WEB_APP, "decorators", "main.jsp"))
     template("decorators.erb", File.join(Configuration::WEB_INF, "decorators.xml"))
+    copy_file("jsp-web.xml", File.join(Configuration::WEB_INF, "web.xml"))
+    empty_directory File.join(Configuration::WEB_INF, "jsp")
   end
 
   def extension

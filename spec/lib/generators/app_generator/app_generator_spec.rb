@@ -2,16 +2,16 @@ require File.expand_path(File.dirname(__FILE__) + "/../../../spec_helper")
 
 describe AppGenerator do
 
-  before(:all) do
-    @project_path = "src/vraptor-scaffold"
-    AppGenerator.new(@project_path).invoke_all
-  end
-
-  after(:all) do
-    FileUtils.remove_dir("src")
-  end
-
   context "build new application" do
+    before(:all) do
+      @project_path = "src/vraptor-scaffold"
+      AppGenerator.new(@project_path).invoke_all
+    end
+
+    after(:all) do
+      FileUtils.remove_dir("src")
+    end
+    
     it "should create directory with project name" do
       File.exist?(@project_path).should be_true 
     end
@@ -47,16 +47,6 @@ describe AppGenerator do
       it "should create generic entity" do
         from = "#{AppGenerator.source_root}/src/models/Entity.java"
         to = "#{@app}/models/Entity.java"
-        FileUtils.compare_file(from, to).should be_true
-      end
-
-      it "should create infrastructure folder" do
-        File.exist?("#{@app}/infrastructure").should be_true 
-      end
-
-      it "should create path resolver" do
-        from = "#{AppGenerator.source_root}/src/infrastructure/FreemarkerPathResolver.java"
-        to = "#{@app}/infrastructure/FreemarkerPathResolver.java"
         FileUtils.compare_file(from, to).should be_true
       end
 
@@ -121,36 +111,8 @@ describe AppGenerator do
         File.exist?(@decorators).should be_true 
       end
 
-      it "should create decorator file" do
-        from = "#{AppGenerator.source_root}/main.ftl"
-        to = "#{@decorators}/main.ftl"
-        FileUtils.compare_file(from, to).should be_true
-      end
-
-      it "should create html macro file" do
-        from = "#{AppGenerator.source_root}/macros/html.ftl"
-        to = "#{@webapp}/macros/html.ftl"
-        FileUtils.compare_file(from, to).should be_true
-      end
-
       it "should create WEB-INF folder" do
         File.exist?(@web_inf).should be_true 
-      end
-
-      it "should create decorators.xml" do
-        from = File.expand_path(File.dirname(__FILE__) + "/templates/decorators.xml")
-        to = "#{@web_inf}/decorators.xml"
-        FileUtils.compare_file(from, to).should be_true
-      end
-
-      it "should create web.xml" do
-        from = "#{AppGenerator.source_root}/webapp/WEB-INF/web.xml"
-        to = "#{@web_inf}/web.xml"
-        FileUtils.compare_file(from, to).should be_true
-      end
-
-      it "should create views folder" do
-        File.exist?("#{@web_inf}/views").should be_true 
       end
 
       it "should create scaffold css" do
@@ -201,5 +163,104 @@ describe AppGenerator do
         File.exist?(@test_resource).should be_true 
       end
     end    
+  end
+  
+  context "building a freemarker application" do
+    before(:all) do
+      @project_path = "src/vraptor-scaffold"
+      AppGenerator.new(@project_path, ["--template-engine=freemarker"]).invoke_all
+      @webapp = "#{@project_path}/#{Configuration::WEB_APP}"
+      @web_inf = "#{@project_path}/#{Configuration::WEB_INF}"
+      @decorators = "#{@webapp}/decorators"
+      @app = "#{@project_path}/#{Configuration::MAIN_SRC}/app"
+    end
+    
+    after(:all) do
+      FileUtils.remove_dir("src")
+    end
+    
+    it "should create decorators.xml" do
+      from = File.expand_path(File.dirname(__FILE__) + "/templates/decorators.xml")
+      to = "#{@web_inf}/decorators.xml"
+      FileUtils.compare_file(from, to).should be_true
+    end
+
+    it "should create web.xml" do
+      from = "#{AppGenerator.source_root}/freemarker-web.xml"
+      to = "#{@web_inf}/web.xml"
+      FileUtils.compare_file(from, to).should be_true
+    end
+
+    it "should create views folder" do
+      File.exist?("#{@web_inf}/views").should be_true 
+    end
+    
+    it "should create infrastructure folder" do
+      File.exist?("#{@app}/infrastructure").should be_true 
+    end
+
+    it "should create path resolver" do
+      from = "#{AppGenerator.source_root}/infrastructure/FreemarkerPathResolver.java"
+      to = "#{@app}/infrastructure/FreemarkerPathResolver.java"
+      FileUtils.compare_file(from, to).should be_true
+    end
+    
+    it "should create decorator file" do
+      from = "#{AppGenerator.source_root}/main.ftl"
+      to = "#{@decorators}/main.ftl"
+      FileUtils.compare_file(from, to).should be_true
+    end
+
+    it "should create html macro file" do
+      from = "#{AppGenerator.source_root}/macros/html.ftl"
+      to = "#{@webapp}/macros/html.ftl"
+      FileUtils.compare_file(from, to).should be_true
+    end
+  end
+  context "building a jsp application" do
+    before(:all) do
+      @project_path = "src/vraptor-scaffold"
+      AppGenerator.new(@project_path, ["--template-engine=jsp"]).invoke_all
+      @webapp = "#{@project_path}/#{Configuration::WEB_APP}"
+      @web_inf = "#{@project_path}/#{Configuration::WEB_INF}"
+      @decorators = "#{@webapp}/decorators"
+      @app = "#{@project_path}/#{Configuration::MAIN_SRC}/app"
+    end
+    
+    after(:all) do
+      FileUtils.remove_dir("src")
+    end
+    
+    it "should create decorators.xml" do
+      from = File.expand_path(File.dirname(__FILE__) + "/templates/decorators-jsp.xml")
+      to = "#{@web_inf}/decorators.xml"
+      FileUtils.compare_file(from, to).should be_true
+    end
+
+    it "should create web.xml" do
+      from = "#{AppGenerator.source_root}/jsp-web.xml"
+      to = "#{@web_inf}/web.xml"
+      FileUtils.compare_file(from, to).should be_true
+    end
+
+    it "should create views folder" do
+      File.exist?("#{@web_inf}/jsp").should be_true 
+    end
+    
+    it "should create decorator file" do
+      from = "#{AppGenerator.source_root}/main.jsp"
+      to = "#{@decorators}/main.jsp"
+      FileUtils.compare_file(from, to).should be_true
+    end
+    
+    it "should not create infrastructure folder" do
+      File.exist?("#{@app}/infrastructure").should be_false 
+    end
+
+    it "should not create path resolver" do
+      to = "#{@app}/infrastructure/FreemarkerPathResolver.java"
+      File.exist?(to).should be_false
+    end
+
   end
 end
