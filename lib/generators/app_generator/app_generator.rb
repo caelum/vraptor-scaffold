@@ -10,7 +10,7 @@ class AppGenerator < VraptorScaffold::Base
   def initialize(args, opts=[])
     super([args], opts)
     self.destination_root=(project_path)
-    @project_name = @project_path.split("/").last
+    @project_name = project_path.split("/").last
   end
 
   def create_root_folder
@@ -31,38 +31,16 @@ class AppGenerator < VraptorScaffold::Base
   end
 
   def create_webapp
-    webapp = Configuration::WEB_APP
-    directory("webapp", webapp)
-    inside webapp do
-      create_decorators
-      create_macros
-    end
+    directory("webapp", Configuration::WEB_APP)
+  end
+
+  def configure_template_engine
+    TemplateEngine.new(project_path, options[:template_engine].to_s).configure
   end
 
   def create_test
     empty_directory Configuration::TEST_SRC
     directory("src-test", Configuration::TEST_SRC + "/app")
     directory("resources-test", Configuration::TEST_RESOURCES)
-  end
-
-  private
-  def create_macros
-    macros = empty_directory "macros"
-    inside macros do
-      template_from_root("macros/html.ftl", "#{macros}/html.ftl")
-    end
-  end
-
-  def create_decorators
-    decorators = empty_directory "decorators"
-    inside decorators do
-      template_from_root("main.ftl", "#{decorators}/main.ftl")
-    end
-  end
-
-  def template_from_root(template, to)
-    in_root do
-      template(template, to)
-    end
   end
 end

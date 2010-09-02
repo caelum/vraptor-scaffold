@@ -138,7 +138,7 @@ describe AppGenerator do
       end
 
       it "should create decorators.xml" do
-        from = "#{AppGenerator.source_root}/webapp/WEB-INF/decorators.xml"
+        from = File.expand_path(File.dirname(__FILE__) + "/templates/decorators.xml")
         to = "#{@web_inf}/decorators.xml"
         FileUtils.compare_file(from, to).should be_true
       end
