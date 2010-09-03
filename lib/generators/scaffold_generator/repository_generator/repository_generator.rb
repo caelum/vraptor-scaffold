@@ -1,12 +1,12 @@
 class RepositoryGenerator < BaseScaffold
 
   def self.source_root
-    File.dirname(__FILE__)
+    File.join File.dirname(__FILE__), "templates"
   end
 
   def build
-    template("templates/repository.erb", "#{Configuration::MAIN_SRC}/app/repositories/#{repository_interface_name}.java")
-    template("templates/repository_impl.erb", "#{Configuration::MAIN_SRC}/app/repositories/#{repository_impl_name}.java")    
-    template("templates/repository_test.erb", "#{Configuration::TEST_SRC}/app/repositories/#{repository_test_class_name}.java")
+    template("repository.erb", File.join(Configuration.repositories_path, "#{repository_interface_name}.java"))
+    template("repository_impl.erb", File.join(Configuration.repositories_path, "#{repository_impl_name}.java"))    
+    template("repository_test.erb", File.join(Configuration.repositories_test_path, "#{repository_test_class_name}.java"))
   end
 end

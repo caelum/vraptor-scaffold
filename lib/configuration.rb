@@ -15,4 +15,32 @@ class Configuration
   def self.template_engine
     config["template_engine"]
   end
+
+  def self.package
+    config["package"]
+  end
+
+  def self.controllers_path
+    File.join MAIN_SRC, package, "controllers"
+  end
+
+  def self.controllers_test_path
+    File.join TEST_SRC, package, "controllers"
+  end
+
+  def self.models_path
+    File.join MAIN_SRC, package, "models"
+  end
+
+  def self.models_test_path
+    File.join TEST_SRC, package, "models"
+  end
+
+  def self.repositories_path
+    File.join MAIN_SRC, package, "repositories"
+  end
+
+  def self.repositories_test_path
+    File.join TEST_SRC, package, "repositories"
+  end
 end

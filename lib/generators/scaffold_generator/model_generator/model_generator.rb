@@ -1,11 +1,11 @@
 class ModelGenerator < BaseScaffold
 
   def self.source_root
-    File.dirname(__FILE__)
+    File.join File.dirname(__FILE__), "templates"
   end
 
   def build
-    template("templates/model.erb", "#{Configuration::MAIN_SRC}/app/models/#{class_name}.java")
-    template("templates/model_test.erb", "#{Configuration::TEST_SRC}/app/models/#{test_class_name}.java")
+    template("model.erb", File.join(Configuration.models_path, "#{class_name}.java"))
+    template("model_test.erb", File.join(Configuration.models_test_path, "#{test_class_name}.java"))
   end
 end

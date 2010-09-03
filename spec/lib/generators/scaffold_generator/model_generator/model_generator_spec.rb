@@ -3,6 +3,7 @@ require File.expand_path(File.dirname(__FILE__) + "/../../../../spec_helper")
 describe ModelGenerator do
 
   before(:each) do
+	mock_config_file
     @generator = ModelGenerator.new("product", build_attributes)
     @generator.build
   end

@@ -1,12 +1,12 @@
 class ControllerGenerator < BaseScaffold
   
   def self.source_root
-    File.dirname(__FILE__)
+	File.join File.dirname(__FILE__), "templates"
   end
   
   def build
-    template("templates/controller.erb", "#{Configuration::MAIN_SRC}/app/controllers/#{controller_class_name}.java")
-    template("templates/controller_test.erb", "#{Configuration::TEST_SRC}/app/controllers/#{controller_test_class_name}.java")
+    template("controller.erb", File.join(Configuration.controllers_path, "#{controller_class_name}.java"))
+    template("controller_test.erb", File.join(Configuration.controllers_test_path, "#{controller_test_class_name}.java"))
   end
   
   def path

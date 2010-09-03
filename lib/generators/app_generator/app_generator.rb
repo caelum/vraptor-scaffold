@@ -1,7 +1,8 @@
 class AppGenerator < VraptorScaffold::Base
 
   argument :project_path
-  class_option :template_engine, :default => :jsp, :aliases => "-t"
+  class_option :template_engine, :default => "jsp", :aliases => "-t"
+  class_option :package, :default => "app", :aliases => "-p"
 
   def self.source_root
     File.join(File.dirname(__FILE__), "templates")
@@ -23,7 +24,7 @@ class AppGenerator < VraptorScaffold::Base
 
   def create_main_java
     empty_directory Configuration::MAIN_SRC
-    directory("src", Configuration::MAIN_SRC + "/app")
+    directory("src", File.join(Configuration::MAIN_SRC, options[:package]))
   end
 
   def create_main_resources
@@ -42,12 +43,12 @@ class AppGenerator < VraptorScaffold::Base
   
   def template_engine
     templates = {"jsp" => JspTemplateEngine, "ftl" => FreemarkerTemplateEngine}
-    templates[options[:template_engine].to_s].new(project_path)
+    templates[options[:template_engine]].new(project_path)
   end
 
   def create_test
     empty_directory Configuration::TEST_SRC
-    directory("src-test", Configuration::TEST_SRC + "/app")
+    directory("src-test", File.join(Configuration::TEST_SRC, options[:package]))
     directory("resources-test", Configuration::TEST_RESOURCES)
   end
 end

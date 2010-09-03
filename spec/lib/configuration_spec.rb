@@ -35,10 +35,17 @@ describe Configuration do
   end
 
   context "load properties" do
-    it "should know template engine" do
-      config = {"template_engine" => "jsp"}
+    before(:each) do
+      config = {"template_engine" => "jsp", "package" => "vraptor"}
       YAML.stub!(:load_file).with(Configuration::FILENAME).and_return(config)
+    end
+
+    it "should know template engine" do
       Configuration.template_engine.should == "jsp"  
+    end
+
+    it "should know base packge" do
+      Configuration.package.should == "vraptor"  
     end
   end
 end

@@ -1,6 +1,7 @@
 === ?.?.?.?? / 2010-??-??
 
 == New Features
+== jsp support
 
 == Improvements
 * Better use of Generics.
