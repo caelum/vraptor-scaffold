@@ -11,9 +11,9 @@ class FreemarkerTemplateEngine < VraptorScaffold::Base
 
   def configure
     directory("macros", File.join(Configuration::WEB_APP, "macros"))
-    copy_file("main.ftl", File.join(Configuration::WEB_APP, "decorators", "main.ftl"))
     template("decorators.erb", File.join(Configuration::WEB_INF, "decorators.xml"))
     copy_file("freemarker-web.xml", File.join(Configuration::WEB_INF, "web.xml"))
+    copy_file("main.ftl", File.join(Configuration::WEB_INF, "decorators", "main.ftl"))
     directory("infrastructure", File.join(Configuration::MAIN_SRC, "app", "infrastructure"))
     empty_directory File.join(Configuration::WEB_INF, "views")
   end

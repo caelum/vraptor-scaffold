@@ -14,6 +14,3 @@ top leval package
 scaml support
 support to change default encondig when create new app like --enconding=ISO-8859-1
 cuke for duke
-
-
--- decorators on WEB-INF?

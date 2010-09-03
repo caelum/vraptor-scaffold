@@ -94,7 +94,6 @@ describe AppGenerator do
       before(:all) do
         @webapp = "#{@project_path}/#{Configuration::WEB_APP}"
         @web_inf = "#{@project_path}/#{Configuration::WEB_INF}"
-        @decorators = "#{@webapp}/decorators"
       end 
 
       it "should create webapp folder" do
@@ -105,10 +104,6 @@ describe AppGenerator do
         from = "#{AppGenerator.source_root}/webapp/index.jsp"
         to = "#{@webapp}/index.jsp"
         FileUtils.compare_file(from, to).should be_true
-      end
-
-      it "should create decorators folder" do
-        File.exist?(@decorators).should be_true 
       end
 
       it "should create WEB-INF folder" do
@@ -171,7 +166,7 @@ describe AppGenerator do
       AppGenerator.new(@project_path, ["--template-engine=freemarker"]).invoke_all
       @webapp = "#{@project_path}/#{Configuration::WEB_APP}"
       @web_inf = "#{@project_path}/#{Configuration::WEB_INF}"
-      @decorators = "#{@webapp}/decorators"
+      @decorators = "#{@web_inf}/decorators"
       @app = "#{@project_path}/#{Configuration::MAIN_SRC}/app"
     end
     
@@ -223,7 +218,7 @@ describe AppGenerator do
       AppGenerator.new(@project_path, ["--template-engine=jsp"]).invoke_all
       @webapp = "#{@project_path}/#{Configuration::WEB_APP}"
       @web_inf = "#{@project_path}/#{Configuration::WEB_INF}"
-      @decorators = "#{@webapp}/decorators"
+      @decorators = "#{@web_inf}/decorators"
       @app = "#{@project_path}/#{Configuration::MAIN_SRC}/app"
     end
     
