@@ -1,4 +1,3 @@
-require 'builder'
 class FreemarkerTemplateEngine < VraptorScaffold::Base
 
   def self.source_root

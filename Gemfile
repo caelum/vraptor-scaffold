@@ -3,6 +3,7 @@ source :rubygems
 gem "thor", ">=0.14.0"
 gem "rake", ">=0.8.7"
 gem "activesupport", ">=3.0.0"
+gem "builder", ">=2.1.2"
 
 gem "ruby-debug", :group => [:development, :test]
 
