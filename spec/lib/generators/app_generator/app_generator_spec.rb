@@ -163,7 +163,7 @@ describe AppGenerator do
   context "building a freemarker application" do
     before(:all) do
       @project_path = "src/vraptor-scaffold"
-      AppGenerator.new(@project_path, ["--template-engine=freemarker"]).invoke_all
+      AppGenerator.new(@project_path, ["--template-engine=ftl"]).invoke_all
       @webapp = "#{@project_path}/#{Configuration::WEB_APP}"
       @web_inf = "#{@project_path}/#{Configuration::WEB_INF}"
       @decorators = "#{@web_inf}/decorators"

@@ -26,4 +26,19 @@ describe Configuration do
     Configuration::WEB_INF.should == "#{Configuration::WEB_APP}/WEB-INF"
   end
 
+  it "should configure meta-inf" do
+    Configuration::META_INF.should == "#{Configuration::WEB_INF}/META-INF"
+  end
+
+  it "should configure properties name" do
+    Configuration::FILENAME.should == "#{Configuration::META_INF}/vraptor-scaffold.properties"
+  end
+
+  context "load properties" do
+    it "should know template engine" do
+      config = {"template_engine" => "jsp"}
+      YAML.stub!(:load_file).with(Configuration::FILENAME).and_return(config)
+      Configuration.template_engine.should == "jsp"  
+    end
+  end
 end

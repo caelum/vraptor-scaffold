@@ -1,7 +1,7 @@
 class AppGenerator < VraptorScaffold::Base
 
   argument :project_path
-  class_option :template_engine, :default => :jsp
+  class_option :template_engine, :default => :jsp, :aliases => "-t"
 
   def self.source_root
     File.join(File.dirname(__FILE__), "templates")
@@ -36,7 +36,8 @@ class AppGenerator < VraptorScaffold::Base
   end
 
   def configure_template_engine
-    templates = {"jsp" => JspTemplateEngine, "freemarker" => FreemarkerTemplateEngine}
+    template("vraptor-scaffold.erb", Configuration::FILENAME)
+    templates = {"jsp" => JspTemplateEngine, "ftl" => FreemarkerTemplateEngine}
     templates[options[:template_engine].to_s].new(project_path).configure
   end
 

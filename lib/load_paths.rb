@@ -3,6 +3,7 @@ require 'rubygems'
 require 'thor/actions'
 require 'thor/group'
 require 'active_support/inflector'
+require 'yaml'
 
 require File.dirname(__FILE__) + '/configuration'
 require File.dirname(__FILE__) + '/../lib/generators/base'

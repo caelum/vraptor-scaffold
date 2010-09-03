@@ -25,6 +25,7 @@ describe ScaffoldGenerator do
 
     before(:each) do
       File.stub!(:exist?).and_return(true)
+      Configuration.stub!(:template_engine).and_return("ftl")
       @generator = ScaffoldGenerator.new(@args)
 
       @model_generator = mock(ModelGenerator)
