@@ -1,3 +1,4 @@
+require 'builder'
 class FreemarkerTemplateEngine < VraptorScaffold::Base
 
   def self.source_root
@@ -20,5 +21,14 @@ class FreemarkerTemplateEngine < VraptorScaffold::Base
 
   def extension
     "ftl"
+  end
+  
+  def dependencies
+    xml = Builder::XmlMarkup.new
+    xml.dependency do |d|
+      d.groupId "org.freemarker"
+      d.artifactId "freemarker"
+      d.version "2.3.16"
+    end
   end
 end

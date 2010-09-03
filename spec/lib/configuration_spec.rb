@@ -27,7 +27,7 @@ describe Configuration do
   end
 
   it "should configure meta-inf" do
-    Configuration::META_INF.should == "#{Configuration::WEB_INF}/META-INF"
+    Configuration::META_INF.should == "#{Configuration::WEB_APP}/META-INF"
   end
 
   it "should configure properties name" do

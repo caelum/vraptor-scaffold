@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
 
   s.required_rubygems_version = Gem::Requirement.new("> 1.3.1") if s.respond_to? :required_rubygems_version=
   s.authors = ["Rodolfo Liviero"]
-  s.date = %q{2010-09-02}
+  s.date = %q{2010-09-03}
   s.default_executable = %q{vraptor}
   s.description = %q{Scaffold for vraptor 3 with jpa, freemarker, maven, mockito, junit and jquery.}
   s.email = %q{rodolfoliviero@gmail.com}
@@ -51,7 +51,7 @@ Gem::Specification.new do |s|
      "lib/generators/app_generator/templates/src/controllers/.empty_directory",
      "lib/generators/app_generator/templates/src/models/Entity.java",
      "lib/generators/app_generator/templates/src/repositories/Repository.java",
-     "lib/generators/app_generator/templates/webapp/decorators/.empty_directory",
+     "lib/generators/app_generator/templates/vraptor-scaffold.erb",
      "lib/generators/app_generator/templates/webapp/images/.empty_directory",
      "lib/generators/app_generator/templates/webapp/index.jsp",
      "lib/generators/app_generator/templates/webapp/javascripts/jquery-1.4.2.min.js",

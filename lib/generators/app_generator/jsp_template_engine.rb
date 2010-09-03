@@ -20,4 +20,13 @@ class JspTemplateEngine < VraptorScaffold::Base
   def extension
     "jsp"
   end
+  
+  def dependencies
+    xml = Builder::XmlMarkup.new
+    xml.dependency do |d|
+      d.groupId "javax.servlet"
+      d.artifactId "jstl"
+      d.version "1.2"
+    end
+  end
 end

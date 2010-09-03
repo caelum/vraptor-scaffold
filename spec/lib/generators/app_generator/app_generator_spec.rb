@@ -19,7 +19,7 @@ describe AppGenerator do
     it "should create pom" do
       from = File.expand_path(File.dirname(__FILE__) + "/templates/pom.xml")
       to = "#{@project_path}/pom.xml"
-      FileUtils.compare_file(from, to).should be_true
+      File.read(from).should == File.read(to)
     end
 
     context "creating main java" do
@@ -211,6 +211,10 @@ describe AppGenerator do
       to = "#{@webapp}/macros/html.ftl"
       FileUtils.compare_file(from, to).should be_true
     end
+    it "should include freemarker dependency" do
+      pom = "#{@project_path}/pom.xml"
+      File.read(pom).should match("<dependency><groupId>org.freemarker</groupId><artifactId>freemarker</artifactId><version>2.3.16</version></dependency>")
+    end
   end
   context "building a jsp application" do
     before(:all) do
@@ -255,6 +259,11 @@ describe AppGenerator do
     it "should not create path resolver" do
       to = "#{@app}/infrastructure/FreemarkerPathResolver.java"
       File.exist?(to).should be_false
+    end
+    
+    it "should include jstl dependency" do
+      pom = "#{@project_path}/pom.xml"
+      File.read(pom).should match("<dependency><groupId>javax.servlet</groupId><artifactId>jstl</artifactId><version>1.2</version></dependency>")
     end
 
   end

@@ -37,8 +37,12 @@ class AppGenerator < VraptorScaffold::Base
 
   def configure_template_engine
     template("vraptor-scaffold.erb", Configuration::FILENAME)
+    template_engine.configure
+  end
+  
+  def template_engine
     templates = {"jsp" => JspTemplateEngine, "ftl" => FreemarkerTemplateEngine}
-    templates[options[:template_engine].to_s].new(project_path).configure
+    templates[options[:template_engine].to_s].new(project_path)
   end
 
   def create_test
