@@ -45,13 +45,13 @@ describe AppGenerator do
       end
 
       it "should create generic entity" do
-        from = "#{AppGenerator.source_root}/src/models/Entity.java"
+        from = File.expand_path(File.dirname(__FILE__) + "/templates/Entity.java")
         to = "#{@app}/models/Entity.java"
         FileUtils.compare_file(from, to).should be_true
       end
 
       it "should create generic repository" do
-        from = "#{AppGenerator.source_root}/src/repositories/Repository.java"
+        from = File.expand_path(File.dirname(__FILE__) + "/templates/Repository.java")
         to = "#{@app}/repositories/Repository.java"
         FileUtils.compare_file(from, to).should be_true
       end
@@ -163,6 +163,7 @@ describe AppGenerator do
   context "building a freemarker application" do
     before(:all) do
       @project_path = "src/vraptor-scaffold"
+      mock_config_file
       AppGenerator.new(@project_path, ["--template-engine=ftl"]).invoke_all
       @webapp = "#{@project_path}/#{Configuration::WEB_APP}"
       @web_inf = "#{@project_path}/#{Configuration::WEB_INF}"
@@ -195,7 +196,7 @@ describe AppGenerator do
     end
 
     it "should create path resolver" do
-      from = "#{AppGenerator.source_root}/infrastructure/FreemarkerPathResolver.java"
+      from = File.expand_path(File.dirname(__FILE__) + "/templates/FreemarkerPathResolver.java")
       to = "#{@app}/infrastructure/FreemarkerPathResolver.java"
       FileUtils.compare_file(from, to).should be_true
     end
@@ -216,6 +217,7 @@ describe AppGenerator do
       File.read(pom).should match("<dependency><groupId>org.freemarker</groupId><artifactId>freemarker</artifactId><version>2.3.16</version></dependency>")
     end
   end
+  
   context "building a jsp application" do
     before(:all) do
       @project_path = "src/vraptor-scaffold"

@@ -5,8 +5,8 @@ class RepositoryGenerator < BaseScaffold
   end
 
   def build
-    template("repository.erb", File.join(Configuration.repositories_path, "#{repository_interface_name}.java"))
-    template("repository_impl.erb", File.join(Configuration.repositories_path, "#{repository_impl_name}.java"))    
-    template("repository_test.erb", File.join(Configuration.repositories_test_path, "#{repository_test_class_name}.java"))
+    template("repository.erb", Configuration.main_class_path("repositories", "#{repository_interface_name}.java"))
+    template("repository_impl.erb", Configuration.main_class_path("repositories", "#{repository_impl_name}.java"))    
+    template("repository_test.erb", Configuration.test_class_path("repositories", "#{repository_test_class_name}.java"))
   end
 end

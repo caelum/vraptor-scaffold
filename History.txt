@@ -2,6 +2,7 @@
 
 == New Features
 == jsp support
+== base package
 
 == Improvements
 * Better use of Generics.

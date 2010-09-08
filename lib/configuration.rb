@@ -20,27 +20,12 @@ class Configuration
     config["package"]
   end
 
-  def self.controllers_path
-    File.join MAIN_SRC, package, "controllers"
-  end
+  def self.main_class_path *path
+    File.join MAIN_SRC, package, path
+  end  
 
-  def self.controllers_test_path
-    File.join TEST_SRC, package, "controllers"
-  end
+  def self.test_class_path *path
+    File.join TEST_SRC, package, path
+  end 
 
-  def self.models_path
-    File.join MAIN_SRC, package, "models"
-  end
-
-  def self.models_test_path
-    File.join TEST_SRC, package, "models"
-  end
-
-  def self.repositories_path
-    File.join MAIN_SRC, package, "repositories"
-  end
-
-  def self.repositories_test_path
-    File.join TEST_SRC, package, "repositories"
-  end
 end

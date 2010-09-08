@@ -1,9 +1,9 @@
-package app.controllers;
+package <%= Configuration.package %>.controllers;
 
 import java.util.List;
 
-import app.models.<%= class_name %>;
-import app.repositories.<%= repository_interface_name %>;
+import <%= Configuration.package %>.models.<%= class_name %>;
+import <%= Configuration.package %>.repositories.<%= repository_interface_name %>;
 import br.com.caelum.vraptor.Delete;
 import br.com.caelum.vraptor.Get;
 import br.com.caelum.vraptor.Path;

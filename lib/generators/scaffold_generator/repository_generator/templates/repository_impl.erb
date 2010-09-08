@@ -1,9 +1,9 @@
-package app.repositories;
+package <%= Configuration.package %>.repositories;
 
 import javax.persistence.EntityManager;
 
 import br.com.caelum.vraptor.ioc.Component;
-import app.models.<%= class_name %>;
+import <%= Configuration.package %>.models.<%= class_name %>;
 
 @Component
 public class <%= repository_impl_name %> 
