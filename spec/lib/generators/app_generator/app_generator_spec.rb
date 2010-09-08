@@ -11,7 +11,7 @@ describe AppGenerator do
     after(:all) do
       FileUtils.remove_dir("src")
     end
-    
+
     it "should create directory with project name" do
       File.exist?(@project_path).should be_true 
     end
@@ -159,7 +159,30 @@ describe AppGenerator do
       end
     end    
   end
-  
+
+  context "build app with complex package" do
+
+    before(:all) do
+      @project_path = "src/vraptor-scaffold"
+      AppGenerator.new(@project_path, ["--package=br.com.caelum"]).invoke_all
+      @main_java = "#{@project_path}/#{Configuration::MAIN_SRC}/br/com/caelum"
+      @test_java = "#{@project_path}/#{Configuration::TEST_SRC}/br/com/caelum"
+    end
+
+    after(:all) do
+      FileUtils.remove_dir("src")
+    end
+
+    it "should create main path" do
+      File.exist?(@main_java).should be_true  
+    end
+
+    it "should create test path" do
+      File.exist?(@test_java).should be_true  
+    end
+
+  end
+
   context "building a freemarker application" do
     before(:all) do
       @project_path = "src/vraptor-scaffold"
@@ -170,11 +193,11 @@ describe AppGenerator do
       @decorators = "#{@web_inf}/decorators"
       @app = "#{@project_path}/#{Configuration::MAIN_SRC}/app"
     end
-    
+
     after(:all) do
       FileUtils.remove_dir("src")
     end
-    
+
     it "should create decorators.xml" do
       from = File.expand_path(File.dirname(__FILE__) + "/templates/decorators.xml")
       to = "#{@web_inf}/decorators.xml"
@@ -190,7 +213,7 @@ describe AppGenerator do
     it "should create views folder" do
       File.exist?("#{@web_inf}/views").should be_true 
     end
-    
+
     it "should create infrastructure folder" do
       File.exist?("#{@app}/infrastructure").should be_true 
     end
@@ -200,7 +223,7 @@ describe AppGenerator do
       to = "#{@app}/infrastructure/FreemarkerPathResolver.java"
       FileUtils.compare_file(from, to).should be_true
     end
-    
+
     it "should create decorator file" do
       from = "#{AppGenerator.source_root}/main.ftl"
       to = "#{@decorators}/main.ftl"
@@ -217,7 +240,7 @@ describe AppGenerator do
       File.read(pom).should match("<dependency><groupId>org.freemarker</groupId><artifactId>freemarker</artifactId><version>2.3.16</version></dependency>")
     end
   end
-  
+
   context "building a jsp application" do
     before(:all) do
       @project_path = "src/vraptor-scaffold"
@@ -227,11 +250,11 @@ describe AppGenerator do
       @decorators = "#{@web_inf}/decorators"
       @app = "#{@project_path}/#{Configuration::MAIN_SRC}/app"
     end
-    
+
     after(:all) do
       FileUtils.remove_dir("src")
     end
-    
+
     it "should create decorators.xml" do
       from = File.expand_path(File.dirname(__FILE__) + "/templates/decorators-jsp.xml")
       to = "#{@web_inf}/decorators.xml"
@@ -247,13 +270,13 @@ describe AppGenerator do
     it "should create views folder" do
       File.exist?("#{@web_inf}/jsp").should be_true 
     end
-    
+
     it "should create decorator file" do
       from = "#{AppGenerator.source_root}/main.jsp"
       to = "#{@decorators}/main.jsp"
       FileUtils.compare_file(from, to).should be_true
     end
-    
+
     it "should not create infrastructure folder" do
       File.exist?("#{@app}/infrastructure").should be_false 
     end
@@ -262,7 +285,7 @@ describe AppGenerator do
       to = "#{@app}/infrastructure/FreemarkerPathResolver.java"
       File.exist?(to).should be_false
     end
-    
+
     it "should include jstl dependency" do
       pom = "#{@project_path}/pom.xml"
       File.read(pom).should match("<dependency><groupId>javax.servlet</groupId><artifactId>jstl</artifactId><version>1.2</version></dependency>")

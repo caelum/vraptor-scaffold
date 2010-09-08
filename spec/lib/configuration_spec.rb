@@ -34,19 +34,9 @@ describe Configuration do
     Configuration::FILENAME.should == "#{Configuration::META_INF}/vraptor-scaffold.properties"
   end
 
-  it "should build main class path with base package" do
-    mock_config_file
-    Configuration.main_class_path("models", "Product.java").should == "src/main/java/app/models/Product.java"
-  end
-
-  it "should build test class path with base package" do
-    mock_config_file
-    Configuration.test_class_path("models", "Product.java").should == "src/test/java/app/models/Product.java"
-  end
-
   context "load config file" do
     before(:each) do
-      config = {"template_engine" => "jsp", "package" => "vraptor"}
+      config = {"template_engine" => "jsp", "package" => "br.com.caelum"}
       YAML.stub!(:load_file).with(Configuration::FILENAME).and_return(config)
     end
 
@@ -55,7 +45,16 @@ describe Configuration do
     end
 
     it "should know base package" do
-      Configuration.package.should == "vraptor"  
+      Configuration.package.should == "br.com.caelum"  
     end
+
+    it "should build main class path with base package" do
+      Configuration.main_class_path("models", "Product.java").should == "src/main/java/br/com/caelum/models/Product.java"
+    end
+
+    it "should build test class path with base package" do
+      Configuration.test_class_path("models", "Product.java").should == "src/test/java/br/com/caelum/models/Product.java"
+    end
+
   end
 end

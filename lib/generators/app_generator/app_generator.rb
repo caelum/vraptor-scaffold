@@ -24,7 +24,7 @@ class AppGenerator < VraptorScaffold::Base
 
   def create_main_java
     empty_directory Configuration::MAIN_SRC
-    directory("src", File.join(Configuration::MAIN_SRC, options[:package]))
+    directory("src", File.join(Configuration::MAIN_SRC, options[:package].gsub(".", File::Separator)))
   end
 
   def create_main_resources
@@ -48,7 +48,7 @@ class AppGenerator < VraptorScaffold::Base
 
   def create_test
     empty_directory Configuration::TEST_SRC
-    directory("src-test", File.join(Configuration::TEST_SRC, options[:package]))
+    directory("src-test", File.join(Configuration::TEST_SRC, options[:package].gsub(".", File::Separator)))
     directory("resources-test", Configuration::TEST_RESOURCES)
   end
 end
