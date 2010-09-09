@@ -34,11 +34,4 @@ describe VraptorScaffold::Main do
       VraptorScaffold::Main.execute(@args)
     end
   end
-
-  context "web server" do
-    it "should start server when typed start" do
-      VraptorScaffold::Main.should_receive(:exec).with("mvn compile war:inplace jetty:run")
-      VraptorScaffold::Main.execute(["start"])
-    end
-  end
 end

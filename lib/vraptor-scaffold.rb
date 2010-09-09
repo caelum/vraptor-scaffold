@@ -6,7 +6,6 @@ module VraptorScaffold
       action = args.shift 
       AppGenerator.new(args.shift, args).invoke_all if action == "new"
       ScaffoldGenerator.new(args).build if action == "scaffold"
-      exec("mvn compile war:inplace jetty:run") if action == "start"
     end
   end
 end
