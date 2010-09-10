@@ -10,3 +10,10 @@ def mock_config_file
   file = YAML.load_file File.join( File.dirname(__FILE__), "resources", "vraptor-scaffold.properties")
   Configuration.stub!(:config).and_return(file)
 end
+
+def exists_and_identical?(source, destination)
+  File.exists?(destination).should be_true
+  FileUtils.should be_identical(source, destination)
+end
+
+

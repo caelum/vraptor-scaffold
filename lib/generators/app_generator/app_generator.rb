@@ -5,7 +5,7 @@ class AppGenerator < VraptorScaffold::Base
   class_option :package, :default => "app", :aliases => "-p"
 
   def self.source_root
-    File.join(File.dirname(__FILE__), "templates")
+    File.join File.dirname(__FILE__), "templates"
   end
 
   def initialize(args, opts=[])

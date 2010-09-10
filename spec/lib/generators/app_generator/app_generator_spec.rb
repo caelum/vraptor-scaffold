@@ -17,9 +17,9 @@ describe AppGenerator do
     end
 
     it "should create pom" do
-      from = File.expand_path(File.dirname(__FILE__) + "/templates/pom.xml")
-      to = "#{@project_path}/pom.xml"
-      File.read(from).should == File.read(to)
+      source =  File.join File.dirname(__FILE__), "templates", "pom.xml"
+      destination = "#{@project_path}/pom.xml"
+      exists_and_identical?(source, destination)
     end
 
     context "creating main java" do
@@ -45,15 +45,15 @@ describe AppGenerator do
       end
 
       it "should create generic entity" do
-        from = File.expand_path(File.dirname(__FILE__) + "/templates/Entity.java")
-        to = "#{@app}/models/Entity.java"
-        FileUtils.compare_file(from, to).should be_true
+        source = File.join File.dirname(__FILE__), "templates", "Entity.java"
+        destination = "#{@app}/models/Entity.java"
+        exists_and_identical?(source, destination)
       end
 
       it "should create generic repository" do
-        from = File.expand_path(File.dirname(__FILE__) + "/templates/Repository.java")
-        to = "#{@app}/repositories/Repository.java"
-        FileUtils.compare_file(from, to).should be_true
+        source =  File.join File.dirname(__FILE__), "templates", "Repository.java"
+        destination = "#{@app}/repositories/Repository.java"
+        exists_and_identical?(source, destination)
       end
     end
 
@@ -68,15 +68,15 @@ describe AppGenerator do
       end
 
       it "should create log4j" do
-        from = "#{AppGenerator.source_root}/resources/log4j.properties"
-        to = "#{@main_resources}/log4j.properties"
-        FileUtils.compare_file(from, to).should be_true
+        source = "#{AppGenerator.source_root}/resources/log4j.properties"
+        destination = "#{@main_resources}/log4j.properties"
+        exists_and_identical?(source, destination)
       end
 
       it "should create messages resource" do
-        from = "#{AppGenerator.source_root}/resources/messages.properties"
-        to = "#{@main_resources}/messages.properties"
-        FileUtils.compare_file(from, to).should be_true
+        source = "#{AppGenerator.source_root}/resources/messages.properties"
+        destination = "#{@main_resources}/messages.properties"
+        exists_and_identical?(source, destination)
       end
 
       it "should create META-INF" do
@@ -84,9 +84,9 @@ describe AppGenerator do
       end
 
       it "should create persistence.xml" do
-        from = "#{AppGenerator.source_root}/resources/META-INF/persistence.xml"
-        to = "#{@meta_inf}/persistence.xml"
-        FileUtils.compare_file(from, to).should be_true
+        source = "#{AppGenerator.source_root}/resources/META-INF/persistence.xml"
+        destination = "#{@meta_inf}/persistence.xml"
+        exists_and_identical?(source, destination)
       end
     end
 
@@ -101,9 +101,9 @@ describe AppGenerator do
       end
 
       it "should create index" do
-        from = "#{AppGenerator.source_root}/webapp/index.jsp"
-        to = "#{@webapp}/index.jsp"
-        FileUtils.compare_file(from, to).should be_true
+        source = "#{AppGenerator.source_root}/webapp/index.jsp"
+        destination = "#{@webapp}/index.jsp"
+        exists_and_identical?(source, destination)
       end
 
       it "should create WEB-INF folder" do
@@ -111,15 +111,15 @@ describe AppGenerator do
       end
 
       it "should create scaffold css" do
-        from = "#{AppGenerator.source_root}/webapp/stylesheets/scaffold.css"
-        to = "#{@webapp}/stylesheets/scaffold.css"
-        FileUtils.compare_file(from, to).should be_true
+        source = "#{AppGenerator.source_root}/webapp/stylesheets/scaffold.css"
+        destination = "#{@webapp}/stylesheets/scaffold.css"
+        exists_and_identical?(source, destination)
       end
 
       it "should create jquery js" do
-        from = "#{AppGenerator.source_root}/webapp/javascripts/jquery-1.4.2.min.js"
-        to = "#{@webapp}/javascripts/jquery-1.4.2.min.js"
-        FileUtils.compare_file(from, to).should be_true
+        source = "#{AppGenerator.source_root}/webapp/javascripts/jquery-1.4.2.min.js"
+        destination = "#{@webapp}/javascripts/jquery-1.4.2.min.js"
+        exists_and_identical?(source, destination)
       end
 
       it "should create images folder" do
@@ -164,7 +164,7 @@ describe AppGenerator do
 
     before(:all) do
       @project_path = "src/vraptor-scaffold"
-      AppGenerator.new(@project_path, ["--package=br.com.caelum"]).invoke_all
+      AppGenerator.new(@project_path, ["-p=br.com.caelum"]).invoke_all
       @main_java = "#{@project_path}/#{Configuration::MAIN_SRC}/br/com/caelum"
       @test_java = "#{@project_path}/#{Configuration::TEST_SRC}/br/com/caelum"
     end

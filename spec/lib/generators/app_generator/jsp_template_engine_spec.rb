@@ -5,11 +5,10 @@ describe JspTemplateEngine do
   context "building a jsp application" do
     before(:all) do
       @project_path = "src/vraptor-scaffold"
-      AppGenerator.new(@project_path, ["--template-engine=jsp"]).invoke_all
-      @webapp = "#{@project_path}/#{Configuration::WEB_APP}"
       @web_inf = "#{@project_path}/#{Configuration::WEB_INF}"
       @decorators = "#{@web_inf}/decorators"
       @app = "#{@project_path}/#{Configuration::MAIN_SRC}/app"
+      AppGenerator.new(@project_path).invoke_all
     end
 
     after(:all) do
@@ -17,15 +16,15 @@ describe JspTemplateEngine do
     end
 
     it "should create decorators.xml" do
-      from = File.expand_path(File.dirname(__FILE__) + "/templates/decorators-jsp.xml")
-      to = "#{@web_inf}/decorators.xml"
-      FileUtils.compare_file(from, to).should be_true
+      source = File.join File.dirname(__FILE__), "templates", "decorators-jsp.xml"
+      destination = "#{@web_inf}/decorators.xml"
+      exists_and_identical?(source, destination)
     end
 
     it "should create web.xml" do
-      from = "#{AppGenerator.source_root}/jsp-web.xml"
-      to = "#{@web_inf}/web.xml"
-      FileUtils.compare_file(from, to).should be_true
+      source = "#{AppGenerator.source_root}/jsp-web.xml"
+      destination = "#{@web_inf}/web.xml"
+      exists_and_identical?(source, destination)
     end
 
     it "should create views folder" do
@@ -33,9 +32,9 @@ describe JspTemplateEngine do
     end
 
     it "should create decorator file" do
-      from = "#{AppGenerator.source_root}/main.jsp"
-      to = "#{@decorators}/main.jsp"
-      FileUtils.compare_file(from, to).should be_true
+      source = "#{AppGenerator.source_root}/main.jsp"
+      destination = "#{@decorators}/main.jsp"
+      exists_and_identical?(source, destination)
     end
 
     it "should not create infrastructure folder" do

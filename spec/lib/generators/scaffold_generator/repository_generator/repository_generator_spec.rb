@@ -11,20 +11,21 @@ describe RepositoryGenerator do
   after(:each) do
     FileUtils.remove_dir("src") 
   end
-
+  
   it "should create repository interface" do
-    from = File.expand_path(File.dirname(__FILE__) + "/templates/ProductRepository.java")
-    to = "#{Configuration::MAIN_SRC}/app/repositories/ProductRepository.java"
-    FileUtils.compare_file(from, to).should be_true
+    source = File.join File.dirname(__FILE__), "templates", "ProductRepository.java"
+    destination = Configuration.main_class_path "repositories", "ProductRepository.java"
+    exists_and_identical?(source, destination)
   end
 
   it "should create repository impl" do
-    from = File.expand_path(File.dirname(__FILE__) + "/templates/ProductRepositoryImpl.java")
-    to = "#{Configuration::MAIN_SRC}/app/repositories/ProductRepositoryImpl.java"
-    FileUtils.compare_file(from, to).should be_true
+    source = File.join File.dirname(__FILE__), "templates", "ProductRepositoryImpl.java"
+    destination = Configuration.main_class_path "repositories", "ProductRepositoryImpl.java"
+    exists_and_identical?(source, destination)
   end
 
   it "should create repository test" do
-    File.exist?("#{Configuration::TEST_SRC}/app/repositories/ProductRepositoryImplTest.java").should be_true
+    test_class = Configuration.test_class_path "repositories", "ProductRepositoryImplTest.java" 
+    File.exist?(test_class).should be_true
   end
 end	
