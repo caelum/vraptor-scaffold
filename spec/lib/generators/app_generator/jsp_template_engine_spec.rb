@@ -46,10 +46,5 @@ describe JspTemplateEngine do
       File.exist?(to).should be_false
     end
 
-    it "should include jstl dependency" do
-      pom = "#{@project_path}/pom.xml"
-      File.read(pom).should match("<dependency><groupId>javax.servlet</groupId><artifactId>jstl</artifactId><version>1.2</version></dependency>")
-    end
-
   end
 end

@@ -38,7 +38,7 @@ describe FreemarkerTemplateEngine do
     end
 
     it "should create path resolver" do
-      source = File.expand_path(File.dirname(__FILE__) + "/templates/FreemarkerPathResolver.java")
+      source = File.join File.dirname(__FILE__), "templates", "FreemarkerPathResolver.java"
       destination = "#{@app}/infrastructure/FreemarkerPathResolver.java"
       exists_and_identical?(source, destination)
     end
@@ -56,8 +56,9 @@ describe FreemarkerTemplateEngine do
     end
 
     it "should include freemarker dependency" do
+      source = File.join AppGenerator.source_root, "freemarker-dep.xml"
       pom = "#{@project_path}/pom.xml"
-      File.read(pom).should match("<dependency><groupId>org.freemarker</groupId><artifactId>freemarker</artifactId><version>2.3.16</version></dependency>")
+      File.read(pom).should match(File.read(source))
     end
   end
 

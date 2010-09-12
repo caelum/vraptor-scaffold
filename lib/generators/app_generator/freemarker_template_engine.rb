@@ -16,18 +16,15 @@ class FreemarkerTemplateEngine < VraptorScaffold::Base
     copy_file("main.ftl", File.join(Configuration::WEB_INF, "decorators", "main.ftl"))
     directory("infrastructure", Configuration.main_class_path("infrastructure"))
     empty_directory File.join(Configuration::WEB_INF, "views")
+    dependencies
   end
 
   def extension
     "ftl"
   end
-  
+
   def dependencies
-    xml = Builder::XmlMarkup.new
-    xml.dependency do |d|
-      d.groupId "org.freemarker"
-      d.artifactId "freemarker"
-      d.version "2.3.16"
-    end
+    template = File.join FreemarkerTemplateEngine.source_root, "freemarker-dep.xml"
+    inject_into_file "pom.xml", File.read(template), :after => "<dependencies>", :verbose => false
   end
 end

@@ -182,4 +182,30 @@ describe AppGenerator do
     end
 
   end
+
+  context "configuring template engine" do
+
+    before(:each) do
+      @project_path = "src/vraptor-scaffold"
+    end
+
+    after(:each) do
+      FileUtils.remove_dir("src")
+    end
+
+    it "should configure freemarker template engine" do
+      template = mock(FreemarkerTemplateEngine)
+      FreemarkerTemplateEngine.stub!(:new).with(@project_path).and_return(template)
+      template.should_receive(:configure)
+      AppGenerator.new(@project_path, ["--template-engine=ftl"]).invoke_all
+    end
+
+    it "should configure jsp template engine" do
+      template = mock(JspTemplateEngine)
+      JspTemplateEngine.stub!(:new).with(@project_path).and_return(template)
+      template.should_receive(:configure)
+      AppGenerator.new(@project_path).invoke_all
+    end
+  end
+
 end
