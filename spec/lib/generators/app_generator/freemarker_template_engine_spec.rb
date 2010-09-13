@@ -4,17 +4,16 @@ describe FreemarkerTemplateEngine do
 
   context "building a freemarker application" do
     before(:all) do
-      mock_config_file
       @project_path = "src/vraptor-scaffold"
       @webapp = "#{@project_path}/#{Configuration::WEB_APP}"
       @web_inf = "#{@project_path}/#{Configuration::WEB_INF}"
       @decorators = "#{@web_inf}/decorators"
-      @app = "#{@project_path}/#{Configuration::MAIN_SRC}/app"
-      AppGenerator.new(@project_path, ["--template-engine=ftl"]).invoke_all
+      @app = "#{@project_path}/#{Configuration::MAIN_SRC}/br/com/caelum"
+      AppGenerator.new(@project_path, ["--template-engine=ftl", "-p=br.com.caelum"]).invoke_all
     end
 
     after(:all) do
-      FileUtils.remove_dir("src")
+      FileUtils.remove_dir(@project_path)
     end
 
     it "should create decorators.xml" do

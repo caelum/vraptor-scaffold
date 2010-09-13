@@ -9,7 +9,7 @@ class Configuration
   FILENAME = "#{META_INF}/vraptor-scaffold.properties"
 
   def self.config
-    YAML.load_file File.join(Configuration::FILENAME)
+    YAML.load_file Configuration::FILENAME
   end
 
   def self.template_engine

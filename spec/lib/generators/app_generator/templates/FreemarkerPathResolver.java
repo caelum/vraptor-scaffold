@@ -1,4 +1,4 @@
-package app.infrastructure;
+package br.com.caelum.infrastructure;
 
 import br.com.caelum.vraptor.http.FormatResolver;
 import br.com.caelum.vraptor.ioc.Component;
