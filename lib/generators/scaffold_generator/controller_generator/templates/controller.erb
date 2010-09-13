@@ -63,13 +63,13 @@ public class <%= controller_class_name %> {
 	}
 
 	@Get
-	@Path("<%= "#{path}/{#{@model}.id}/show" %>")
+	@Path("<%= "#{path}/{#{@model}.id}" %>")
 	public <%= class_name %> show(<%= class_name %> <%= @model %>) {
 		return repository.find(<%= @model %>.getId());
 	}
 
 	@Delete
-	@Path("<%= path %>")
+	@Path("<%= "#{path}/{#{@model}.id}" %>")
 	public void destroy(<%= class_name %> <%= @model %>) {
 		repository.destroy(repository.find(<%= @model %>.getId()));
 		result.redirectTo(this).index();  

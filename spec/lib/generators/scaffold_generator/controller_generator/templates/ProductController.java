@@ -63,13 +63,13 @@ public class ProductController {
 	}
 
 	@Get
-	@Path("/products/{product.id}/show")
+	@Path("/products/{product.id}")
 	public Product show(Product product) {
 		return repository.find(product.getId());
 	}
 
 	@Delete
-	@Path("/products")
+	@Path("/products/{product.id}")
 	public void destroy(Product product) {
 		repository.destroy(repository.find(product.getId()));
 		result.redirectTo(this).index();  

@@ -19,11 +19,10 @@
       <%= "${#{@model}.#{att.name}}" %>
     </td>
   <% end -%>
-    <td><a href="<%= path "/${#{@model}.id}/show" %>">show</a></td>
+    <td><a href="<%= path "/${#{@model}.id}" %>">show</a></td>
     <td><a href="<%= path "/${#{@model}.id}/edit" %>">edit</a></td>
     <td>
-      <form action="<%= path %>" method="post">
-    	  <input name="<%= "#{@model}.id" %>" value="<%= "${#{@model}.id}" %>" type="hidden" />
+      <form action="<%= path "/${#{@model}.id}" %>" method="post">
     	  <input type="hidden" name="_method" value="delete"/>
     	  <button type="submit" onclick="return confirm('Are you sure?')">destroy</button>
 	    </form>
