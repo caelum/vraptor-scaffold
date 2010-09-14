@@ -22,6 +22,10 @@ describe AppGenerator do
       exists_and_identical?(source, destination)
     end
 
+    it "cannot create ivy.xml" do
+      File.exist?("#{@project_path}/ivy.xml").should be_false  
+    end
+
     context "creating main java" do
       before(:all) do
         @main_java = "#{@project_path}/#{Configuration::MAIN_SRC}"
@@ -205,6 +209,30 @@ describe AppGenerator do
       JspTemplateEngine.stub!(:new).with(@project_path).and_return(template)
       template.should_receive(:configure)
       AppGenerator.new(@project_path).invoke_all
+    end
+  end
+
+  context "configuring ant application" do
+
+    before(:all) do
+      @project_path = "vraptor-scaffold"
+      AppGenerator.new(@project_path, ["-b=ant"]).invoke_all
+    end
+
+    after(:all) do
+      FileUtils.remove_dir(@project_path)
+    end
+
+    it "should create build.xml" do
+      File.exist?("#{@project_path}/build.xml").should be_true  
+    end
+
+    it "should create ivy.xml" do
+      File.exist?("#{@project_path}/ivy.xml").should be_true  
+    end
+
+    it "cannot create pom.xml" do
+      File.exist?("#{@project_path}/pom.xml").should be_false  
     end
   end
 

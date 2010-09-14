@@ -1,8 +1,9 @@
 === ?.?.?.?? / 2010-??-??
 
 == New Features
-== jsp support
-== base package
+* jsp support
+* base package
+* ant + ivy
 
 == Improvements
 * Better use of Generics.

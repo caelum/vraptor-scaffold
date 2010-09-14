@@ -3,6 +3,7 @@ class AppGenerator < VraptorScaffold::Base
   argument :project_path
   class_option :template_engine, :default => "jsp", :aliases => "-t"
   class_option :package, :default => "app", :aliases => "-p"
+  class_option :build_tool, :default => "mvn", :aliases => "-b"
 
   def self.source_root
     File.join File.dirname(__FILE__), "templates"
@@ -18,8 +19,12 @@ class AppGenerator < VraptorScaffold::Base
     empty_directory "."
   end
 
-  def create_pom
-    template("pom.erb", "pom.xml")
+  def configure_build_tool
+    template("pom.erb", "pom.xml") if options[:build_tool] == "mvn"
+    if options[:build_tool] == "ant"
+      copy_file("build.xml") 
+      copy_file("ivy.xml") 
+    end
   end
 
   def create_main_java
