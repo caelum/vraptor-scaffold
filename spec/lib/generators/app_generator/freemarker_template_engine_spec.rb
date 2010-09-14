@@ -23,7 +23,7 @@ describe FreemarkerTemplateEngine do
     end
 
     it "should create web.xml" do
-      source = "#{AppGenerator.source_root}/freemarker-web.xml"
+      source = "#{FreemarkerTemplateEngine.source_root}/freemarker-web.xml"
       destination = "#{@web_inf}/web.xml"
       exists_and_identical?(source, destination)
     end
@@ -43,19 +43,19 @@ describe FreemarkerTemplateEngine do
     end
 
     it "should create decorator file" do
-      source = "#{AppGenerator.source_root}/main.ftl"
+      source = "#{FreemarkerTemplateEngine.source_root}/main.ftl"
       destination = "#{@decorators}/main.ftl"
       exists_and_identical?(source, destination)
     end
 
     it "should create html macro file" do
-      source = "#{AppGenerator.source_root}/macros/html.ftl"
+      source = "#{FreemarkerTemplateEngine.source_root}/macros/html.ftl"
       destination = "#{@webapp}/macros/html.ftl"
       exists_and_identical?(source, destination)
     end
 
     it "should include freemarker dependency" do
-      source = File.join AppGenerator.source_root, "freemarker-dep.xml"
+      source = File.join FreemarkerTemplateEngine.source_root, "freemarker-dep.xml"
       pom = "#{@project_path}/pom.xml"
       File.read(pom).should match(File.read(source))
     end

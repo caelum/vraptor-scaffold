@@ -22,7 +22,7 @@ describe JspTemplateEngine do
     end
 
     it "should create web.xml" do
-      source = "#{AppGenerator.source_root}/jsp-web.xml"
+      source = "#{JspTemplateEngine.source_root}/jsp-web.xml"
       destination = "#{@web_inf}/web.xml"
       exists_and_identical?(source, destination)
     end
@@ -32,7 +32,7 @@ describe JspTemplateEngine do
     end
 
     it "should create decorator file" do
-      source = "#{AppGenerator.source_root}/main.jsp"
+      source = "#{JspTemplateEngine.source_root}/main.jsp"
       destination = "#{@decorators}/main.jsp"
       exists_and_identical?(source, destination)
     end
