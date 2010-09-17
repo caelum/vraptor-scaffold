@@ -1,12 +1,25 @@
 class AppGenerator < VraptorScaffold::Base
 
+  TEMPLATE_ENGINES = %w( jsp ftl )
+  BUILD_TOOLS = %w( ant mvn )
+
   argument :project_path
-  class_option :template_engine, :default => "jsp", :aliases => "-t"
-  class_option :package, :default => "app", :aliases => "-p"
-  class_option :build_tool, :default => "mvn", :aliases => "-b"
+
+  class_option :template_engine, :default => "jsp", :aliases => "-t",
+    :desc => "Choose template engine (options: #{TEMPLATE_ENGINES.join(', ')})"
+
+  class_option :package, :default => "app", :aliases => "-p", 
+    :desc => "Base package"
+
+  class_option :build_tool, :default => "mvn", :aliases => "-b", 
+    :desc => "Java build tool (options: #{BUILD_TOOLS.join(', ')})"
 
   def self.source_root
     File.join File.dirname(__FILE__), "templates"
+  end
+
+  def self.banner
+    "vraptor new #{self.arguments.map(&:usage).join(' ')} [options]"
   end
 
   def initialize(args, opts=[])

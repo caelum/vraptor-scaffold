@@ -236,4 +236,28 @@ describe AppGenerator do
     end
   end
 
+  context "valid template engines" do
+    it "jsp should be valid" do
+      AppGenerator::TEMPLATE_ENGINES.include?("jsp").should be_true
+    end
+
+    it "freemarker should be valid" do
+      AppGenerator::TEMPLATE_ENGINES.include?("ftl").should be_true
+    end
+  end
+
+  context "valid build tools" do
+    it "ant should be valid" do
+      AppGenerator::BUILD_TOOLS.include?("ant").should be_true
+    end
+
+    it "maven should be valid" do
+      AppGenerator::BUILD_TOOLS.include?("mvn").should be_true
+    end
+  end
+
+  it "should configure banner" do
+    AppGenerator.banner.should == "vraptor new PROJECT_PATH [options]"
+  end
+
 end
