@@ -18,7 +18,7 @@ class ScaffoldGenerator
 
   private 
   def validate_scaffold_command(args)
-    unless File.exist?("pom.xml")
+    unless File.exist?("src")
       puts "To run scaffold please go to the project root folder."
       Kernel::exit
     end

@@ -7,8 +7,8 @@ describe ScaffoldGenerator do
   end
 
   context "invalid scaffold command" do
-    it "outside project root" do
-      File.stub!(:exist?).with("pom.xml").and_return(false)
+    it "outside root folder" do
+      File.stub!(:exist?).with("src").and_return(false)
       Kernel.should_receive(:exit)
       ScaffoldGenerator.new(@args)
     end
@@ -24,7 +24,7 @@ describe ScaffoldGenerator do
   context "valid scaffold command" do
 
     before(:each) do
-      File.stub!(:exist?).and_return(true)
+      File.stub!(:exist?).with("src").and_return(true)
       Configuration.stub!(:template_engine).and_return("ftl")
       @generator = ScaffoldGenerator.new(@args)
 
