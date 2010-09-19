@@ -1,43 +1,35 @@
-class ScaffoldGenerator
+class ScaffoldGenerator < VraptorScaffold::Base
 
-  attr_accessor :attributes, :model
+  attr_accessor :generated_attributes
+  argument :model
+  argument :attributes, :type => :hash, :default => {}, :banner => "field:type field:type" 
+
+  def self.banner
+    "vraptor scaffold #{self.arguments.map(&:usage).join(' ')}"
+  end
 
   def initialize(args)
-    @model = args.shift.downcase 
-    @attributes = []
-    validate_scaffold_command(args)
+    super(args)
+    @generated_attributes = []
+    attributes.each { |field, type| 
+      @generated_attributes << Attribute.new(field, type)
+    }
   end
 
-  def build
-    ModelGenerator.new(model, attributes).build
-    RepositoryGenerator.new(model, attributes).build
-    ControllerGenerator.new(model, attributes).build
+  def controller_generator
+    ControllerGenerator.new(model, @generated_attributes).build
+  end
+
+  def model_generator
+    ModelGenerator.new(model, @generated_attributes).build
+  end
+
+  def repository_generator
+    RepositoryGenerator.new(model, @generated_attributes).build
+  end
+
+  def template_engine_generator
     templates = {"jsp" => JspGenerator, "ftl" => FreemarkerGenerator}
-    templates[Configuration.template_engine].new(model, attributes).build
-  end
-
-  private 
-  def validate_scaffold_command(args)
-    unless File.exist?("src")
-      puts "To run scaffold please go to the project root folder."
-      Kernel::exit
-    end
-    validate_attributes(args)
-  end
-
-  def validate_attributes(args)
-    args.each do |arg|
-      parsedAttribute = arg.split(":")
-      parse_attribute(parsedAttribute)
-    end
-  end
-
-  def parse_attribute(parsedAttribute) 
-    type = parsedAttribute.last.downcase 
-    unless Attribute.valid_types.include?(type)
-      puts "Attribute #{type} is not supported. The supported attributes types are: #{Attribute.valid_types.join(" ")}"
-      Kernel::exit
-    end
-    @attributes << Attribute.new(parsedAttribute.first, type)
+    templates[Configuration.template_engine].new(model, @generated_attributes).build
   end
 end

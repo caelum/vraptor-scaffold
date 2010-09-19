@@ -104,6 +104,26 @@ describe Attribute do
     end
   end
 
+  context "validate" do
+
+    it "should be valid when attribute is supported" do
+      Kernel.should_not_receive(:exit) 
+      Attribute.valid_types.each do |type|
+        Attribute.new("name", type)
+      end
+    end
+
+    it "cannot be valid when attribute is not supported" do
+      Kernel.should_receive(:exit) 
+      Attribute.new("name", "char")
+    end
+
+    it "should be valid when attribute is upper case" do
+      Kernel.should_not_receive(:exit) 
+      Attribute.new("name", "String")
+    end
+  end
+
   it "should be boolean when type is boolean" do
     Attribute.new("flag", "boolean").boolean?.should be_true
   end

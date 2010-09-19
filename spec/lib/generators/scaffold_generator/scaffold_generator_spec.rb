@@ -3,67 +3,64 @@ require File.expand_path(File.dirname(__FILE__) + "/../../../spec_helper")
 describe ScaffoldGenerator do
 
   before(:each) do
-    @args = ["product", "name:String", "value:double"]
+    @model = "product"
+    args = [@model, {"name" => "string", "value" => "double"}]
+    @generator = ScaffoldGenerator.new(args)
+    @attributes = @generator.generated_attributes
   end
 
-  context "invalid scaffold command" do
-    it "outside root folder" do
-      File.stub!(:exist?).with("src").and_return(false)
-      Kernel.should_receive(:exit)
-      ScaffoldGenerator.new(@args)
+  context "generated attributes" do
+    it "should generate name attribute" do
+      att = @attributes.first
+      att.name.should == "name"
+      att.type.should == "string"
     end
 
-    it "invalid attribute type" do
-      File.stub!(:exist?).and_return(true)
-      args = ["product", "name:string", "value:char"] 
-      Kernel.should_receive(:exit)
-      ScaffoldGenerator.new(args)
+    it "should generate value attribute" do
+      att = @attributes.last
+      att.name.should == "value"
+      att.type.should == "double"
     end
   end
 
-  context "valid scaffold command" do
+  it "should call model generator" do
+    @model_generator = mock(ModelGenerator)
+    ModelGenerator.stub!(:new).with(@model, @attributes).and_return(@model_generator)
+    @model_generator.should_receive(:build)
+    @generator.model_generator
+  end
 
-    before(:each) do
-      File.stub!(:exist?).with("src").and_return(true)
-      Configuration.stub!(:template_engine).and_return("ftl")
-      @generator = ScaffoldGenerator.new(@args)
+  it "should call controller generator" do
+    @controller_generator = mock(ControllerGenerator)
+    ControllerGenerator.stub!(:new).with(@model, @attributes).and_return(@controller_generator)
+    @controller_generator.should_receive(:build)
+    @generator.controller_generator
+  end
 
-      @model_generator = mock(ModelGenerator)
-      ModelGenerator.stub!(:new).with(@generator.model, @generator.attributes).and_return(@model_generator)
+  it "should call freemarker generator" do
+    Configuration.stub!(:template_engine).and_return("ftl")
+    @freemarker_generator = mock(FreemarkerGenerator)
+    FreemarkerGenerator.stub!(:new).with(@model, @attributes).and_return(@freemarker_generator)
+    @freemarker_generator.should_receive(:build)
+    @generator.template_engine_generator
+  end
 
-      @repository_generator = mock(RepositoryGenerator)
-      RepositoryGenerator.stub!(:new).with(@generator.model, @generator.attributes).and_return(@repository_generator)
+  it "should call jsp generator" do
+    Configuration.stub!(:template_engine).and_return("jsp")
+    @jsp_generator = mock(JspGenerator)
+    JspGenerator.stub!(:new).with(@model, @attributes).and_return(@jsp_generator)
+    @jsp_generator.should_receive(:build)
+    @generator.template_engine_generator
+  end
 
-      @controller_generator = mock(ControllerGenerator)
-      ControllerGenerator.stub!(:new).with(@generator.model, @generator.attributes).and_return(@controller_generator)
+  it "should call repository generator" do
+    @repository_generator = mock(RepositoryGenerator)
+    RepositoryGenerator.stub!(:new).with(@model, @attributes).and_return(@repository_generator)
+    @repository_generator.should_receive(:build)
+    @generator.repository_generator
+  end
 
-      @freemarker_generator = mock(FreemarkerGenerator)
-      FreemarkerGenerator.stub!(:new).with(@generator.model, @generator.attributes).and_return(@freemarker_generator)
-
-      @model_generator.stub!(:build)
-      @repository_generator.stub!(:build)
-      @controller_generator.stub!(:build)
-      @freemarker_generator.stub!(:build)
-    end
-
-    it "should call model generator" do
-      @model_generator.should_receive(:build)
-      @generator.build
-    end
-
-    it "should call controller generator" do
-      @controller_generator.should_receive(:build)
-      @generator.build
-    end
-
-    it "should call freemarker generator" do
-      @freemarker_generator.should_receive(:build)
-      @generator.build
-    end
-
-    it "should call repository generator" do
-      @repository_generator.should_receive(:build)
-      @generator.build
-    end
+  it "should configure banner" do
+    ScaffoldGenerator.banner.should == "vraptor scaffold MODEL [field:type field:type]"
   end
 end	

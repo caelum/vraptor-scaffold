@@ -5,7 +5,7 @@ class AppGenerator < VraptorScaffold::Base
 
   argument :project_path
 
-  class_option :template_engine, :default => "jsp", :aliases => "-t",
+  class_option :template_engine, :default => "jsp", :aliases => "-e",
     :desc => "Choose template engine (options: #{TEMPLATE_ENGINES.join(', ')})"
 
   class_option :package, :default => "app", :aliases => "-p", 
