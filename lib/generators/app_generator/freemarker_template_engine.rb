@@ -35,7 +35,10 @@ class FreemarkerTemplateEngine < VraptorScaffold::Base
   end
 
   def dependencies
-    template = File.join FreemarkerTemplateEngine.source_root, "freemarker-dep.xml"
-    inject_into_file "pom.xml", File.read(template), :after => "<dependencies>", :verbose => false
+    file = "pom.xml" if File.exist?("#{@project_path}/pom.xml")
+    file = "ivy.xml" if File.exist?("#{@project_path}/ivy.xml") 
+    template = File.join FreemarkerTemplateEngine.source_root, "freemarker-#{file}"
+    inject_into_file(file, File.read(template), :after => "<dependencies>", :verbose => false)
   end
+
 end

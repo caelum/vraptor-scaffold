@@ -2,13 +2,16 @@ require File.expand_path(File.dirname(__FILE__) + "/../../../spec_helper")
 
 describe FreemarkerTemplateEngine do
 
-  context "building a freemarker application" do
+  before(:all) do
+    @project_path = "src/vraptor-scaffold"
+    @webapp = "#{@project_path}/#{Configuration::WEB_APP}"
+    @web_inf = "#{@project_path}/#{Configuration::WEB_INF}"
+    @decorators = "#{@web_inf}/decorators"
+    @app = "#{@project_path}/#{Configuration::MAIN_SRC}/br/com/caelum"
+  end
+
+  context "configuring" do
     before(:all) do
-      @project_path = "src/vraptor-scaffold"
-      @webapp = "#{@project_path}/#{Configuration::WEB_APP}"
-      @web_inf = "#{@project_path}/#{Configuration::WEB_INF}"
-      @decorators = "#{@web_inf}/decorators"
-      @app = "#{@project_path}/#{Configuration::MAIN_SRC}/br/com/caelum"
       AppGenerator.new(@project_path, ["--template-engine=ftl", "-p=br.com.caelum"]).invoke_all
     end
 
@@ -53,12 +56,37 @@ describe FreemarkerTemplateEngine do
       destination = "#{@webapp}/macros/html.ftl"
       exists_and_identical?(source, destination)
     end
+  end
 
-    it "should include freemarker dependency" do
-      source = File.join FreemarkerTemplateEngine.source_root, "freemarker-dep.xml"
+  context "with maven" do
+    before(:all) do
+      AppGenerator.new(@project_path, ["--template-engine=ftl", "-b=mvn"]).invoke_all
+    end
+
+    after(:all) do
+      FileUtils.remove_dir(@project_path)
+    end
+
+    it "should include freemarker dependency in pom.xml" do
+      source = File.join FreemarkerTemplateEngine.source_root, "freemarker-pom.xml"
       pom = "#{@project_path}/pom.xml"
       File.read(pom).should match(File.read(source))
     end
   end
 
+  context "with ant" do
+    before(:all) do
+      AppGenerator.new(@project_path, ["--template-engine=ftl", "-b=ant"]).invoke_all
+    end
+
+    after(:all) do
+      FileUtils.remove_dir(@project_path)
+    end
+
+    it "should include freemarker dependency in ivy.xml" do
+      source = File.join FreemarkerTemplateEngine.source_root, "freemarker-ivy.xml"
+      ivy = "#{@project_path}/ivy.xml"
+      File.read(ivy).should match(File.read(source))
+    end
+  end
 end
