@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
 
   s.required_rubygems_version = Gem::Requirement.new("> 1.3.1") if s.respond_to? :required_rubygems_version=
   s.authors = ["Rodolfo Liviero"]
-  s.date = %q{2010-09-03}
+  s.date = %q{2010-09-21}
   s.default_executable = %q{vraptor}
   s.description = %q{Scaffold for vraptor 3 with jpa, freemarker, maven, mockito, junit and jquery.}
   s.email = %q{rodolfoliviero@gmail.com}
@@ -33,13 +33,17 @@ Gem::Specification.new do |s|
      "lib/generators/app_generator/app_generator.rb",
      "lib/generators/app_generator/freemarker_template_engine.rb",
      "lib/generators/app_generator/jsp_template_engine.rb",
+     "lib/generators/app_generator/templates/build.xml",
      "lib/generators/app_generator/templates/decorators.erb",
-     "lib/generators/app_generator/templates/freemarker-web.xml",
-     "lib/generators/app_generator/templates/infrastructure/FreemarkerPathResolver.java",
-     "lib/generators/app_generator/templates/jsp-web.xml",
-     "lib/generators/app_generator/templates/macros/html.ftl",
-     "lib/generators/app_generator/templates/main.ftl",
-     "lib/generators/app_generator/templates/main.jsp",
+     "lib/generators/app_generator/templates/freemarker/freemarker-ivy.xml",
+     "lib/generators/app_generator/templates/freemarker/freemarker-pom.xml",
+     "lib/generators/app_generator/templates/freemarker/freemarker-web.xml",
+     "lib/generators/app_generator/templates/freemarker/infrastructure/FreemarkerPathResolver.java.tt",
+     "lib/generators/app_generator/templates/freemarker/macros/html.ftl",
+     "lib/generators/app_generator/templates/freemarker/main.ftl",
+     "lib/generators/app_generator/templates/ivy.xml",
+     "lib/generators/app_generator/templates/jsp/jsp-web.xml",
+     "lib/generators/app_generator/templates/jsp/main.jsp",
      "lib/generators/app_generator/templates/pom.erb",
      "lib/generators/app_generator/templates/resources-test/.empty_directory",
      "lib/generators/app_generator/templates/resources/META-INF/persistence.xml",
@@ -49,8 +53,8 @@ Gem::Specification.new do |s|
      "lib/generators/app_generator/templates/src-test/models/.empty_directory",
      "lib/generators/app_generator/templates/src-test/repositories/.empty_directory",
      "lib/generators/app_generator/templates/src/controllers/.empty_directory",
-     "lib/generators/app_generator/templates/src/models/Entity.java",
-     "lib/generators/app_generator/templates/src/repositories/Repository.java",
+     "lib/generators/app_generator/templates/src/models/Entity.java.tt",
+     "lib/generators/app_generator/templates/src/repositories/Repository.java.tt",
      "lib/generators/app_generator/templates/vraptor-scaffold.erb",
      "lib/generators/app_generator/templates/webapp/images/.empty_directory",
      "lib/generators/app_generator/templates/webapp/index.jsp",
@@ -86,6 +90,11 @@ Gem::Specification.new do |s|
      "lib/vraptor-scaffold.rb",
      "spec/lib/configuration_spec.rb",
      "spec/lib/generators/app_generator/app_generator_spec.rb",
+     "spec/lib/generators/app_generator/freemarker_template_engine_spec.rb",
+     "spec/lib/generators/app_generator/jsp_template_engine_spec.rb",
+     "spec/lib/generators/app_generator/templates/Entity.java",
+     "spec/lib/generators/app_generator/templates/FreemarkerPathResolver.java",
+     "spec/lib/generators/app_generator/templates/Repository.java",
      "spec/lib/generators/app_generator/templates/decorators-jsp.xml",
      "spec/lib/generators/app_generator/templates/decorators.xml",
      "spec/lib/generators/app_generator/templates/pom.xml",
@@ -102,36 +111,39 @@ Gem::Specification.new do |s|
      "spec/lib/generators/scaffold_generator/repository_generator/templates/ProductRepositoryImpl.java",
      "spec/lib/generators/scaffold_generator/scaffold_generator_spec.rb",
      "spec/lib/vraptor-scaffold_spec.rb",
+     "spec/resources/vraptor-scaffold.properties",
      "spec/spec.opts",
      "spec/spec_helper.rb",
      "vraptor-scaffold.gemspec"
   ]
-  s.homepage = %q{http://github.com/rodolfoliviero/vraptor-scaffold}
-  s.post_install_message = %q{Thank you for installing vraptor-scaffold. Please read http://github.com/rodolfoliviero/vraptor-scaffold/blob/master/README.rdoc for more information.}
+  s.homepage = %q{http://github.com/caelum/vraptor-scaffold}
+  s.post_install_message = %q{Thank you for installing vraptor-scaffold. Please read http://github.com/caelum/vraptor-scaffold/blob/master/README.rdoc for more information.}
   s.rdoc_options = ["--charset=UTF-8"]
   s.require_paths = ["lib"]
-  s.rubygems_version = %q{1.3.6}
+  s.rubygems_version = %q{1.3.7}
   s.summary = %q{Scaffold for vraptor 3.}
   s.test_files = [
-    "spec/spec_helper.rb",
-     "spec/lib/configuration_spec.rb",
-     "spec/lib/generators/scaffold_generator/base_scaffold_spec.rb",
-     "spec/lib/generators/scaffold_generator/attribute_spec.rb",
-     "spec/lib/generators/scaffold_generator/freemarker_generator/freemarker_generator_spec.rb",
-     "spec/lib/generators/scaffold_generator/scaffold_generator_spec.rb",
-     "spec/lib/generators/scaffold_generator/model_generator/model_generator_spec.rb",
+    "spec/lib/vraptor-scaffold_spec.rb",
+     "spec/lib/generators/app_generator/app_generator_spec.rb",
+     "spec/lib/generators/app_generator/jsp_template_engine_spec.rb",
+     "spec/lib/generators/app_generator/freemarker_template_engine_spec.rb",
+     "spec/lib/generators/scaffold_generator/jsp_generator/jsp_generator_spec.rb",
      "spec/lib/generators/scaffold_generator/controller_generator/controller_generator_spec.rb",
      "spec/lib/generators/scaffold_generator/repository_generator/repository_generator_spec.rb",
-     "spec/lib/generators/scaffold_generator/jsp_generator/jsp_generator_spec.rb",
-     "spec/lib/generators/app_generator/app_generator_spec.rb",
-     "spec/lib/vraptor-scaffold_spec.rb"
+     "spec/lib/generators/scaffold_generator/base_scaffold_spec.rb",
+     "spec/lib/generators/scaffold_generator/scaffold_generator_spec.rb",
+     "spec/lib/generators/scaffold_generator/model_generator/model_generator_spec.rb",
+     "spec/lib/generators/scaffold_generator/freemarker_generator/freemarker_generator_spec.rb",
+     "spec/lib/generators/scaffold_generator/attribute_spec.rb",
+     "spec/lib/configuration_spec.rb",
+     "spec/spec_helper.rb"
   ]
 
   if s.respond_to? :specification_version then
     current_version = Gem::Specification::CURRENT_SPECIFICATION_VERSION
     s.specification_version = 3
 
-    if Gem::Version.new(Gem::RubyGemsVersion) >= Gem::Version.new('1.2.0') then
+    if Gem::Version.new(Gem::VERSION) >= Gem::Version.new('1.2.0') then
       s.add_runtime_dependency(%q<thor>, [">= 0.14.0"])
       s.add_runtime_dependency(%q<rake>, [">= 0.8.7"])
       s.add_runtime_dependency(%q<activesupport>, [">= 3.0.0"])

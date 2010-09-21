@@ -1,57 +1,64 @@
-<project name="vraptor-scaffold" default="run" xmlns:ivy="antlib:org.apache.ivy.ant">
-    <!-- some variables used -->
-    <property name="lib.dir" value="lib" />
-    <property name="build.dir" value="build" />
-    <property name="src.dir" value="src/main/java" />
-    
-    <!-- paths used for compilation and run  -->
-    <path id="lib.path.id">
-        <fileset dir="${lib.dir}" />
+<project name="vraptor-scaffold" default="war" xmlns:ivy="antlib:org.apache.ivy.ant">
+
+	<!-- some variables used -->
+	<property name="lib.dir" value="lib/default" />
+	<property name="build.dir" value="build" />
+	<property name="src.dir" value="src/main/java" />
+  <mkdir dir="lib/jetty" />
+  
+	<!-- paths used for compilation -->
+	<path id="lib.path.id">
+		<fileset dir="${lib.dir}" />
 	</path>
-    <path id="run.path.id">
-        <path refid="lib.path.id" />
-        <path location="${build.dir}" />
-    </path>
-    
-    <!-- ================================= 
+	<path id="jetty.path.id">
+		<fileset dir="lib/jetty" />
+	</path>
+
+	<taskdef classpathref="jetty.path.id" resource="tasks.properties" loaderref="jetty.loader" />
+
+	<!-- ================================= 
           target: resolve              
          ================================= -->
-    <target name="resolve" description="--> retreive dependencies with ivy">
-        <ivy:retrieve/>
-    </target>    
-    
-    <!-- ================================= 
+	<target name="resolve" description="--> retrieve dependencies with ivy">
+		<ivy:retrieve pattern="lib/[conf]/[artifact]-[revision].[ext]" sync="true" />
+	</target>
+
+	<!-- ================================= 
+          target: compile
+         ================================= -->
+	<target name="compile" depends="resolve" description="--> compile">
+		<mkdir dir="${build.dir}" />
+		<javac srcdir="${src.dir}" destdir="${build.dir}" classpathref="lib.path.id" />
+		<copy todir="${build.dir}">
+			<fileset dir="src/main/resources">
+				<include name="**/*.*" />
+			</fileset>
+		</copy>
+	</target>
+
+	<!-- ================================= 
+          target: war
+         ================================= -->
+	<target name="war" description="--> generate war file" depends="compile">
+		<war destfile="vraptor-scaffold.war">
+			<zipfileset dir="src/main/webapp" />
+			<lib dir="${lib.dir}" />
+			<classes dir="${build.dir}"/>
+		</war>
+	</target>
+
+	<target name="jetty.run" description="--> run jetty server">
+		<jetty tempDirectory="jetty-temp">
+			<webApp name="vraptor-scaffold" warfile="vraptor-scaffold.war" contextpath="/" />
+		</jetty>
+	</target>
+
+	<!-- ================================= 
           target: report              
          ================================= -->
-    <target name="report" depends="resolve" description="--> generates a report of dependencies">
-        <ivy:report todir="${build.dir}"/>
-    </target>
-
-    <!-- ================================= 
-          target: run
-         ================================= -->
-    <target name="run" depends="resolve" description="--> compile and run the project">
-        <mkdir dir="${build.dir}" />
-        <javac srcdir="${src.dir}" destdir="${build.dir}" classpathref="lib.path.id" />
-    </target>
-
-    <!-- ================================= 
-          target: clean              
-         ================================= -->
-    <target name="clean" description="--> clean the project">
-        <delete includeemptydirs="true">
-            <fileset dir="${basedir}">
-            	<exclude name="src/**" />
-            	<exclude name="build.xml" />
-              <exclude name="ivy.xml" />
-        	</fileset>
-    	</delete>
-    </target>
-	
-    <!-- ================================= 
-          target: clean-cache              
-         ================================= -->
-	<target name="clean-cache" description="--> clean the ivy cache">
-		<ivy:cleancache />
+	<target name="report" depends="resolve" description="--> generates a report of dependencies">
+		<mkdir dir="reports" />
+		<ivy:report todir="reports" />
 	</target>
+
 </project>
