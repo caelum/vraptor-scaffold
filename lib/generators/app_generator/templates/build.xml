@@ -1,26 +1,44 @@
 <project name="vraptor-scaffold" default="war" xmlns:ivy="antlib:org.apache.ivy.ant">
 
-	<!-- some variables used -->
+	<!-- variables -->
+	<property name="output.dir" value="target" />
+
 	<property name="lib.dir" value="lib/default" />
-	<property name="build.dir" value="build" />
+
+	<property name="webapp.dir" value="src/main/webapp" />
+
+	<property name="build.dir" value="${webapp.dir}/WEB-INF/classes" />
 	<property name="src.dir" value="src/main/java" />
-  <mkdir dir="lib/jetty" />
-  
-	<!-- paths used for compilation -->
+	<property name="resources.dir" value="src/main/resources" />
+
+	<property name="test.build.dir" value="${output.dir}/test-classes" />
+	<property name="test.src.dir" value="src/test/java" />
+	<property name="test.resources.dir" value="src/test/resources" />
+
+	<!-- paths -->
 	<path id="lib.path.id">
 		<fileset dir="${lib.dir}" />
+		<fileset dir="lib/provided" />
 	</path>
-	<path id="jetty.path.id">
-		<fileset dir="lib/jetty" />
+	<path id="test.path.id">
+		<fileset dir="lib/test" />
+		<fileset dir="${lib.dir}" />
+		<fileset dir="lib/provided" />
+		<pathelement location="${build.dir}" />
+		<pathelement location="${test.build.dir}" />
 	</path>
-
-	<taskdef classpathref="jetty.path.id" resource="tasks.properties" loaderref="jetty.loader" />
 
 	<!-- ================================= 
           target: resolve              
          ================================= -->
 	<target name="resolve" description="--> retrieve dependencies with ivy">
 		<ivy:retrieve pattern="lib/[conf]/[artifact]-[revision].[ext]" sync="true" />
+		<!--
+		<copy todir="src/main/webapp/WEB-INF/lib">
+			<fileset dir="lib/default">
+				<include name="*.jar" />
+			</fileset>
+		</copy> -->
 	</target>
 
 	<!-- ================================= 
@@ -28,12 +46,41 @@
          ================================= -->
 	<target name="compile" depends="resolve" description="--> compile">
 		<mkdir dir="${build.dir}" />
-		<javac srcdir="${src.dir}" destdir="${build.dir}" classpathref="lib.path.id" />
+		<javac srcdir="${src.dir}" destdir="${build.dir}" classpathref="lib.path.id" debug="on" />
 		<copy todir="${build.dir}">
-			<fileset dir="src/main/resources">
+			<fileset dir="${resources.dir}">
 				<include name="**/*.*" />
 			</fileset>
 		</copy>
+	</target>
+
+	<!-- ================================= 
+	      target: compile test
+	     ================================= -->
+	<target name="compile-test" depends="compile" description="--> compile">
+		<mkdir dir="${test.build.dir}" />
+		<javac srcdir="${test.src.dir}" destdir="${test.build.dir}" classpathref="test.path.id" debug="on" />
+		<copy todir="${test.build.dir}">
+			<fileset dir="${test.resources.dir}">
+				<include name="**/*.*" />
+			</fileset>
+		</copy>
+	</target>
+
+	<!-- ================================= 
+          target: run tests
+         ================================= -->
+	<target name="test" depends="compile-test" description="--> run all tests">
+		<mkdir dir="${output.dir}/test-results" />
+		<junit haltonfailure="no">
+			<batchtest fork="yes" todir="${output.dir}/test-results">
+				<fileset dir="${test.src.dir}">
+					<include name="**/*Test.java" />
+				</fileset>
+			</batchtest>
+			<formatter type="xml" />
+			<classpath refid="test.path.id" />
+		</junit>
 	</target>
 
 	<!-- ================================= 
@@ -41,15 +88,20 @@
          ================================= -->
 	<target name="war" description="--> generate war file" depends="compile">
 		<war destfile="vraptor-scaffold.war">
-			<zipfileset dir="src/main/webapp" />
+			<zipfileset dir="${webapp.dir}" />
 			<lib dir="${lib.dir}" />
-			<classes dir="${build.dir}"/>
 		</war>
 	</target>
 
 	<target name="jetty.run" description="--> run jetty server">
-		<jetty tempDirectory="jetty-temp">
-			<webApp name="vraptor-scaffold" warfile="vraptor-scaffold.war" contextpath="/" />
+		<path id="jetty.path.id">
+			<fileset dir="lib/jetty" />
+		</path>
+		<taskdef classpathref="jetty.path.id" resource="tasks.properties" loaderref="jetty.loader" />
+		<jetty tempDirectory="{output.dir}/jetty-temp">
+			<webApp name="vraptor-scaffold" warfile="${webapp.dir}" contextpath="/" scanIntervalSeconds="5">
+				<lib dir="${lib.dir}" includes="*.jar" />
+			</webApp>
 		</jetty>
 	</target>
 
@@ -57,8 +109,8 @@
           target: report              
          ================================= -->
 	<target name="report" depends="resolve" description="--> generates a report of dependencies">
-		<mkdir dir="reports" />
-		<ivy:report todir="reports" />
+		<mkdir dir="${output.dir}/reports" />
+		<ivy:report todir="${output.dir}/reports" />
 	</target>
 
 </project>
