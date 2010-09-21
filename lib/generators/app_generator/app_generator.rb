@@ -6,13 +6,13 @@ class AppGenerator < VraptorScaffold::Base
   argument :project_path
 
   class_option :template_engine, :default => "jsp", :aliases => "-e",
-    :desc => "Choose template engine (options: #{TEMPLATE_ENGINES.join(', ')})"
+    :desc => "Template engine (options: #{TEMPLATE_ENGINES.join(', ')})"
 
   class_option :package, :default => "app", :aliases => "-p", 
     :desc => "Base package"
 
-  class_option :build_tool, :default => "mvn", :aliases => "-b", 
-    :desc => "Java build tool (options: #{BUILD_TOOLS.join(', ')})"
+  class_option :build_tool, :default => "ant", :aliases => "-b", 
+    :desc => "Build tool (options: #{BUILD_TOOLS.join(', ')})"
 
   def self.source_root
     File.join File.dirname(__FILE__), "templates"

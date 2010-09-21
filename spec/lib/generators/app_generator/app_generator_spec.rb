@@ -5,7 +5,7 @@ describe AppGenerator do
   context "build new application" do
     before(:all) do
       @project_path = "src/vraptor-scaffold"
-      AppGenerator.new(@project_path).invoke_all
+      AppGenerator.new(@project_path, ["-b=mvn"]).invoke_all
     end
 
     after(:all) do
