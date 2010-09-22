@@ -1,2 +1,2 @@
 		
-		<dependency org="org.freemarker" name="freemarker" rev="2.3.16" />
+		<dependency org="org.freemarker" name="freemarker" rev="2.3.16" conf="default"/>
