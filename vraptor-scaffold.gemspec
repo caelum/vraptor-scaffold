@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
 
   s.required_rubygems_version = Gem::Requirement.new("> 1.3.1") if s.respond_to? :required_rubygems_version=
   s.authors = ["Rodolfo Liviero"]
-  s.date = %q{2010-09-21}
+  s.date = %q{2010-09-22}
   s.default_executable = %q{vraptor}
   s.description = %q{Scaffold for vraptor 3 with jpa, freemarker, maven, mockito, junit and jquery.}
   s.email = %q{rodolfoliviero@gmail.com}
@@ -33,7 +33,7 @@ Gem::Specification.new do |s|
      "lib/generators/app_generator/app_generator.rb",
      "lib/generators/app_generator/freemarker_template_engine.rb",
      "lib/generators/app_generator/jsp_template_engine.rb",
-     "lib/generators/app_generator/templates/build.xml",
+     "lib/generators/app_generator/templates/build.erb",
      "lib/generators/app_generator/templates/decorators.erb",
      "lib/generators/app_generator/templates/freemarker/freemarker-ivy.xml",
      "lib/generators/app_generator/templates/freemarker/freemarker-pom.xml",
@@ -95,6 +95,7 @@ Gem::Specification.new do |s|
      "spec/lib/generators/app_generator/templates/Entity.java",
      "spec/lib/generators/app_generator/templates/FreemarkerPathResolver.java",
      "spec/lib/generators/app_generator/templates/Repository.java",
+     "spec/lib/generators/app_generator/templates/build.xml",
      "spec/lib/generators/app_generator/templates/decorators-jsp.xml",
      "spec/lib/generators/app_generator/templates/decorators.xml",
      "spec/lib/generators/app_generator/templates/pom.xml",

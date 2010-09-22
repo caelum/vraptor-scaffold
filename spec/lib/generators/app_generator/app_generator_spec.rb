@@ -224,7 +224,9 @@ describe AppGenerator do
     end
 
     it "should create build.xml" do
-      File.exist?("#{@project_path}/build.xml").should be_true  
+      source =  File.join File.dirname(__FILE__), "templates", "build.xml"
+      destination = "#{@project_path}/build.xml"
+      exists_and_identical?(source, destination)
     end
 
     it "should create ivy.xml" do
