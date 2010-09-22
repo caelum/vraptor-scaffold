@@ -36,7 +36,7 @@ class AppGenerator < VraptorScaffold::Base
     template("pom.erb", "pom.xml") if options[:build_tool] == "mvn"
     if options[:build_tool] == "ant"
       template("build.erb", "build.xml") 
-      copy_file("ivy.xml") 
+      template("ivy.erb", "ivy.xml") 
     end
   end
 
