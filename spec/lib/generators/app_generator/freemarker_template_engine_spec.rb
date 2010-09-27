@@ -25,10 +25,10 @@ describe FreemarkerTemplateEngine do
       exists_and_identical?(source, destination)
     end
 
-    it "should create web.xml" do
-      source = "#{FreemarkerTemplateEngine.source_root}/freemarker-web.xml"
-      destination = "#{@web_inf}/web.xml"
-      exists_and_identical?(source, destination)
+    it "should append freemarker servlet in web.xml" do
+      source = File.join FreemarkerTemplateEngine.source_root, "freemarker-web.xml"
+      web_xml = "#{@web_inf}/web.xml"
+      File.read(web_xml).should include(File.read(source))
     end
 
     it "should create views folder" do
@@ -67,7 +67,7 @@ describe FreemarkerTemplateEngine do
       FileUtils.remove_dir(@project_path)
     end
 
-    it "should include freemarker dependency in pom.xml" do
+    it "should append freemarker dependency in pom.xml" do
       source = File.join FreemarkerTemplateEngine.source_root, "freemarker-pom.xml"
       pom = "#{@project_path}/pom.xml"
       File.read(pom).should match(File.read(source))
@@ -83,7 +83,7 @@ describe FreemarkerTemplateEngine do
       FileUtils.remove_dir(@project_path)
     end
 
-    it "should include freemarker dependency in ivy.xml" do
+    it "should append freemarker dependency in ivy.xml" do
       source = File.join FreemarkerTemplateEngine.source_root, "freemarker-ivy.xml"
       ivy = "#{@project_path}/ivy.xml"
       File.read(ivy).should match(File.read(source))

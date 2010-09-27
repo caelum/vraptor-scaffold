@@ -13,11 +13,11 @@ class FreemarkerTemplateEngine < VraptorScaffold::Base
   def configure
     directory("macros", File.join(Configuration::WEB_APP, "macros"))
     template("../decorators.erb", File.join(Configuration::WEB_INF, "decorators.xml"))
-    copy_file("freemarker-web.xml", File.join(Configuration::WEB_INF, "web.xml"))
     copy_file("main.ftl", File.join(Configuration::WEB_INF, "decorators", "main.ftl"))
     directory("infrastructure", infra_path)
     empty_directory File.join(Configuration::WEB_INF, "views")
-    dependencies
+    append_freemarker_dependencies
+    append_freemarker_servlet
   end
 
   def extension
@@ -29,12 +29,18 @@ class FreemarkerTemplateEngine < VraptorScaffold::Base
     package = YAML.load_file(file)['package']
   end
 
-  private 
+  private
+  def append_freemarker_servlet
+    file = File.join(Configuration::WEB_INF, "web.xml")
+    template = File.join FreemarkerTemplateEngine.source_root, "freemarker-web.xml"
+    inject_into_file(file, File.read(template), :before => "</web-app>", :verbose => false)
+  end 
+
   def infra_path
     File.join Configuration::MAIN_SRC, package.gsub(".", File::Separator), "infrastructure"
   end
 
-  def dependencies
+  def append_freemarker_dependencies
     file = "pom.xml" if File.exist?("#{@project_path}/pom.xml")
     file = "ivy.xml" if File.exist?("#{@project_path}/ivy.xml") 
     template = File.join FreemarkerTemplateEngine.source_root, "freemarker-#{file}"

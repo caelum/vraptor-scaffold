@@ -51,7 +51,6 @@ class AppGenerator < VraptorScaffold::Base
 
   def create_webapp
     directory("webapp", Configuration::WEB_APP)
-    empty_directory Configuration::WEB_INF
   end
 
   def configure_template_engine

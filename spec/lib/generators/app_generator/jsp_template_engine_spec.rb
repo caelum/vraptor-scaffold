@@ -21,12 +21,6 @@ describe JspTemplateEngine do
       exists_and_identical?(source, destination)
     end
 
-    it "should create web.xml" do
-      source = "#{JspTemplateEngine.source_root}/jsp-web.xml"
-      destination = "#{@web_inf}/web.xml"
-      exists_and_identical?(source, destination)
-    end
-
     it "should create views folder" do
       File.exist?("#{@web_inf}/jsp").should be_true 
     end

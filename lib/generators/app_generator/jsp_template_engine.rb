@@ -11,7 +11,6 @@ class JspTemplateEngine < VraptorScaffold::Base
 
   def configure
     template("../decorators.erb", File.join(Configuration::WEB_INF, "decorators.xml"))
-    copy_file("jsp-web.xml", File.join(Configuration::WEB_INF, "web.xml"))
     copy_file("main.jsp", File.join(Configuration::WEB_INF, "decorators", "main.jsp"))
     empty_directory File.join(Configuration::WEB_INF, "jsp")
   end
