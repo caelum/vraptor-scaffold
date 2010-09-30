@@ -30,6 +30,11 @@
           target: resolve              
          ================================= -->
 	<target name="resolve" description="--> retrieve dependencies with ivy">
+		<path id="ivy.lib.path">
+			<pathelement location="<%= AppGenerator::IVY_JAR %>" />
+		</path>
+		<taskdef resource="org/apache/ivy/ant/antlib.xml" uri="antlib:org.apache.ivy.ant" classpathref="ivy.lib.path" />
+		
 		<ivy:retrieve pattern="lib/[conf]/[artifact]-[revision].[ext]" sync="true" />
 		<delete dir="${lib.dir}" includes="**/*.*" />
 		<copy todir="${lib.dir}">
@@ -98,7 +103,7 @@
 		</path>
 		<taskdef classpathref="jetty.path.id" resource="tasks.properties" loaderref="jetty.loader" />
 		<jetty tempDirectory="${output.dir}/jetty-temp">
-			<webApp name="<%= @project_name %>" warfile="${webapp.dir}" contextpath="/" scanIntervalSeconds="5" />
+			<webApp name="<%= @project_name %>" warfile="${webapp.dir}" contextpath="/" scanIntervalSeconds="3" />
 		</jetty>
 	</target>
 

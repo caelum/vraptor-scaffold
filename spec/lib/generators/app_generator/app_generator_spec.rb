@@ -236,7 +236,14 @@ describe AppGenerator do
     end
 
     it "should create ivy.xml" do
-      File.exist?("#{@project_path}/ivy.xml").should be_true  
+      source =  File.join File.dirname(__FILE__), "templates", "ivy.xml"
+      destination = "#{@project_path}/ivy.xml"
+      exists_and_identical?(source, destination)
+    end
+
+    it "should copy ivy.jar" do
+      ivy = File.join @project_path, AppGenerator::IVY_JAR
+      File.exist?(ivy).should be_true  
     end
 
     it "cannot create pom.xml" do

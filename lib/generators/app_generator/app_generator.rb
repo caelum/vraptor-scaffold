@@ -2,6 +2,7 @@ class AppGenerator < VraptorScaffold::Base
 
   TEMPLATE_ENGINES = %w( jsp ftl )
   BUILD_TOOLS = %w( ant mvn )
+  IVY_JAR = "ivy-2.2.0-rc1.jar"
 
   argument :project_path
 
@@ -37,6 +38,7 @@ class AppGenerator < VraptorScaffold::Base
     if options[:build_tool] == "ant"
       template("build.erb", "build.xml") 
       template("ivy.erb", "ivy.xml") 
+      copy_file(IVY_JAR)
     end
   end
 
