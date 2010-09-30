@@ -1,18 +1,6 @@
-<project name="<%= @project_name %>" default="war" xmlns:ivy="antlib:org.apache.ivy.ant">
+<project name="vraptor-scaffold" default="war" xmlns:ivy="antlib:org.apache.ivy.ant">
 
-	<!-- variables -->
-	<property name="output.dir" value="target" />
-
-	<property name="webapp.dir" value="<%= Configuration::WEB_APP %>" />
-	<property name="lib.dir" value="${webapp.dir}/WEB-INF/lib" />
-	<property name="build.dir" value="${webapp.dir}/WEB-INF/classes" />
-
-	<property name="src.dir" value="<%= Configuration::MAIN_SRC %>" />
-	<property name="resources.dir" value="<%= Configuration::MAIN_RESOURCES %>" />
-
-	<property name="test.build.dir" value="${output.dir}/test-classes" />
-	<property name="test.src.dir" value="<%= Configuration::TEST_SRC %>" />
-	<property name="test.resources.dir" value="<%= Configuration::TEST_RESOURCES %>" />
+	<property file="build.properties" />
 
 	<!-- paths -->
 	<path id="lib.path.id">
@@ -31,10 +19,10 @@
          ================================= -->
 	<target name="resolve" description="--> retrieve dependencies with ivy">
 		<path id="ivy.lib.path">
-			<pathelement location="<%= AppGenerator::IVY_JAR %>" />
+			<pathelement location="${ivy.jar.file}" />
 		</path>
 		<taskdef resource="org/apache/ivy/ant/antlib.xml" uri="antlib:org.apache.ivy.ant" classpathref="ivy.lib.path" />
-		
+
 		<ivy:retrieve pattern="lib/[conf]/[artifact]-[revision].[ext]" sync="true" />
 		<delete dir="${lib.dir}" includes="**/*.*" />
 		<copy todir="${lib.dir}">
@@ -92,18 +80,21 @@
           target: war
          ================================= -->
 	<target name="war" description="--> generate war file" depends="test">
-		<war destfile="${output.dir}/<%= @project_name %>.war">
+		<war destfile="${output.dir}/${project.name}.war">
 			<zipfileset dir="${webapp.dir}" />
 		</war>
 	</target>
 
+	<!-- ================================= 
+          target: jetty.run              
+         ================================= -->
 	<target name="jetty.run" description="--> run jetty server" depends="compile">
 		<path id="jetty.path.id">
 			<fileset dir="lib/jetty" />
 		</path>
 		<taskdef classpathref="jetty.path.id" resource="tasks.properties" loaderref="jetty.loader" />
 		<jetty tempDirectory="${output.dir}/jetty-temp">
-			<webApp name="<%= @project_name %>" warfile="${webapp.dir}" contextpath="/" scanIntervalSeconds="3" />
+			<webApp name="${project.name}" warfile="${webapp.dir}" contextpath="/" scanIntervalSeconds="3" />
 		</jetty>
 	</target>
 
