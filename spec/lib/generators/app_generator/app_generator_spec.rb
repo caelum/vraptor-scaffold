@@ -278,6 +278,21 @@ describe AppGenerator do
     end
   end
 
+  context "skip eclipse configuration files" do
+    before(:all) do
+      @project_path = "vraptor-scaffold"
+      AppGenerator.new(@project_path, ["--skip-eclipse"]).invoke_all
+    end
+
+    after(:all) do
+      FileUtils.remove_dir(@project_path)
+    end
+
+    it "cannot create .classpath file" do
+      File.exist?("#{@project_path}/.classpath").should be_false
+    end
+  end
+
   context "valid template engines" do
     it "jsp should be valid" do
       AppGenerator::TEMPLATE_ENGINES.include?("jsp").should be_true

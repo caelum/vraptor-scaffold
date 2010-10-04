@@ -13,7 +13,10 @@ class AppGenerator < VraptorScaffold::Base
     :desc => "Base package"
 
   class_option :build_tool, :default => "ant", :aliases => "-b", 
-    :desc => "Build tool (options: #{BUILD_TOOLS.join(', ')})"
+    :desc => "Build tools (options: #{BUILD_TOOLS.join(', ')})"
+  
+  class_option :skip_eclipse, :type => :boolean, :aliases => "-E",
+    :desc => "Skip Eclipse files"
 
   def self.source_root
     File.join File.dirname(__FILE__), "templates"
@@ -69,7 +72,7 @@ class AppGenerator < VraptorScaffold::Base
     template("build.properties.erb", "build.properties") 
     template("ivy.erb", "ivy.xml") 
     copy_file(IVY_JAR)
-    create_eclipse_wtp
+    create_eclipse_wtp unless options[:skip_eclipse]
   end
   
   def create_eclipse_wtp
