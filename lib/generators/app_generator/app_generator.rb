@@ -62,12 +62,19 @@ class AppGenerator < VraptorScaffold::Base
     directory("src-test", File.join(Configuration::TEST_SRC, options[:package].gsub(".", File::Separator)))
     directory("resources-test", Configuration::TEST_RESOURCES)
   end
-  
+
   private
   def configure_ant
     copy_file("build.xml")
     template("build.properties.erb", "build.properties") 
     template("ivy.erb", "ivy.xml") 
     copy_file(IVY_JAR)
+    create_eclipse_wtp
+  end
+  
+  def create_eclipse_wtp
+    template("eclipse/project.erb", ".project")
+    copy_file("eclipse/classpath", ".classpath")
+    directory("eclipse/settings", ".settings")
   end
 end

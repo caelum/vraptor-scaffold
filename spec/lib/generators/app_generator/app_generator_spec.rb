@@ -25,6 +25,10 @@ describe AppGenerator do
     it "cannot create ivy.xml" do
       File.exist?("#{@project_path}/ivy.xml").should be_false  
     end
+    
+    it "cannot create eclipse wtp" do
+      File.exist?("#{@project_path}/.classpath").should be_false
+    end
 
     context "creating main java" do
       before(:all) do
@@ -254,6 +258,23 @@ describe AppGenerator do
 
     it "cannot create pom.xml" do
       File.exist?("#{@project_path}/pom.xml").should be_false  
+    end
+
+    context "eclipse wtp configuration" do
+      it "should create .project" do
+        project = File.join @project_path, ".project"
+        File.exist?(project).should be_true
+      end
+      
+      it "should create .classpath" do
+        class_path = File.join @project_path, ".classpath"
+        File.exist?(class_path).should be_true
+      end
+      
+      it "should create .settings" do
+        settings = File.join @project_path, ".settings"
+        File.exist?(settings).should be_true
+      end      
     end
   end
 
