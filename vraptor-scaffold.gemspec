@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
 
   s.required_rubygems_version = Gem::Requirement.new("> 1.3.1") if s.respond_to? :required_rubygems_version=
   s.authors = ["Rodolfo Liviero"]
-  s.date = %q{2010-09-22}
+  s.date = %q{2010-10-04}
   s.default_executable = %q{vraptor}
   s.description = %q{Scaffold for vraptor 3 with jpa, freemarker, maven, mockito, junit and jquery.}
   s.email = %q{rodolfoliviero@gmail.com}
@@ -33,16 +33,24 @@ Gem::Specification.new do |s|
      "lib/generators/app_generator/app_generator.rb",
      "lib/generators/app_generator/freemarker_template_engine.rb",
      "lib/generators/app_generator/jsp_template_engine.rb",
-     "lib/generators/app_generator/templates/build.erb",
+     "lib/generators/app_generator/templates/build.properties.erb",
+     "lib/generators/app_generator/templates/build.xml",
      "lib/generators/app_generator/templates/decorators.erb",
+     "lib/generators/app_generator/templates/eclipse/classpath",
+     "lib/generators/app_generator/templates/eclipse/project.erb",
+     "lib/generators/app_generator/templates/eclipse/settings/org.eclipse.jdt.core.prefs",
+     "lib/generators/app_generator/templates/eclipse/settings/org.eclipse.wst.common.component.tt",
+     "lib/generators/app_generator/templates/eclipse/settings/org.eclipse.wst.common.project.facet.core.xml",
+     "lib/generators/app_generator/templates/eclipse/settings/org.eclipse.wst.jsdt.ui.superType.container",
+     "lib/generators/app_generator/templates/eclipse/settings/org.eclipse.wst.jsdt.ui.superType.name",
      "lib/generators/app_generator/templates/freemarker/freemarker-ivy.xml",
      "lib/generators/app_generator/templates/freemarker/freemarker-pom.xml",
      "lib/generators/app_generator/templates/freemarker/freemarker-web.xml",
      "lib/generators/app_generator/templates/freemarker/infrastructure/FreemarkerPathResolver.java.tt",
      "lib/generators/app_generator/templates/freemarker/macros/html.ftl",
      "lib/generators/app_generator/templates/freemarker/main.ftl",
-     "lib/generators/app_generator/templates/ivy.xml",
-     "lib/generators/app_generator/templates/jsp/jsp-web.xml",
+     "lib/generators/app_generator/templates/ivy-2.2.0-rc1.jar",
+     "lib/generators/app_generator/templates/ivy.erb",
      "lib/generators/app_generator/templates/jsp/main.jsp",
      "lib/generators/app_generator/templates/pom.erb",
      "lib/generators/app_generator/templates/resources-test/.empty_directory",
@@ -56,6 +64,7 @@ Gem::Specification.new do |s|
      "lib/generators/app_generator/templates/src/models/Entity.java.tt",
      "lib/generators/app_generator/templates/src/repositories/Repository.java.tt",
      "lib/generators/app_generator/templates/vraptor-scaffold.erb",
+     "lib/generators/app_generator/templates/webapp/WEB-INF/web.xml",
      "lib/generators/app_generator/templates/webapp/images/.empty_directory",
      "lib/generators/app_generator/templates/webapp/index.jsp",
      "lib/generators/app_generator/templates/webapp/javascripts/jquery-1.4.2.min.js",
@@ -95,9 +104,10 @@ Gem::Specification.new do |s|
      "spec/lib/generators/app_generator/templates/Entity.java",
      "spec/lib/generators/app_generator/templates/FreemarkerPathResolver.java",
      "spec/lib/generators/app_generator/templates/Repository.java",
-     "spec/lib/generators/app_generator/templates/build.xml",
+     "spec/lib/generators/app_generator/templates/build.properties",
      "spec/lib/generators/app_generator/templates/decorators-jsp.xml",
      "spec/lib/generators/app_generator/templates/decorators.xml",
+     "spec/lib/generators/app_generator/templates/ivy.xml",
      "spec/lib/generators/app_generator/templates/pom.xml",
      "spec/lib/generators/scaffold_generator/attribute_spec.rb",
      "spec/lib/generators/scaffold_generator/base_scaffold_spec.rb",
@@ -145,16 +155,16 @@ Gem::Specification.new do |s|
     s.specification_version = 3
 
     if Gem::Version.new(Gem::VERSION) >= Gem::Version.new('1.2.0') then
-      s.add_runtime_dependency(%q<thor>, [">= 0.14.0"])
+      s.add_runtime_dependency(%q<thor>, [">= 0.14.3"])
       s.add_runtime_dependency(%q<rake>, [">= 0.8.7"])
       s.add_runtime_dependency(%q<activesupport>, [">= 3.0.0"])
     else
-      s.add_dependency(%q<thor>, [">= 0.14.0"])
+      s.add_dependency(%q<thor>, [">= 0.14.3"])
       s.add_dependency(%q<rake>, [">= 0.8.7"])
       s.add_dependency(%q<activesupport>, [">= 3.0.0"])
     end
   else
-    s.add_dependency(%q<thor>, [">= 0.14.0"])
+    s.add_dependency(%q<thor>, [">= 0.14.3"])
     s.add_dependency(%q<rake>, [">= 0.8.7"])
     s.add_dependency(%q<activesupport>, [">= 3.0.0"])
   end
