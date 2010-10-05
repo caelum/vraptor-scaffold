@@ -5,8 +5,8 @@ begin
   require 'jeweler'
   Jeweler::Tasks.new do |gem|
     gem.name = "vraptor-scaffold"
-    gem.summary = "Scaffold for vraptor 3."
-    gem.description = "Scaffold for vraptor 3 with jpa, freemarker, maven, mockito, junit and jquery."
+    gem.summary = "VRaptor Scaffold."
+    gem.description = "VRaptor scaffold extension to make it easier configuring new projects and plugins."
     gem.email = "rodolfoliviero@gmail.com"
     gem.homepage = "http://github.com/caelum/vraptor-scaffold"
     gem.authors = ["Rodolfo Liviero"]
