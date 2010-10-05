@@ -1,7 +1,7 @@
 h1. Documentation
 
 Vraptor Scaffold website can be found at "http://vraptor.org":http://vraptor.org
-RDocs can be found at :http://rdoc.info/github/caelum/vraptor-scaffold
+RDocs can be found at ":http://rdoc.info/github/caelum/vraptor-scaffold"
 
 h1. Installation
 
