@@ -5,18 +5,18 @@
 
 Gem::Specification.new do |s|
   s.name = %q{vraptor-scaffold}
-  s.version = "0.0.2.rc"
+  s.version = "0.0.1"
 
-  s.required_rubygems_version = Gem::Requirement.new("> 1.3.1") if s.respond_to? :required_rubygems_version=
+  s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Rodolfo Liviero"]
-  s.date = %q{2010-10-04}
+  s.date = %q{2010-10-05}
   s.default_executable = %q{vraptor}
-  s.description = %q{Scaffold for vraptor 3 with jpa, freemarker, maven, mockito, junit and jquery.}
+  s.description = %q{VRaptor scaffold extension to make it easier configuring new projects and plugins.}
   s.email = %q{rodolfoliviero@gmail.com}
   s.executables = ["vraptor"]
   s.extra_rdoc_files = [
     "LICENSE",
-     "README.rdoc"
+     "README.textile"
   ]
   s.files = [
     ".document",
@@ -24,9 +24,8 @@ Gem::Specification.new do |s|
      "Gemfile",
      "History.txt",
      "LICENSE",
-     "README.rdoc",
+     "README.textile",
      "Rakefile",
-     "TODO.txt",
      "VERSION.yml",
      "bin/vraptor",
      "lib/configuration.rb",
@@ -132,7 +131,7 @@ Gem::Specification.new do |s|
   s.rdoc_options = ["--charset=UTF-8"]
   s.require_paths = ["lib"]
   s.rubygems_version = %q{1.3.7}
-  s.summary = %q{Scaffold for vraptor 3.}
+  s.summary = %q{VRaptor Scaffold.}
   s.test_files = [
     "spec/lib/vraptor-scaffold_spec.rb",
      "spec/lib/generators/app_generator/app_generator_spec.rb",
