@@ -2,7 +2,7 @@ class AppGenerator < VraptorScaffold::Base
 
   TEMPLATE_ENGINES = %w( jsp ftl )
   BUILD_TOOLS = %w( ant mvn )
-  IVY_JAR = "ivy-2.2.0-rc1.jar"
+  IVY_JAR = "ivy-2.2.0.jar"
 
   argument :project_path
 
