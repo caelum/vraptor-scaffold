@@ -1,7 +1,7 @@
 class AppGenerator < VraptorScaffold::Base
 
   TEMPLATE_ENGINES = %w( jsp ftl )
-  BUILD_TOOLS = %w( ant mvn )
+  BUILD_TOOLS = %w( ant mvn gradle )
   IVY_JAR = "ivy-2.2.0.jar"
 
   argument :project_path
@@ -36,9 +36,22 @@ class AppGenerator < VraptorScaffold::Base
     empty_directory "."
   end
 
-  def configure_build_tool
+  def configure_maven
     template("pom.erb", "pom.xml") if options[:build_tool] == "mvn"
-    configure_ant if options[:build_tool] == "ant"
+  end
+
+  def configure_ant
+    if options[:build_tool] == "ant"
+      create_eclipse_files unless options[:skip_eclipse]
+      copy_file("build.xml")
+      template("build.properties.erb", "build.properties") 
+      template("ivy.erb", "ivy.xml") 
+      copy_file(IVY_JAR)
+    end
+  end
+
+  def configure_gradle
+    template("build.gradle.erb", "build.gradle") if options[:build_tool] == "gradle"
   end
 
   def create_main_java
@@ -67,14 +80,6 @@ class AppGenerator < VraptorScaffold::Base
   end
 
   private
-  def configure_ant
-    copy_file("build.xml")
-    template("build.properties.erb", "build.properties") 
-    template("ivy.erb", "ivy.xml") 
-    copy_file(IVY_JAR)
-    create_eclipse_files unless options[:skip_eclipse]
-  end
-  
   def create_eclipse_files
     template("eclipse/project.erb", ".project")
     template("eclipse/classpath.erb", ".classpath")

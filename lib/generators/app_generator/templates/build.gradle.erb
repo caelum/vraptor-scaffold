@@ -1,0 +1,32 @@
+repositories {
+    mavenCentral()
+}
+
+apply plugin: 'java'
+apply plugin: 'war'
+apply plugin: 'jetty'
+apply plugin: 'eclipse'
+
+sourceCompatibility = 1.6
+targetCompatibility = 1.6
+version = '1.0'
+
+sourceSets.main.classesDir = new File('<%= Configuration::WEB_INF %>/classes')
+
+jettyRun.scanIntervalSeconds=3
+jettyRun.contextPath = '/' 
+[jettyRunWar,jettyStop]*.stopPort = 8081
+[jettyRunWar,jettyStop]*.stopKey = 'stopKey'
+
+dependencies {
+<% Dependency.compile_scope.each do |dependency| -%>
+    compile group: '<%= dependency.group %>', name: '<%= dependency.name %>', version: '<%= dependency.version %>'
+<% end -%>
+<% Dependency.provided_scope.each do |dependency| -%>
+    providedCompile group: '<%= dependency.group %>', name: '<%= dependency.name %>', version: '<%= dependency.version %>'
+<% end -%>
+<% Dependency.test_scope.each do |dependency| -%>
+    testCompile group: '<%= dependency.group %>', name: '<%= dependency.name %>', version: '<%= dependency.version %>'
+<% end -%>
+    providedCompile 'org.mortbay.jetty:jsp-api-2.1:6.1.14', 'org.mortbay.jetty:jsp-2.1:6.1.14'
+}

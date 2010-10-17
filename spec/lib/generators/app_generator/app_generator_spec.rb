@@ -25,7 +25,11 @@ describe AppGenerator do
     it "cannot create ivy.xml" do
       File.exist?("#{@project_path}/ivy.xml").should be_false  
     end
-    
+
+    it "cannot create build.gradle" do
+      File.exist?("#{@project_path}/build.gradle").should be_false
+    end
+
     it "cannot create eclipse wtp" do
       File.exist?("#{@project_path}/.classpath").should be_false
     end
@@ -260,17 +264,21 @@ describe AppGenerator do
       File.exist?("#{@project_path}/pom.xml").should be_false  
     end
 
+    it "cannot create build.gradle" do
+      File.exist?("#{@project_path}/build.gradle").should be_false
+    end
+
     context "eclipse wtp configuration" do
       it "should create .project" do
         project = File.join @project_path, ".project"
         File.exist?(project).should be_true
       end
-      
+
       it "should create .classpath" do
         class_path = File.join @project_path, ".classpath"
         File.exist?(class_path).should be_true
       end
-      
+
       it "should create .settings" do
         settings = File.join @project_path, ".settings"
         File.exist?(settings).should be_true
@@ -293,6 +301,32 @@ describe AppGenerator do
     end
   end
 
+  context "configuring gradle application" do
+
+    before(:all) do
+      @project_path = "vraptor-scaffold"
+      AppGenerator.new(@project_path, ["-b=gradle"]).invoke_all
+    end
+
+    after(:all) do
+      FileUtils.remove_dir(@project_path)
+    end
+
+    it "should create build.gradle" do
+      source = File.join File.dirname(__FILE__), "templates", "build.gradle"
+      destination = "#{@project_path}/build.gradle"
+      exists_and_identical?(source, destination)
+    end
+
+    it "cannot create ivy.xml" do
+      File.exist?("#{@project_path}/ivy.xml").should be_false  
+    end
+
+    it "cannot create pom.xml" do
+      File.exist?("#{@project_path}/pom.xml").should be_false  
+    end
+  end
+
   context "valid template engines" do
     it "jsp should be valid" do
       AppGenerator::TEMPLATE_ENGINES.include?("jsp").should be_true
@@ -310,6 +344,10 @@ describe AppGenerator do
 
     it "maven should be valid" do
       AppGenerator::BUILD_TOOLS.include?("mvn").should be_true
+    end
+
+    it "gradle should be valid" do
+      AppGenerator::BUILD_TOOLS.include?("gradle").should be_true
     end
   end
 
