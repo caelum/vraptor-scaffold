@@ -55,6 +55,5 @@ describe Configuration do
     it "should build test class path with base package" do
       Configuration.test_class_path("models", "Product.java").should == "src/test/java/br/com/caelum/models/Product.java"
     end
-
   end
 end

@@ -72,12 +72,12 @@ class AppGenerator < VraptorScaffold::Base
     template("build.properties.erb", "build.properties") 
     template("ivy.erb", "ivy.xml") 
     copy_file(IVY_JAR)
-    create_eclipse_wtp unless options[:skip_eclipse]
+    create_eclipse_files unless options[:skip_eclipse]
   end
   
-  def create_eclipse_wtp
+  def create_eclipse_files
     template("eclipse/project.erb", ".project")
-    copy_file("eclipse/classpath", ".classpath")
+    template("eclipse/classpath.erb", ".classpath")
     directory("eclipse/settings", ".settings")
   end
 end
