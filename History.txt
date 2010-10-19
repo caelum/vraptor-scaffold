@@ -1,14 +1,30 @@
-=== ?.?.?.?? / 2010-??-??
+=== 0.0.3 / 2010-10-??
+
+== New Features
+* works with gradle
+
+== Improvements
+* bumped ivy version to 2.2.0
+* updated maven plugins
+
+=== 0.0.2 / 2010-10-08
+
+== Improvements
+* bumped vraptor version to 3.2.0
+
+=== 0.0.1 / 2010-10-05
 
 == New Features
 * jsp support
 * base package
-* ant + ivy
+* works with ant + ivy
+* help command
 
 == Improvements
 * Better use of Generics.
+* Update Hibernate
 
-=== 0.0.1.rc / 2010-08-23
+=== 0.0.1.rc / 2010-08-24
 
 == New Features
 * Added Hamcrest 1.1
