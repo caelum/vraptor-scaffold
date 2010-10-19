@@ -89,4 +89,20 @@ describe FreemarkerTemplateEngine do
       File.read(ivy).should match(File.read(source))
     end
   end
+
+  context "with gradle" do
+    before(:all) do
+      AppGenerator.new(@project_path, ["--template-engine=ftl", "-b=gradle"]).invoke_all
+    end
+
+    after(:all) do
+      FileUtils.remove_dir(@project_path)
+    end
+
+    it "should append freemarker dependency in build.gradle" do
+      source = File.join FreemarkerTemplateEngine.source_root, "freemarker-build.gradle"
+      pom = "#{@project_path}/build.gradle"
+      File.read(pom).should match(File.read(source))
+    end
+  end
 end

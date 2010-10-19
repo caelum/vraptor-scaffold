@@ -43,8 +43,9 @@ class FreemarkerTemplateEngine < VraptorScaffold::Base
   def append_freemarker_dependencies
     file = "pom.xml" if File.exist?("#{@project_path}/pom.xml")
     file = "ivy.xml" if File.exist?("#{@project_path}/ivy.xml") 
+    file = "build.gradle" if File.exist?("#{@project_path}/build.gradle")
     template = File.join FreemarkerTemplateEngine.source_root, "freemarker-#{file}"
     inject_into_file(file, File.read(template), :after => "<dependencies>", :verbose => false)
+    inject_into_file(file, File.read(template), :after => "dependencies {", :verbose => false)
   end
-
 end
