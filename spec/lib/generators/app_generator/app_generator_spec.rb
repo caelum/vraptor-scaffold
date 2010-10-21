@@ -2,6 +2,23 @@ require File.expand_path(File.dirname(__FILE__) + "/../../../spec_helper")
 
 describe AppGenerator do
 
+  context "build maven application with Spring 3" do
+    before(:all) do
+      @project_path = "src/vraptor-scaffold"
+      AppGenerator.new(@project_path, ["-b=mvn", "--spring-version=3.0"]).invoke_all
+    end
+
+    after(:all) do
+      FileUtils.remove_dir("src")
+    end
+
+    it "should create pom" do
+      source =  File.join File.dirname(__FILE__), "templates", "pom_spring3.xml"
+      destination = "#{@project_path}/pom.xml"
+      exists_and_identical?(source, destination)
+    end
+  end
+
   context "build new application" do
     before(:all) do
       @project_path = "src/vraptor-scaffold"
