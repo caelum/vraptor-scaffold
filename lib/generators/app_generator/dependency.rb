@@ -18,6 +18,11 @@ class Dependency
       self.new("joda-time", "joda-time", "1.6")]
   end
 
+  def self.spring_3_compile_scope
+    [self.new("org.springframework", "spring-web", "3.0.4.RELEASE"), self.new("com.thoughtworks.xstream", "xstream", "1.3.1")]
+
+  end
+
   def self.test_scope
     [self.new("junit", "junit", "4.8.2"), 
       self.new("org.hamcrest", "hamcrest-all", "1.1"),

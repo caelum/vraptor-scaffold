@@ -3,6 +3,7 @@ class AppGenerator < VraptorScaffold::Base
   TEMPLATE_ENGINES = %w( jsp ftl )
   BUILD_TOOLS = %w( ant mvn gradle )
   IVY_JAR = "ivy-2.2.0.jar"
+  SPRING_VERSIONS = %w( 2.5 3.0 )
 
   argument :project_path
 
@@ -17,6 +18,9 @@ class AppGenerator < VraptorScaffold::Base
   
   class_option :skip_eclipse, :type => :boolean, :aliases => "-E",
     :desc => "Skip Eclipse files"
+
+  class_option :spring_version, :default => "2.5", :aliases => "-S",
+    :desc => "Spring version (options: #{SPRING_VERSIONS})"
 
   def self.source_root
     File.join File.dirname(__FILE__), "templates"
@@ -37,6 +41,7 @@ class AppGenerator < VraptorScaffold::Base
   end
 
   def configure_maven
+    @spring_version = options[:spring_version]
     template("pom.erb", "pom.xml") if options[:build_tool] == "mvn"
   end
 

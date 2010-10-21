@@ -57,10 +57,21 @@
 		<dependency>
 			<groupId><%= dependency.group %></groupId>
 			<artifactId><%= dependency.name %></artifactId>
+                        <version><%= dependency.version %></version><% if dependency.name == 'vraptor' and @spring_version == '3.0' %>
+                        <exclusions>
+                                <exclusion>
+                          	        <groupId>org.springframework</groupId>
+				        <artifactId>spring</artifactId>
+                                </exclusion>
+                        </exclusions><% end %>
+                </dependency><% end %><% if @spring_version == '3.0' %><% Dependency.spring_3_compile_scope.each do |dependency| %>
+		<dependency>
+			<groupId><%= dependency.group %></groupId>
+			<artifactId><%= dependency.name %></artifactId>
 			<version><%= dependency.version %></version>
-		</dependency><% end %>
-		
-		<!-- Test dependencies --><% Dependency.test_scope.each do |dependency| %>
+		</dependency><% end %><% end %>	
+
+                <!-- Test dependencies --><% Dependency.test_scope.each do |dependency| %>
 		<dependency>
 			<groupId><%= dependency.group %></groupId>
 			<artifactId><%= dependency.name %></artifactId>
