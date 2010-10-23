@@ -20,7 +20,6 @@ class Dependency
 
   def self.spring_3_compile_scope
     [self.new("org.springframework", "spring-web", "3.0.4.RELEASE"), self.new("com.thoughtworks.xstream", "xstream", "1.3.1")]
-
   end
 
   def self.test_scope
