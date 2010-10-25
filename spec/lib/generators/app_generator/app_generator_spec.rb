@@ -2,7 +2,7 @@ require File.expand_path(File.dirname(__FILE__) + "/../../../spec_helper")
 
 describe AppGenerator do
 
-  context "build maven application with Spring 3" do
+  context "build maven application with Spring 3.0" do
     before(:all) do
       @project_path = "src/vraptor-scaffold"
       AppGenerator.new(@project_path, ["-b=mvn", "--spring-version=3.0"]).invoke_all
@@ -240,6 +240,24 @@ describe AppGenerator do
       JspTemplateEngine.stub!(:new).with(@project_path).and_return(template)
       template.should_receive(:configure)
       AppGenerator.new(@project_path).invoke_all
+    end
+  end
+
+  context "configuring ant application with spring 3.0" do
+
+    before(:all) do
+      @project_path = "vraptor-scaffold"
+      AppGenerator.new(@project_path, ["-b=ant", "-S=3.0"]).invoke_all
+    end
+
+    after(:all) do
+      FileUtils.remove_dir(@project_path)
+    end
+
+    it "should create ivy.xml" do
+      source =  File.join File.dirname(__FILE__), "templates", "ivy_spring3.xml"
+      destination = "#{@project_path}/ivy.xml"
+      exists_and_identical?(source, destination)
     end
   end
 

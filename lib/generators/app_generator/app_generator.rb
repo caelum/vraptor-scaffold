@@ -34,6 +34,7 @@ class AppGenerator < VraptorScaffold::Base
     super([args], opts)
     self.destination_root=(project_path)
     @project_name = project_path.split("/").last
+    @spring_version = options[:spring_version]
   end
 
   def create_root_folder
@@ -41,7 +42,6 @@ class AppGenerator < VraptorScaffold::Base
   end
 
   def configure_maven
-    @spring_version = options[:spring_version]
     template("pom.erb", "pom.xml") if options[:build_tool] == "mvn"
   end
 
