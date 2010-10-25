@@ -9,7 +9,7 @@ class Dependency
   end
 
   def self.compile_scope
-    [self.new("br.com.caelum", "vraptor", "3.2.0"), self.new("hsqldb", "hsqldb", "1.8.0.10"),
+    [self.new("br.com.caelum", "vraptor", "3.2.0"), self.new("org.hsqldb", "hsqldb", "2.0.0"),
       self.new("opensymphony", "sitemesh", "2.4.2"), self.new("javax.servlet", "jstl", "1.2"),
       self.new("javax.persistence", "persistence-api", "1.0"), 
       self.new("org.hibernate", "hibernate-entitymanager", "3.4.0.GA"),

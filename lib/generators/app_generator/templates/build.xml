@@ -10,8 +10,8 @@
 	<path id="test.path.id">
 		<fileset dir="lib/test" />
 		<path refid="lib.path.id" />
-		<pathelement location="${build.dir}" />
 		<pathelement location="${test.build.dir}" />
+		<pathelement location="${build.dir}" />
 	</path>
 
 	<!-- ================================= 
@@ -71,6 +71,7 @@
 					<include name="**/*Test.java" />
 				</fileset>
 			</batchtest>
+			<formatter type="brief" usefile="false" />
 			<formatter type="xml" />
 			<classpath refid="test.path.id" />
 		</junit>
