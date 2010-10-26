@@ -371,5 +371,24 @@ describe AppGenerator do
   it "should configure banner" do
     AppGenerator.banner.should == "vraptor new PROJECT_PATH [options]"
   end
+  
+  context "validate options" do
+    before(:each) do
+      @project_path = "vraptor-scaffold"
+    end
 
+    after(:each) do
+      FileUtils.remove_dir(@project_path)
+    end
+
+    it "should be invalid when build tool is not supported" do
+      Kernel.should_receive(:exit) 
+      AppGenerator.new(@project_path, ["-b=maven"]).invoke_all
+    end
+
+    it "should be invalid when template engine is not supported" do
+      Kernel.should_receive(:exit) 
+      AppGenerator.new(@project_path, ["-e=velocity"]).invoke_all
+    end
+  end
 end

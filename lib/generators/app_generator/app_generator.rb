@@ -34,6 +34,7 @@ class AppGenerator < VraptorScaffold::Base
     super([args], opts)
     self.destination_root=(project_path)
     @project_name = project_path.split("/").last
+    validate
   end
 
   def create_root_folder
@@ -75,7 +76,7 @@ class AppGenerator < VraptorScaffold::Base
   def configure_template_engine
     template("vraptor-scaffold.erb", Configuration::FILENAME)
     templates = {"jsp" => JspTemplateEngine, "ftl" => FreemarkerTemplateEngine}
-    templates[options[:template_engine]].new(project_path).configure
+    templates[options[:template_engine]].new(project_path).configure if templates[options[:template_engine]]
   end
 
   def create_test
@@ -89,5 +90,16 @@ class AppGenerator < VraptorScaffold::Base
     template("eclipse/project.erb", ".project")
     template("eclipse/classpath.erb", ".classpath")
     directory("eclipse/settings", ".settings")
+  end
+
+  def validate
+    unless BUILD_TOOLS.include? options[:build_tool]
+      puts "Build tool #{options[:build_tool]} is not supported. The supported build tools are: #{BUILD_TOOLS.join(", ")}"
+      Kernel::exit
+    end
+    unless TEMPLATE_ENGINES.include? options[:template_engine]
+      puts "Template engine #{options[:template_engine]} is not supported. The supported template engines are: #{TEMPLATE_ENGINES.join(", ")}"
+      Kernel::exit
+    end
   end
 end

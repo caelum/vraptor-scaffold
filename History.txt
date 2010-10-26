@@ -2,10 +2,12 @@
 
 == New Features
 * works with gradle
+* works with spring 3 
 
 == Improvements
 * bumped ivy version to 2.2.0
 * updated maven plugins
+* validate users action when create app
 
 === 0.0.2 / 2010-10-08
 
