@@ -53,7 +53,7 @@
 		</plugins>
 	</build>
 
-	<dependencies><% Dependency.compile_scope.each do |dependency| %>
+	<dependencies><% @dependency_manager.compile_scope.each do |dependency| %>
 		<dependency>
 			<groupId><%= dependency.group %></groupId>
 			<artifactId><%= dependency.name %></artifactId>
@@ -64,14 +64,14 @@
 					<artifactId>spring</artifactId>
 				</exclusion>
 			</exclusions><% end %>
-		</dependency><% end %><% if @spring_version == '3.0' %><% Dependency.spring_3_compile_scope.each do |dependency| %>
+		</dependency><% end %><% if @spring_version == '3.0' %><% @dependency_manager.spring_3_compile_scope.each do |dependency| %>
 		<dependency>
 			<groupId><%= dependency.group %></groupId>
 			<artifactId><%= dependency.name %></artifactId>
 			<version><%= dependency.version %></version>
 		</dependency><% end %><% end %>
 
-		<!-- Test dependencies --><% Dependency.test_scope.each do |dependency| %>
+		<!-- Test dependencies --><% @dependency_manager.test_scope.each do |dependency| %>
 		<dependency>
 			<groupId><%= dependency.group %></groupId>
 			<artifactId><%= dependency.name %></artifactId>
@@ -79,7 +79,7 @@
 			<scope>test</scope>
 		</dependency><% end %>
 
-		<!-- Provided dependencies --><% Dependency.provided_scope.each do |dependency| %>
+		<!-- Provided dependencies --><% @dependency_manager.provided_scope.each do |dependency| %>
 		<dependency>
 			<groupId><%= dependency.group %></groupId>
 			<artifactId><%= dependency.name %></artifactId>

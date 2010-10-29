@@ -16,7 +16,6 @@ class FreemarkerTemplateEngine < VraptorScaffold::Base
     copy_file("main.ftl", File.join(Configuration::WEB_INF, "decorators", "main.ftl"))
     directory("infrastructure", infra_path)
     empty_directory File.join(Configuration::WEB_INF, "views")
-    append_freemarker_dependencies
     append_freemarker_servlet
   end
 
@@ -40,12 +39,4 @@ class FreemarkerTemplateEngine < VraptorScaffold::Base
     File.join Configuration::MAIN_SRC, package.gsub(".", File::Separator), "infrastructure"
   end
 
-  def append_freemarker_dependencies
-    file = "pom.xml" if File.exist?("#{@project_path}/pom.xml")
-    file = "ivy.xml" if File.exist?("#{@project_path}/ivy.xml") 
-    file = "build.gradle" if File.exist?("#{@project_path}/build.gradle")
-    template = File.join FreemarkerTemplateEngine.source_root, "freemarker-#{file}"
-    inject_into_file(file, File.read(template), :after => "<dependencies>", :verbose => false)
-    inject_into_file(file, File.read(template), :after => "dependencies {", :verbose => false)
-  end
 end
