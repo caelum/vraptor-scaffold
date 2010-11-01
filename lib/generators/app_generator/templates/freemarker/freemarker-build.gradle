@@ -1,2 +1,0 @@
-
-    compile group: 'org.freemarker', name: 'freemarker', version: '2.3.16'

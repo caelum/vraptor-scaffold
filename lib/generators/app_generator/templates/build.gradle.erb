@@ -19,17 +19,17 @@ jettyRun.contextPath = '/'
 [jettyRunWar,jettyStop]*.stopKey = 'stopKey'
 
 dependencies {
-<% Dependency.compile_scope.each do |dependency| -%>
+<% @dependency_manager.compile_scope.each do |dependency| -%>
     compile group: '<%= dependency.group %>', name: '<%= dependency.name %>', version: '<%= dependency.version %>'
 <% end -%>
 
     //Provided dependencies
-<% Dependency.provided_scope.each do |dependency| -%>
+<% @dependency_manager.provided_scope.each do |dependency| -%>
     providedCompile group: '<%= dependency.group %>', name: '<%= dependency.name %>', version: '<%= dependency.version %>'
 <% end -%>
 
     //Test dependencies
-<% Dependency.test_scope.each do |dependency| -%>
+<% @dependency_manager.test_scope.each do |dependency| -%>
     testCompile group: '<%= dependency.group %>', name: '<%= dependency.name %>', version: '<%= dependency.version %>'
 <% end -%>
 }
