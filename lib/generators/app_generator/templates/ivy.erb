@@ -9,7 +9,9 @@
 	</configurations>
 
 	<dependencies><% @dependency_manager.compile_scope.each do |dependency| -%>
-		<dependency org="<%= dependency.group %>" name="<%= dependency.name %>" rev="<%= dependency.version %>" conf="default" /><% end -%>
+                <dependency org="<%= dependency.group %>" name="<%= dependency.name %>" rev="<%= dependency.version %>" conf="default" <% if dependency.has_exclusions? %>><% dependency.exclusions.each do |exclusion| %>
+                        <exclude org="<%= exclusion.group %>" name="<%= exclusion.name %>" />
+                </dependency><% end %><% else %>/><% end %><% end %>
 
 		<!-- Provided dependencies --><% @dependency_manager.provided_scope.each do |dependency| -%>
 		<dependency org="<%= dependency.group %>" name="<%= dependency.name %>" rev="<%= dependency.version %>" conf="provided->default" /><% end -%>

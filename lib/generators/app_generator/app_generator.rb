@@ -43,7 +43,6 @@ class AppGenerator < VraptorScaffold::Base
   end
 
   def configure_maven
-    @spring_version = options[:spring_version]
     template("pom.erb", "pom.xml") if options[:build_tool] == "mvn"
   end
 
