@@ -335,6 +335,24 @@ describe AppGenerator do
       File.exist?("#{@project_path}/.classpath").should be_false
     end
   end
+  
+  context "configuring gradle application with spring 3.0" do
+
+    before(:all) do
+      @project_path = "vraptor-scaffold"
+      AppGenerator.new(@project_path, ["-b=gradle", "-S=3.0"]).invoke_all
+    end
+
+    after(:all) do
+      FileUtils.remove_dir(@project_path)
+    end
+
+    it "should create build.gradle" do
+      source = File.join File.dirname(__FILE__), "templates", "build_spring3.gradle"
+      destination = "#{@project_path}/build.gradle"
+      exists_and_identical?(source, destination)
+    end
+  end
 
   context "configuring gradle application" do
 

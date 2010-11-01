@@ -19,8 +19,10 @@ jettyRun.contextPath = '/'
 [jettyRunWar,jettyStop]*.stopKey = 'stopKey'
 
 dependencies {
-<% Dependency.compile_scope.each do |dependency| -%>
-    compile group: '<%= dependency.group %>', name: '<%= dependency.name %>', version: '<%= dependency.version %>'
+<% Dependency.compile_scope(@spring_version).each do |dependency| -%>
+    compile group: '<%= dependency.group %>', name: '<%= dependency.name %>', version: '<%= dependency.version %>'<% if dependency.has_exclusions? %>, {<% dependency.exclusions.each do |exclusion| %>
+        exclude group: '<%= exclusion.group %>', name: '<%= exclusion.name %>'<% end %>
+    }<% end %>
 <% end -%>
 
     //Provided dependencies
