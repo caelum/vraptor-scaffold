@@ -57,14 +57,14 @@
 		<dependency>
 			<groupId><%= dependency.group %></groupId>
 			<artifactId><%= dependency.name %></artifactId>
-                        <version><%= dependency.version %></version><% if dependency.has_exclusions? %>
-                        <exclusions><% dependency.exclusions.each do |exclusion| %>
-                                <exclusion>
-                                        <groupId><%= exclusion.group %></groupId>
-                                        <artifactId><%= exclusion.name %></artifactId>
-                                </exclusion><% end %>
-                        </exclusions><% end %>
-                </dependency><% end %>
+			<version><%= dependency.version %></version><% if dependency.has_exclusions? %>
+			<exclusions><% dependency.exclusions.each do |exclusion| %>
+				<exclusion>
+					<groupId><%= exclusion.group %></groupId>
+					<artifactId><%= exclusion.name %></artifactId>
+				</exclusion><% end %>
+			</exclusions><% end %>
+		</dependency><% end %>
 
 		<!-- Test dependencies --><% @dependency_manager.test_scope.each do |dependency| %>
 		<dependency>

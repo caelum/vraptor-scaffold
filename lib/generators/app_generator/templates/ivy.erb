@@ -9,9 +9,9 @@
 	</configurations>
 
 	<dependencies><% @dependency_manager.compile_scope.each do |dependency| -%>
-                <dependency org="<%= dependency.group %>" name="<%= dependency.name %>" rev="<%= dependency.version %>" conf="default" <% if dependency.has_exclusions? %>><% dependency.exclusions.each do |exclusion| %>
-                        <exclude org="<%= exclusion.group %>" name="<%= exclusion.name %>" />
-                </dependency><% end %><% else %>/><% end %><% end %>
+		<dependency org="<%= dependency.group %>" name="<%= dependency.name %>" rev="<%= dependency.version %>" conf="default"<% if dependency.has_exclusions? %>><% dependency.exclusions.each do |exclusion| %>
+			<exclude org="<%= exclusion.group %>" name="<%= exclusion.name %>" />
+		</dependency><% end %><% else %> /><% end %><% end %>
 
 		<!-- Provided dependencies --><% @dependency_manager.provided_scope.each do |dependency| -%>
 		<dependency org="<%= dependency.group %>" name="<%= dependency.name %>" rev="<%= dependency.version %>" conf="provided->default" /><% end -%>
@@ -20,8 +20,8 @@
 		<dependency org="<%= dependency.group %>" name="<%= dependency.name %>" rev="<%= dependency.version %>" conf="test->default" /><% end -%>
 
 		<!-- Jetty dependencies -->
-		<dependency org="org.mortbay.jetty" name="jsp-api-2.1" rev="6.1.14" conf="jetty->default"/>
-		<dependency org="org.mortbay.jetty" name="jsp-2.1" rev="6.1.14" conf="jetty->default"/>
-		<dependency org="org.mortbay.jetty" name="jetty-ant" rev="6.1.14" conf="jetty->default" />	
+		<dependency org="org.mortbay.jetty" name="jsp-api-2.1" rev="6.1.14" conf="jetty->default" />
+		<dependency org="org.mortbay.jetty" name="jsp-2.1" rev="6.1.14" conf="jetty->default" />
+		<dependency org="org.mortbay.jetty" name="jetty-ant" rev="6.1.14" conf="jetty->default" />
 	</dependencies>
 </ivy-module>
