@@ -20,7 +20,7 @@ class AppGenerator < VraptorScaffold::Base
     :desc => "Skip Eclipse files"
 
   class_option :spring_version, :default => "2.5", :aliases => "-S",
-    :desc => "Spring version (options: #{SPRING_VERSIONS})"
+    :desc => "Spring version (options: #{SPRING_VERSIONS.join(', ')})"
 
   def self.source_root
     File.join File.dirname(__FILE__), "templates"
@@ -32,9 +32,9 @@ class AppGenerator < VraptorScaffold::Base
 
   def initialize(args, opts=[])
     super([args], opts)
+    validate
     self.destination_root=(project_path)
     @project_name = project_path.split("/").last
-    validate
     @dependency_manager = DependencyManager.new(options)
   end
 
