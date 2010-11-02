@@ -2,10 +2,10 @@ require File.expand_path(File.dirname(__FILE__) + "/../../../spec_helper")
 
 describe AppGenerator do
 
-  context "build maven application with Spring 3.0" do
+  context "build maven application with Spring 3" do
     before(:all) do
       @project_path = "src/vraptor-scaffold"
-      AppGenerator.new(@project_path, ["-b=mvn", "--spring-version=3.0"]).invoke_all
+      AppGenerator.new(@project_path, ["-b=mvn", "--spring3=true"]).invoke_all
     end
 
     after(:all) do
@@ -243,11 +243,11 @@ describe AppGenerator do
     end
   end
 
-  context "configuring ant application with spring 3.0" do
+  context "configuring ant application with spring 3" do
 
     before(:all) do
       @project_path = "vraptor-scaffold"
-      AppGenerator.new(@project_path, ["-b=ant", "-S=3.0"]).invoke_all
+      AppGenerator.new(@project_path, ["-b=ant", "-S=true"]).invoke_all
     end
 
     after(:all) do
@@ -336,11 +336,11 @@ describe AppGenerator do
     end
   end
   
-  context "configuring gradle application with spring 3.0" do
+  context "configuring gradle application with spring 3" do
 
     before(:all) do
       @project_path = "vraptor-scaffold"
-      AppGenerator.new(@project_path, ["-b=gradle", "-S=3.0"]).invoke_all
+      AppGenerator.new(@project_path, ["-b=gradle", "-S=true"]).invoke_all
     end
 
     after(:all) do
