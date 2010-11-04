@@ -1,13 +1,16 @@
-=== 0.0.3 / 2010-10-??
+=== 0.0.3 / 2010-11-04
 
 == New Features
 * works with gradle
-* works with spring 3 
+* works with spring 3
 
 == Improvements
 * bumped ivy version to 2.2.0
 * updated maven plugins
 * validate users action when create app
+* update hsqldb
+* update junit
+* better build.xml
 
 === 0.0.2 / 2010-10-08
 
