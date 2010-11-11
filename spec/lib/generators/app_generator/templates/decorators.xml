@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="ISO-8859-1"?>
+<?xml version="1.0" encoding="UTF-8"?>
 
 <decorators defaultdir="/WEB-INF/decorators">
     <decorator name="main" page="main.ftl">
