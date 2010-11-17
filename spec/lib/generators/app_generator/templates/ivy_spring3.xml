@@ -25,6 +25,7 @@
 
 		<!-- Provided dependencies -->
 		<dependency org="javax.servlet" name="servlet-api" rev="2.5" conf="provided->default" />
+		<dependency org="javax.servlet.jsp" name="jsp-api" rev="2.1" conf="provided->default" />
 
 		<!-- Test dependencies -->
 		<dependency org="junit" name="junit" rev="4.8.2" conf="test->default" />

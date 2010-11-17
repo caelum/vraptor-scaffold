@@ -19,7 +19,7 @@ class DependencyManager
   end
 
   def provided_scope
-    [Dependency.new("javax.servlet", "servlet-api", "2.5")]
+    [Dependency.new("javax.servlet", "servlet-api", "2.5"), Dependency.new("javax.servlet.jsp", "jsp-api", "2.1")]
   end
   
   private
