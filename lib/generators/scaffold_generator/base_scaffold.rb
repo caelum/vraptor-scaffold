@@ -5,6 +5,10 @@ class BaseScaffold < VraptorScaffold::Base
     @model = model
     @attributes = attributes
   end
+  
+  def model_parameter_name
+    @model.first.downcase
+  end
 
   def class_name
     @model.capitalize

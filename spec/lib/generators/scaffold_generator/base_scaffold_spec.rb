@@ -33,4 +33,9 @@ describe BaseScaffold do
   it "should know controller test class name" do
     @base.controller_test_class_name.should eql("ClientControllerTest")
   end
+  
+  it "should know model parameter name with scaffold given with first letter uppercased" do
+    base = BaseScaffold.new("Client")
+    base.model_parameter_name.should eql("client")
+  end
 end
