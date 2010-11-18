@@ -10,6 +10,6 @@ class ControllerGenerator < BaseScaffold
   end
 
   def path
-    "/#{@model.pluralize}"
+    "/#{@model.first.downcase.pluralize}"
   end
 end
