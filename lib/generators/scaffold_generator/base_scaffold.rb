@@ -7,7 +7,7 @@ class BaseScaffold < VraptorScaffold::Base
   end
   
   def model_parameter_name
-    @model.first.downcase
+    @model.downcase
   end
 
   def class_name

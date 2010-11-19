@@ -1,7 +1,27 @@
 require File.expand_path(File.dirname(__FILE__) + "/../../../spec_helper")
 
 describe Attribute do
+  
+  context "initialize attribute" do
+    context "downcase name" do
+      it  "should downcase all words" do
+        Attribute.new("VALUE", "double").name.should == "value"
+      end
 
+      it  "should camelize composed name" do
+        Attribute.new("NomeComposto", "double").name.should == "nomeComposto"
+      end
+
+      it  "should keep name in downcase" do
+        Attribute.new("value", "double").name.should == "value"
+      end
+    end
+    
+    it  "should downcase type" do
+      Attribute.new("value", "DoublE").type.should == "double"
+    end
+  end
+  
   context "supported types" do
     it "should support boolean" do
       Attribute.valid_types.include?("boolean").should be_true
