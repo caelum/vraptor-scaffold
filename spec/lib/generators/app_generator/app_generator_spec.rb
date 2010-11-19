@@ -152,8 +152,8 @@ describe AppGenerator do
       end
 
       it "should create jquery js" do
-        source = "#{AppGenerator.source_root}/webapp/javascripts/jquery-1.4.2.min.js"
-        destination = "#{@webapp}/javascripts/jquery-1.4.2.min.js"
+        source = "#{AppGenerator.source_root}/webapp/javascripts/jquery.min.js"
+        destination = "#{@webapp}/javascripts/jquery.min.js"
         exists_and_identical?(source, destination)
       end
 
