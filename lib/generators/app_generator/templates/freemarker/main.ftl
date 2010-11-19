@@ -9,6 +9,6 @@
 
   <body>
     ${body}
-    <@html.js "jquery-1.4.2.min"/>
+    <@html.js "jquery.min"/>
   </body>
 </html>
