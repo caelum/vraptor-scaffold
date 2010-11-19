@@ -2,6 +2,12 @@
 
 == Improvements
 * changed decorators encoding to UTF-8
+* updated jquery to 1.4.4
+* updated joda-time to 1.6.2
+* added jsp-api 2.1 dependency as provided scope.
+
+== Bugfixes
+* Fixed scaffolding with uppercase model and attributes.
 
 === 0.0.3 / 2010-11-04
 
