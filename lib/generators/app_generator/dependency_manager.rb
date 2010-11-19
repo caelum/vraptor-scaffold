@@ -30,7 +30,7 @@ class DependencyManager
         Dependency.new("org.hibernate", "hibernate-entitymanager", "3.4.0.GA"),
         Dependency.new("org.hibernate", "hibernate-core", "3.3.2.GA"),
         Dependency.new("org.hibernate", "hibernate-validator", "3.1.0.GA"),
-        Dependency.new("joda-time", "joda-time", "1.6")]
+        Dependency.new("joda-time", "joda-time", "1.6.2")]
   end
   
   def vraptor_dependencies
