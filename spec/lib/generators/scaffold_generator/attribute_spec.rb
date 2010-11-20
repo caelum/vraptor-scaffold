@@ -2,6 +2,16 @@ require File.expand_path(File.dirname(__FILE__) + "/../../../spec_helper")
 
 describe Attribute do
   
+  context "getter method prefix" do
+    it "should be 'is' to boolean attributes" do
+       Attribute.new("active", "boolean").getter_prefix.should == "is"
+    end
+    
+    it "should be 'get' otherwise" do
+       Attribute.new("description", "string").getter_prefix.should == "get"
+    end
+  end
+  
   context "initialize attribute" do
     context "downcase name" do
       it  "should downcase all words" do

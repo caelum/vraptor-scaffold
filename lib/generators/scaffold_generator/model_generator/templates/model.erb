@@ -12,7 +12,7 @@ public class <%= class_name %> extends Entity {
 		this.<%= att.name %> = <%= att.name %>;
 	}
 	
-	public <%= att.java_type %> get<%= att.name.capitalize %>() {
+	public <%= att.java_type %> <%= att.getter_prefix + att.name.capitalize %>() {
 		return <%= att.name %>;
 	}
 	

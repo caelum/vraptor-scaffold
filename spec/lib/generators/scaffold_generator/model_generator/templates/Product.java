@@ -18,7 +18,7 @@ public class Product extends Entity {
 		this.flag = flag;
 	}
 	
-	public boolean getFlag() {
+	public boolean isFlag() {
 		return flag;
 	}
 	

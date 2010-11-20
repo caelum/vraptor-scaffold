@@ -28,6 +28,11 @@ class Attribute
   def boolean?
     type.eql? "boolean"
   end
+  
+  def getter_prefix
+    return "is" if boolean?
+    "get"
+  end
 
   def validate
     unless Attribute.valid_types.include?(@type)
