@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{vraptor-scaffold}
-  s.version = "0.0.3"
+  s.version = "0.0.4"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Rodolfo Liviero"]
-  s.date = %q{2010-11-04}
+  s.date = %q{2010-11-20}
   s.default_executable = %q{vraptor}
   s.description = %q{VRaptor scaffold extension to make it easier configuring new projects and plugins.}
   s.email = %q{rodolfoliviero@gmail.com}
@@ -22,6 +22,7 @@ Gem::Specification.new do |s|
     ".document",
      ".gitignore",
      "Gemfile",
+     "Gemfile.lock",
      "History.txt",
      "LICENSE",
      "README.textile",
@@ -67,7 +68,7 @@ Gem::Specification.new do |s|
      "lib/generators/app_generator/templates/webapp/WEB-INF/web.xml",
      "lib/generators/app_generator/templates/webapp/images/.empty_directory",
      "lib/generators/app_generator/templates/webapp/index.jsp",
-     "lib/generators/app_generator/templates/webapp/javascripts/jquery-1.4.2.min.js",
+     "lib/generators/app_generator/templates/webapp/javascripts/jquery.min.js",
      "lib/generators/app_generator/templates/webapp/stylesheets/scaffold.css",
      "lib/generators/base.rb",
      "lib/generators/scaffold_generator/attribute.rb",
@@ -140,22 +141,22 @@ Gem::Specification.new do |s|
   s.rubygems_version = %q{1.3.7}
   s.summary = %q{VRaptor Scaffold.}
   s.test_files = [
-    "spec/spec_helper.rb",
-     "spec/lib/vraptor-scaffold_spec.rb",
+    "spec/lib/configuration_spec.rb",
      "spec/lib/generators/app_generator/app_generator_spec.rb",
      "spec/lib/generators/app_generator/dependency_manager_spec.rb",
+     "spec/lib/generators/app_generator/dependency_spec.rb",
      "spec/lib/generators/app_generator/freemarker_template_engine_spec.rb",
      "spec/lib/generators/app_generator/jsp_template_engine_spec.rb",
-     "spec/lib/generators/app_generator/dependency_spec.rb",
-     "spec/lib/generators/scaffold_generator/model_generator/model_generator_spec.rb",
-     "spec/lib/generators/scaffold_generator/freemarker_generator/freemarker_generator_spec.rb",
-     "spec/lib/generators/scaffold_generator/repository_generator/repository_generator_spec.rb",
      "spec/lib/generators/scaffold_generator/attribute_spec.rb",
      "spec/lib/generators/scaffold_generator/base_scaffold_spec.rb",
-     "spec/lib/generators/scaffold_generator/jsp_generator/jsp_generator_spec.rb",
-     "spec/lib/generators/scaffold_generator/scaffold_generator_spec.rb",
      "spec/lib/generators/scaffold_generator/controller_generator/controller_generator_spec.rb",
-     "spec/lib/configuration_spec.rb"
+     "spec/lib/generators/scaffold_generator/freemarker_generator/freemarker_generator_spec.rb",
+     "spec/lib/generators/scaffold_generator/jsp_generator/jsp_generator_spec.rb",
+     "spec/lib/generators/scaffold_generator/model_generator/model_generator_spec.rb",
+     "spec/lib/generators/scaffold_generator/repository_generator/repository_generator_spec.rb",
+     "spec/lib/generators/scaffold_generator/scaffold_generator_spec.rb",
+     "spec/lib/vraptor-scaffold_spec.rb",
+     "spec/spec_helper.rb"
   ]
 
   if s.respond_to? :specification_version then
@@ -163,18 +164,18 @@ Gem::Specification.new do |s|
     s.specification_version = 3
 
     if Gem::Version.new(Gem::VERSION) >= Gem::Version.new('1.2.0') then
-      s.add_runtime_dependency(%q<thor>, [">= 0.14.3"])
-      s.add_runtime_dependency(%q<rake>, [">= 0.8.7"])
-      s.add_runtime_dependency(%q<activesupport>, [">= 3.0.0"])
+      s.add_runtime_dependency(%q<thor>, ["= 0.14.4"])
+      s.add_runtime_dependency(%q<rake>, ["= 0.8.7"])
+      s.add_runtime_dependency(%q<activesupport>, ["= 3.0.1"])
     else
-      s.add_dependency(%q<thor>, [">= 0.14.3"])
-      s.add_dependency(%q<rake>, [">= 0.8.7"])
-      s.add_dependency(%q<activesupport>, [">= 3.0.0"])
+      s.add_dependency(%q<thor>, ["= 0.14.4"])
+      s.add_dependency(%q<rake>, ["= 0.8.7"])
+      s.add_dependency(%q<activesupport>, ["= 3.0.1"])
     end
   else
-    s.add_dependency(%q<thor>, [">= 0.14.3"])
-    s.add_dependency(%q<rake>, [">= 0.8.7"])
-    s.add_dependency(%q<activesupport>, [">= 3.0.0"])
+    s.add_dependency(%q<thor>, ["= 0.14.4"])
+    s.add_dependency(%q<rake>, ["= 0.8.7"])
+    s.add_dependency(%q<activesupport>, ["= 3.0.1"])
   end
 end
 
