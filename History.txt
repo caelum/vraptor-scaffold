@@ -1,4 +1,4 @@
-=== 0.0.4 / 2010-??-??
+=== 0.0.4 / 2010-11-20
 
 == Improvements
 * changed decorators encoding to UTF-8
@@ -7,7 +7,9 @@
 * added jsp-api 2.1 dependency as provided scope.
 
 == Bugfixes
-* Fixed scaffolding with uppercase model and attributes.
+* Fixed scaffolding with uppercase model and attributes(Issue 19).
+* Fixed activesupport version cause version 3.0.3 break new instalations(Issue 22).
+* Generate correct getter for boolean attributes(Issue 21).
 
 === 0.0.3 / 2010-11-04
 
