@@ -6,7 +6,7 @@ describe JspTemplateEngine do
     before(:all) do
       @project_path = "src/vraptor-scaffold"
       @web_inf = "#{@project_path}/#{Configuration::WEB_INF}"
-      @decorators = "#{@web_inf}/decorators"
+      @decorators = "#{@web_inf}/jsp/decorators"
       @app = "#{@project_path}/#{Configuration::MAIN_SRC}/app"
       AppGenerator.new(@project_path).invoke_all
     end

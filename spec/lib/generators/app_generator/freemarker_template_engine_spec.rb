@@ -6,7 +6,7 @@ describe FreemarkerTemplateEngine do
     @project_path = "src/vraptor-scaffold"
     @webapp = "#{@project_path}/#{Configuration::WEB_APP}"
     @web_inf = "#{@project_path}/#{Configuration::WEB_INF}"
-    @decorators = "#{@web_inf}/decorators"
+    @decorators = "#{@web_inf}/views/decorators"
     @app = "#{@project_path}/#{Configuration::MAIN_SRC}/br/com/caelum"
   end
 
