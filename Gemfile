@@ -1,6 +1,6 @@
 source :rubygems
 
-gem "thor", "0.14.4"
+gem "thor", "0.14.6"
 gem "rake", "0.8.7"
 gem "activesupport", "3.0.1"
 
