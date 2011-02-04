@@ -20,7 +20,7 @@ jettyRun.contextPath = '/'
 [jettyRunWar,jettyStop]*.stopKey = 'stopKey'
 
 dependencies {
-    compile group: 'br.com.caelum', name: 'vraptor', version: '3.2.0', {
+    compile group: 'br.com.caelum', name: 'vraptor', version: '3.3.0', {
         exclude group: 'org.springframework', name: 'spring'
     }
     compile group: 'org.springframework', name: 'spring-web', version: '3.0.4.RELEASE'

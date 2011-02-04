@@ -34,7 +34,7 @@ class DependencyManager
   end
   
   def vraptor_dependencies
-    vraptor_dependency = Dependency.new("br.com.caelum", "vraptor", "3.2.0")
+    vraptor_dependency = Dependency.new("br.com.caelum", "vraptor", "3.3.0")
     append_spring_dependency_if_necessary vraptor_dependency
    end
    
