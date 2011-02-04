@@ -18,9 +18,6 @@ class AppGenerator < VraptorScaffold::Base
   class_option :skip_eclipse, :type => :boolean, :aliases => "-E",
     :desc => "Skip Eclipse files"
 
-  class_option :spring3, :aliases => "-S", :type => :boolean,
-    :desc => "Use spring 3 instead of spring 2.5"
-
   def self.source_root
     File.join File.dirname(__FILE__), "templates"
   end

@@ -2,23 +2,6 @@ require File.expand_path(File.dirname(__FILE__) + "/../../../spec_helper")
 
 describe AppGenerator do
 
-  context "build maven application with Spring 3" do
-    before(:all) do
-      @project_path = "src/vraptor-scaffold"
-      AppGenerator.new(@project_path, ["-b=mvn", "--spring3=true"]).invoke_all
-    end
-
-    after(:all) do
-      FileUtils.remove_dir("src")
-    end
-
-    it "should create pom" do
-      source =  File.join File.dirname(__FILE__), "templates", "pom_spring3.xml"
-      destination = "#{@project_path}/pom.xml"
-      exists_and_identical?(source, destination)
-    end
-  end
-
   context "build new application" do
     before(:all) do
       @project_path = "src/vraptor-scaffold"
@@ -242,25 +225,7 @@ describe AppGenerator do
       AppGenerator.new(@project_path).invoke_all
     end
   end
-
-  context "configuring ant application with spring 3" do
-
-    before(:all) do
-      @project_path = "vraptor-scaffold"
-      AppGenerator.new(@project_path, ["-b=ant", "-S=true"]).invoke_all
-    end
-
-    after(:all) do
-      FileUtils.remove_dir(@project_path)
-    end
-
-    it "should create ivy.xml" do
-      source =  File.join File.dirname(__FILE__), "templates", "ivy_spring3.xml"
-      destination = "#{@project_path}/ivy.xml"
-      exists_and_identical?(source, destination)
-    end
-  end
-
+  
   context "configuring ant application" do
 
     before(:all) do
@@ -336,24 +301,6 @@ describe AppGenerator do
     end
   end
   
-  context "configuring gradle application with spring 3" do
-
-    before(:all) do
-      @project_path = "vraptor-scaffold"
-      AppGenerator.new(@project_path, ["-b=gradle", "-S=true"]).invoke_all
-    end
-
-    after(:all) do
-      FileUtils.remove_dir(@project_path)
-    end
-
-    it "should create build.gradle" do
-      source = File.join File.dirname(__FILE__), "templates", "build_spring3.gradle"
-      destination = "#{@project_path}/build.gradle"
-      exists_and_identical?(source, destination)
-    end
-  end
-
   context "configuring gradle application" do
 
     before(:all) do

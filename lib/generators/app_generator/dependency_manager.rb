@@ -7,9 +7,7 @@ class DependencyManager
   end
  
   def compile_scope
-    dependencies = vraptor_dependencies + default_dependencies
-    append_freemarker_dependency_if_necessary dependencies
-    dependencies
+    append_freemarker_dependency_if_necessary default_dependencies
   end
   
   def test_scope
@@ -24,7 +22,8 @@ class DependencyManager
   
   private
   def default_dependencies
-    [ Dependency.new("net.sf.scannotation", "scannotation", "1.0.2"), Dependency.new("org.hsqldb", "hsqldb", "2.0.0"),
+    [ Dependency.new("br.com.caelum", "vraptor", "3.3.0"),
+        Dependency.new("net.sf.scannotation", "scannotation", "1.0.2"), Dependency.new("org.hsqldb", "hsqldb", "2.0.0"),
         Dependency.new("opensymphony", "sitemesh", "2.4.2"), Dependency.new("javax.servlet", "jstl", "1.2"),
         Dependency.new("javax.persistence", "persistence-api", "1.0"), 
         Dependency.new("org.hibernate", "hibernate-entitymanager", "3.4.0.GA"),
@@ -33,25 +32,8 @@ class DependencyManager
         Dependency.new("joda-time", "joda-time", "1.6.2")]
   end
   
-  def vraptor_dependencies
-    vraptor_dependency = Dependency.new("br.com.caelum", "vraptor", "3.3.0")
-    append_spring_dependency_if_necessary vraptor_dependency
-   end
-   
-   def spring3_dependencies
-     [Dependency.new("org.springframework", "spring-web", "3.0.4.RELEASE"), 
-       Dependency.new("com.thoughtworks.xstream", "xstream", "1.3.1")]
-   end
-   
-   def append_freemarker_dependency_if_necessary dependencies
+  def append_freemarker_dependency_if_necessary dependencies
      dependencies << Dependency.new("org.freemarker", "freemarker", "2.3.16") if @options[:template_engine] == 'ftl'
-   end
-   
-   def append_spring_dependency_if_necessary vraptor_dependency
-     if options[:spring3]
-       vraptor_dependency.exclusions << Dependency.new("org.springframework", "spring")
-       return [vraptor_dependency] + spring3_dependencies
-      end
-      [vraptor_dependency]
-   end
+     dependencies
+  end
 end

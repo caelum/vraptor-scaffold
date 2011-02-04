@@ -15,11 +15,5 @@ describe DependencyManager do
       Dependency.stub!(:new).with("org.freemarker", "freemarker", "2.3.16").and_return(@dependency)
       DependencyManager.new(options).compile_scope.include?(@dependency).should be_true
     end
-    
-    it "should include spring 3 when user asked for that" do
-       options = {:spring3 => true}
-       Dependency.stub!(:new).with("org.springframework", "spring-web", "3.0.4.RELEASE").and_return(@dependency)
-       DependencyManager.new(options).compile_scope.include?(@dependency).should be_true
-    end
   end
 end
