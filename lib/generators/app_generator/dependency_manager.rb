@@ -24,7 +24,7 @@ class DependencyManager
   
   private
   def default_dependencies
-    [ Dependency.new("org.hsqldb", "hsqldb", "2.0.0"),
+    [ Dependency.new("net.sf.scannotation", "scannotation", "1.0.2"), Dependency.new("org.hsqldb", "hsqldb", "2.0.0"),
         Dependency.new("opensymphony", "sitemesh", "2.4.2"), Dependency.new("javax.servlet", "jstl", "1.2"),
         Dependency.new("javax.persistence", "persistence-api", "1.0"), 
         Dependency.new("org.hibernate", "hibernate-entitymanager", "3.4.0.GA"),
