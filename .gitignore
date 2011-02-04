@@ -7,3 +7,4 @@ pgk
 doc
 *.swp
 rdoc
+.DS_Store
