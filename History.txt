@@ -3,6 +3,7 @@
 * updated vraptor to 3.3.0
 * updated jquery to 1.5
 * decorators folder inside WEB-INF
+* removed spring 3 option.
 
 === 0.0.4 / 2010-11-20
 
