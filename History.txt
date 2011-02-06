@@ -1,3 +1,11 @@
+=== 1.1.0 / 2011-??-??
+
+== New Features
+* JPA 2 support (Hibernate 3.6.1.Final)
+
+== Improvements
+* updated hibernate validator to 4.1.0.Final
+
 === 1.0.0 / 2011-02-04
 
 == Improvements
