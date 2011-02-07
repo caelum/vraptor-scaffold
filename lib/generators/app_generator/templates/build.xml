@@ -100,6 +100,38 @@
 	</target>
 
 	<!-- ================================= 
+          target: minify              
+         ================================= -->
+	<target name="minify" depends="resolve" description="minify js and css">
+		<property name="yuicompressor.jar" value="lib/minify/yuicompressor-2.3.6.jar" />
+
+		<fileset dir="${js.dir}" includes="*.js" excludes="all.min.js" id="alljs" />
+		<fileset dir="${css.dir}" includes="*.css" excludes="*.min.css" id="allcss" />
+
+		<delete file="${css.dir}/all.css" />
+		<concat destfile="${css.dir}/all.css" fixlastline="true">
+			<fileset refid="allcss" />
+		</concat>
+
+		<java jar="${yuicompressor.jar}" fork="true">
+			<arg value="${css.dir}/all.css" />
+			<arg value="-o" />
+			<arg value="${css.dir}/all.min.css" />
+		</java>
+
+		<delete file="${js.dir}/all.js" />
+		<concat destfile="${js.dir}/all.js" fixlastline="true">
+			<fileset refid="alljs" />
+		</concat>
+
+		<java jar="${yuicompressor.jar}" fork="true">
+			<arg value="${js.dir}/all.js" />
+			<arg value="-o" />
+			<arg value="${js.dir}/all.min.js" />
+		</java>
+	</target>
+
+	<!-- ================================= 
           target: report              
          ================================= -->
 	<target name="report" depends="resolve" description="--> generates a report of dependencies">

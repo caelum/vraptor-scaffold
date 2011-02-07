@@ -1,7 +1,8 @@
 === 1.1.0 / 2011-??-??
 
 == New Features
-* JPA 2 support (Hibernate 3.6.1.Final)
+* JPA 2 support (Hibernate 3.6.1.Final) (Issue 13)
+* ant task to minify js and css. (Issue 27)
 
 == Improvements
 * updated hibernate validator to 4.1.0.Final
@@ -11,7 +12,7 @@
 == Improvements
 * updated vraptor to 3.3.0
 * updated jquery to 1.5
-* decorators folder inside WEB-INF
+* decorators folder inside WEB-INF (Issue 24)
 * removed spring 3 option.
 
 === 0.0.4 / 2010-11-20
