@@ -20,7 +20,7 @@ public class <%= controller_class_name %> {
 	private final <%= repository_interface_name %> repository;
 	private final Validator validator;
 	
-	public <%= controller_class_name %>(Result result, <%= repository_interface_name %> repository, Validator validator) {
+	<%= controller_class_name %>(Result result, <%= repository_interface_name %> repository, Validator validator) {
 		this.result = result;
 		this.repository = repository;
 		this.validator = validator;
