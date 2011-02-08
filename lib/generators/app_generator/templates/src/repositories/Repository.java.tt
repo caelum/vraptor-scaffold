@@ -10,7 +10,7 @@ public abstract class Repository<T, I extends Serializable> {
 	
 	protected final EntityManager entityManager;
 	
-	public Repository(EntityManager entityManager) {
+	protected Repository(EntityManager entityManager) {
 		this.entityManager = entityManager;
 	}
 	
