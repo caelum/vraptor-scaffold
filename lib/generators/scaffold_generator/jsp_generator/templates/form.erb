@@ -1,26 +1,26 @@
 <c:if test="${not empty errors}">
 	<c:forEach items="${errors}" var="error">
-		 ${error.category} - ${error.message}<br />
+		${error.category} - ${error.message}<br />
 	</c:forEach>
 </c:if>
 
 <form action="<%= path %>" method="post">
   
-  <c:if test="${not empty <%= @model %>.id}">
-    <input type="hidden" name="<%= @model %>.id" value="${<%=@model%>.id}"/>
-    <input type="hidden" name="_method" value="put"/>
-  </c:if>
+	<c:if test="${not empty <%= @model %>.id}">
+		<input type="hidden" name="<%= @model %>.id" value="${<%=@model%>.id}"/>
+		<input type="hidden" name="_method" value="put"/>
+	</c:if>
 
 <% @attributes.each do |att| -%>
-  <div class="field">
-    <%= att.name.capitalize %>:<br />
-    <input type="text" name="<%= @model %>.<%=att.name%>" value="${<%=@model%>.<%=att.name%>}"/>
-  </div>
+	<div class="field">
+		<%= att.name.capitalize %>:<br />
+		<input type="text" name="<%= @model %>.<%=att.name%>" value="${<%=@model%>.<%=att.name%>}"/>
+	</div>
 <% end -%>
-  <div class="actions">
-    <button type="submit">send</button>
-  </div>
+
+<div class="actions">
+	<button type="submit">send</button>
+	</div>
 </form>
 
 <a href="<%= path %>">Back</a>
-
