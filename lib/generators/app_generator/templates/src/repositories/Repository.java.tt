@@ -30,9 +30,13 @@ public abstract class Repository<T, I extends Serializable> {
 		return entityManager.find(getParameterizedClass(), id);
 	}
 	
-	@SuppressWarnings("unchecked")
 	public List<T> findAll() {
-		return entityManager.createQuery("From " + getParameterizedClass().getName()).getResultList();
+		Query query = manager.createQuery("from " + getParameterizedClass().getName());
+
+		@SuppressWarnings("unchecked")
+		Collection<T> resultList = query.getResultList();
+
+		return resultList;
 	}
 	
 	@SuppressWarnings("unchecked")
