@@ -31,10 +31,10 @@ public abstract class Repository<T, I extends Serializable> {
 	}
 	
 	public List<T> findAll() {
-		Query query = manager.createQuery("from " + getParameterizedClass().getName());
+		Query query = entityManager.createQuery("from " + getParameterizedClass().getName());
 
 		@SuppressWarnings("unchecked")
-		Collection<T> resultList = query.getResultList();
+		List<T> resultList = query.getResultList();
 
 		return resultList;
 	}
