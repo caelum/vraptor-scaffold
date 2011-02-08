@@ -10,7 +10,7 @@ public class <%= repository_impl_name %>
     extends Repository<<%= class_name %>, Long>
     implements <%= repository_interface_name %> {
 
-	<%= repository_impl_name %>(EntityManager entityManager) {
+	public <%= repository_impl_name %>(EntityManager entityManager) {
 		super(entityManager);
 	}
 }
