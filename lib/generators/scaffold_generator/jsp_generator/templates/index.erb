@@ -6,9 +6,9 @@
 
 	<table>
 		<tr>
-			<% @attributes.each do |att| -%>
-				<th><%= att.name %></th>
-			<% end -%>
+			<%- @attributes.each do |att| -%>
+			<th><%= att.name %></th>
+			<%- end -%>
 			<th></th>
 			<th></th>
 			<th></th>
@@ -16,9 +16,9 @@
 
 		<c:forEach items="${<%=@model%>List}" var="<%=@model%>">
 			<tr>
-				<% @attributes.each do |att| -%>
-					<td><%= "${#{@model}.#{att.name}}" %></td>
-				<% end -%>
+				<%- @attributes.each do |att| -%>
+				<td><%= "${#{@model}.#{att.name}}" %></td>
+				<%- end -%>
 				<td><a href="<%= path "/${#{@model}.id}" %>">show</a></td>
 				<td><a href="<%= path "/${#{@model}.id}/edit" %>">edit</a></td>
 				<td>

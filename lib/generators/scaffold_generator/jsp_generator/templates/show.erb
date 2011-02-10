@@ -2,12 +2,12 @@
 	<title><%= class_name %> [show]</title>
 </head>
 <body>
-	<% @attributes.each do |att| -%>
-		<p>
-			<b><%= att.name.capitalize %>:</b>
-			<%= "${#{@model}.#{att.name}}" %>
-		</p>
-	<% end -%>
+<%- @attributes.each do |att| -%>
+	<p>
+		<b><%= att.name.capitalize %>:</b>
+		<%= "${#{@model}.#{att.name}}" %>
+	</p>
+<% end -%>
 
 	<a href="<%= path "/${#{@model}.id}/edit" %>">Edit</a>
 	<a href="<%= path %>">Back</a>
