@@ -18,7 +18,7 @@
 	<jsp-config>
 		<jsp-property-group>
 			<url-pattern>*.jsp</url-pattern>
-			<page-encoding>ISO-8859-1</page-encoding>
+			<page-encoding>UTF-8</page-encoding>
 			<include-prelude>/WEB-INF/jsp/prelude.jspf</include-prelude>
 		</jsp-property-group>
 	</jsp-config>
