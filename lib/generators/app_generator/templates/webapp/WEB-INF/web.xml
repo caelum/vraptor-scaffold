@@ -15,6 +15,14 @@
 		<param-value>UTF-8</param-value>
 	</context-param>
 
+	<jsp-config>
+		<jsp-property-group>
+			<url-pattern>*.jsp</url-pattern>
+			<page-encoding>ISO-8859-1</page-encoding>
+			<include-prelude>/WEB-INF/jsp/prelude.jspf</include-prelude>
+		</jsp-property-group>
+	</jsp-config>
+
 	<filter>
 		<filter-name>sitemesh</filter-name>
 		<filter-class>com.opensymphony.sitemesh.webapp.SiteMeshFilter</filter-class>
