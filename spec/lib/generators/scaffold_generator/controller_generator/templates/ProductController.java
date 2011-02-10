@@ -20,7 +20,7 @@ public class ProductController {
 	private final ProductRepository repository;
 	private final Validator validator;
 	
-	public ProductController(Result result, ProductRepository repository, Validator validator) {
+	ProductController(Result result, ProductRepository repository, Validator validator) {
 		this.result = result;
 		this.repository = repository;
 		this.validator = validator;
