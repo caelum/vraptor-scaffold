@@ -10,7 +10,7 @@ public class ProductRepositoryImpl
     extends Repository<Product, Long>
     implements ProductRepository {
 
-	public ProductRepositoryImpl(EntityManager entityManager) {
+	ProductRepositoryImpl(EntityManager entityManager) {
 		super(entityManager);
 	}
 }
