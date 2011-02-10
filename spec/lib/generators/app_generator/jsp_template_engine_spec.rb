@@ -39,6 +39,11 @@ describe JspTemplateEngine do
       to = "#{@app}/infrastructure/FreemarkerPathResolver.java"
       File.exist?(to).should be_false
     end
-
+    
+    it "should create prelude.jspf" do
+      source = "#{JspTemplateEngine.source_root}/prelude.jspf"
+      destination = "#{@web_inf}/jsp/prelude.jspf"
+      exists_and_identical?(source, destination)
+    end
   end
 end

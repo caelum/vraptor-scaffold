@@ -140,12 +140,6 @@ describe AppGenerator do
         exists_and_identical?(source, destination)
       end
 
-      it "should create prelude.jspf" do
-        source = "#{AppGenerator.source_root}/jsp/prelude.jspf"
-        destination = "#{@web_inf}/jsp/WEB-INF/jsp/prelude.jspf"
-        exists_and_identical?(source, destination)
-      end
-
       it "should create images folder" do
         File.exist?("#{@webapp}/images").should be_true 
       end
