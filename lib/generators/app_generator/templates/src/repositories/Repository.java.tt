@@ -45,5 +45,4 @@ public abstract class Repository<T, I extends Serializable> {
 
 		return resultList;
 	}
-
 }

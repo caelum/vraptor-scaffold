@@ -5,13 +5,20 @@ import java.lang.reflect.ParameterizedType;
 import java.util.List;
 
 import javax.persistence.EntityManager;
+import javax.persistence.Query;
 
 public abstract class Repository<T, I extends Serializable> {
 	
 	protected final EntityManager entityManager;
-	
-	public Repository(EntityManager entityManager) {
+	protected final Class<T> clazz;
+
+	protected Repository(EntityManager entityManager) {
 		this.entityManager = entityManager;
+		
+		@SuppressWarnings("unchecked")
+		Class<T> clazz = (Class<T>) ((ParameterizedType) getClass().getGenericSuperclass()).getActualTypeArguments()[0];
+
+		this.clazz = clazz;
 	}
 	
 	public void create(T entity) {
@@ -27,17 +34,15 @@ public abstract class Repository<T, I extends Serializable> {
 	}
 	
 	public T find(I id) {
-		return entityManager.find(getParameterizedClass(), id);
+		return entityManager.find(clazz, id);
 	}
 	
-	@SuppressWarnings("unchecked")
 	public List<T> findAll() {
-		return entityManager.createQuery("From " + getParameterizedClass().getName()).getResultList();
-	}
-	
-	@SuppressWarnings("unchecked")
-	private Class<T> getParameterizedClass() {
-		ParameterizedType parameterizedType = (ParameterizedType) getClass().getGenericSuperclass();
-		return (Class<T>) parameterizedType.getActualTypeArguments()[0];
+		Query query = entityManager.createQuery("from " + clazz.getName());
+
+		@SuppressWarnings("unchecked")
+		List<T> resultList = query.getResultList();
+
+		return resultList;
 	}
 }
