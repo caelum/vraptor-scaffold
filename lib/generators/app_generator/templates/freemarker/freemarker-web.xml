@@ -20,4 +20,3 @@
 		<servlet-name>sitemesh-freemarker</servlet-name>
 		<url-pattern>*.ftl</url-pattern>
 	</servlet-mapping>
-

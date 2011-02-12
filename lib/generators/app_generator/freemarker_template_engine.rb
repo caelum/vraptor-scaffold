@@ -41,5 +41,4 @@ class FreemarkerTemplateEngine < VraptorScaffold::Base
   def infra_path
     File.join Configuration::MAIN_SRC, package.gsub(".", File::Separator), "infrastructure"
   end
-  
 end

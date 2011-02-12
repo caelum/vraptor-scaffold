@@ -122,12 +122,6 @@ describe AppGenerator do
         File.exist?(@web_inf).should be_true 
       end
 
-      it "should create web.xml" do
-        source = "#{AppGenerator.source_root}/webapp/WEB-INF/web.xml"
-        destination = "#{@web_inf}/web.xml"
-        exists_and_identical?(source, destination)
-      end
-
       it "should create scaffold css" do
         source = "#{AppGenerator.source_root}/webapp/stylesheets/scaffold.css"
         destination = "#{@webapp}/stylesheets/scaffold.css"

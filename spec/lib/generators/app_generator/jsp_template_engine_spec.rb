@@ -40,6 +40,12 @@ describe JspTemplateEngine do
       File.exist?(to).should be_false
     end
     
+    it "should create web.xml" do
+      source = File.join File.dirname(__FILE__), "templates", "jsp-web.xml"
+      destination = "#{@web_inf}/web.xml"
+      exists_and_identical?(source, destination)
+    end
+    
     it "should create prelude.jspf" do
       source = "#{JspTemplateEngine.source_root}/prelude.jspf"
       destination = "#{@web_inf}/jsp/prelude.jspf"

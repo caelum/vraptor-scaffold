@@ -25,10 +25,10 @@ describe FreemarkerTemplateEngine do
       exists_and_identical?(source, destination)
     end
 
-    it "should append freemarker servlet in web.xml" do
-      source = File.join FreemarkerTemplateEngine.source_root, "freemarker-web.xml"
-      web_xml = "#{@web_inf}/web.xml"
-      File.read(web_xml).should include(File.read(source))
+    it "should create web.xml" do
+      source = File.join File.dirname(__FILE__), "templates", "freemarker-web.xml"
+      destination = "#{@web_inf}/web.xml"
+      exists_and_identical?(source, destination)
     end
 
     it "should create views folder" do
