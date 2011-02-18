@@ -10,8 +10,7 @@
 	</configurations>
 
 	<dependencies>
-		<dependency org="br.com.caelum" name="vraptor" rev="3.3.0" conf="default" />
-		<dependency org="net.sf.scannotation" name="scannotation" rev="1.0.2" conf="default" />
+		<dependency org="br.com.caelum" name="vraptor" rev="3.3.1" conf="default" />
 		<dependency org="org.hsqldb" name="hsqldb" rev="2.0.0" conf="default" />
 		<dependency org="opensymphony" name="sitemesh" rev="2.4.2" conf="default" />
 		<dependency org="javax.servlet" name="jstl" rev="1.2" conf="default" />

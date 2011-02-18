@@ -65,12 +65,7 @@
 		<dependency>
 			<groupId>br.com.caelum</groupId>
 			<artifactId>vraptor</artifactId>
-			<version>3.3.0</version>
-		</dependency>
-		<dependency>
-			<groupId>net.sf.scannotation</groupId>
-			<artifactId>scannotation</artifactId>
-			<version>1.0.2</version>
+			<version>3.3.1</version>
 		</dependency>
 		<dependency>
 			<groupId>org.hsqldb</groupId>

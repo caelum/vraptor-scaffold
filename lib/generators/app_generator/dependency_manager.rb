@@ -22,8 +22,8 @@ class DependencyManager
   
   private
   def default_dependencies
-    [ Dependency.new("br.com.caelum", "vraptor", "3.3.0"),
-        Dependency.new("net.sf.scannotation", "scannotation", "1.0.2"), Dependency.new("org.hsqldb", "hsqldb", "2.0.0"),
+    [ Dependency.new("br.com.caelum", "vraptor", "3.3.1"),
+        Dependency.new("org.hsqldb", "hsqldb", "2.0.0"),
         Dependency.new("opensymphony", "sitemesh", "2.4.2"), Dependency.new("javax.servlet", "jstl", "1.2"),
         Dependency.new("org.hibernate", "hibernate-entitymanager", "3.6.1.Final"),
         Dependency.new("org.hibernate", "hibernate-validator", "4.1.0.Final"),
