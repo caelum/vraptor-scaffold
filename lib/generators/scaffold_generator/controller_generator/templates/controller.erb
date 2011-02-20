@@ -6,7 +6,6 @@ import <%= Configuration.package %>.models.<%= class_name %>;
 import <%= Configuration.package %>.repositories.<%= repository_interface_name %>;
 import br.com.caelum.vraptor.Delete;
 import br.com.caelum.vraptor.Get;
-import br.com.caelum.vraptor.Path;
 import br.com.caelum.vraptor.Post;
 import br.com.caelum.vraptor.Put;
 import br.com.caelum.vraptor.Resource;
@@ -26,14 +25,12 @@ public class <%= controller_class_name %> {
 		this.validator = validator;
 	}
 	
-	@Get
-	@Path("<%= path %>")
+	@Get("<%= path %>")
 	public List<<%= class_name %>> index() {
 		return repository.findAll();
 	}
 	
-	@Post
-	@Path("<%= path %>")
+	@Post("<%= path %>")
 	public void create(<%= class_name %> <%= model_parameter_name %>) {
 		validator.validate(<%= model_parameter_name %>);
 		validator.onErrorUsePageOf(this).new<%= class_name %>();
@@ -41,14 +38,12 @@ public class <%= controller_class_name %> {
 		result.redirectTo(this).index();
 	}
 	
-	@Get
-	@Path("<%= "#{path}/new" %>")
+	@Get("<%= "#{path}/new" %>")
 	public <%= class_name %> new<%= class_name %>() {
 		return new <%= class_name %>();
 	}
 	
-	@Put
-	@Path("<%= path %>")
+	@Put("<%= path %>")
 	public void update(<%= class_name %> <%= model_parameter_name %>) {
 		validator.validate(<%= model_parameter_name %>);
 		validator.onErrorUsePageOf(this).edit(<%= model_parameter_name %>);
@@ -56,23 +51,19 @@ public class <%= controller_class_name %> {
 		result.redirectTo(this).index();
 	}
 	
-	@Get
-	@Path("<%= "#{path}/{#{model_parameter_name}.id}/edit" %>")
+	@Get("<%= "#{path}/{#{model_parameter_name}.id}/edit" %>")
 	public <%= class_name %> edit(<%= class_name %> <%= model_parameter_name %>) {
 		return repository.find(<%= model_parameter_name %>.getId());
 	}
 
-	@Get
-	@Path("<%= "#{path}/{#{model_parameter_name}.id}" %>")
+	@Get("<%= "#{path}/{#{model_parameter_name}.id}" %>")
 	public <%= class_name %> show(<%= class_name %> <%= model_parameter_name %>) {
 		return repository.find(<%= model_parameter_name %>.getId());
 	}
 
-	@Delete
-	@Path("<%= "#{path}/{#{model_parameter_name}.id}" %>")
+	@Delete("<%= "#{path}/{#{model_parameter_name}.id}" %>")
 	public void destroy(<%= class_name %> <%= model_parameter_name %>) {
 		repository.destroy(repository.find(<%= model_parameter_name %>.getId()));
 		result.redirectTo(this).index();  
 	}
-	
 }
