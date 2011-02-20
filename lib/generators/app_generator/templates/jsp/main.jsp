@@ -6,11 +6,11 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <title><decorator:title default="Vraptor Scaffold"/></title>
-    <link rel="stylesheet" type="text/css" href="<c:url value="/stylesheets/stylesheets.css"/>" />  
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/stylesheets/stylesheets.css"/>  
     <decorator:head/>
   </head>
   <body>
     <decorator:body/>
-    <script type="text/javascript" src="<c:url value="/javascripts/jquery.min.js"/>"></script>
+    <script type="text/javascript" src="${pageContext.request.contextPath}/javascripts/jquery.min.js"/></script>
   </body>
 </html>

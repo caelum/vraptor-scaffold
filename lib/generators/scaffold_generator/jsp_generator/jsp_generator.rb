@@ -17,6 +17,6 @@ class JspGenerator < BaseScaffold
   end
   
   def path url=""
-    %Q{<c:url value="/#{@model.pluralize}#{url}"/>}
+    %Q{${pageContext.request.contextPath}/#{@model.pluralize}#{url}}
   end
 end
