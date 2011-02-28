@@ -4,16 +4,19 @@
 * JPA 2 support using hibernate 3.6.1.Final. (Issue 13)
 * ant task to minify js and css. (Issue 27)
 * created prelude to automatic import taglibs in jsp.
-* added css reset to reduce browsers inconsistencies.
 
 == Improvements
 * updated hibernate validator to 4.1.0.Final.
-* changed html DTD to XHTML.
-* declared css encoding.
-* better repository and controller encapsulation.
-* added head with title tag for sitemesh capture it in jsp views.
 * updated vraptor to 3.3.1.
 * updated jquery to 1.5.1.
+* added head with title tag for sitemesh capture it in jsp views.
+* changed html DTD to XHTML.
+* declared css encoding (UTF-8).
+* created application.js.
+* better repository and controller encapsulation.
+* better controller template.
+* specified the exact location of SuppressWarnings, like Clean Code technique.
+* changed jeweler to bundler. (Issue 26)
 
 === 1.0.0 / 2011-02-04
 
