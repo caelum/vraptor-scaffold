@@ -128,9 +128,27 @@ describe AppGenerator do
         exists_and_identical?(source, destination)
       end
 
+      it "should create common css" do
+        source = "#{AppGenerator.source_root}/webapp/stylesheets/common.css"
+        destination = "#{@webapp}/stylesheets/common.css"
+        exists_and_identical?(source, destination)
+      end
+
+      it "should create stylesheets css" do
+        source = "#{AppGenerator.source_root}/webapp/stylesheets/stylesheets.css"
+        destination = "#{@webapp}/stylesheets/stylesheets.css"
+        exists_and_identical?(source, destination)
+      end
+
       it "should create jquery js" do
         source = "#{AppGenerator.source_root}/webapp/javascripts/jquery.min.js"
         destination = "#{@webapp}/javascripts/jquery.min.js"
+        exists_and_identical?(source, destination)
+      end
+
+      it "should create application js" do
+        source = "#{AppGenerator.source_root}/webapp/javascripts/application.js"
+        destination = "#{@webapp}/javascripts/application.js"
         exists_and_identical?(source, destination)
       end
 

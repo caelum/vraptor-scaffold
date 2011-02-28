@@ -2,7 +2,7 @@
 <html>
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <@html.css "scaffold"/>  
+    <@html.css "stylesheets"/>
     <title>Vraptor Scaffold</title>
     ${head}
   </head>
@@ -10,5 +10,6 @@
   <body>
     ${body}
     <@html.js "jquery.min"/>
+    <@html.js "application"/>
   </body>
 </html>

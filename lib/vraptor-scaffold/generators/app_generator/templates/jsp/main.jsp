@@ -12,5 +12,6 @@
   <body>
     <decorator:body/>
     <script type="text/javascript" src="${pageContext.request.contextPath}/javascripts/jquery.min.js"/></script>
+    <script type="text/javascript" src="${pageContext.request.contextPath}/javascripts/application.js"/></script>
   </body>
 </html>
