@@ -15,15 +15,14 @@ Gem::Specification.new do |s|
   
   s.add_dependency('thor', '0.14.6')
   s.add_dependency('activesupport', "3.0.1")
-  
+  s.add_dependency('rake', '0.8.7')
+
   s.add_development_dependency('rspec', '1.3.1')
   s.add_development_dependency('ZenTest', '4.4.0')
   s.add_development_dependency('rcov', '0.9.9')
-  s.add_development_dependency('ruby-debug')
-  s.add_development_dependency('rake', '0.8.7')
 
   s.files         = `git ls-files`.split("\n")
-  s.test_files    = `git ls-files -- {test,spec,features}/*`.split("\n")
+  s.test_files    = `git ls-files -- {spec}/*`.split("\n")
   s.executables   = `git ls-files -- bin/*`.split("\n").map{ |f| File.basename(f) }
   s.require_paths = ["lib"]
 end
