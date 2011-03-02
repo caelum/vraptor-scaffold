@@ -1,4 +1,4 @@
-=== 1.1.0 / 2011-??-??
+=== 1.1.0 / 2011-03-02
 
 == New Features
 * JPA 2 support using hibernate 3.6.1.Final. (Issue 13)
