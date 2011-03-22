@@ -11,7 +11,6 @@ import br.com.caelum.vraptor.Put;
 import br.com.caelum.vraptor.Resource;
 import br.com.caelum.vraptor.Result;
 import br.com.caelum.vraptor.Validator;
-import br.com.caelum.vraptor.authz.annotation.AuthzBypass;
 
 @Resource
 public class UserController {
@@ -31,7 +30,7 @@ public class UserController {
 		return repository.findAll();
 	}
 	
-	@Post("/users") @AuthzBypass
+	@Post("/users")
 	public void create(User user) {
 		validator.validate(user);
 		validator.onErrorUsePageOf(this).newUser();
@@ -40,7 +39,6 @@ public class UserController {
 	}
 	
 	@Get("/users/new")
-	@AuthzBypass
 	public User newUser() {
 		return new User();
 	}
