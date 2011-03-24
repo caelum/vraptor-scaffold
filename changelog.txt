@@ -1,3 +1,9 @@
+=== 1.2.0 / 2011-??-??
+
+== New Features
+
+== Improvements
+
 === 1.1.0 / 2011-03-02
 
 == New Features
@@ -82,7 +88,7 @@
 == Bugfixes
 * Works on windows OS.
 
-=== 0.0.1.beta4 / 2010-08-04
+=== 0.0.1.beta5 / 2010-08-04
 
 == New Features
 * Added generic repository.
