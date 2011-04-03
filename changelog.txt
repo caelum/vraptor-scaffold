@@ -1,3 +1,13 @@
+=== 1.2.0 / 2011-??-??
+
+== New Features
+* added c3p0 pool configurations.
+
+== Improvements
+* removed unnecessary EJB provider configuration.
+* updated hibernate to 3.6.2.Final.
+* updated maven war plugin to 2.1.1.
+
 === 1.1.0 / 2011-03-02
 
 == New Features
@@ -82,7 +92,7 @@
 == Bugfixes
 * Works on windows OS.
 
-=== 0.0.1.beta4 / 2010-08-04
+=== 0.0.1.beta5 / 2010-08-04
 
 == New Features
 * Added generic repository.
