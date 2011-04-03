@@ -101,35 +101,35 @@ describe Attribute do
   end
 
   context "java type" do
-    it "should know corret java type to boolean" do
+    it "should know correct java type to boolean" do
       Attribute.new("flag", "boolean").java_type.should eql("boolean")
     end
 
-    it "should know corret java type to text" do
+    it "should know correct java type to text" do
       Attribute.new("description", "text").java_type.should eql("String")
     end
 
-    it "should know corret java type to string" do
+    it "should know correct java type to string" do
       Attribute.new("name", "string").java_type.should eql("String")
     end
 
-    it "should know corret java type to double" do
+    it "should know correct java type to double" do
       Attribute.new("name", "double").java_type.should eql("Double")
     end
 
-    it "should know corret java type to float" do
+    it "should know correct java type to float" do
       Attribute.new("name", "float").java_type.should eql("Float")
     end
 
-    it "should know corret java type to short" do
+    it "should know correct java type to short" do
       Attribute.new("name", "short").java_type.should eql("Short")
     end
 
-    it "should know corret java type to integer" do
+    it "should know correct java type to integer" do
       Attribute.new("name", "integer").java_type.should eql("Integer")
     end
 
-    it "should know corret java type to long" do
+    it "should know correct java type to long" do
       Attribute.new("name", "long").java_type.should eql("Long")
     end
   end
