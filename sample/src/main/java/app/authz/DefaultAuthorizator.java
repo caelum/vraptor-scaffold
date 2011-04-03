@@ -20,6 +20,6 @@ public class DefaultAuthorizator implements Authorizator {
 	@Override
 	public boolean isAllowed(Role role, String url, EnumSet<HttpMethod> httpMethods) {
 		return userSession.isLogged();
-		//TODO: verify if user can access the resource.
+		//TODO: verify if user's role can access the resource.
 	}
 }

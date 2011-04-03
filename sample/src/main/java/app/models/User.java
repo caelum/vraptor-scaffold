@@ -1,17 +1,22 @@
 package app.models;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 
 import org.hibernate.validator.constraints.Email;
 
 @javax.persistence.Entity
-public class User extends Entity {
+public class User extends Entity implements Serializable {
 	
+	private static final long serialVersionUID = -9178076802437667656L;
+
 	private String name;
 	
-	@Email @Column(unique = true)
+	@Email @Column(unique = true, nullable = false)
 	private String email;
 	
+	@Column(nullable = false)
 	private String password;
 	
 	public void setName(String name) {
@@ -37,4 +42,6 @@ public class User extends Entity {
 	public String getEmail() {
 		return email;
 	}
+
+
 }
