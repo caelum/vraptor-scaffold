@@ -8,7 +8,7 @@ import br.com.caelum.vraptor.ioc.Component;
 
 @Component
 public class DefaultAuthzInfo implements AuthzInfo {
-
+	
 	@Override
 	public Authorizable getAuthorizable() {
 		return new DefaultAuthorizable();
