@@ -11,11 +11,12 @@ h1. Getting Started
 
 At the command line client:
  
-* vraptor new myapp
-* Change directory into myapp
-* vraptor scaffold product name:string value:double
-* ant jetty.run
-* Go http://localhost:8080/products
+	vraptor new myapp
+	cd myapp
+	vraptor scaffold product name:string value:double
+	ant jetty.run
+	
+	open http://localhost:8080/products
 
 h2. Note on Patches/Pull Requests
  
