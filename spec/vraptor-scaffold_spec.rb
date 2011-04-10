@@ -7,32 +7,30 @@ describe VraptorScaffold do
       generator = mock(AppGenerator)
       generator.stub!(:invoke_all)
       AppGenerator.stub!(:new).and_return(generator)
-      AppGenerator.should_receive(:start).with(["-h"])
-      Kernel.should_receive(:exit)
     end 
 
     it "should print help when vraptor" do
-      VraptorScaffold.execute([])
+      VraptorScaffold::Execution.new.run([])
     end
 
     it "should print help when vraptor -h" do
-      VraptorScaffold.execute(["-h"])
+      VraptorScaffold::Execution.new.run(["-h"])
     end
 
     it "should print help when vraptor --help" do
-      VraptorScaffold.execute(["--help"])
+      VraptorScaffold::Execution.new.run(["--help"])
     end
 
     it "should print help when vraptor new" do
-      VraptorScaffold.execute(["new"])
+      VraptorScaffold::Execution.new.run(["new"])
     end
 
     it "should print help when vraptor new -h" do
-      VraptorScaffold.execute(["new", "-h"])
+      VraptorScaffold::Execution.new.run(["new", "-h"])
     end
 
     it "should print help when vraptor new --help" do
-      VraptorScaffold.execute(["new", "--help"])
+      VraptorScaffold::Execution.new.run(["new", "--help"])
     end
   end
 
@@ -47,7 +45,7 @@ describe VraptorScaffold do
 
     it "should invoke all app generator tasks when typed new" do
       @generator.should_receive(:invoke_all)
-      VraptorScaffold.execute(@args)
+      VraptorScaffold::Execution.new.run(@args)
     end
   end
 
@@ -58,19 +56,18 @@ describe VraptorScaffold do
       generator.stub!(:invoke_all)
       ScaffoldGenerator.stub!(:new).and_return(generator)
       ScaffoldGenerator.should_receive(:start).with(["-h"])
-      Kernel.should_receive(:exit)
     end 
 
     it "should print help when vraptor scaffold" do
-      VraptorScaffold.execute(["scaffold"])
+      VraptorScaffold::Execution.new.run(["scaffold"])
     end
 
     it "should print help when vraptor scaffold -h" do
-      VraptorScaffold.execute(["scaffold", "-h"])
+      VraptorScaffold::Execution.new.run(["scaffold", "-h"])
     end
 
     it "should print help when vraptor scaffold --help" do
-      VraptorScaffold.execute(["scaffold", "--help"])
+      VraptorScaffold::Execution.new.run(["scaffold", "--help"])
     end
   end
 
@@ -84,14 +81,13 @@ describe VraptorScaffold do
     it "should invoke all scaffold generator tasks" do
       File.stub!(:exist?).and_return(true)
       @generator.should_receive(:invoke_all)
-      VraptorScaffold.execute(@args)
+      VraptorScaffold::Execution.new.run(@args)
     end
 
     it "cannot invoke scaffold generator outsite root folder" do
       File.stub!(:exist?).and_return(false)
-      Kernel.should_receive(:exit)
       @generator.stub!(:invoke_all)
-      VraptorScaffold.execute(@args)
+      VraptorScaffold::Execution.new.run(@args)
     end
   end
 end
