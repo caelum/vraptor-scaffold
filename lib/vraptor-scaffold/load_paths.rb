@@ -1,11 +1,3 @@
-require 'rubygems'
-
-require 'thor/actions'
-require 'thor/group'
-require 'active_support/inflector'
-require 'yaml'
-
-require File.dirname(__FILE__) + '/configuration'
 require File.dirname(__FILE__) + '/generators/base'
 require File.dirname(__FILE__) + '/generators/app_generator/app_generator'
 require File.dirname(__FILE__) + '/generators/app_generator/dependency'
