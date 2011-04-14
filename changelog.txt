@@ -87,7 +87,7 @@
 * Added text support(textarea).
 
 == Improvements
-* Create forder to put images.
+* Create folder to put images.
 
 == Bugfixes
 * Works on windows OS.

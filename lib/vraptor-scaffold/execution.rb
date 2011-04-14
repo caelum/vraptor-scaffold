@@ -14,7 +14,6 @@ module VraptorScaffold
   end
 
   COMMANDS = {"--help" => Runner::Generator,
-    nil => Runner::Generator,
     "-h" => Runner::Generator,
     "new" => Runner::Generator,
     "scaffold" => Runner::Scaffold,

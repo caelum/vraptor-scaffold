@@ -7,8 +7,8 @@ describe VraptorScaffold::Execution do
   end
 
   context "discover runner for action" do
-    it "should be app generator when no action action" do
-      @execution.runner_for(nil).should == VraptorScaffold::Runner::Generator
+    it "should be commands help when no action" do
+      @execution.runner_for(nil).should == VraptorScaffold::Runner::CommandsHelp
     end
 
     it "should be app generator when -h action" do
@@ -27,18 +27,17 @@ describe VraptorScaffold::Execution do
       @execution.runner_for("scaffold").should == VraptorScaffold::Runner::Scaffold
     end
 
-    it "should be commands when scaffold when unknown action" do
+    it "should be commands help when scaffold when unknown action" do
       @execution.runner_for("xpto").should == VraptorScaffold::Runner::CommandsHelp
     end
   end
 
-  context "run action" do
-    it "should discover runner and run" do
-      runner = mock(VraptorScaffold::Runner::Generator)
-      runner.stub!(:new).and_return runner
-      runner.should_receive(:run).with(['app'])
-      @execution.stub!(:runner_for).with('new').and_return(runner)
-      @execution.run(['new', 'app'])
-    end
+  it "should discover runner and run" do
+    runner = mock(VraptorScaffold::Runner::Generator)
+    runner.stub!(:new).and_return runner
+    runner.should_receive(:run).with(['app'])
+    @execution.stub!(:runner_for).with('new').and_return(runner)
+    @execution.run(['new', 'app'])
   end
+  
 end

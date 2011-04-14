@@ -3,9 +3,11 @@ module VraptorScaffold
 
     class CommandsHelp
       def run(args)
-        puts "Available runners for vraptor are:"
-        puts VraptorScaffold::COMMANDS.inspect
+        Kernel.puts "Available runners for vraptor are: #{VraptorScaffold::COMMANDS.keys.join(', ')}"
+        Kernel.puts "Usage:"
+        Kernel.puts "  vraptor runner"
       end
     end
+
   end
 end
