@@ -27,6 +27,10 @@ describe VraptorScaffold::Execution do
       @execution.runner_for("scaffold").should == VraptorScaffold::Runner::Scaffold
     end
 
+    it "should be plugin generator when plugin action" do
+      @execution.runner_for("plugin").should == VraptorScaffold::Runner::Plugin
+    end
+
     it "should be commands help when scaffold when unknown action" do
       @execution.runner_for("xpto").should == VraptorScaffold::Runner::CommandsHelp
     end
