@@ -1,4 +1,5 @@
 require File.dirname(__FILE__) + '/generators/base'
+require File.dirname(__FILE__) + '/generators/plugin_generator'
 require File.dirname(__FILE__) + '/generators/app/app_generator'
 require File.dirname(__FILE__) + '/generators/app/dependency'
 require File.dirname(__FILE__) + '/generators/app/dependency_manager'
