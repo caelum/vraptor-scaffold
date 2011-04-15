@@ -18,6 +18,6 @@ module VraptorScaffold
     "new" => Runner::Generator,
     "scaffold" => Runner::Scaffold,
     "plugin" => Runner::Plugin
-    }
+  }
   
 end
