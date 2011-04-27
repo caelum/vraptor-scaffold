@@ -36,7 +36,7 @@ describe Configuration do
 
   context "load config file" do
     before(:each) do
-      config = {"template_engine" => "jsp", "package" => "br.com.caelum"}
+      config = {"template_engine" => "jsp", "package" => "br.com.caelum", "orm" => "jpa"}
       YAML.stub!(:load_file).with(Configuration::FILENAME).and_return(config)
     end
 
@@ -46,6 +46,10 @@ describe Configuration do
 
     it "should know base package" do
       Configuration.package.should == "br.com.caelum"  
+    end
+
+    it "should know orm" do
+      Configuration.orm.should == "jpa"
     end
 
     it "should build main class path with base package" do
