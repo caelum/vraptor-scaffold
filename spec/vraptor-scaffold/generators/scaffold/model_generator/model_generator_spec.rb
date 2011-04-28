@@ -22,4 +22,8 @@ describe ModelGenerator do
     test_class = Configuration.test_class_path "models", "ProductTest.java"
     File.exist?(test_class).should be_true 
   end
+
+  it "should map hibernate.cfg.xml when orm is hibernate" do
+    pending
+  end
 end	
