@@ -2,6 +2,7 @@ class AppGenerator < VraptorScaffold::Base
 
   TEMPLATE_ENGINES = %w( jsp ftl )
   BUILD_TOOLS = %w( ant mvn gradle )
+  ORMS = %w( jpa hibernate )
   IVY_JAR = "ivy-2.2.0.jar"
 
   argument :project_path
@@ -15,8 +16,12 @@ class AppGenerator < VraptorScaffold::Base
   class_option :build_tool, :default => "ant", :aliases => "-b", 
     :desc => "Build tools (options: #{BUILD_TOOLS.join(', ')})"
   
+  class_option :orm, :default => "jpa", :aliases => "-o",
+    :desc => "Object-relational mapping (options: #{ORMS.join(', ')})"
+
   class_option :skip_eclipse, :type => :boolean, :aliases => "-E",
     :desc => "Skip Eclipse files"
+
 
   def self.source_root
     File.join File.dirname(__FILE__), "templates"
