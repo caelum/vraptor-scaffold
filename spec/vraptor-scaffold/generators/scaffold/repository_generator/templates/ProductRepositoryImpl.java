@@ -6,7 +6,7 @@ import br.com.caelum.vraptor.ioc.Component;
 import app.models.Product;
 
 @Component
-public class ProductRepositoryImpl 
+public class ProductRepositoryImpl
     extends Repository<Product, Long>
     implements ProductRepository {
 
