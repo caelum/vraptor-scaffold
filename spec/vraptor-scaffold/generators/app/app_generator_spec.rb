@@ -97,12 +97,16 @@ describe AppGenerator do
         exists_and_identical?(source, destination)
       end
 
+      it "cannot create hibernate.cfg.xml" do
+        File.exist?("#{@main_resources}/hibernate.cfg.xml").should be_false
+      end
+
       it "should create META-INF" do
         File.exist?(@meta_inf).should be_true 
       end
 
       it "should create persistence.xml" do
-        source = "#{AppGenerator.source_root}/resources/META-INF/persistence.xml"
+        source = "#{AppGenerator.source_root}/orm/persistence.xml"
         destination = "#{@meta_inf}/persistence.xml"
         exists_and_identical?(source, destination)
       end
