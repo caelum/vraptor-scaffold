@@ -12,7 +12,7 @@ describe FreemarkerTemplateEngine do
 
   context "configuring" do
     before(:all) do
-      AppGenerator.new(@project_path, ["--template-engine=ftl", "-p=br.com.caelum"]).invoke_all
+      AppGenerator.new(@project_path, ["--template-engine=ftl", "-p=br.com.caelum", "--orm=hibernate"]).invoke_all
     end
 
     after(:all) do

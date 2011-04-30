@@ -22,7 +22,6 @@ class AppGenerator < VraptorScaffold::Base
   class_option :skip_eclipse, :type => :boolean, :aliases => "-E",
     :desc => "Skip Eclipse files"
 
-
   def self.source_root
     File.join File.dirname(__FILE__), "templates"
   end

@@ -3,11 +3,11 @@
 	xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
 	id="WebApp_ID" version="2.5">
 
-	<display-name>vraptor-scaffold-project</display-name>
+	<display-name><%= @project_name %></display-name>
 
 	<context-param>
 		<param-name>br.com.caelum.vraptor.packages</param-name>
-		<param-value>br.com.caelum.vraptor.util.jpa</param-value>
+		<param-value>br.com.caelum.vraptor.util.<%= options[:orm] %></param-value>
 	</context-param>
 
 	<context-param>
