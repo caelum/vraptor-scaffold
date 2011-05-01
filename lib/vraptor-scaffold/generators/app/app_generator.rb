@@ -68,9 +68,13 @@ class AppGenerator < VraptorScaffold::Base
 
   def create_main_resources
     directory("resources", Configuration::MAIN_RESOURCES)
-    metainf = File.join Configuration::MAIN_RESOURCES, 'META-INF'
-    empty_directory metainf
-    copy_file("orm/persistence.xml", (File.join metainf, "persistence.xml"))
+    if (options[:orm] == "hibernate")
+      copy_file("orm/hibernate.cfg.xml", (File.join Configuration::MAIN_RESOURCES, "hibernate.cfg.xml"))
+    else
+      metainf = File.join Configuration::MAIN_RESOURCES, 'META-INF'
+      empty_directory metainf
+      copy_file("orm/persistence.xml", (File.join metainf, "persistence.xml"))
+    end
   end
 
   def create_webapp

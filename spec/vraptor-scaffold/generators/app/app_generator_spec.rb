@@ -70,10 +70,37 @@ describe AppGenerator do
     end
 
     context "creating main resources" do
-      before(:all) do
+      before(:each) do
         @main_resources = "#{@project_path}/#{Configuration::MAIN_RESOURCES}"
         @meta_inf = "#{@main_resources}/META-INF"
-      end 
+      end
+
+      context "hibernate orm" do
+        before(:all) do
+          @project_path = "src/vraptor-scaffold-hibernate"
+          @main_resources = "#{@project_path}/#{Configuration::MAIN_RESOURCES}"
+          @meta_inf = "#{@main_resources}/META-INF"
+          AppGenerator.new(@project_path, ["--orm=hibernate"]).invoke_all
+        end
+
+        after(:all) do
+          FileUtils.remove_dir("src/vraptor-scaffold-hibernate")
+        end
+
+        it "should create hibernate.cfg.xml" do
+          source = "#{AppGenerator.source_root}/orm/hibernate.cfg.xml"
+          destination = "#{@main_resources}/hibernate.cfg.xml"
+          exists_and_identical?(source, destination)
+        end
+
+        it "cannot create META-INF" do
+          File.exist?(@meta_inf).should be_false
+        end
+
+        it "cannot create persistence.xml" do
+          File.exist?("#{@meta_inf}/persistence.xml").should be_false
+        end
+      end
 
       it "should create resource folder" do
         File.exist?(@main_resources).should be_true 
