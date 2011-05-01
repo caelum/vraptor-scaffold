@@ -63,7 +63,9 @@ class AppGenerator < VraptorScaffold::Base
 
   def create_main_java
     empty_directory Configuration::MAIN_SRC
-    directory("src", File.join(Configuration::MAIN_SRC, options[:package].gsub(".", File::Separator)))
+    src = File.join(Configuration::MAIN_SRC, options[:package].gsub(".", File::Separator))
+    directory("src", src)
+    template("orm/Repository-jpa.java.tt", "#{src}/repositories/Repository.java")
   end
 
   def create_main_resources

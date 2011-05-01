@@ -1,19 +1,19 @@
-package app.repositories;
+package <%= options[:package] %>.repositories;
 
 import java.io.Serializable;
 import java.lang.reflect.ParameterizedType;
 import java.util.List;
 
-import javax.persistence.EntityManager;
-import javax.persistence.Query;
+import org.hibernate.Query;
+import org.hibernate.Session;
 
 public abstract class Repository<T, I extends Serializable> {
 	
-	protected final EntityManager entityManager;
+	protected final Session session;
 	protected final Class<T> clazz;
 
-	protected Repository(EntityManager entityManager) {
-		this.entityManager = entityManager;
+	protected Repository(Session session) {
+		this.session = session;
 		
 		@SuppressWarnings("unchecked")
 		Class<T> clazz = (Class<T>) ((ParameterizedType) getClass().getGenericSuperclass()).getActualTypeArguments()[0];
@@ -22,26 +22,28 @@ public abstract class Repository<T, I extends Serializable> {
 	}
 	
 	public void create(T entity) {
-		entityManager.persist(entity);
+		session.persist(entity);
 	}
 	
+	@SuppressWarnings("unchecked")
 	public T update(T entity) {
-		return entityManager.merge(entity);
+		return (T) session.merge(entity);
 	}
 	
 	public void destroy(T entity) {
-		entityManager.remove(entity);
+		session.delete(entity);
 	}
 	
+	@SuppressWarnings("unchecked")
 	public T find(I id) {
-		return entityManager.find(clazz, id);
+		return (T) session.get(clazz, id);
 	}
 	
 	public List<T> findAll() {
-		Query query = entityManager.createQuery("from " + clazz.getName());
+		Query query = session.createQuery("from " + clazz.getName());
 
 		@SuppressWarnings("unchecked")
-		List<T> resultList = query.getResultList();
+		List<T> resultList = query.list();
 
 		return resultList;
 	}
