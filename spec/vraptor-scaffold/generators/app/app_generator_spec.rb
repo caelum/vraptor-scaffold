@@ -34,6 +34,12 @@ describe AppGenerator do
       File.exist?("#{@project_path}/.classpath").should be_false
     end
 
+    it "should configure vraptor-scaffold.properties" do
+      source = File.join File.dirname(__FILE__), "templates", "vraptor-scaffold.properties"
+      destination = "#{@project_path}/#{Configuration::FILENAME}"
+      exists_and_identical?(source, destination)
+    end
+
     context "creating main java" do
       before(:all) do
         @main_java = "#{@project_path}/#{Configuration::MAIN_SRC}"
