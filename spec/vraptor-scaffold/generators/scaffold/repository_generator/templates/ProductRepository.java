@@ -11,7 +11,7 @@ public interface ProductRepository {
 	 
 	void create(Product entity);
 	
-	void update(Product entity);
+	Product update(Product entity);
 	
 	void destroy(Product entity);
 	

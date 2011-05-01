@@ -11,7 +11,7 @@ public interface ClientRepository {
 	 
 	void create(Client entity);
 	
-	void update(Client entity);
+	Client update(Client entity);
 	
 	void destroy(Client entity);
 	
