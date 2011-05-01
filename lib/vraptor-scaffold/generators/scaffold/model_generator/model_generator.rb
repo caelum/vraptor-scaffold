@@ -10,9 +10,11 @@ class ModelGenerator < BaseScaffold
     map_orm_class if Configuration.orm.eql? 'hibernate'
   end
 
+  private
   def map_orm_class
     file = File.join Configuration::MAIN_RESOURCES, "hibernate.cfg.xml"
     model = "#{Configuration.package}.models.#{class_name}"
-    inject_into_file(file, "<mapping class='#{model}'/>", :before => "</session-factory>")
+    line_break = "\n	"
+    inject_into_file(file, "	<mapping class='#{model}'/>#{line_break}", :before => "</session-factory>")
   end
 end

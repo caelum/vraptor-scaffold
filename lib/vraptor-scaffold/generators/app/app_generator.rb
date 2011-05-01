@@ -70,6 +70,9 @@ class AppGenerator < VraptorScaffold::Base
 
   def create_main_resources
     directory("resources", Configuration::MAIN_RESOURCES)
+  end
+
+  def configure_orm
     if (options[:orm] == "hibernate")
       copy_file("orm/hibernate.cfg.xml", (File.join Configuration::MAIN_RESOURCES, "hibernate.cfg.xml"))
     else
