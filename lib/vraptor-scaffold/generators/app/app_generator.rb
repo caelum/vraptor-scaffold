@@ -8,22 +8,25 @@ class AppGenerator < VraptorScaffold::Base
   argument :project_path
 
   class_option :template_engine, :default => "jsp", :aliases => "-e",
-    :desc => "Template engine (options: #{TEMPLATE_ENGINES.join(', ')})"
+               :desc => "Template engine (options: #{TEMPLATE_ENGINES.join(', ')})"
 
-  class_option :package, :default => "app", :aliases => "-p", 
-    :desc => "Base package"
+  class_option :package, :default => "app", :aliases => "-p",
+               :desc => "Base package"
 
   class_option :models_package, :aliases => "-m", :default => "models",
                :desc => "Define models package"
 
+  class_option :controllers_package, :aliases => "-c", :default => "controllers",
+               :desc => "Define controllers package"
+
   class_option :build_tool, :default => "ant", :aliases => "-b",
-  :desc => "Build tools (options: #{BUILD_TOOLS.join(', ')})"
+               :desc => "Build tools (options: #{BUILD_TOOLS.join(', ')})"
 
   class_option :orm, :default => "jpa", :aliases => "-o",
-  :desc => "Object-relational mapping (options: #{ORMS.join(', ')})"
+               :desc => "Object-relational mapping (options: #{ORMS.join(', ')})"
 
   class_option :skip_eclipse, :type => :boolean, :aliases => "-E",
-  :desc => "Skip Eclipse files"
+               :desc => "Skip Eclipse files"
 
   def self.source_root
     File.join File.dirname(__FILE__), "templates"
