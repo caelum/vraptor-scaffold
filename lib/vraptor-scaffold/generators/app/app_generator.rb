@@ -19,6 +19,9 @@ class AppGenerator < VraptorScaffold::Base
   class_option :controllers_package, :aliases => "-c", :default => "controllers",
                :desc => "Define controllers package"
 
+  class_option :repositories_package, :aliases => "-r", :default => "repositories",
+               :desc => "Define repositories package"
+
   class_option :build_tool, :default => "ant", :aliases => "-b",
                :desc => "Build tools (options: #{BUILD_TOOLS.join(', ')})"
 

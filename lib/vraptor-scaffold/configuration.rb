@@ -28,6 +28,10 @@ class Configuration
     config["controllers_package"]
   end
 
+  def self.repositories_package
+    config["repositories_package"]
+  end
+
   def self.full_models_package
     "#{package}.#{models_package}"
   end

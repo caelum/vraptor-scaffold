@@ -1,4 +1,4 @@
-package app.repositories;
+package app.repository;
 
 import org.hibernate.Session;
 

@@ -33,7 +33,7 @@ describe RepositoryGenerator do
 
   context "Hibernate" do
     before(:each) do
-      config = {"template_engine" => "jsp", "package" => "app", "orm" => "hibernate"}
+      config = {"template_engine" => "jsp", "package" => "app", "orm" => "hibernate", "repositories_package" => "repository"}
       YAML.stub!(:load_file).with(Configuration::FILENAME).and_return(config)
       @generator = RepositoryGenerator.new("client", build_attributes)
       @generator.build
