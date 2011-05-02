@@ -1,4 +1,4 @@
-package app.repositories;
+package app.repository;
 
 import java.io.Serializable;
 import java.lang.reflect.ParameterizedType;

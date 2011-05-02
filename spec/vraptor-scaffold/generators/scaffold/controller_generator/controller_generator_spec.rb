@@ -14,12 +14,12 @@ describe ControllerGenerator do
 
     it "should create controller" do
       source = File.join File.dirname(__FILE__), "templates", "ProductController.java"
-      destination = Configuration.main_class_path "controllers", "ProductController.java"
+      destination = Configuration.main_class_path "controller", "ProductController.java"
       exists_and_identical?(source, destination)
     end
 
     it "should create controller test" do
-      test_class = Configuration.test_class_path "controllers", "ProductControllerTest.java"
+      test_class = Configuration.test_class_path "controller", "ProductControllerTest.java"
       File.exist?(test_class).should be_true 
     end
   end
@@ -37,12 +37,12 @@ describe ControllerGenerator do
 
     it "should create controller" do
       source = File.join File.dirname(__FILE__), "templates", "ProductController.java"
-      destination = Configuration.main_class_path "controllers", "ProductController.java"
+      destination = Configuration.main_class_path "controller", "ProductController.java"
       exists_and_identical?(source, destination)
     end
 
     it "should create controller test" do
-      test_class = Configuration.test_class_path "controllers", "ProductControllerTest.java"
+      test_class = Configuration.test_class_path "controller", "ProductControllerTest.java"
       File.exist?(test_class).should be_true 
     end
   end

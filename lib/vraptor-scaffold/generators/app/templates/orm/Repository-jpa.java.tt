@@ -1,4 +1,4 @@
-package <%= options[:package] %>.repositories;
+package <%= options[:package] %>.<%= options[:repositories_package] %>;
 
 import java.io.Serializable;
 import java.lang.reflect.ParameterizedType;
