@@ -3,7 +3,7 @@ package <%= Configuration.package %>.<%= Configuration.repositories_package %>;
 import <%= orm_import %>;
 
 import br.com.caelum.vraptor.ioc.Component;
-import <%= Configuration.package %>.models.<%= class_name %>;
+import <%= Configuration.full_models_package %>.<%= class_name %>;
 
 @Component
 public class <%= repository_impl_name %>

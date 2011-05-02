@@ -2,8 +2,8 @@ package <%= Configuration.package %>.<%= Configuration.controllers_package %>;
 
 import java.util.List;
 
-import <%= Configuration.package %>.models.<%= class_name %>;
-import <%= Configuration.package %>.repositories.<%= repository_interface_name %>;
+import <%= Configuration.full_models_package %>.<%= class_name %>;
+import <%= Configuration.package %>.<%= Configuration.repositories_package %>.<%= repository_interface_name %>;
 import br.com.caelum.vraptor.Delete;
 import br.com.caelum.vraptor.Get;
 import br.com.caelum.vraptor.Post;

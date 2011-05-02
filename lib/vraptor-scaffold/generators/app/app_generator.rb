@@ -72,9 +72,23 @@ class AppGenerator < VraptorScaffold::Base
 
   def create_main_java
     empty_directory Configuration::MAIN_SRC
-    src = File.join(Configuration::MAIN_SRC, options[:package].gsub(".", File::Separator))
-    directory("src", src)
-    template("orm/Repository-#{options[:orm]}.java.tt", "#{src}/repositories/Repository.java")
+    @src = File.join(Configuration::MAIN_SRC, options[:package].gsub(".", File::Separator))
+  end
+
+  def create_controllers_directory
+    empty_directory File.join @src, options[:controllers_package]
+  end
+
+  def create_models_directory
+    models_folder = File.join @src, options[:models_package]
+    empty_directory models_folder
+    template("models/Entity.erb", "#{models_folder}/Entity.java")
+  end
+
+  def create_repositories_directory
+    repositories_folder = File.join @src, options[:repositories_package]
+    empty_directory repositories_folder
+    template("orm/Repository-#{options[:orm]}.java.tt", "#{repositories_folder}/Repository.java")
   end
 
   def create_main_resources
@@ -106,7 +120,12 @@ class AppGenerator < VraptorScaffold::Base
 
   def create_test
     empty_directory Configuration::TEST_SRC
-    directory("src-test", File.join(Configuration::TEST_SRC, options[:package].gsub(".", File::Separator)))
+    test_src = File.join(Configuration::TEST_SRC, options[:package].gsub(".", File::Separator))
+
+    empty_directory File.join test_src, options[:controllers_package]
+    empty_directory File.join test_src, options[:models_package]
+    empty_directory File.join test_src, options[:repositories_package]
+    
     directory("resources-test", Configuration::TEST_RESOURCES)
   end
 

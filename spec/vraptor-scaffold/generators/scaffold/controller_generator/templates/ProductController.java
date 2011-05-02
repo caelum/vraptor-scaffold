@@ -2,8 +2,8 @@ package app.controller;
 
 import java.util.List;
 
-import app.models.Product;
-import app.repositories.ProductRepository;
+import app.model.Product;
+import app.repository.ProductRepository;
 import br.com.caelum.vraptor.Delete;
 import br.com.caelum.vraptor.Get;
 import br.com.caelum.vraptor.Post;

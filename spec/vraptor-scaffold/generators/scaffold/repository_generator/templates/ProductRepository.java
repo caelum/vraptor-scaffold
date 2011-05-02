@@ -2,7 +2,7 @@ package app.repository;
 
 import java.util.List;
 
-import app.models.Product;
+import app.model.Product;
 
 public interface ProductRepository {
 	/*
