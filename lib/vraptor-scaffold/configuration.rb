@@ -20,6 +20,22 @@ class Configuration
     config["package"]
   end
 
+  def self.models_package
+    config["models_package"]
+  end
+
+  def self.controllers_package
+    config["controllers_package"]
+  end
+
+  def self.repositories_package
+    config["repositories_package"]
+  end
+
+  def self.full_models_package
+    "#{package}.#{models_package}"
+  end
+
   def self.orm
     config["orm"]
   end

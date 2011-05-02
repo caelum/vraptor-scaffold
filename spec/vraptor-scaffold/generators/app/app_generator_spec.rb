@@ -5,7 +5,7 @@ describe AppGenerator do
   context "build new application" do
     before(:all) do
       @project_path = "src/vraptor-scaffold"
-      AppGenerator.new(@project_path, ["-b=mvn"]).invoke_all
+      AppGenerator.new(@project_path, ["-b=mvn", "-r=repository", "-m=domain", "-c=control"]).invoke_all
     end
 
     after(:all) do
@@ -55,22 +55,22 @@ describe AppGenerator do
       end
 
       it "should create controllers folder" do
-        File.exist?("#{@app}/controllers").should be_true 
+        File.exist?("#{@app}/control").should be_true
       end
 
       it "should create models folder" do
-        File.exist?("#{@app}/models").should be_true 
+        File.exist?("#{@app}/domain").should be_true
       end
 
       it "should create generic entity" do
         source = File.join File.dirname(__FILE__), "templates", "Entity.java"
-        destination = "#{@app}/models/Entity.java"
+        destination = "#{@app}/domain/Entity.java"
         exists_and_identical?(source, destination)
       end
 
       it "should create generic repository" do
         source =  File.join File.dirname(__FILE__), "templates", "Repository.java"
-        destination = "#{@app}/repositories/Repository.java"
+        destination = "#{@app}/repository/Repository.java"
         exists_and_identical?(source, destination)
       end
     end
@@ -216,15 +216,15 @@ describe AppGenerator do
       end
 
       it "should create controllers folder" do
-        File.exist?("#{@app}/controllers").should be_true 
+        File.exist?("#{@app}/control").should be_true
       end
 
       it "should create models folder" do
-        File.exist?("#{@app}/models").should be_true 
+        File.exist?("#{@app}/domain").should be_true
       end
 
       it "should create respositories folder" do
-        File.exist?("#{@app}/repositories").should be_true 
+        File.exist?("#{@app}/repository").should be_true
       end    
 
       it "should create test resource folder" do
@@ -412,6 +412,16 @@ describe AppGenerator do
     end
   end
 
+  context "valid orm" do
+    it "jpa should be valid" do
+      AppGenerator::ORMS.include?("jpa").should be_true
+    end
+
+    it "hibernate should be valid" do
+      AppGenerator::ORMS.include?("hibernate").should be_true
+    end
+  end
+
   it "should configure banner" do
     AppGenerator.banner.should == "vraptor new PROJECT_PATH [options]"
   end
@@ -421,18 +431,20 @@ describe AppGenerator do
       @project_path = "vraptor-scaffold"
     end
 
-    after(:each) do
-      FileUtils.remove_dir(@project_path)
-    end
-
     it "should be invalid when build tool is not supported" do
       Kernel.should_receive(:exit) 
-      AppGenerator.new(@project_path, ["-b=maven"]).invoke_all
+      AppGenerator.new(@project_path, ["-b=maven"])
     end
 
     it "should be invalid when template engine is not supported" do
       Kernel.should_receive(:exit) 
-      AppGenerator.new(@project_path, ["-e=velocity"]).invoke_all
+      AppGenerator.new(@project_path, ["-e=velocity"])
     end
+
+    it "should be invalid when orm mapping is not supported" do
+      Kernel.should_receive(:exit)
+      AppGenerator.new(@project_path, ["-o=toplink"])
+    end
+
   end
 end

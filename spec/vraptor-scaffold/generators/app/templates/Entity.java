@@ -1,4 +1,4 @@
-package app.models;
+package app.domain;
 
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;

@@ -1,9 +1,9 @@
-package app.repositories;
+package app.repository;
 
 import javax.persistence.EntityManager;
 
 import br.com.caelum.vraptor.ioc.Component;
-import app.models.Product;
+import app.model.Product;
 
 @Component
 public class ProductRepositoryImpl
