@@ -117,5 +117,10 @@ class AppGenerator < VraptorScaffold::Base
       puts "Template engine #{options[:template_engine]} is not supported. The supported template engines are: #{TEMPLATE_ENGINES.join(", ")}"
       Kernel::exit
     end
+    unless ORMS.include? options[:orm]
+      puts options[:orm]
+      puts "ORM #{options[:orm]} is not supported. The supported object-relational mapping are: #{ORMS.join(", ")}"
+      Kernel::exit
+    end
   end
 end
