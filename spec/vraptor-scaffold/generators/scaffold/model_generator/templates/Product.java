@@ -1,4 +1,4 @@
-package app.models;
+package app.model;
 
 @javax.persistence.Entity
 public class Product extends Entity {

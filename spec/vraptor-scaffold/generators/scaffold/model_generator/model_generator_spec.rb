@@ -15,19 +15,19 @@ describe ModelGenerator do
 
     it "should create model" do
       source = File.join File.dirname(__FILE__), "templates", "Product.java"
-      destination = Configuration.main_class_path "models", "Product.java"
+      destination = Configuration.main_class_path "model", "Product.java"
       exists_and_identical?(source, destination)
     end
 
     it "should create model test" do
-      test_class = Configuration.test_class_path "models", "ProductTest.java"
+      test_class = Configuration.test_class_path "model", "ProductTest.java"
       File.exist?(test_class).should be_true
     end
   end
 
   context "hibernate" do
     before(:each) do
-      config = {"template_engine" => "jsp", "package" => "app", "orm" => "hibernate"}
+      config = {"package" => "app", "orm" => "hibernate", "models_package" => "model"}
       YAML.stub!(:load_file).with(Configuration::FILENAME).and_return(config)
       AppGenerator.new("src", ["-o=hibernate"]).configure_orm
       FileUtils.chdir("src")

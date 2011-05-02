@@ -36,8 +36,16 @@ describe Configuration do
 
   context "load config file" do
     before(:each) do
-      config = {"template_engine" => "jsp", "package" => "br.com.caelum", "orm" => "jpa"}
+      config = {"template_engine" => "jsp", "package" => "br.com.caelum", "orm" => "jpa", "models_package" => "model"}
       YAML.stub!(:load_file).with(Configuration::FILENAME).and_return(config)
+    end
+
+    it "should know models package" do
+      Configuration.models_package.should == "model"
+    end
+
+    it "should know full models package" do
+      Configuration.full_models_package.should == "br.com.caelum.model"
     end
 
     it "should know template engine" do

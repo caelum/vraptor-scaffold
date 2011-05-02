@@ -13,14 +13,17 @@ class AppGenerator < VraptorScaffold::Base
   class_option :package, :default => "app", :aliases => "-p", 
     :desc => "Base package"
 
-  class_option :build_tool, :default => "ant", :aliases => "-b", 
-    :desc => "Build tools (options: #{BUILD_TOOLS.join(', ')})"
-  
+  class_option :models_package, :aliases => "-m", :default => "models",
+               :desc => "Define models package"
+
+  class_option :build_tool, :default => "ant", :aliases => "-b",
+  :desc => "Build tools (options: #{BUILD_TOOLS.join(', ')})"
+
   class_option :orm, :default => "jpa", :aliases => "-o",
-    :desc => "Object-relational mapping (options: #{ORMS.join(', ')})"
+  :desc => "Object-relational mapping (options: #{ORMS.join(', ')})"
 
   class_option :skip_eclipse, :type => :boolean, :aliases => "-E",
-    :desc => "Skip Eclipse files"
+  :desc => "Skip Eclipse files"
 
   def self.source_root
     File.join File.dirname(__FILE__), "templates"
