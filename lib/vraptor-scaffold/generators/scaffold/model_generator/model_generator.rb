@@ -7,7 +7,7 @@ class ModelGenerator < BaseScaffold
   def build
     template("model.erb", Configuration.main_class_path("models", "#{class_name}.java"))
     template("model_test.erb", Configuration.test_class_path("models", "#{test_class_name}.java"))
-    map_orm_class if Configuration.orm.eql? 'hibernate'
+    map_orm_class if Configuration.hibernate?
   end
 
   private
