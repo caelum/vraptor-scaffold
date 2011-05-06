@@ -11,7 +11,7 @@ class BaseScaffold < VraptorScaffold::Base
   end
 
   def class_name
-    @model.capitalize
+    @model.camelize
   end
 
   def test_class_name
