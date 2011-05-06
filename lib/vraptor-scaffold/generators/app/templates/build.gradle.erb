@@ -13,6 +13,25 @@ sourceCompatibility = 1.6
 targetCompatibility = 1.6
 version = '1.0'
 
+sourceSets {
+    main {
+        java {
+            srcDir '<%= Configuration::MAIN_SRC %>'
+        }
+        resources {
+            srcDir '<%= Configuration::MAIN_RESOURCES %>'
+        }
+    }
+    test {
+        java {
+            srcDir '<%= Configuration::TEST_SRC %>'
+        }
+        resources {
+            srcDir '<%= Configuration::TEST_RESOURCES %>'
+        }
+    }
+}
+
 sourceSets.main.classesDir = new File('<%= Configuration::WEB_INF %>/classes')
 
 jettyRun.scanIntervalSeconds=3
