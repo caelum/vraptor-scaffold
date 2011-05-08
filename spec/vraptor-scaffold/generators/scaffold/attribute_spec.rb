@@ -19,7 +19,11 @@ describe Attribute do
       end
 
       it  "should camelize composed name" do
-        Attribute.new("NomeComposto", "double").name.should == "nomeComposto"
+        Attribute.new("MyItem", "double").name.should == "myItem"
+      end
+
+      it  "should camelize composed name" do
+        Attribute.new("myItem", "double").name.should == "myItem"
       end
 
       it  "should keep name in downcase" do

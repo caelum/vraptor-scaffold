@@ -2,7 +2,7 @@ class Attribute
   attr_accessor :name, :type
 
   def initialize(name, type)
-    @name = name.underscore.camelize(:lower) 
+    @name = name.underscore.camelize(:lower)
     @type = type.downcase
     validate
   end

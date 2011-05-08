@@ -42,12 +42,20 @@ describe BaseScaffold do
   end
 
   context "compound model name" do
-    it "should camelize model name to orderItem" do
+    it "should know class name to 'orderItem'" do
       BaseScaffold.new("orderItem").class_name.should eql("OrderItem")
     end
 
-    it "should camelize model name to OrderItem" do
+    it "should know class name to 'OrderItem'" do
       BaseScaffold.new("OrderItem").class_name.should eql("OrderItem")
+    end
+
+    it "should know parameter name to 'OrderItem'" do
+      BaseScaffold.new("OrderItem").model_parameter_name.should eql("orderItem")
+    end
+
+    it "should know parameter name to 'OrderItem'" do
+      BaseScaffold.new("orderItem").model_parameter_name.should eql("orderItem")
     end
   end
 end

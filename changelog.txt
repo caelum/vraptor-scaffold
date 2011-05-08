@@ -135,4 +135,4 @@
 * Fixed runtime dependencies.
 
 === 0.0.1.beta2 / 2010-07-07
-  * Crud with vraptor, maven 2, jpa, freemarker e jquery.   
+  * Crud with vraptor, maven 2, jpa, freemarker and jquery.

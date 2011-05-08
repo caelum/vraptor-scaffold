@@ -2,14 +2,14 @@ require File.expand_path(File.dirname(__FILE__) + "/../../../../spec_helper")
 
 describe FreemarkerGenerator do
 
-  before(:each) do
+  before(:all) do
     model = "product"
     @views_path = File.join Configuration::WEB_INF, "views", model
     @generator = FreemarkerGenerator.new(model, build_attributes)
     @generator.build
   end
 
-  after(:each) do
+  after(:all) do
     FileUtils.remove_dir("src") 
   end
 

@@ -7,7 +7,7 @@ class BaseScaffold < VraptorScaffold::Base
   end
   
   def model_parameter_name
-    @model.downcase
+    @model.camelize(:lower)
   end
 
   def class_name
