@@ -4,7 +4,7 @@ package app.model;
 public class Product extends Entity {
 	
 	private String name;
-	private boolean flag;
+	private boolean myFlag;
 	
 	public void setName(String name) {
 		this.name = name;
@@ -14,12 +14,12 @@ public class Product extends Entity {
 		return name;
 	}
 	
-	public void setFlag(boolean flag) {
-		this.flag = flag;
+	public void setMyFlag(boolean myFlag) {
+		this.myFlag = myFlag;
 	}
 	
-	public boolean isFlag() {
-		return flag;
+	public boolean isMyFlag() {
+		return myFlag;
 	}
 	
 }

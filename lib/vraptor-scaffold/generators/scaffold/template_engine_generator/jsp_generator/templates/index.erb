@@ -7,22 +7,22 @@
 	<table>
 		<tr>
 			<%- @attributes.each do |att| -%>
-			<th><%= att.name %></th>
+			<th><%= att.name.camelize %></th>
 			<%- end -%>
 			<th></th>
 			<th></th>
 			<th></th>
 		</tr>
 
-		<c:forEach items="${<%=@model%>List}" var="<%=@model%>">
+		<c:forEach items="${<%=model_parameter_name%>List}" var="<%=model_parameter_name%>">
 			<tr>
 				<%- @attributes.each do |att| -%>
-				<td><%= "${#{@model}.#{att.name}}" %></td>
+				<td><%= "${#{model_parameter_name}.#{att.name}}" %></td>
 				<%- end -%>
-				<td><a href="<%= path "/${#{@model}.id}" %>">show</a></td>
-				<td><a href="<%= path "/${#{@model}.id}/edit" %>">edit</a></td>
+				<td><a href="<%= path "/${#{model_parameter_name}.id}" %>">show</a></td>
+				<td><a href="<%= path "/${#{model_parameter_name}.id}/edit" %>">edit</a></td>
 				<td>
-					<form action="<%= path "/${#{@model}.id}" %>" method="post">
+					<form action="<%= path "/${#{model_parameter_name}.id}" %>" method="post">
 						<input type="hidden" name="_method" value="delete"/>
 						<button type="submit" onclick="return confirm('Are you sure?')">destroy</button>
 					</form>

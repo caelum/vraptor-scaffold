@@ -4,25 +4,25 @@
 <table>
   <tr>
 <% @attributes.each do |att| -%>
-   <th><%= att.name %></th>
+   <th><%= att.name.camelize %></th>
 <% end -%>
    <th></th>
    <th></th>
    <th></th>
   </tr>
 
-<#list <%= "#{@model}List as #@model" %>>
+<#list <%= "#{model_parameter_name}List as #{model_parameter_name}" %>>
   <tr>
   <% @attributes.each do |att| -%>
     <td>
-      <%= "${#{@model}.#{att.name}!\"\"}" unless att.boolean? %>
-      <%= "${#{@model}.#{att.name}?string}" if att.boolean? %>
+      <%= "${#{model_parameter_name}.#{att.name}!\"\"}" unless att.boolean? %>
+      <%= "${#{model_parameter_name}.#{att.name}?string}" if att.boolean? %>
     </td>
   <% end -%>
-    <td><a href="<%= "#{path}/${#{@model}.id}" %>">show</a></td>
-    <td><a href="<%= "#{path}/${#{@model}.id}/edit" %>">edit</a></td>
+    <td><a href="<%= "#{path}/${#{model_parameter_name}.id}" %>">show</a></td>
+    <td><a href="<%= "#{path}/${#{model_parameter_name}.id}/edit" %>">edit</a></td>
     <td>
-      <form action="<%= "#{path}/${#{@model}.id}" %>" method="post">
+      <form action="<%= "#{path}/${#{model_parameter_name}.id}" %>" method="post">
     	  <input type="hidden" name="_method" value="delete"/>
     	  <button type="submit" onclick="return confirm('Are you sure?')">destroy</button>
 	    </form>

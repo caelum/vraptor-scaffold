@@ -13,6 +13,6 @@ class FreemarkerGenerator < TemplateEngineGenerator
   end
 
   def path
-    "${base}/#{@model.pluralize}"
+    "${base}/#{base_path}"
   end
 end

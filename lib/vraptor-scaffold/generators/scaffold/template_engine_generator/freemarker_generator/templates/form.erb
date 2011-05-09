@@ -6,15 +6,15 @@
 
 <form action="<%= path %>" method="post">
   
-  <#if <%= "#{@model}.id" %>??>
-    <input type="hidden" name="<%= "#{@model}.id" %>" value="<%= "${#{@model}.id}" %>"/>
+  <#if <%= "#{model_parameter_name}.id" %>??>
+    <input type="hidden" name="<%= "#{model_parameter_name}.id" %>" value="<%= "${#{model_parameter_name}.id}" %>"/>
     <input type="hidden" name="_method" value="put"/>
   </#if>
 
 <% @attributes.each do |att| -%>
   <div class="field">
-    <%= att.name.capitalize %>:<br />
-    <%= "<@html.#{att.html_input} \"#{@model}.#{att.name}\" #{@model}.#{att.name}/>"  %>
+    <%= att.name.camelize %>:<br />
+    <%= "<@html.#{att.html_input} \"#{model_parameter_name}.#{att.name}\" #{model_parameter_name}.#{att.name}/>"  %>
   </div>
 <% end -%>
   <div class="actions">

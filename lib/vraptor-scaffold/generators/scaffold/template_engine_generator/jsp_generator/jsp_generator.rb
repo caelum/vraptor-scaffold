@@ -13,6 +13,6 @@ class JspGenerator < TemplateEngineGenerator
   end
 
   def path url=""
-    %Q{${pageContext.request.contextPath}/#{@model.pluralize}#{url}}
+    %Q{${pageContext.request.contextPath}/#{base_path}#{url}}
   end
 end

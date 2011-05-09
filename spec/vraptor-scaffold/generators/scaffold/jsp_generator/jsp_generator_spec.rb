@@ -2,6 +2,10 @@ require File.expand_path(File.dirname(__FILE__) + "/../../../../spec_helper")
 
 describe JspGenerator do
 
+  it "should append context to path" do
+    JspGenerator.new("myModel", build_attributes).path("/edit").should == "${pageContext.request.contextPath}/myModels/edit"
+  end
+
   context "simple model name" do
     before(:all) do
       model = "product"

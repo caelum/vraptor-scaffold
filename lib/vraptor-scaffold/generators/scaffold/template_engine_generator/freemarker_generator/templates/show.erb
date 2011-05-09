@@ -2,13 +2,13 @@
 
 <% @attributes.each do |att| -%>
 <p>
-  <b><%= att.name.capitalize %>:</b>
-   <%= "${#{@model}.#{att.name}!\"\"}" unless att.boolean? %>
-   <%= "${#{@model}.#{att.name}?string}" if att.boolean? %>
+  <b><%= att.name.camelize %>:</b>
+   <%= "${#{model_parameter_name}.#{att.name}!\"\"}" unless att.boolean? %>
+   <%= "${#{model_parameter_name}.#{att.name}?string}" if att.boolean? %>
 </p>
 <% end -%>
 
-<a href="<%= "#{path}/${#{@model}.id}/edit" %>">Edit</a>
+<a href="<%= "#{path}/${#{model_parameter_name}.id}/edit" %>">Edit</a>
 <a href="<%= path %>">Back</a>
 
 </body>

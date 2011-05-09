@@ -1,6 +1,11 @@
 require File.expand_path(File.dirname(__FILE__) + "/../../../../spec_helper")
 
 describe FreemarkerGenerator do
+
+  it "should append context to path" do
+    FreemarkerGenerator.new("myModel", build_attributes).path.should == "${base}/myModels"
+  end
+
   context "simple model name" do
     before(:all) do
       model = "product"

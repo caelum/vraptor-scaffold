@@ -8,11 +8,11 @@ public class <%= class_name %> extends Entity {
 <% end -%>
 	
 <% @attributes.each do |att| -%>
-	public void set<%= att.name.capitalize %>(<%= att.java_type %> <%= att.name %>) {
+	public void set<%= att.name.camelize %>(<%= att.java_type %> <%= att.name %>) {
 		this.<%= att.name %> = <%= att.name %>;
 	}
 	
-	public <%= att.java_type %> <%= att.getter_prefix + att.name.capitalize %>() {
+	public <%= att.java_type %> <%= att.getter_prefix + att.name.camelize %>() {
 		return <%= att.name %>;
 	}
 	

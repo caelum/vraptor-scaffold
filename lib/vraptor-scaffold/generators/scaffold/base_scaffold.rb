@@ -37,4 +37,8 @@ class BaseScaffold < VraptorScaffold::Base
   def controller_test_class_name
     "#{controller_class_name}Test"
   end
+
+  def base_path
+    model_parameter_name.pluralize
+  end
 end

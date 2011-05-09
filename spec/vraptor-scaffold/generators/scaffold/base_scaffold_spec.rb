@@ -35,6 +35,10 @@ describe BaseScaffold do
       @base.controller_test_class_name.should eql("ClientControllerTest")
     end
 
+    it "should know path" do
+      @base.base_path.should eql("clients")
+    end
+
     it "should know model parameter name with scaffold given with first letter uppercased" do
       base = BaseScaffold.new("Client")
       base.model_parameter_name.should eql("client")
@@ -56,6 +60,14 @@ describe BaseScaffold do
 
     it "should know parameter name to 'OrderItem'" do
       BaseScaffold.new("orderItem").model_parameter_name.should eql("orderItem")
+    end
+
+    it "should know path to 'orderItem'" do
+      BaseScaffold.new("orderItem").base_path.should eql("orderItems")
+    end
+
+    it "should know path to 'OrderItem'" do
+      BaseScaffold.new("OrderItem").base_path.should eql("orderItems")
     end
   end
 end

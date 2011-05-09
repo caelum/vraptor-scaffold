@@ -6,15 +6,15 @@
 
 <form action="<%= path %>" method="post">
   
-	<c:if test="${not empty <%= @model %>.id}">
-		<input type="hidden" name="<%= @model %>.id" value="${<%=@model%>.id}"/>
+	<c:if test="${not empty <%= model_parameter_name %>.id}">
+		<input type="hidden" name="<%= model_parameter_name %>.id" value="${<%= model_parameter_name%>.id}"/>
 		<input type="hidden" name="_method" value="put"/>
 	</c:if>
 
 <% @attributes.each do |att| -%>
 	<div class="field">
-		<%= att.name.capitalize %>:<br />
-		<input type="text" name="<%= @model %>.<%=att.name%>" value="${<%=@model%>.<%=att.name%>}"/>
+		<%= att.name.camelize %>:<br />
+		<input type="text" name="<%= model_parameter_name %>.<%=att.name%>" value="${<%=model_parameter_name%>.<%=att.name%>}"/>
 	</div>
 <% end -%>
 
