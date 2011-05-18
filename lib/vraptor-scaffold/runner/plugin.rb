@@ -4,7 +4,7 @@ module VraptorScaffold
     class Plugin
 
       def run(args)
-        if VraptorScaffold::Runner::Help.help? args.first
+        if VraptorScaffold::Runner::Help.help?(args.first) || args.size < 2
           PluginGenerator.start(["-h"])
         elsif File.exist?("src")
           PluginGenerator.new(args).invoke_all
