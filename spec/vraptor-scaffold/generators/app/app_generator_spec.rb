@@ -15,6 +15,11 @@ describe AppGenerator do
     it "should create directory with project name" do
       File.exist?(@project_path).should be_true 
     end
+    
+    it "should be invalid when project name already exist" do
+      Kernel.should_receive(:exit)
+      AppGenerator.new(@project_path)
+    end
 
     it "should create pom" do
       source =  File.join File.dirname(__FILE__), "templates", "pom.xml"
