@@ -150,5 +150,10 @@ class AppGenerator < VraptorScaffold::Base
       puts "ORM #{options[:orm]} is not supported. The supported object-relational mapping are: #{ORMS.join(", ")}"
       Kernel::exit
     end
+
+    if File.directory? project_path
+      puts "The project #{project_path} already exist"
+      Kernel::exit
+    end
   end
 end
