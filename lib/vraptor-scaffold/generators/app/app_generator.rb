@@ -28,6 +28,9 @@ class AppGenerator < VraptorScaffold::Base
   class_option :orm, :default => "jpa", :aliases => "-o",
                :desc => "Object-relational mapping (options: #{ORMS.join(', ')})"
 
+  class_option :jquery, :aliases => "-j", :default => "latest version",
+               :desc => "jQuery version"
+
   class_option :skip_eclipse, :type => :boolean, :aliases => "-E",
                :desc => "Skip Eclipse files"
 
@@ -109,6 +112,12 @@ class AppGenerator < VraptorScaffold::Base
     directory("webapp", Configuration::WEB_APP)
   end
 
+  def create_javascripts
+    javascripts = File.join Configuration::WEB_APP, "javascripts"
+    create_file File.join javascripts, "application.js"
+    get jquery_url, (File.join javascripts, "jquery.min.js")
+  end
+
   def configure_scaffold_properties
     template("vraptor-scaffold.erb", Configuration::FILENAME)
   end
@@ -130,6 +139,12 @@ class AppGenerator < VraptorScaffold::Base
   end
 
   private
+  def jquery_url
+    jquery_version = "1" #this mean get latest version
+    jquery_version = options[:jquery] if options[:jquery] != 'latest version'
+    "http://ajax.googleapis.com/ajax/libs/jquery/#{jquery_version}/jquery.min.js"
+  end
+
   def create_eclipse_files
     template("eclipse/project.erb", ".project")
     template("eclipse/classpath.erb", ".classpath")
@@ -155,5 +170,15 @@ class AppGenerator < VraptorScaffold::Base
       puts "The project #{project_path} already exist"
       Kernel::exit
     end
+
+    require 'open-uri'
+    begin
+      Kernel::open(jquery_url)
+    rescue OpenURI::HTTPError => e
+      download_url = "http://docs.jquery.com/Downloading_jQuery"
+      puts "jQuery version #{options[:jquery]} was not found. Please visit the download page to see the versions available #{download_url}."
+      Kernel::exit
+    end
+
   end
 end

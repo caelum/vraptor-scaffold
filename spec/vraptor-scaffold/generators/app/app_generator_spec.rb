@@ -189,15 +189,13 @@ describe AppGenerator do
       end
 
       it "should create jquery js" do
-        source = "#{AppGenerator.source_root}/webapp/javascripts/jquery.min.js"
         destination = "#{@webapp}/javascripts/jquery.min.js"
-        exists_and_identical?(source, destination)
+        File.exists?(destination).should be_true
       end
 
       it "should create application js" do
-        source = "#{AppGenerator.source_root}/webapp/javascripts/application.js"
         destination = "#{@webapp}/javascripts/application.js"
-        exists_and_identical?(source, destination)
+        File.exists?(destination).should be_true
       end
 
       it "should create images folder" do
@@ -451,5 +449,9 @@ describe AppGenerator do
       AppGenerator.new(@project_path, ["-o=toplink"])
     end
 
+    it "should be invalid when jquery version does not exist" do
+      Kernel.should_receive(:exit)
+      AppGenerator.new(@project_path, ["-j=1.x"])
+    end
   end
 end
