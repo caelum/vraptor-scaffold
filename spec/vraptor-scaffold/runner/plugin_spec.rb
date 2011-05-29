@@ -20,6 +20,7 @@ describe VraptorScaffold::Runner::Plugin do
     end
 
     it "should invoke all plugin generator tasks" do
+      pending
       File.stub!(:exist?).and_return(true)
       PluginGenerator.stub!(:new).and_return(@generator)
       @generator.should_receive(:invoke_all)
