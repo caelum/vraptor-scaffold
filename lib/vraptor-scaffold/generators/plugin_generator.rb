@@ -14,14 +14,14 @@ class PluginGenerator < VraptorScaffold::Base
 
   def build
     if is_ivy?
-        plugin = "<dependency org=\"#{plugin_org}\" name=\"#{plugin_name}\" rev=\"#{plugin_version}\" conf=\"default\" />\n"
+        plugin = "\t<dependency org=\"#{plugin_org}\" name=\"#{plugin_name}\" rev=\"#{plugin_version}\" conf=\"default\" />\n\t"
         inject_into_file("ivy.xml", plugin, :before=>"</dependencies>")
     elsif is_maven?
-        plugin = "<dependency><groupId>#{plugin_org}</groupId><artifactId>#{plugin_name}</artifactId><version>#{plugin_version}</version></dependency>\n"
-        inject_into_file("pom.xml", plugin, :before=>"<!-- Test dependencies -->")
+        plugin = "\t<dependency>\n\t\t\t<groupId>#{plugin_org}</groupId>\n\t\t\t<artifactId>#{plugin_name}</artifactId>\n\t\t\t<version>#{plugin_version}</version>\n\t\t</dependency>\n\t"
+        inject_into_file("pom.xml", plugin, :before=>"</dependencies>")
     else
-        plugin = "compile group: '#{plugin_org}', name: '#{plugin_name}', version: '#{plugin_version}'\n"
-        inject_into_file("build.gradle", plugin, :before=>"//Test dependencies")
+        plugin = "\n    compile group: '#{plugin_org}', name: '#{plugin_name}', version: '#{plugin_version}'\n"
+        inject_into_file("build.gradle", plugin, :after=>"dependencies {")
     end
   end
 

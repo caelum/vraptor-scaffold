@@ -1,0 +1,62 @@
+repositories {
+    mavenCentral()
+    mavenRepo urls: "https://repository.jboss.org/nexus/content/groups/public-jboss"
+}
+
+apply plugin: 'java'
+apply plugin: 'war'
+apply plugin: 'jetty'
+apply plugin: 'eclipse'
+apply plugin: 'project-report'
+
+sourceCompatibility = 1.6
+targetCompatibility = 1.6
+version = '1.0'
+
+sourceSets {
+    main {
+        java {
+            srcDir 'src/main/java'
+        }
+        resources {
+            srcDir 'src/main/resources'
+        }
+    }
+    test {
+        java {
+            srcDir 'src/test/java'
+        }
+        resources {
+            srcDir 'src/test/resources'
+        }
+    }
+}
+
+sourceSets.main.classesDir = new File('src/main/webapp/WEB-INF/classes')
+
+jettyRun.scanIntervalSeconds=3
+jettyRun.contextPath = '/' 
+[jettyRunWar,jettyStop]*.stopPort = 8081
+[jettyRunWar,jettyStop]*.stopKey = 'stopKey'
+
+dependencies {
+    compile group: 'br.com.caelum.vraptor', name: 'vraptor-environment', version: '0.0.8'
+
+    compile group: 'br.com.caelum', name: 'vraptor', version: '3.3.1'
+    compile group: 'org.hsqldb', name: 'hsqldb', version: '2.0.0'
+    compile group: 'opensymphony', name: 'sitemesh', version: '2.4.2'
+    compile group: 'javax.servlet', name: 'jstl', version: '1.2'
+    compile group: 'org.hibernate', name: 'hibernate-entitymanager', version: '3.6.2.Final'
+    compile group: 'org.hibernate', name: 'hibernate-c3p0', version: '3.6.2.Final'
+    compile group: 'org.hibernate', name: 'hibernate-validator', version: '4.1.0.Final'
+    compile group: 'joda-time', name: 'joda-time', version: '1.6.2'
+
+    //Provided dependencies
+    providedCompile group: 'javax.servlet', name: 'servlet-api', version: '2.5'
+    providedCompile group: 'javax.servlet.jsp', name: 'jsp-api', version: '2.1'
+
+    //Test dependencies
+    testCompile group: 'junit', name: 'junit', version: '4.8.2'
+    testCompile group: 'org.hamcrest', name: 'hamcrest-all', version: '1.1'
+    testCompile group: 'org.mockito', name: 'mockito-all', version: '1.8.5'
+}
