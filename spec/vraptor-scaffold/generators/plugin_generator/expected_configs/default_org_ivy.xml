@@ -1,0 +1,40 @@
+<ivy-module version="2.0">
+	<info organisation="vraptor-plugin-test" module="vraptor-plugin-test" />
+
+	<configurations>
+		<conf name="default" description="dependencies used for compile" />
+		<conf name="provided" description="dependencies used for compile but is not packaged" visibility="public" />
+		<conf name="test" description="dependencies used for tests" visibility="public" />
+		<conf name="jetty" description="dependencies used for jetty" visibility="public" />
+		<conf name="minify" description="dependencies used to minify js and css" visibility="public" />
+	</configurations>
+
+	<dependencies>
+		<dependency org="br.com.caelum" name="vraptor" rev="3.3.1" conf="default" />
+		<dependency org="org.hsqldb" name="hsqldb" rev="2.0.0" conf="default" />
+		<dependency org="opensymphony" name="sitemesh" rev="2.4.2" conf="default" />
+		<dependency org="javax.servlet" name="jstl" rev="1.2" conf="default" />
+		<dependency org="org.hibernate" name="hibernate-entitymanager" rev="3.6.2.Final" conf="default" />
+		<dependency org="org.hibernate" name="hibernate-c3p0" rev="3.6.2.Final" conf="default" />
+		<dependency org="org.hibernate" name="hibernate-validator" rev="4.1.0.Final" conf="default" />
+		<dependency org="joda-time" name="joda-time" rev="1.6.2" conf="default" />
+
+		<!-- Provided dependencies -->
+		<dependency org="javax.servlet" name="servlet-api" rev="2.5" conf="provided->default" />
+		<dependency org="javax.servlet.jsp" name="jsp-api" rev="2.1" conf="provided->default" />
+
+		<!-- Test dependencies -->
+		<dependency org="junit" name="junit" rev="4.8.2" conf="test->default" />
+		<dependency org="org.hamcrest" name="hamcrest-all" rev="1.1" conf="test->default" />
+		<dependency org="org.mockito" name="mockito-all" rev="1.8.5" conf="test->default" />
+
+		<!-- Jetty dependencies -->
+		<dependency org="org.mortbay.jetty" name="jsp-api-2.1" rev="6.1.14" conf="jetty->default" />
+		<dependency org="org.mortbay.jetty" name="jsp-2.1" rev="6.1.14" conf="jetty->default" />
+		<dependency org="org.mortbay.jetty" name="jetty-ant" rev="6.1.14" conf="jetty->default" />
+		
+		<!-- Minify dependencies -->
+		<dependency org="com.yahoo.platform.yui" name="yuicompressor" rev="2.3.6" conf="minify->default" />
+		<dependency org="br.com.caelum.vraptor" name="vraptor-environment" rev="0.0.8" conf="default" />
+	</dependencies>
+</ivy-module>
