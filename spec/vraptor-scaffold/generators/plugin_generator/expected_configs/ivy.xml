@@ -11,7 +11,7 @@
 
 	<dependencies>
 		<dependency org="br.com.caelum" name="vraptor" rev="3.3.1" conf="default" />
-		<dependency org="org.hsqldb" name="hsqldb" rev="2.0.0" conf="default" />
+		<dependency org="org.hsqldb" name="hsqldb" rev="2.2.0" conf="default" />
 		<dependency org="opensymphony" name="sitemesh" rev="2.4.2" conf="default" />
 		<dependency org="javax.servlet" name="jstl" rev="1.2" conf="default" />
 		<dependency org="org.hibernate" name="hibernate-entitymanager" rev="3.6.2.Final" conf="default" />
@@ -32,9 +32,10 @@
 		<dependency org="org.mortbay.jetty" name="jsp-api-2.1" rev="6.1.14" conf="jetty->default" />
 		<dependency org="org.mortbay.jetty" name="jsp-2.1" rev="6.1.14" conf="jetty->default" />
 		<dependency org="org.mortbay.jetty" name="jetty-ant" rev="6.1.14" conf="jetty->default" />
-		
+
 		<!-- Minify dependencies -->
 		<dependency org="com.yahoo.platform.yui" name="yuicompressor" rev="2.3.6" conf="minify->default" />
 		<dependency org="br.com.caelum.vraptor.plugin" name="vraptor-environment" rev="0.0.8" conf="default" />
 	</dependencies>
 </ivy-module>
+
