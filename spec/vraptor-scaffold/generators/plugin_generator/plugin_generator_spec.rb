@@ -1,10 +1,15 @@
 require File.expand_path(File.dirname(__FILE__) + "/../../../spec_helper")
 
+def copy_file(src, dest)
+  full_path_src = File.expand_path(File.dirname(__FILE__) + src)
+  FileUtils.cp(full_path_src, dest)
+end
+
 describe PluginGenerator do
-  
+
   context "ivy" do
     before(:each) do
-      FileUtils.cp("./default_configs/ivy.xml", "./ivy.xml")
+      copy_file("/default_configs/ivy.xml", "./ivy.xml")
       @generator = PluginGenerator.new(["vraptor-environment", "0.0.8", "br.com.caelum.vraptor.plugin"])
       @generator.build
     end
@@ -15,14 +20,14 @@ describe PluginGenerator do
 
     it "should inject dependency into ivy.xml" do
       source = File.join File.dirname(__FILE__), "expected_configs", "ivy.xml"
-      destination = File.join File.dirname(__FILE__), "ivy.xml"
+      destination = "./ivy.xml"
       exists_and_identical?(source, destination)
     end
   end
 
   context "ivy with default plugin_org" do
     before(:each) do
-      FileUtils.cp("./default_configs/ivy.xml", "./ivy.xml")
+      copy_file("/default_configs/ivy.xml", "./ivy.xml")
       @generator = PluginGenerator.new(["vraptor-environment", "0.0.8"])
       @generator.build
     end
@@ -33,14 +38,14 @@ describe PluginGenerator do
 
     it "should inject dependency into ivy.xml" do
       source = File.join File.dirname(__FILE__), "expected_configs", "default_org_ivy.xml"
-      destination = File.join File.dirname(__FILE__), "ivy.xml"
+      destination = "./ivy.xml"
       exists_and_identical?(source, destination)
     end
   end
 
   context "maven" do
     before(:each) do
-      FileUtils.cp("./default_configs/pom.xml", "./pom.xml")
+      copy_file("/default_configs/pom.xml", "./pom.xml")
       @generator = PluginGenerator.new(["vraptor-environment", "0.0.8", "br.com.caelum.vraptor.plugin"])
       @generator.build
     end
@@ -51,14 +56,14 @@ describe PluginGenerator do
 
     it "should inject dependency into pom.xml" do
       source = File.join File.dirname(__FILE__), "expected_configs", "pom.xml"
-      destination = File.join File.dirname(__FILE__), "pom.xml"
+      destination = "./pom.xml"
       exists_and_identical?(source, destination)
     end
   end
   
   context "maven with default plugin_org" do
     before(:each) do
-      FileUtils.cp("./default_configs/pom.xml", "./pom.xml")
+      copy_file("/default_configs/pom.xml", "./pom.xml")
       @generator = PluginGenerator.new(["vraptor-environment", "0.0.8"])
       @generator.build
     end
@@ -69,14 +74,14 @@ describe PluginGenerator do
 
     it "should inject dependency into pom.xml" do
       source = File.join File.dirname(__FILE__), "expected_configs", "default_org_pom.xml"
-      destination = File.join File.dirname(__FILE__), "pom.xml"
+      destination = "./pom.xml"
       exists_and_identical?(source, destination)
     end
   end
 
   context "gradle" do
     before(:each) do
-      FileUtils.cp("./default_configs/build.gradle", "./build.gradle")
+      copy_file("/default_configs/build.gradle", "./build.gradle")
       @generator = PluginGenerator.new(["vraptor-environment", "0.0.8", "br.com.caelum.vraptor.plugin"])
       @generator.build
     end
@@ -87,14 +92,14 @@ describe PluginGenerator do
 
     it "should inject dependency into build.gradle" do
       source = File.join File.dirname(__FILE__), "expected_configs", "build.gradle"
-      destination = File.join File.dirname(__FILE__), "build.gradle"
+      destination = "./build.gradle"
       exists_and_identical?(source, destination)
     end
   end
 
   context "gradle with default plugin_org" do
     before(:each) do
-      FileUtils.cp("./default_configs/build.gradle", "./build.gradle")
+      copy_file("/default_configs/build.gradle", "./build.gradle")
       @generator = PluginGenerator.new(["vraptor-environment", "0.0.8"])
       @generator.build
     end
@@ -105,7 +110,7 @@ describe PluginGenerator do
 
     it "should inject dependency into pom.xml" do
       source = File.join File.dirname(__FILE__), "expected_configs", "default_org_build.gradle"
-      destination = File.join File.dirname(__FILE__), "build.gradle"
+      destination = "./build.gradle"
       exists_and_identical?(source, destination)
     end
   end
