@@ -1,11 +1,11 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>vraptor-plugin-test</groupId>
-	<artifactId>vraptor-plugin-test</artifactId>
+	<groupId>maven</groupId>
+	<artifactId>maven</artifactId>
 	<packaging>war</packaging>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>vraptor-plugin-test</name>
+	<name>maven</name>
 
 	<repositories>
 		<repository>
@@ -63,6 +63,11 @@
 
 	<dependencies>
 		<dependency>
+			<groupId>br.com.caelum.vraptor</groupId>
+			<artifactId>vraptor-environment</artifactId>
+			<version>0.0.8</version>
+		</dependency>
+		<dependency>
 			<groupId>br.com.caelum</groupId>
 			<artifactId>vraptor</artifactId>
 			<version>3.3.1</version>
@@ -70,7 +75,7 @@
 		<dependency>
 			<groupId>org.hsqldb</groupId>
 			<artifactId>hsqldb</artifactId>
-			<version>2.0.0</version>
+			<version>2.2.4</version>
 		</dependency>
 		<dependency>
 			<groupId>opensymphony</groupId>
@@ -135,11 +140,6 @@
 			<artifactId>jsp-api</artifactId>
 			<version>2.1</version>
 			<scope>provided</scope>
-		</dependency>
-		<dependency>
-			<groupId>br.com.caelum.vraptor.plugin</groupId>
-			<artifactId>vraptor-environment</artifactId>
-			<version>0.0.8</version>
 		</dependency>
 	</dependencies>
 

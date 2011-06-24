@@ -1,113 +1,74 @@
 require File.expand_path(File.dirname(__FILE__) + "/../../../spec_helper")
 
 describe PluginGenerator do
-  
-  context "ivy" do
-    before(:each) do
-      FileUtils.cp("./default_configs/ivy.xml", "./ivy.xml")
-      @generator = PluginGenerator.new(["vraptor-environment", "0.0.8", "br.com.caelum.vraptor.plugin"])
-      @generator.build
-    end
 
-    after(:each) do
-      FileUtils.rm("./ivy.xml")
-    end
+  before :all do
+    @project_path = "plugins"
+    @maven_projet = "#{@project_path}/maven"
+    @gradle_projet = "#{@project_path}/gradle"
+    @ant_projet = "#{@project_path}/ant"
 
-    it "should inject dependency into ivy.xml" do
-      source = File.join File.dirname(__FILE__), "expected_configs", "ivy.xml"
-      destination = File.join File.dirname(__FILE__), "ivy.xml"
-      exists_and_identical?(source, destination)
-    end
+    AppGenerator.new(@maven_projet, ["-b=mvn"]).invoke_all
+    AppGenerator.new(@gradle_projet, ["-b=gradle"]).invoke_all
+    AppGenerator.new(@ant_projet, ["-b=ant"]).invoke_all
   end
 
-  context "ivy with default plugin_org" do
-    before(:each) do
-      FileUtils.cp("./default_configs/ivy.xml", "./ivy.xml")
+  after :all do
+    FileUtils.remove_dir(@project_path)
+  end
+
+  context "maven project" do
+
+    before :each do
+      FileUtils.chdir(@maven_projet)
       @generator = PluginGenerator.new(["vraptor-environment", "0.0.8"])
       @generator.build
-    end
-
-    after(:each) do
-      FileUtils.rm("./ivy.xml")
-    end
-
-    it "should inject dependency into ivy.xml" do
-      source = File.join File.dirname(__FILE__), "expected_configs", "default_org_ivy.xml"
-      destination = File.join File.dirname(__FILE__), "ivy.xml"
-      exists_and_identical?(source, destination)
-    end
-  end
-
-  context "maven" do
-    before(:each) do
-      FileUtils.cp("./default_configs/pom.xml", "./pom.xml")
-      @generator = PluginGenerator.new(["vraptor-environment", "0.0.8", "br.com.caelum.vraptor.plugin"])
-      @generator.build
-    end
-
-    after(:each) do
-      FileUtils.rm("./pom.xml")
+      back
     end
 
     it "should inject dependency into pom.xml" do
       source = File.join File.dirname(__FILE__), "expected_configs", "pom.xml"
-      destination = File.join File.dirname(__FILE__), "pom.xml"
+      destination = "#{@maven_projet}/pom.xml"
       exists_and_identical?(source, destination)
     end
   end
-  
-  context "maven with default plugin_org" do
-    before(:each) do
-      FileUtils.cp("./default_configs/pom.xml", "./pom.xml")
+
+  context "ant project" do
+
+    before :each do
+      FileUtils.chdir(@ant_projet)
       @generator = PluginGenerator.new(["vraptor-environment", "0.0.8"])
       @generator.build
+      back
     end
 
-    after(:each) do
-      FileUtils.rm("./pom.xml")
-    end
-
-    it "should inject dependency into pom.xml" do
-      source = File.join File.dirname(__FILE__), "expected_configs", "default_org_pom.xml"
-      destination = File.join File.dirname(__FILE__), "pom.xml"
+    it "should inject dependency into ivy.xml" do
+      pending
+      source = File.join File.dirname(__FILE__), "expected_configs", "ivy.xml"
+      destination = "#{@ant_projet}/ivy.xml"
       exists_and_identical?(source, destination)
     end
   end
 
-  context "gradle" do
-    before(:each) do
-      FileUtils.cp("./default_configs/build.gradle", "./build.gradle")
-      @generator = PluginGenerator.new(["vraptor-environment", "0.0.8", "br.com.caelum.vraptor.plugin"])
-      @generator.build
-    end
+  context "gradle project" do
 
-    after(:each) do
-      FileUtils.rm("./build.gradle")
+    before :each do
+      FileUtils.chdir(@gradle_projet)
+      @generator = PluginGenerator.new(["vraptor-environment", "0.0.8"])
+      @generator.build
+      back
     end
 
     it "should inject dependency into build.gradle" do
       source = File.join File.dirname(__FILE__), "expected_configs", "build.gradle"
-      destination = File.join File.dirname(__FILE__), "build.gradle"
+      destination = "#{@gradle_projet}/build.gradle"
       exists_and_identical?(source, destination)
     end
   end
 
-  context "gradle with default plugin_org" do
-    before(:each) do
-      FileUtils.cp("./default_configs/build.gradle", "./build.gradle")
-      @generator = PluginGenerator.new(["vraptor-environment", "0.0.8"])
-      @generator.build
-    end
-
-    after(:each) do
-      FileUtils.rm("./build.gradle")
-    end
-
-    it "should inject dependency into pom.xml" do
-      source = File.join File.dirname(__FILE__), "expected_configs", "default_org_build.gradle"
-      destination = File.join File.dirname(__FILE__), "build.gradle"
-      exists_and_identical?(source, destination)
-    end
+  def back
+    FileUtils.chdir("..")
+    FileUtils.chdir("..")
   end
 
 end
