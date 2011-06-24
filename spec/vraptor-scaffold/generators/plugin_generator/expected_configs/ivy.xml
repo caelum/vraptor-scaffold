@@ -11,7 +11,7 @@
 
 	<dependencies>
 		<dependency org="br.com.caelum" name="vraptor" rev="3.3.1" conf="default" />
-		<dependency org="org.hsqldb" name="hsqldb" rev="2.2.0" conf="default" />
+		<dependency org="org.hsqldb" name="hsqldb" rev="2.2.4" conf="default" />
 		<dependency org="opensymphony" name="sitemesh" rev="2.4.2" conf="default" />
 		<dependency org="javax.servlet" name="jstl" rev="1.2" conf="default" />
 		<dependency org="org.hibernate" name="hibernate-entitymanager" rev="3.6.2.Final" conf="default" />
