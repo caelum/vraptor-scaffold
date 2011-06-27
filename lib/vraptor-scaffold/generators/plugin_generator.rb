@@ -1,3 +1,36 @@
+require 'rubygems'
+require 'rubygems/gem_runner'
+require 'net/http'
+
+class VRaptorGem
+    def initialize(who)
+        @who = who
+    end
+    def install_and_configure
+        if is_installed?
+            configure
+        elsif exists?
+            install
+            configure
+        end
+    end
+    
+    private
+    def is_installed?
+        Gem::GemPathSearcher.new.find(@who)
+    end
+    def exists?
+        res = Net::HTTP.get(URI.parse("http://rubygems.org/gems/#{@who}"))
+        res.code == '200'
+    end
+    def install
+        Gem::GemRunner.new.run ["install", @who]
+    end
+    def configure
+        VraptorScaffold::Execution.new.run(["configure", @who])
+    end
+end
+
 class PluginGenerator < VraptorScaffold::Base
 
   argument :plugin_name
@@ -23,6 +56,7 @@ class PluginGenerator < VraptorScaffold::Base
         plugin = "\n    compile group: '#{plugin_org}', name: '#{plugin_name}', version: '#{plugin_version}'\n"
         inject_into_file("build.gradle", plugin, :after=>"dependencies {")
     end
+    VRaptorGem.new(plugin_name).install_and_configure
   end
 
   def is_ivy?
@@ -34,3 +68,4 @@ class PluginGenerator < VraptorScaffold::Base
   end
 
 end
+
