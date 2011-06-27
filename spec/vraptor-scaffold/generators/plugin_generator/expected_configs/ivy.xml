@@ -1,5 +1,5 @@
 <ivy-module version="2.0">
-	<info organisation="vraptor-plugin-test" module="vraptor-plugin-test" />
+	<info organisation="ant" module="ant" />
 
 	<configurations>
 		<conf name="default" description="dependencies used for compile" />
