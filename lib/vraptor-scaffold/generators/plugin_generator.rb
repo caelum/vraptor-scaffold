@@ -20,7 +20,11 @@ class VRaptorGem
         Gem::GemPathSearcher.new.find(@who)
     end
     def exists?
-        res = Net::HTTP.get(URI.parse("http://rubygems.org/gems/#{@who}"))
+      url = URI.parse("http://rubygems.org/gems/#{@who}")
+      req = Net::HTTP::Get.new(url.path)
+      res = Net::HTTP.start(url.host, url.port) {|http|
+             http.request(req)
+           }
         res.code == '200'
     end
     def install
