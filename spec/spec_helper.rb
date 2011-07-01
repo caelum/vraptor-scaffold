@@ -13,5 +13,16 @@ end
 
 def exists_and_identical?(source, created)
   File.exists?(created).should be_true
-  FileUtils.should be_identical(source, created)
+  if(!FileUtils.identical?(source, created))
+    puts "----------$$--------$$----------"
+    IO.readlines(created).each do |l|
+      puts l
+    end
+    puts "----------$$--------$$----------"
+    IO.readlines(source).each do |l|
+      puts l
+    end
+    puts "----------$$--------$$----------"
+    FileUtils.should be_identical(source, created)
+  end
 end

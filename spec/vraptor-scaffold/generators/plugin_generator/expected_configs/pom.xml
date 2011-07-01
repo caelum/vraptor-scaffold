@@ -63,7 +63,7 @@
 
 	<dependencies>
 		<dependency>
-			<groupId>br.com.caelum.vraptor</groupId>
+			<groupId>br.com.caelum.vraptor.plugin</groupId>
 			<artifactId>vraptor-environment</artifactId>
 			<version>0.0.8</version>
 		</dependency>
