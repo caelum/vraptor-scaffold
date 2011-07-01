@@ -15,5 +15,3 @@ def exists_and_identical?(source, destination)
   File.exists?(destination).should be_true
   FileUtils.should be_identical(source, destination)
 end
-
-

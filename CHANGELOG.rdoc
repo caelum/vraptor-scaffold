@@ -1,0 +1,141 @@
+== 1.2.0 / 2011-??-??
+
+* New Features
+    * added c3p0 pool configurations.
+
+* Improvements
+    * removed unnecessary EJB provider configuration.
+    * updated hibernate to 3.6.5.Final.
+    * updated maven war plugin to 2.1.1.
+
+* Bugfixes
+    * jetty hot deploy on ant projects.
+
+== 1.1.0 / 2011-03-02
+
+* New Features
+    * JPA 2 support using hibernate 3.6.1.Final. (Issue 13)
+    * ant task to minify js and css. (Issue 27)
+    * created prelude to automatic import taglibs in jsp.
+
+* Improvements
+    * updated hibernate validator to 4.1.0.Final.
+    * updated vraptor to 3.3.1.
+    * updated jquery to 1.5.1.
+    * added head with title tag for sitemesh capture it in jsp views.
+    * changed html DTD to XHTML.
+    * declared css encoding (UTF-8).
+    * created application.js.
+    * better repository and controller encapsulation.
+    * better controller template.
+    * specified the exact location of SuppressWarnings, like Clean Code technique.
+    * changed jeweler to bundler. (Issue 26)
+
+== 1.0.0 / 2011-02-04
+
+* Improvements
+    * updated vraptor to 3.3.0
+    * updated jquery to 1.5
+    * decorators folder inside WEB-INF (Issue 24)
+    * removed spring 3 option.
+
+== 0.0.4 / 2010-11-20
+
+* Improvements
+    * changed decorators encoding to UTF-8
+    * updated jquery to 1.4.4
+    * updated joda-time to 1.6.2
+    * added jsp-api 2.1 dependency as provided scope.
+
+* Bugfixes
+    * Fixed scaffolding with uppercase model and attributes(Issue 19).
+    * Fixed activesupport version cause version 3.0.3 break new instalations(Issue 22).
+    * Generate correct getter for boolean attributes(Issue 21).
+
+== 0.0.3 / 2010-11-04
+
+* New Features
+    * works with gradle
+    * works with spring 3
+
+* Improvements
+    * bumped ivy version to 2.2.0
+    * updated maven plugins
+    * validate users action when create app
+    * update hsqldb
+    * update junit
+    * better build.xml
+
+== 0.0.2 / 2010-10-08
+
+* Improvements
+    * bumped vraptor version to 3.2.0
+
+== 0.0.1 / 2010-10-05
+
+* New Features
+    * jsp support
+    * base package
+    * works with ant + ivy
+    * help command
+
+* Improvements
+    * Better use of Generics.
+    * Update Hibernate
+
+== 0.0.1.rc / 2010-08-24
+
+* New Features
+    * Added Hamcrest 1.1
+    * Added text support(textarea).
+
+* Improvements
+    * Create folder to put images.
+
+* Bugfixes
+    * Works on windows OS.
+
+== 0.0.1.beta5 / 2010-08-04
+
+* New Features
+    * Added generic repository.
+    * Scaffold repository to each model.
+    * Now controllers use repository instead entity manager.
+    * Generated models come with hashCode and equals.
+    * Generating fake tests to models, controllers and repositories.
+
+* Improvements
+    * Better freemarker views.
+    * UTF-8 default enconding.
+    * Update jetty maven plugin version(6 to 7).
+
+== 0.0.1.beta4 / 2010-07-16
+
+* New Features
+    * Added validator support with hibernate-validator.
+    * Error Messages.
+    * Redirect to form when occur validation erros.
+    * Added joda time dependency.
+    * Create messages.properties(i18n).
+  
+* Bugfixes
+    * Fixed i.e problems.
+
+== 0.0.1.beta3 / 2010-07-11
+
+* New Features
+    * Added command to start web server(jetty).
+    * Added boolean support.
+
+* Improvements
+    * Bumped vraptor version to 3.1.3.
+    * Change log4j.xml to log4j.properties.
+    * Change views directory from WEB-INF/freemarker to WEB-INF/views.
+    * Change hsqldb to use file instead of memory.
+  
+* Bugfixes
+    * Fixed pom when creating project with path like /home/rodolfo/project.
+    * Fixed runtime dependencies.
+
+== 0.0.1.beta2 / 2010-07-07
+* Crud with vraptor, maven 2, jpa, freemarker and jquery.

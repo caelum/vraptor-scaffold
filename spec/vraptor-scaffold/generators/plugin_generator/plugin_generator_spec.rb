@@ -13,10 +13,6 @@ describe PluginGenerator do
     AppGenerator.new(@ant_projet, ["-b=ant"]).invoke_all
   end
 
-  after :all do
-    FileUtils.remove_dir(@project_path)
-  end
-
   context "maven project" do
 
     before :each do
