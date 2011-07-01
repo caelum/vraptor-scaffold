@@ -14,10 +14,6 @@ describe PluginGenerator do
     AppGenerator.new(@ant_projet, ["-b=ant"]).invoke_all
   end
   
-  after :all do
-    FileUtils.rm_rf(@project_path)
-  end
-  
   def expected_for(name)
     File.join File.dirname(__FILE__), "expected_configs", name
   end
