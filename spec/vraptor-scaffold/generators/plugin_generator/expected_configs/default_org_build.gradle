@@ -40,7 +40,7 @@ jettyRun.contextPath = '/'
 [jettyRunWar,jettyStop]*.stopKey = 'stopKey'
 
 dependencies {
-    compile group: 'br.com.caelum.vraptor.plugin', name: 'vraptor-environment', version: '0.0.8'
+    compile group: 'br.com.caelum.vraptor', name: 'vraptor-environment', version: '0.0.8'
 
     compile group: 'br.com.caelum', name: 'vraptor', version: '3.3.1'
     compile group: 'org.hsqldb', name: 'hsqldb', version: '2.2.4'
