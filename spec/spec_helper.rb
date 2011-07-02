@@ -12,17 +12,7 @@ def mock_config_file
 end
 
 def exists_and_identical?(source, created)
-  File.exists?(created).should be_true
-  if(!FileUtils.identical?(source, created))
-    puts "----------$$--------$$----------"
-    IO.readlines(created).each do |l|
-      puts l
-    end
-    puts "----------$$--------$$----------"
-    IO.readlines(source).each do |l|
-      puts l
-    end
-    puts "----------$$--------$$----------"
-    FileUtils.should be_identical(source, created)
-  end
+  c = File.open(created).read.gsub( /\r/m, "" )
+  c2 = File.open(source).read.gsub( /\r/m, "" )
+  c.should be == c2
 end

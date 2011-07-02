@@ -38,3 +38,4 @@
 		<dependency org="com.yahoo.platform.yui" name="yuicompressor" rev="2.3.6" conf="minify->default" />
 	</dependencies>
 </ivy-module>
+
