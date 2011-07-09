@@ -37,7 +37,7 @@ h2. Contributors
  * Adriano Almeida
  * Edgar Latorre
  * Felipe Fontoura
- * Guilherme Silverira
+ * Guilherme Silveira
  * José Guilherme Camara Ribeiro
  * Lucas Cavalcanti
  * Luiz Fernando Signorelli
