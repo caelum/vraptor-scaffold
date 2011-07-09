@@ -28,6 +28,18 @@ h2. Note on Patches/Pull Requests
   (if you want to have your own version, that is fine but bump version in a commit by itself I can ignore when I pull)
 * Send me a pull request. Bonus points for topic branches.
 
-h2. Authors
+h2. Author
 
-Vraptor Scaffold was created by Rodolfo Liviero and is maintained by Rodolfo Liviero and "Caelum":http://www.caelum.com.br/
+Vraptor Scaffold was created and is maintained by "Rodolfo Liviero":http://rodolfoliviero.com.br.
+
+h2. Contributors
+
+ * Adriano Almeida
+ * Edgar Latorre
+ * Felipe Fontoura
+ * Guilherme Silverira
+ * José Guilherme Camara Ribeiro
+ * Lucas Cavalcanti
+ * Luiz Fernando Signorelli
+ * Toshi Kurauchi
+ * Washington Botelho
