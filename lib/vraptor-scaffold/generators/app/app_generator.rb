@@ -1,3 +1,5 @@
+class AppConfigException < Exception
+end
 class AppGenerator < VraptorScaffold::Base
 
   TEMPLATE_ENGINES = %w( jsp ftl )
@@ -161,14 +163,12 @@ class AppGenerator < VraptorScaffold::Base
       Kernel::exit
     end
     unless ORMS.include? options[:orm]
-      puts options[:orm]
       puts "ORM #{options[:orm]} is not supported. The supported object-relational mapping are: #{ORMS.join(", ")}"
       Kernel::exit
     end
 
     if File.directory? project_path
-      puts "The project #{project_path} already exist"
-      Kernel::exit
+      raise AppConfigException.new("The project #{project_path} already exist")
     end
 
     require 'open-uri'

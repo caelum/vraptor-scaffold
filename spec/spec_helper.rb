@@ -11,7 +11,8 @@ def mock_config_file
   Configuration.stub!(:config).and_return(file)
 end
 
-def exists_and_identical?(source, destination)
-  File.exists?(destination).should be_true
-  FileUtils.should be_identical(source, destination)
+def exists_and_identical?(source, created)
+  c = File.open(created).read.gsub( /\r/m, "" )
+  c2 = File.open(source).read.gsub( /\r/m, "" )
+  c.should be == c2
 end
