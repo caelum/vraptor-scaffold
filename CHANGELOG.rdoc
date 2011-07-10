@@ -2,7 +2,7 @@
 
 * New Features
     * added c3p0 pool configurations.
-    * option to choose between JPA(Entity Manager) or Hibernate(Session)
+    * option to choose between JPA(Entity Manager) or Hibernate(Session).
     * option to override models package.
     * option to override controllers package.
     * option to override repositories package.
@@ -12,6 +12,7 @@
     * moving hibernate configurations to hibernate.properties.
     * update method on generic repository nows return the updated entity.
     * better log4j pattern.
+    * removing the hibernate configuration repositories from build tools.
     * updated hsqldb to 2.2.4.
     * updated hibernate to 3.6.5.Final.
     * updated hibernate validator to 4.2.0.Final.
@@ -152,4 +153,6 @@
     * Fixed runtime dependencies.
 
 == 0.0.1.beta2 / 2010-07-07
-* Crud with vraptor, maven 2, jpa, freemarker and jquery.
+
+* First version
+    * Crud with vraptor 3, maven 2, jpa, freemarker and jquery.
