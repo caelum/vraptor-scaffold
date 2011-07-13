@@ -13,23 +13,23 @@ class Configuration
   end
 
   def self.template_engine
-    config["template_engine"]
+    config["template_engine"] ? config["template_engine"] : 'jsp'
   end
 
   def self.package
-    config["package"]
+    config["package"] ? config["package"] : 'app'
   end
 
   def self.models_package
-    config["models_package"]
+    config["models_package"] ? config["models_package"] : 'models'
   end
 
   def self.controllers_package
-    config["controllers_package"]
+    config["controllers_package"] ? config["controllers_package"] : 'controllers'
   end
 
   def self.repositories_package
-    config["repositories_package"]
+    config["repositories_package"] ? config["repositories_package"] : 'repositories'
   end
 
   def self.full_models_package
@@ -37,7 +37,7 @@ class Configuration
   end
 
   def self.orm
-    config["orm"]
+    config["orm"] ? config["orm"] : 'jpa'
   end
 
   def self.hibernate?
@@ -51,5 +51,4 @@ class Configuration
   def self.test_class_path *path
     File.join TEST_SRC, package.gsub(".", File::Separator), path
   end
-
 end

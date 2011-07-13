@@ -2,14 +2,29 @@
 
 * New Features
     * added c3p0 pool configurations.
+    * option to choose between JPA(Entity Manager) or Hibernate(Session).
+    * option to override models package.
+    * option to override controllers package.
+    * option to override repositories package.
 
 * Improvements
     * removed unnecessary EJB provider configuration.
+    * moving hibernate configurations to hibernate.properties.
+    * update method on generic repository nows return the updated entity.
+    * better log4j pattern.
+    * removing the hibernate configuration repositories from build tools.
+    * updated hsqldb to 2.2.4.
     * updated hibernate to 3.6.5.Final.
+    * updated hibernate validator to 4.2.0.Final.
     * updated maven war plugin to 2.1.1.
+    * updated maven cobertura plugin to 2.5.1.
 
 * Bugfixes
     * jetty hot deploy on ant projects.
+    * script tag in main.jsp was closing twice.
+    * gradle does not load test classpath correctly.
+    * scaffold models with compound names.
+    * does not create new project if a folder with the project name exists.
 
 == 1.1.0 / 2011-03-02
 
@@ -138,4 +153,6 @@
     * Fixed runtime dependencies.
 
 == 0.0.1.beta2 / 2010-07-07
-* Crud with vraptor, maven 2, jpa, freemarker and jquery.
+
+* First version
+    * Crud with vraptor 3, maven 2, jpa, freemarker and jquery.

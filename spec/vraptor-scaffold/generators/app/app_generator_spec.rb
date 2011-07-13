@@ -311,12 +311,6 @@ describe AppGenerator do
       destination = "#{@project_path}/ivy.xml"
       exists_and_identical?(source, destination)
     end
-    
-    it "should create ivysettings.xml" do
-      source = File.join AppGenerator.source_root, "ivysettings.xml"
-      destination = "#{@project_path}/ivysettings.xml"
-      exists_and_identical?(source, destination)
-    end
 
     it "should copy ivy.jar" do
       ivy = File.join @project_path, AppGenerator::IVY_JAR

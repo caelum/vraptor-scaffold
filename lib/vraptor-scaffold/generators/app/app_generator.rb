@@ -66,7 +66,6 @@ class AppGenerator < VraptorScaffold::Base
       copy_file("build.xml")
       template("build.properties.erb", "build.properties") 
       template("ivy.erb", "ivy.xml")
-      copy_file("ivysettings.xml") 
       copy_file(IVY_JAR)
     end
   end
