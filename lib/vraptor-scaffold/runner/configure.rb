@@ -5,14 +5,15 @@ module VraptorScaffold
 
       def run(args)
         if VraptorScaffold::Runner::Help.help?(args.first) || args.size < 2
-          puts "vraptor configure usage:"
-          puts "\tvraptor configure PLUGIN_NAME"
-        elsif File.exist?("src")
+          Kernel.puts "vraptor configure usage:"
+          Kernel.puts "\tvraptor configure PLUGIN_NAME"
+        else
           plugin_name = args.first
           require plugin_name
-          plugin_name.gsub('-','_').camelize.constantize.new(args).invoke_all
-        else
-          puts "To run vraptor plugin please go to the project root folder."
+          puts "Configuring plugin '#{plugin_name}'"
+          plugin = plugin_name.gsub('-','_').camelize.constantize.new(args)
+          plugin.invoke_all
+          plugin
         end
       end
     end
