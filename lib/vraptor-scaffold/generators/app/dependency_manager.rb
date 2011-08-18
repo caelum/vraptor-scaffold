@@ -33,7 +33,7 @@ class DependencyManager
   end
   
   def append_freemarker_dependency_if_necessary dependencies
-     dependencies << Dependency.new("org.freemarker", "freemarker", "2.3.16") if @options[:template_engine] == 'ftl'
+     dependencies << Dependency.new("org.freemarker", "freemarker", "2.3.18") if @options[:template_engine] == 'ftl'
      dependencies
   end
 end

@@ -12,7 +12,7 @@ describe DependencyManager do
   context "compile scope" do
     it "should include freemarker dependency when template is freemarker" do
       options = {:template_engine => "ftl"}
-      Dependency.stub!(:new).with("org.freemarker", "freemarker", "2.3.16").and_return(@dependency)
+      Dependency.stub!(:new).with("org.freemarker", "freemarker", "2.3.18").and_return(@dependency)
       DependencyManager.new(options).compile_scope.include?(@dependency).should be_true
     end
   end
