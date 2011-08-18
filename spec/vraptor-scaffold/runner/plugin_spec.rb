@@ -19,14 +19,6 @@ describe VraptorScaffold::Runner::Plugin do
       @args = ["simplemail"]
     end
 
-    it "should invoke all plugin generator tasks" do
-      pending
-      File.stub!(:exist?).and_return(true)
-      PluginGenerator.stub!(:new).and_return(@generator)
-      @generator.should_receive(:invoke_all)
-      @plugin_runner.new.run(@args)
-    end
-
     it "cannot invoke plugin generator outsite root folder" do
       File.stub!(:exist?).and_return(false)
       PluginGenerator.should_not_receive(:new)
