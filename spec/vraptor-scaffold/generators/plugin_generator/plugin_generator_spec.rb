@@ -4,7 +4,7 @@ describe PluginGenerator do
 
   before :all do
     @project_path = "test_for_plugins"
-    FileUtils.rm_rf(@project_path)
+
     @maven_projet = "#{@project_path}/maven"
     @gradle_projet = "#{@project_path}/gradle"
     @ant_projet = "#{@project_path}/ant"
@@ -13,6 +13,10 @@ describe PluginGenerator do
     AppGenerator.new(@gradle_projet, ["-b=gradle"]).invoke_all
     AppGenerator.new(@ant_projet, ["-b=ant"]).invoke_all
   end
+
+   after :all do
+      FileUtils.rm_rf(@project_path)
+   end
   
   def expected_for(name)
     File.join File.dirname(__FILE__), "expected_configs", name

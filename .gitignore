@@ -8,5 +8,3 @@ doc
 *.swp
 rdoc
 .DS_Store
-test_for_plugins
-
