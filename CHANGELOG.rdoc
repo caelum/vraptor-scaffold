@@ -14,7 +14,7 @@
     * better log4j pattern.
     * removing the hibernate configuration repositories from build tools.
     * updated hsqldb to 2.2.4.
-    * updated hibernate to 3.6.5.Final.
+    * updated hibernate to 3.6.6.Final.
     * updated hibernate validator to 4.2.0.Final.
     * updated maven war plugin to 2.1.1.
     * updated maven cobertura plugin to 2.5.1.

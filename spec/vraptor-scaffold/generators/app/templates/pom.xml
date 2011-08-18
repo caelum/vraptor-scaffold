@@ -77,12 +77,12 @@
 		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-entitymanager</artifactId>
-			<version>3.6.5.Final</version>
+			<version>3.6.6.Final</version>
 		</dependency>
 		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-c3p0</artifactId>
-			<version>3.6.5.Final</version>
+			<version>3.6.6.Final</version>
 		</dependency>
 		<dependency>
 			<groupId>org.hibernate</groupId>

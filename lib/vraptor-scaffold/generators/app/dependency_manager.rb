@@ -22,7 +22,7 @@ class DependencyManager
   
   private
   def default_dependencies
-    hibernate_version = "3.6.5.Final"
+    hibernate_version = "3.6.6.Final"
     [ Dependency.new("br.com.caelum", "vraptor", "3.3.1"),
         Dependency.new("org.hsqldb", "hsqldb", "2.2.4"),
         Dependency.new("opensymphony", "sitemesh", "2.4.2"), Dependency.new("javax.servlet", "jstl", "1.2"),
