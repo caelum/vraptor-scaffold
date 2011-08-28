@@ -34,7 +34,7 @@ class DependencyManager
      Dependency.new("org.hibernate", "hibernate-entitymanager", hibernate_version),
      Dependency.new("org.hibernate", "hibernate-c3p0", hibernate_version),
      Dependency.new("org.hibernate", "hibernate-validator", "4.2.0.Final"),
-     Dependency.new("joda-time", "joda-time", "1.6.2")]
+     Dependency.new("joda-time", "joda-time", "2.0")]
   end
 
   def append_heroku_dependencies_if_necessary dependencies

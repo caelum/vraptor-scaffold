@@ -48,7 +48,7 @@ dependencies {
     compile group: 'org.hibernate', name: 'hibernate-entitymanager', version: '3.6.7.Final'
     compile group: 'org.hibernate', name: 'hibernate-c3p0', version: '3.6.7.Final'
     compile group: 'org.hibernate', name: 'hibernate-validator', version: '4.2.0.Final'
-    compile group: 'joda-time', name: 'joda-time', version: '1.6.2'
+    compile group: 'joda-time', name: 'joda-time', version: '2.0'
 
     //Provided dependencies
     providedCompile group: 'javax.servlet', name: 'servlet-api', version: '2.5'
