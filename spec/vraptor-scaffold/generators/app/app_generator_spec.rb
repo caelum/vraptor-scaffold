@@ -17,7 +17,8 @@ describe AppGenerator do
     end
 
     it "should be invalid when project name already exist" do
-      lambda { AppGenerator.new(@project_path) }.should raise_error
+      Kernel.should_receive(:exit)
+      AppGenerator.new(@project_path)
     end
 
     it "should create pom" do

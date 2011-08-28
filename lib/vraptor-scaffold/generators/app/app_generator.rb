@@ -1,5 +1,3 @@
-class AppConfigException < Exception
-end
 class AppGenerator < VraptorScaffold::Base
 
   TEMPLATE_ENGINES = %w( jsp ftl )
@@ -181,7 +179,8 @@ class AppGenerator < VraptorScaffold::Base
     end
 
     if File.directory? project_path
-      raise AppConfigException.new("The project #{project_path} already exist")
+      puts "The project #{project_path} already exist"
+      Kernel::exit
     end
 
     require 'open-uri'
