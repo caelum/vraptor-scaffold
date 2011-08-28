@@ -6,6 +6,7 @@
     * option to override models package.
     * option to override controllers package.
     * option to override repositories package.
+    * get always latest jquery version. (Use - j to choose another one.)
     * added c3p0 pool configurations.
 
 * Improvements
@@ -14,6 +15,8 @@
     * update method on generic repository nows return the updated entity.
     * better log4j pattern.
     * removing the hibernate configuration repositories from build tools.
+    * better helps commands.
+    * removing jre classpath entry making eclipse use default.
     * updated hsqldb to 2.2.4.
     * updated freemarker to 2.3.18.
     * updated hibernate to 3.6.7.Final.
