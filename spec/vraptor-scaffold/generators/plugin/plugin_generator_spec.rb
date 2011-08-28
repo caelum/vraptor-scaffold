@@ -22,6 +22,10 @@ describe PluginGenerator do
     File.join File.dirname(__FILE__), "expected_configs", name
   end
 
+  it "should configure banner" do
+    PluginGenerator.banner.should == "vraptor plugin NAME [options]"
+  end
+
   context "maven project" do
 
     before :each do
