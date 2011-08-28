@@ -13,13 +13,16 @@ class AppGenerator < VraptorScaffold::Base
                :desc => "Template engine (options: #{TEMPLATE_ENGINES.join(', ')})"
 
   class_option :package, :default => "app", :aliases => "-p",
-               :desc => "Base package"
+               :desc => "Define base package"
 
   class_option :models_package, :aliases => "-m", :default => "models",
                :desc => "Define models package"
 
   class_option :controllers_package, :aliases => "-c", :default => "controllers",
                :desc => "Define controllers package"
+
+  class_option :heroku, :type => :boolean, :aliases => "-h",
+               :desc => "heroku project"
 
   class_option :repositories_package, :aliases => "-r", :default => "repositories",
                :desc => "Define repositories package"
@@ -54,14 +57,17 @@ class AppGenerator < VraptorScaffold::Base
 
   def create_root_folder
     empty_directory "."
+    if @options[:heroku]
+      copy_file("heroku/Procfile", "Procfile")
+    end
   end
 
   def configure_maven
-    template("pom.erb", "pom.xml") if options[:build_tool] == "mvn"
+    template("pom.erb", "pom.xml") if build_tool == "mvn"
   end
 
   def configure_ant
-    if options[:build_tool] == "ant"
+    if build_tool == "ant"
       create_eclipse_files unless options[:skip_eclipse]
       copy_file("build.xml")
       template("build.properties.erb", "build.properties") 
@@ -71,12 +77,15 @@ class AppGenerator < VraptorScaffold::Base
   end
 
   def configure_gradle
-    template("build.gradle.erb", "build.gradle") if options[:build_tool] == "gradle"
+    template("build.gradle.erb", "build.gradle") if build_tool == "gradle"
   end
 
   def create_main_java
     empty_directory Configuration::MAIN_SRC
     @src = File.join(Configuration::MAIN_SRC, options[:package].gsub(".", File::Separator))
+    if @options[:heroku]
+      copy_file("heroku/Main.java", "#{Configuration::MAIN_SRC}/Main.java")
+    end
   end
 
   def create_controllers_directory
@@ -140,6 +149,11 @@ class AppGenerator < VraptorScaffold::Base
   end
 
   private
+  def build_tool
+    return "mvn" if options[:heroku]
+    options[:build_tool]
+  end
+
   def jquery_url
     jquery_version = "1" #this mean get latest version
     jquery_version = options[:jquery] if options[:jquery] != 'latest version'

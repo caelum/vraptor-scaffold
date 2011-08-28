@@ -1,6 +1,7 @@
 == 1.2.0 / 2011-??-??
 
 * New Features
+    * heroku support (vraptor new app --heroku).
     * added c3p0 pool configurations.
     * option to choose between JPA(Entity Manager) or Hibernate(Session).
     * option to override models package.

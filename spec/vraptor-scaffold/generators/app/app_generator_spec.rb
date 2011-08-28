@@ -13,9 +13,9 @@ describe AppGenerator do
     end
 
     it "should create directory with project name" do
-      File.exist?(@project_path).should be_true 
+      File.exist?(@project_path).should be_true
     end
-    
+
     it "should be invalid when project name already exist" do
       lambda { AppGenerator.new(@project_path) }.should raise_error
     end
@@ -27,7 +27,7 @@ describe AppGenerator do
     end
 
     it "cannot create ivy.xml" do
-      File.exist?("#{@project_path}/ivy.xml").should be_false  
+      File.exist?("#{@project_path}/ivy.xml").should be_false
     end
 
     it "cannot create build.gradle" do
@@ -51,11 +51,11 @@ describe AppGenerator do
       end
 
       it "should create source folder" do
-        File.exist?(@main_java).should be_true 
+        File.exist?(@main_java).should be_true
       end
 
       it "should create app folder" do
-        File.exist?(@app).should be_true 
+        File.exist?(@app).should be_true
       end
 
       it "should create controllers folder" do
@@ -113,7 +113,7 @@ describe AppGenerator do
       end
 
       it "should create resource folder" do
-        File.exist?(@main_resources).should be_true 
+        File.exist?(@main_resources).should be_true
       end
 
       it "should create log4j" do
@@ -139,7 +139,7 @@ describe AppGenerator do
       end
 
       it "should create META-INF" do
-        File.exist?(@meta_inf).should be_true 
+        File.exist?(@meta_inf).should be_true
       end
 
       it "should create persistence.xml" do
@@ -153,10 +153,10 @@ describe AppGenerator do
       before(:all) do
         @webapp = "#{@project_path}/#{Configuration::WEB_APP}"
         @web_inf = "#{@project_path}/#{Configuration::WEB_INF}"
-      end 
+      end
 
       it "should create webapp folder" do
-        File.exist?(@webapp).should be_true 
+        File.exist?(@webapp).should be_true
       end
 
       it "should create index" do
@@ -166,7 +166,7 @@ describe AppGenerator do
       end
 
       it "should create WEB-INF folder" do
-        File.exist?(@web_inf).should be_true 
+        File.exist?(@web_inf).should be_true
       end
 
       it "should create scaffold css" do
@@ -198,7 +198,7 @@ describe AppGenerator do
       end
 
       it "should create images folder" do
-        File.exist?("#{@webapp}/images").should be_true 
+        File.exist?("#{@webapp}/images").should be_true
       end
     end
 
@@ -210,11 +210,11 @@ describe AppGenerator do
       end
 
       it "should create test source folder" do
-        File.exist?(@test_java).should be_true 
+        File.exist?(@test_java).should be_true
       end
 
       it "should create app folder" do
-        File.exist?(@app).should be_true 
+        File.exist?(@app).should be_true
       end
 
       it "should create controllers folder" do
@@ -227,12 +227,12 @@ describe AppGenerator do
 
       it "should create respositories folder" do
         File.exist?("#{@app}/repository").should be_true
-      end    
+      end
 
       it "should create test resource folder" do
-        File.exist?(@test_resource).should be_true 
+        File.exist?(@test_resource).should be_true
       end
-    end    
+    end
   end
 
   context "build app with complex package" do
@@ -249,11 +249,11 @@ describe AppGenerator do
     end
 
     it "should create main path" do
-      File.exist?(@main_java).should be_true  
+      File.exist?(@main_java).should be_true
     end
 
     it "should create test path" do
-      File.exist?(@test_java).should be_true  
+      File.exist?(@test_java).should be_true
     end
 
   end
@@ -282,7 +282,7 @@ describe AppGenerator do
       AppGenerator.new(@project_path).invoke_all
     end
   end
-  
+
   context "configuring ant application" do
 
     before(:all) do
@@ -314,11 +314,11 @@ describe AppGenerator do
 
     it "should copy ivy.jar" do
       ivy = File.join @project_path, AppGenerator::IVY_JAR
-      File.exist?(ivy).should be_true  
+      File.exist?(ivy).should be_true
     end
 
     it "cannot create pom.xml" do
-      File.exist?("#{@project_path}/pom.xml").should be_false  
+      File.exist?("#{@project_path}/pom.xml").should be_false
     end
 
     it "cannot create build.gradle" do
@@ -339,7 +339,7 @@ describe AppGenerator do
       it "should create .settings" do
         settings = File.join @project_path, ".settings"
         File.exist?(settings).should be_true
-      end      
+      end
     end
   end
 
@@ -357,7 +357,7 @@ describe AppGenerator do
       File.exist?("#{@project_path}/.classpath").should be_false
     end
   end
-  
+
   context "configuring gradle application" do
 
     before(:all) do
@@ -376,11 +376,11 @@ describe AppGenerator do
     end
 
     it "cannot create ivy.xml" do
-      File.exist?("#{@project_path}/ivy.xml").should be_false  
+      File.exist?("#{@project_path}/ivy.xml").should be_false
     end
 
     it "cannot create pom.xml" do
-      File.exist?("#{@project_path}/pom.xml").should be_false  
+      File.exist?("#{@project_path}/pom.xml").should be_false
     end
   end
 
@@ -421,19 +421,19 @@ describe AppGenerator do
   it "should configure banner" do
     AppGenerator.banner.should == "vraptor new PROJECT_PATH [options]"
   end
-  
+
   context "validate options" do
     before(:each) do
       @project_path = "vraptor-scaffold"
     end
 
     it "should be invalid when build tool is not supported" do
-      Kernel.should_receive(:exit) 
+      Kernel.should_receive(:exit)
       AppGenerator.new(@project_path, ["-b=maven"])
     end
 
     it "should be invalid when template engine is not supported" do
-      Kernel.should_receive(:exit) 
+      Kernel.should_receive(:exit)
       AppGenerator.new(@project_path, ["-e=velocity"])
     end
 
@@ -447,4 +447,30 @@ describe AppGenerator do
       AppGenerator.new(@project_path, ["-j=1.x"])
     end
   end
+
+  context "heroku app" do
+    before(:all) do
+      @project_path = "heroku"
+      AppGenerator.new(@project_path, ["--heroku"]).invoke_all
+    end
+
+    after(:all) do
+      FileUtils.remove_dir(@project_path)
+    end
+
+    it "should create pom" do
+      source = File.join File.dirname(__FILE__), "templates", "pom-heroku.xml"
+      destination = "#{@project_path}/pom.xml"
+      exists_and_identical?(source, destination)
+    end
+
+    it "should create Procfile" do
+      File.exist?("#{@project_path}/Procfile").should be_true
+    end
+
+    it "should create main class to run heroku apps" do
+      File.exist?("#{@project_path}/src/main/java/Main.java").should be_true
+    end
+  end
+
 end
