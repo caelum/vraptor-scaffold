@@ -7,7 +7,7 @@ module VraptorScaffold
         if VraptorScaffold::Runner::Help.help?(args.first) || args.size < 2
           PluginGenerator.start(["-h"])
         elsif File.exist?("src")
-          PluginGenerator.new(args).invoke_all
+          PluginGenerator.new(args.shift, args).invoke_all
         else
           puts "To run vraptor plugin please go to the project root folder."
         end

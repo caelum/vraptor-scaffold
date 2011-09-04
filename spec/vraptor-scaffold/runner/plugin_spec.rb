@@ -7,21 +7,31 @@ describe VraptorScaffold::Runner::Plugin do
     @plugin_runner = VraptorScaffold::Runner::Plugin
   end
 
-  it "should print help command" do
-    @help.stub!(:help).with("--help").and_return true
-    PluginGenerator.should_receive(:start).with(["-h"])
-    @plugin_runner.new.run(["--help"])
+  context "help command" do
+    before :each do
+      @help.stub!(:help).with("--help").and_return true
+      PluginGenerator.should_receive(:start).with(["-h"])
+    end
+
+    it "should ptin when options --help" do
+      @plugin_runner.new.run(["--help"])
+    end
+
+    it "should print when args is less than 2" do
+      @plugin_runner.new.run(["simplemail"])
+    end
   end
 
   context "plugin generator" do
     before(:each) do
       @generator = mock(PluginGenerator)
-      @args = ["simplemail", "-v=1.0.0"]
+      @name = "simplemail"
+      @args = [@name, "-v=1.0.0"]
     end
 
     it "should invoke plugin tasks" do
       File.stub!(:exist?).and_return(true)
-      PluginGenerator.stub!(:new).with(@args).and_return(@generator)
+      PluginGenerator.stub!(:new).with(@name, @args).and_return(@generator)
       @generator.should_receive(:invoke_all)
       @plugin_runner.new.run(@args)
     end
