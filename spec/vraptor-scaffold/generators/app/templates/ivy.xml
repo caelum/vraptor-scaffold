@@ -24,7 +24,7 @@
 		<dependency org="javax.servlet.jsp" name="jsp-api" rev="2.1" conf="provided->default" />
 
 		<!-- Test dependencies -->
-		<dependency org="junit" name="junit" rev="4.8.2" conf="test->default" />
+		<dependency org="junit" name="junit" rev="4.10" conf="test->default" />
 		<dependency org="org.hamcrest" name="hamcrest-all" rev="1.1" conf="test->default" />
 		<dependency org="org.mockito" name="mockito-all" rev="1.8.5" conf="test->default" />
 

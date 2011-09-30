@@ -13,7 +13,7 @@ class DependencyManager
   end
 
   def test_scope
-    [Dependency.new("junit", "junit", "4.8.2"),
+    [Dependency.new("junit", "junit", "4.10"),
      Dependency.new("org.hamcrest", "hamcrest-all", "1.1"),
      Dependency.new("org.mockito", "mockito-all", "1.8.5")]
   end
