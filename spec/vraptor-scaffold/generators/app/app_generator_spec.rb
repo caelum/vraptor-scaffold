@@ -468,4 +468,25 @@ describe AppGenerator do
     end
   end
 
+  context "gae app" do
+    before(:all) do
+      @project_path = "gae"
+      AppGenerator.new(@project_path, ["--gae"]).invoke_all
+    end
+
+    after(:all) do
+      FileUtils.remove_dir(@project_path)
+    end
+
+    it "should create ivy.xml" do
+      source = File.join File.dirname(__FILE__), "templates", "ivy-gae.xml"
+      destination = "#{@project_path}/ivy.xml"
+      exists_and_identical?(source, destination)
+    end
+
+    it "should not create generic entity" do
+      File.exist?("#{@app}/model/Entity.java").should be_false
+    end
+  end
+
 end
