@@ -152,6 +152,7 @@ class AppGenerator < VraptorScaffold::Base
   private
   def build_tool
     return "mvn" if options[:heroku]
+    return "ant" if options[:gae]
     options[:build_tool]
   end
 
