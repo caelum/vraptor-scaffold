@@ -22,6 +22,9 @@ class AppGenerator < VraptorScaffold::Base
   class_option :heroku, :type => :boolean, :aliases => "-h",
                :desc => "heroku project"
 
+  class_option :gae, :type => :boolean, :aliases => "-g",
+               :desc => "google app engine project"
+
   class_option :repositories_package, :aliases => "-r", :default => "repositories",
                :desc => "Define repositories package"
 
