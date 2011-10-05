@@ -28,9 +28,10 @@ class DependencyManager
 
   private
   def default_dependencies
-    dependencies = [Dependency.new("br.com.caelum", "vraptor", "3.4.0"),
-                    Dependency.new("org.hsqldb", "hsqldb", "2.2.4"),
-                    Dependency.new("opensymphony", "sitemesh", "2.4.2"), Dependency.new("javax.servlet", "jstl", "1.2")]
+    dependencies = [Dependency.new("br.com.caelum", "vraptor", "3.3.1"),
+                    Dependency.new("opensymphony", "sitemesh", "2.4.2"), 
+                    Dependency.new("javax.servlet", "jstl", "1.2"),
+                    Dependency.new("org.hsqldb", "hsqldb", "2.2.4")]
 
     if !@options[:gae]
       hibernate_version = "3.6.7.Final"
