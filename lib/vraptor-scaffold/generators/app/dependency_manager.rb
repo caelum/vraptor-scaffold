@@ -30,12 +30,12 @@ class DependencyManager
   def default_dependencies
     dependencies = [Dependency.new("br.com.caelum", "vraptor", "3.3.1"),
                     Dependency.new("opensymphony", "sitemesh", "2.4.2"), 
-                    Dependency.new("javax.servlet", "jstl", "1.2"),
-                    Dependency.new("org.hsqldb", "hsqldb", "2.2.4")]
+                    Dependency.new("javax.servlet", "jstl", "1.2")]
 
     if !@options[:gae]
       hibernate_version = "3.6.7.Final"
-      dependencies += [Dependency.new("org.hibernate", "hibernate-entitymanager", hibernate_version),
+      dependencies += [Dependency.new("org.hsqldb", "hsqldb", "2.2.4"),
+                       Dependency.new("org.hibernate", "hibernate-entitymanager", hibernate_version),
                        Dependency.new("org.hibernate", "hibernate-c3p0", hibernate_version)]
     end
 
