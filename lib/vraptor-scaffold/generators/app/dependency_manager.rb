@@ -9,6 +9,7 @@ class DependencyManager
   def compile_scope
     dependencies = append_freemarker_dependency_if_necessary default_dependencies
     dependencies = append_heroku_dependencies_if_necessary dependencies
+    dependencies = append_gae_dependencies_if_necessary dependencies
     dependencies
   end
 
@@ -43,6 +44,13 @@ class DependencyManager
       dependencies += [Dependency.new("org.eclipse.jetty", "jetty-webapp", "7.4.4.v20110707"),
                        Dependency.new("org.mortbay.jetty", "jsp-2.1-glassfish", "2.1.v20100127"),
                        Dependency.new("javax.servlet", "servlet-api", "2.5")]
+    end
+    dependencies
+  end
+
+  def append_gae_dependencies_if_necessary dependencies
+    if @options[:gae]
+      dependencies += [Dependency.new("com.googlecode.objectify", "objectify", "2.2.3")]
     end
     dependencies
   end
