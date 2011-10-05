@@ -17,10 +17,16 @@ describe DependencyManager do
     end
 
     context "dependencies for a gae app" do
-      it "should include gae dependencies when gae project options is selected" do
+      it "should include gae dependencies when gae project option is selected" do
         options = {:gae => true}
         Dependency.stub!(:new).with("com.googlecode.objectify", "objectify", "2.2.3").and_return(@dependency)
         DependencyManager.new(options).compile_scope.include?(@dependency).should be_true
+      end
+
+      it "should not have hibernate persistence dependencies when gae project option is selected" do
+        options = {:gae => true}
+        Dependency.stub!(:new).with("org.hibernate", "hibernate-entitymanager", "3.6.7.Final").and_return(@dependency)
+        DependencyManager.new(options).compile_scope.include?(@dependency).should be_false
       end
     end
   end
