@@ -96,7 +96,7 @@ class AppGenerator < VraptorScaffold::Base
   def create_models_directory
     models_folder = File.join @src, options[:models_package]
     empty_directory models_folder
-    template("models/Entity.erb", "#{models_folder}/Entity.java")
+    template("models/Entity.erb", "#{models_folder}/Entity.java") unless options[:gae]
   end
 
   def create_repositories_directory
