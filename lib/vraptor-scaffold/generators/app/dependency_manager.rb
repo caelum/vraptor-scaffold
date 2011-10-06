@@ -28,7 +28,7 @@ class DependencyManager
 
   private
   def default_dependencies
-    dependencies = [Dependency.new("br.com.caelum", "vraptor", "3.3.1"),
+    dependencies = [Dependency.new("br.com.caelum", "vraptor", "3.4.0"),
                     Dependency.new("opensymphony", "sitemesh", "2.4.2"), 
                     Dependency.new("javax.servlet", "jstl", "1.2")]
 
@@ -40,7 +40,8 @@ class DependencyManager
     end
 
     dependencies += [Dependency.new("org.hibernate", "hibernate-validator", "4.2.0.Final"),
-                     Dependency.new("joda-time", "joda-time", "2.0")]
+                     Dependency.new("joda-time", "joda-time", "2.0"),
+                     Dependency.new("com.thoughtworks.xstream", "xstream", "1.4.1")]
     dependencies
   end
 
