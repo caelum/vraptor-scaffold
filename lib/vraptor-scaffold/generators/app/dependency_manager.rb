@@ -28,13 +28,14 @@ class DependencyManager
   private
   def default_dependencies
     hibernate_version = "3.6.7.Final"
-    [Dependency.new("br.com.caelum", "vraptor", "3.3.1"),
+    [Dependency.new("br.com.caelum", "vraptor", "3.4.0"),
      Dependency.new("org.hsqldb", "hsqldb", "2.2.4"),
      Dependency.new("opensymphony", "sitemesh", "2.4.2"), Dependency.new("javax.servlet", "jstl", "1.2"),
      Dependency.new("org.hibernate", "hibernate-entitymanager", hibernate_version),
      Dependency.new("org.hibernate", "hibernate-c3p0", hibernate_version),
      Dependency.new("org.hibernate", "hibernate-validator", "4.2.0.Final"),
-     Dependency.new("joda-time", "joda-time", "2.0")]
+     Dependency.new("joda-time", "joda-time", "2.0"),
+     Dependency.new("com.thoughtworks.xstream", "xstream", "1.4.1")]
   end
 
   def append_heroku_dependencies_if_necessary dependencies
