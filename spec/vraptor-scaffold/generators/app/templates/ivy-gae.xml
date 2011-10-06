@@ -10,11 +10,12 @@
 	</configurations>
 
 	<dependencies>
-		<dependency org="br.com.caelum" name="vraptor" rev="3.3.1" conf="default" />
+		<dependency org="br.com.caelum" name="vraptor" rev="3.4.0" conf="default" />
 		<dependency org="opensymphony" name="sitemesh" rev="2.4.2" conf="default" />
 		<dependency org="javax.servlet" name="jstl" rev="1.2" conf="default" />
 		<dependency org="org.hibernate" name="hibernate-validator" rev="4.2.0.Final" conf="default" />
 		<dependency org="joda-time" name="joda-time" rev="2.0" conf="default" />
+		<dependency org="com.thoughtworks.xstream" name="xstream" rev="1.4.1" conf="default" />
 		<dependency org="com.googlecode.objectify" name="objectify" rev="2.2.3" conf="default" />
 
 		<!-- Provided dependencies -->
