@@ -185,7 +185,7 @@ class AppGenerator < VraptorScaffold::Base
 
     require 'open-uri'
     begin
-      Kernel::open(jquery_url)
+      Kernel::open(jquery_url) if options[:jquery] != 'latest version'
     rescue OpenURI::HTTPError => e
       download_url = "http://docs.jquery.com/Downloading_jQuery"
       puts "jQuery version #{options[:jquery]} was not found. Please visit the download page to see the versions available #{download_url}."
