@@ -472,6 +472,8 @@ describe AppGenerator do
     before(:all) do
       @project_path = "gae"
       AppGenerator.new(@project_path, ["--gae"]).invoke_all
+      @main_java = "#{@project_path}/#{Configuration::MAIN_SRC}"
+      @app = "#{@main_java}/app"
     end
 
     after(:all) do
@@ -485,6 +487,7 @@ describe AppGenerator do
     end
 
     it "should not create generic entity" do
+      puts "#{@app}/model/Entity.java"
       File.exist?("#{@app}/model/Entity.java").should be_false
     end
   end
