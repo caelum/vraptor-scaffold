@@ -1,3 +1,7 @@
+h1. VRaptor Scaffold "!https://secure.travis-ci.org/caelum/vraptor-scaffold.png!":http://travis-ci.org/caelum/vraptor-scaffold
+
+VRaptor Scaffold extension to make it easier configuring new projects and plugins.
+
 h1. Documentation
 
 Vraptor Scaffold website can be found at "http://vraptor.org":http://vraptor.org
