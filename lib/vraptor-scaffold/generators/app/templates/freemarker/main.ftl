@@ -2,7 +2,7 @@
 <html>
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <@html.css "stylesheets"/>
+    <@html.css "application"/>
     <title>Vraptor Scaffold</title>
     ${head}
   </head>
