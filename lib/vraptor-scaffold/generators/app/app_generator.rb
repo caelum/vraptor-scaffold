@@ -176,6 +176,11 @@ class AppGenerator < VraptorScaffold::Base
       Kernel::exit
     end
 
+    if options[:heroku] and options[:gae]
+      puts "You cannot create gae and heroku template project together"
+      Kernel::exit
+    end
+
     if File.directory? project_path
       puts "The project #{project_path} already exist"
       Kernel::exit

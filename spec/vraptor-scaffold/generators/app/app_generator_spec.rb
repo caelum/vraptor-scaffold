@@ -441,6 +441,11 @@ describe AppGenerator do
       Kernel.should_receive(:exit)
       AppGenerator.new(@project_path, ["-j=1.x"])
     end
+
+    it "should be invalid when gae and heroku are selected" do
+      Kernel.should_receive(:exit)
+      AppGenerator.new(@project_path, ["-g", "-h"])
+    end
   end
 
   context "heroku app" do
@@ -487,7 +492,6 @@ describe AppGenerator do
     end
 
     it "should not create generic entity" do
-      puts "#{@app}/model/Entity.java"
       File.exist?("#{@app}/model/Entity.java").should be_false
     end
   end
