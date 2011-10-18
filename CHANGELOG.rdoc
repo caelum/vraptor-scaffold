@@ -1,4 +1,4 @@
-== 1.2.1 / 2011-10-??
+== 1.2.1 / 2011-10-18
 
 * New Features
     * heroku support (vraptor new app --heroku).
@@ -8,6 +8,7 @@
     * option to override repositories package (Use -r).
     * get always latest jquery version (Use - j to choose another one).
     * added c3p0 pool configurations.
+    * plugin install. (vraptor plugin install simple-mail -v 1.0.0)
 
 * Improvements
     * removed unnecessary EJB provider configuration.
