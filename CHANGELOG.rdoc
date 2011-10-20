@@ -1,4 +1,6 @@
 == 1.2.2 / 2011-??-??
+* Bugfixes
+    * Run scaffold commands behind proxy.
 
 == 1.2.1 / 2011-10-18
 
