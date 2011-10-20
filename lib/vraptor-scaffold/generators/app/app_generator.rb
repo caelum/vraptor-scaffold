@@ -171,7 +171,6 @@ class AppGenerator < VraptorScaffold::Base
   end
 
   require 'net/http'
-  require 'uri'
   def validate
     unless BUILD_TOOLS.include? options[:build_tool]
       puts "Build tool #{options[:build_tool]} is not supported. The supported build tools are: #{BUILD_TOOLS.join(", ")}"
