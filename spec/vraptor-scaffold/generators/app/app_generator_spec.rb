@@ -74,7 +74,7 @@ describe AppGenerator do
       end
 
       it "should create generic repository" do
-        source =  File.join File.dirname(__FILE__), "templates", "Repository.java"
+        source =  File.join File.dirname(__FILE__), "templates", "RepositoryJPA.java"
         destination = "#{@app}/repository/Repository.java"
         exists_and_identical?(source, destination)
       end
@@ -493,6 +493,12 @@ describe AppGenerator do
 
     it "should not create generic entity" do
       File.exist?("#{@app}/model/Entity.java").should be_false
+    end
+
+    it "should create a objectify generic repository" do
+      source =  File.join File.dirname(__FILE__), "templates", "RepositoryObjectify.java"
+      destination = "#{@app}/repositories/Repository.java"
+      exists_and_identical?(source, destination)
     end
   end
 

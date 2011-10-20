@@ -102,7 +102,11 @@ class AppGenerator < VraptorScaffold::Base
   def create_repositories_directory
     repositories_folder = File.join @src, options[:repositories_package]
     empty_directory repositories_folder
-    template("orm/Repository-#{options[:orm]}.java.tt", "#{repositories_folder}/Repository.java")
+    if options[:gae]
+      template("orm/Repository-objectify.java.tt", "#{repositories_folder}/Repository.java")
+    else
+      template("orm/Repository-#{options[:orm]}.java.tt", "#{repositories_folder}/Repository.java")
+    end
   end
 
   def create_main_resources
