@@ -68,7 +68,7 @@ class AppGenerator < VraptorScaffold::Base
     if build_tool == "ant"
       create_eclipse_files unless options[:skip_eclipse]
       copy_file("build.xml")
-      template("build.properties.erb", "build.properties") 
+      template("build.properties.erb", "build.properties")
       template("ivy.erb", "ivy.xml")
       copy_file(IVY_JAR)
     end
@@ -123,7 +123,9 @@ class AppGenerator < VraptorScaffold::Base
   def create_javascripts
     javascripts = File.join Configuration::WEB_APP, "javascripts"
     create_file File.join javascripts, "application.js"
-    get jquery_url, (File.join javascripts, "jquery.min.js")
+    http_request_for_jquery_repo = http_request(jquery_repo)
+    jquery_min = http_request_for_jquery_repo.get(jquery_uri)
+    add_file (File.join javascripts, "jquery.min.js"), jquery_min.body
   end
 
   def configure_scaffold_properties
@@ -142,7 +144,7 @@ class AppGenerator < VraptorScaffold::Base
     empty_directory File.join test_src, options[:controllers_package]
     empty_directory File.join test_src, options[:models_package]
     empty_directory File.join test_src, options[:repositories_package]
-    
+
     directory("resources-test", Configuration::TEST_RESOURCES)
   end
 
@@ -152,10 +154,14 @@ class AppGenerator < VraptorScaffold::Base
     options[:build_tool]
   end
 
-  def jquery_url
+  def jquery_repo
+    "ajax.googleapis.com"
+  end
+
+  def jquery_uri
     jquery_version = "1" #this mean get latest version
     jquery_version = options[:jquery] if options[:jquery] != 'latest version'
-    "http://ajax.googleapis.com/ajax/libs/jquery/#{jquery_version}/jquery.min.js"
+    "/ajax/libs/jquery/#{jquery_version}/jquery.min.js"
   end
 
   def create_eclipse_files
@@ -164,6 +170,8 @@ class AppGenerator < VraptorScaffold::Base
     directory("eclipse/settings", ".settings")
   end
 
+  require 'net/http'
+  require 'uri'
   def validate
     unless BUILD_TOOLS.include? options[:build_tool]
       puts "Build tool #{options[:build_tool]} is not supported. The supported build tools are: #{BUILD_TOOLS.join(", ")}"
@@ -183,14 +191,22 @@ class AppGenerator < VraptorScaffold::Base
       Kernel::exit
     end
 
-    require 'open-uri'
-    begin
-      Kernel::open(jquery_url) if options[:jquery] != 'latest version'
-    rescue OpenURI::HTTPError => e
-      download_url = "http://docs.jquery.com/Downloading_jQuery"
-      puts "jQuery version #{options[:jquery]} was not found. Please visit the download page to see the versions available #{download_url}."
-      Kernel::exit
+    if options[:jquery] != 'latest version'
+      http = http_request(jquery_repo)
+      case http.get(jquery_uri)
+      when Net::HTTPClientError, Net::HTTPServerError
+        download_url = "http://docs.jquery.com/Downloading_jQuery"
+        puts "jQuery version #{options[:jquery]} was not found. Please visit the download page to see the versions available #{download_url}."
+        Kernel::exit
+      end
     end
+  end
 
+  def http_request(url)
+    return Net::HTTP.start(url) unless ENV['http_proxy']
+
+    uri = URI.parse(ENV['http_proxy'])
+    proxy_user, proxy_pass = uri.userinfo.split(/:/) if uri.userinfo
+    Net::HTTP::Proxy(uri.host, uri.port, proxy_user, proxy_pass).start(url)
   end
 end
