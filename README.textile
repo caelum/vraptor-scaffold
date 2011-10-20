@@ -39,6 +39,7 @@ Vraptor Scaffold was created and is maintained by "Rodolfo Liviero":http://rodol
 h2. Contributors
 
  * Adriano Almeida
+ * Arthur Moura Carvalho
  * Edgar Latorre
  * Felipe Fontoura
  * Guilherme Silveira
