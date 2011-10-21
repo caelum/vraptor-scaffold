@@ -500,6 +500,10 @@ describe AppGenerator do
       destination = "#{@app}/repositories/Repository.java"
       exists_and_identical?(source, destination)
     end
+
+    it "should create appengine-web xml to run gae apps" do
+      File.exist?("#{@project_path}/src/main/webapp/appengine-web.xml").should be_true
+    end
   end
 
 end
