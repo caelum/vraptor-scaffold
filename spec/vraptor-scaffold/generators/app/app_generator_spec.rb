@@ -502,7 +502,11 @@ describe AppGenerator do
     end
 
     it "should create appengine-web xml to run gae apps" do
-      File.exist?("#{@project_path}/src/main/webapp/appengine-web.xml").should be_true
+      File.exist?("#{@project_path}/src/main/webapp/WEB-INF/appengine-web.xml").should be_true
+    end
+
+    it "should create logging properties for gae apps" do
+      File.exist?("#{@project_path}/src/main/webapp/WEB-INF/logging.properties").should be_true
     end
   end
 
