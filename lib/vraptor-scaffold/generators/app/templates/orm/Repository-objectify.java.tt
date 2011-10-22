@@ -9,7 +9,7 @@ class Repository<T> {
 	
 	protected final Objectify objectify;
 	
-	public Repositorio(Objectify objectify) {
+	public Repository(Objectify objectify) {
 		this.objectify = objectify;
 	}
 	
