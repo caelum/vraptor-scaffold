@@ -2,7 +2,7 @@ class AppGenerator < VraptorScaffold::Base
 
   TEMPLATE_ENGINES = %w( jsp ftl )
   BUILD_TOOLS = %w( ant mvn gradle )
-  ORMS = %w( jpa hibernate )
+  ORMS = %w( jpa hibernate objectify )
   IVY_JAR = "ivy-2.2.0.jar"
 
   argument :project_path
@@ -105,7 +105,7 @@ class AppGenerator < VraptorScaffold::Base
     if options[:gae]
       template("orm/Repository-objectify.java.tt", "#{repositories_folder}/Repository.java")
     else
-      template("orm/Repository-#{options[:orm]}.java.tt", "#{repositories_folder}/Repository.java")
+      template("orm/Repository-#{orm}.java.tt", "#{repositories_folder}/Repository.java")
     end
   end
 
@@ -114,7 +114,7 @@ class AppGenerator < VraptorScaffold::Base
   end
 
   def configure_orm
-    if (options[:orm] == "hibernate")
+    if (orm == "hibernate")
       copy_file("orm/hibernate.cfg.xml", (File.join Configuration::MAIN_RESOURCES, "hibernate.cfg.xml"))
     else
       metainf = File.join Configuration::MAIN_RESOURCES, 'META-INF'
@@ -164,6 +164,11 @@ class AppGenerator < VraptorScaffold::Base
     options[:build_tool]
   end
 
+  def orm
+    return "objectify" if options[:gae]
+    options[:orm]
+  end
+
   def create_eclipse_files
     template("eclipse/project.erb", ".project")
     template("eclipse/classpath.erb", ".classpath")
@@ -179,8 +184,8 @@ class AppGenerator < VraptorScaffold::Base
       puts "Template engine #{options[:template_engine]} is not supported. The supported template engines are: #{TEMPLATE_ENGINES.join(", ")}"
       Kernel::exit
     end
-    unless ORMS.include? options[:orm]
-      puts "ORM #{options[:orm]} is not supported. The supported object-relational mapping are: #{ORMS.join(", ")}"
+    unless ORMS.include? orm
+      puts "ORM #{orm} is not supported. The supported object-relational mapping are: #{ORMS.join(", ")}"
       Kernel::exit
     end
 
