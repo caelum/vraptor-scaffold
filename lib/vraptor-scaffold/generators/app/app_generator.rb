@@ -81,6 +81,13 @@ class AppGenerator < VraptorScaffold::Base
     template("build.gradle.erb", "build.gradle") if build_tool == "gradle"
   end
 
+  def configure_vraptor_packages
+    vraptor_util_package = "br.com.caelum.vraptor.util"
+    @vraptor_packages = []
+    @vraptor_packages += ["#{vraptor_util_package}.#{orm}"] if orm == "jpa" or orm == "hibernate"
+    @vraptor_packages += ["#{vraptor_util_package}.gae"] if options[:gae]
+  end
+
   def create_main_java
     empty_directory Configuration::MAIN_SRC
     @src = File.join(Configuration::MAIN_SRC, options[:package].gsub(".", File::Separator))
