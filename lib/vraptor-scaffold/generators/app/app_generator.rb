@@ -177,8 +177,12 @@ class AppGenerator < VraptorScaffold::Base
   end
 
   def create_eclipse_files
+    if options[:gae]
+      template("eclipse/classpath-gae.erb", ".classpath")
+    else
+      template("eclipse/classpath.erb", ".classpath")
+    end
     template("eclipse/project.erb", ".project")
-    template("eclipse/classpath.erb", ".classpath")
     directory("eclipse/settings", ".settings")
   end
 
