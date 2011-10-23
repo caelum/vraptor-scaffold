@@ -135,6 +135,7 @@ class AppGenerator < VraptorScaffold::Base
     if @options[:gae]
       template("gae/appengine-web.xml.tt", "#{Configuration::WEB_INF}/appengine-web.xml")
       copy_file("gae/logging.properties", "#{Configuration::WEB_INF}/logging.properties")
+      empty_directory("#{Configuration::WEB_INF}/classes")
     end
   end
 
