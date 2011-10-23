@@ -495,18 +495,18 @@ describe AppGenerator do
       File.exist?("#{@app}/model/Entity.java").should be_false
     end
 
-    it "should create a objectify generic repository" do
-      source =  File.join File.dirname(__FILE__), "templates", "RepositoryObjectify.java"
-      destination = "#{@app}/repositories/Repository.java"
-      exists_and_identical?(source, destination)
-    end
-
     it "should create appengine-web xml to run gae apps" do
-      File.exist?("#{@project_path}/src/main/webapp/WEB-INF/appengine-web.xml").should be_true
+      File.exist?("#{@project_path}/#{Configuration::WEB_INF}/appengine-web.xml").should be_true
     end
 
     it "should create logging properties for gae apps" do
-      File.exist?("#{@project_path}/src/main/webapp/WEB-INF/logging.properties").should be_true
+      File.exist?("#{@project_path}/#{Configuration::WEB_INF}/logging.properties").should be_true
+    end
+
+    it "should create web.xml" do
+      source = File.join File.dirname(__FILE__), "templates", "gae-jsp-web.xml"
+      destination = "#{@project_path}/#{Configuration::WEB_INF}/web.xml"
+      exists_and_identical?(source, destination)
     end
   end
 
