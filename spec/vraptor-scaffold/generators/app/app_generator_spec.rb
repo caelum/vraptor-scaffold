@@ -514,6 +514,17 @@ describe AppGenerator do
       destination = "#{@project_path}/.classpath"
       exists_and_identical?(source, destination)
     end
+
+    it "should create a specific .project for gae" do
+      source = File.join File.dirname(__FILE__), "templates", "project-gae"
+      destination = "#{@project_path}/.project"
+      exists_and_identical?(source, destination)
+    end
+
+    it "should create .settings" do
+      settings = File.join @project_path, ".settings"
+      File.exist?(settings).should be_true
+    end
   end
 
 end
