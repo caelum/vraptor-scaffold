@@ -2,7 +2,7 @@ class ScaffoldGenerator < VraptorScaffold::Base
 
   attr_accessor :generated_attributes
   argument :model
-  argument :attributes, :type => :hash, :default => {}, :banner => "field:type field:type" 
+  argument :attributes, :type => :hash, :default => {}, :banner => "field:type field:type"
 
   def self.banner
     "vraptor scaffold #{self.arguments.map(&:usage).join(' ')}"

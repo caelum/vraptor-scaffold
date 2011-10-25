@@ -81,11 +81,13 @@ describe Configuration do
       Configuration.test_class_path("models", "Product.java").should == "src/test/java/br/com/caelum/models/Product.java"
     end
   end
+
   context "hibernate" do
     before(:each) do
       config = {"template_engine" => "jsp", "package" => "br.com.caelum", "orm" => "hibernate"}
       YAML.stub!(:load_file).with(Configuration::FILENAME).and_return(config)
     end
+
     it "should know orm" do
       Configuration.orm.should == "hibernate"
     end
@@ -94,6 +96,7 @@ describe Configuration do
       Configuration.hibernate?.should be_true
     end
   end
+
   context "properties without default configs" do
     before(:each) do
       config = {}
