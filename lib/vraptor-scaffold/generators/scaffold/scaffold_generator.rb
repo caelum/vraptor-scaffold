@@ -4,6 +4,7 @@ class ScaffoldGenerator < VraptorScaffold::Base
   argument :model
   argument :attributes, :type => :hash, :default => {}, :banner => "field:type field:type"
 
+
   def self.banner
     "vraptor scaffold #{self.arguments.map(&:usage).join(' ')}"
   end
@@ -21,7 +22,10 @@ class ScaffoldGenerator < VraptorScaffold::Base
   end
 
   def model_generator
-    ModelGenerator.new(model, @generated_attributes).build
+    models_available = {"jpa" => ModelGenerator,
+                        "hibernate" => ModelGenerator,
+                        "objectify" => ObjectifyModelGenerator }
+    models_available.fetch(Configuration.orm).new(model, @generated_attributes).build
   end
 
   def repository_generator

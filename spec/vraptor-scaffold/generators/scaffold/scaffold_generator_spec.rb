@@ -24,8 +24,19 @@ describe ScaffoldGenerator do
   end
 
   it "should call model generator" do
+    config = {}
+    YAML.stub!(:load_file).with(Configuration::FILENAME).and_return(config)
     @model_generator = mock(ModelGenerator)
     ModelGenerator.stub!(:new).with(@model, @attributes).and_return(@model_generator)
+    @model_generator.should_receive(:build)
+    @generator.model_generator
+  end
+
+  it "should call objectify model generator" do
+    config = {"orm" => "objectify"}
+    YAML.stub!(:load_file).with(Configuration::FILENAME).and_return(config)
+    @model_generator = mock(ObjectifyModelGenerator)
+    ObjectifyModelGenerator.stub!(:new).with(@model, @attributes).and_return(@model_generator)
     @model_generator.should_receive(:build)
     @generator.model_generator
   end
