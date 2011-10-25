@@ -1,0 +1,33 @@
+package <%= Configuration.full_models_package %>;
+
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
+@Entity
+public class <%= class_name %> {
+
+	@Id
+	private Long id;
+<% @attributes.each do |att| -%>
+	private <%= att.java_type %> <%= att.name %>;
+<% end -%>
+	
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public Long getId() {
+		return id;
+	}
+
+<% @attributes.each do |att| -%>
+	public void set<%= att.name.camelize %>(<%= att.java_type %> <%= att.name %>) {
+		this.<%= att.name %> = <%= att.name %>;
+	}
+	
+	public <%= att.java_type %> <%= att.getter_prefix + att.name.camelize %>() {
+		return <%= att.name %>;
+	}
+	
+<% end -%>
+}
