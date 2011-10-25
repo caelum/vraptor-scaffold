@@ -5,7 +5,7 @@ class BaseScaffold < VraptorScaffold::Base
     @model = model
     @attributes = attributes
   end
-  
+
   def model_parameter_name
     @model.camelize(:lower)
   end

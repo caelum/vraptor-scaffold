@@ -1,7 +1,7 @@
 require File.expand_path(File.dirname(__FILE__) + "/../../../../spec_helper")
 
 describe ControllerGenerator do
-  
+
   it "paths to simple model name" do
     ControllerGenerator.new("product", build_attributes).path.should == "/products"
   end
@@ -55,4 +55,4 @@ describe ControllerGenerator do
       File.exist?(test_class).should be_true
     end
   end
-end	
+end
