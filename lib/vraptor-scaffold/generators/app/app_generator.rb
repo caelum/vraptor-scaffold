@@ -116,6 +116,14 @@ class AppGenerator < VraptorScaffold::Base
     end
   end
 
+  def create_infra_directory
+    if options[:gae]
+      infra_folder = File.join @src, "infra"
+      empty_directory infra_folder
+      template("gae/ObjectifyFactory.java.tt", "#{@src}/infra/ObjectifyFactory.java")
+    end
+  end
+
   def create_main_resources
     directory("resources", Configuration::MAIN_RESOURCES)
   end
