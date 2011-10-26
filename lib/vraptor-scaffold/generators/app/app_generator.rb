@@ -116,14 +116,6 @@ class AppGenerator < VraptorScaffold::Base
     end
   end
 
-  def create_infra_directory
-    if options[:gae]
-      infra_folder = File.join @src, "infra"
-      empty_directory infra_folder
-      template("gae/ObjectifyFactory.java.tt", "#{@src}/infra/ObjectifyFactory.java")
-    end
-  end
-
   def create_main_resources
     directory("resources", Configuration::MAIN_RESOURCES)
   end
@@ -131,6 +123,10 @@ class AppGenerator < VraptorScaffold::Base
   def configure_orm
     if (orm == "hibernate")
       copy_file("orm/hibernate.cfg.xml", (File.join Configuration::MAIN_RESOURCES, "hibernate.cfg.xml"))
+    elsif options[:gae]
+      infra_folder = File.join @src, "infra"
+      empty_directory infra_folder
+      template("gae/ObjectifyFactory.java.tt", "#{@src}/infra/ObjectifyFactory.java")
     else
       metainf = File.join Configuration::MAIN_RESOURCES, 'META-INF'
       empty_directory metainf
