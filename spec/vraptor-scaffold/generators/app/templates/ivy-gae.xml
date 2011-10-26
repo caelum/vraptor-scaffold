@@ -22,6 +22,8 @@
 		<!-- Provided dependencies -->
 		<dependency org="javax.servlet" name="servlet-api" rev="2.5" conf="provided->default" />
 		<dependency org="javax.servlet.jsp" name="jsp-api" rev="2.1" conf="provided->default" />
+		<dependency org="com.google.appengine" name="appengine-api-1.0-sdk" rev="1.5.5" conf="provided->default" />
+		<dependency org="org.apache.geronimo.specs" name="geronimo-jpa_3.0_spec" rev="1.1.1" conf="provided->default" />
 
 		<!-- Test dependencies -->
 		<dependency org="junit" name="junit" rev="4.10" conf="test->default" />
