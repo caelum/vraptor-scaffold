@@ -56,7 +56,8 @@ class DependencyManager
 
   def append_gae_dependencies_if_necessary dependencies
     if @options[:gae]
-      dependencies += [Dependency.new("com.googlecode.objectify", "objectify", "2.2.3")]
+      dependencies += [Dependency.new("com.googlecode.objectify", "objectify", "2.2.3"),
+                       Dependency.new("commons-fileupload", "commons-fileupload", "1.2.1")]
     end
     dependencies
   end
