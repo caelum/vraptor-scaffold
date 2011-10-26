@@ -515,6 +515,12 @@ describe AppGenerator do
       exists_and_identical?(source, destination)
     end
 
+    it "should generate a objectify resource factory" do
+      source = File.join File.dirname(__FILE__), "templates", "ObjectifyFactory.java"
+      destination = "#{@project_path}/#{Configuration::MAIN_SRC}/app/infra/ObjectifyFactory.java"
+      exists_and_identical?(source, destination)
+    end
+
     it "should create a specific .classpath for gae" do
       source = File.join File.dirname(__FILE__), "templates", "classpath-gae"
       destination = "#{@project_path}/.classpath"
