@@ -25,16 +25,6 @@ public class ObjectifyFactory implements ComponentFactory<Objectify> {
 		session = ObjectifyService.begin();
 	}
 	
-	@PreDestroy
-	public void fechaSession() {
-		try {
-		    session.getTxn().commit();
-		} finally {
-		    if (session.getTxn().isActive())
-		    	session.getTxn().rollback();
-		}
-	}
-	
 	@Override
 	public Objectify getInstance() {
 		return session;
