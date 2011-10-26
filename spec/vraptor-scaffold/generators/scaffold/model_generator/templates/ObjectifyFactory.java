@@ -1,4 +1,4 @@
-package <%= options[:package] %>.infra;
+package app.infra;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
@@ -17,6 +17,7 @@ public class ObjectifyFactory implements ComponentFactory<Objectify> {
 	private Objectify session;
 	
 	static {
+		ObjectifyService.register(Product.class);
 	}
 
 	@PostConstruct

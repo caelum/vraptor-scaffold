@@ -16,8 +16,8 @@ public class ObjectifyFactory implements ComponentFactory<Objectify> {
 
 	private Objectify session;
 	
-        static {
-        }
+	static {
+	}
 
 	@PostConstruct
 	public void abreSession() {

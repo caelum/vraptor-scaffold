@@ -123,7 +123,7 @@ class AppGenerator < VraptorScaffold::Base
   def configure_orm
     if (orm == "hibernate")
       copy_file("orm/hibernate.cfg.xml", (File.join Configuration::MAIN_RESOURCES, "hibernate.cfg.xml"))
-    elsif options[:gae]
+    elsif orm == "objectify"
       infra_folder = File.join @src, "infra"
       empty_directory infra_folder
       template("gae/ObjectifyFactory.java.tt", "#{@src}/infra/ObjectifyFactory.java")
