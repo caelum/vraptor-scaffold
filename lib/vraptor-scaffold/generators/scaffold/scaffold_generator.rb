@@ -31,7 +31,7 @@ class ScaffoldGenerator < VraptorScaffold::Base
   def repository_generator
     repository_generators_available = {"jpa" => RepositoryGenerator,
                                        "hibernate" => RepositoryGenerator,
-                                       "objectify" => ObjectifyModelGenerator }
+                                       "objectify" => ObjectifyRepositoryGenerator }
     repository_generators_available.fetch(Configuration.orm).new(model, @generated_attributes).build
   end
 
