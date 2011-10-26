@@ -65,6 +65,8 @@ describe ScaffoldGenerator do
   end
 
   it "should call repository generator" do
+    config = {"orm" => "jpa"}
+    YAML.stub!(:load_file).with(Configuration::FILENAME).and_return(config)
     @repository_generator = mock(RepositoryGenerator)
     RepositoryGenerator.stub!(:new).with(@model, @attributes).and_return(@repository_generator)
     @repository_generator.should_receive(:build)
@@ -74,4 +76,4 @@ describe ScaffoldGenerator do
   it "should configure banner" do
     ScaffoldGenerator.banner.should == "vraptor scaffold MODEL [field:type field:type]"
   end
-end	
+end
