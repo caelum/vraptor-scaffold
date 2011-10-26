@@ -7,7 +7,7 @@ import app.model.Product;
 
 @Component
 public class ProductRepositoryImpl
-    extends Repository<Product, Long>
+    extends Repository<Product>
     implements ProductRepository {
 
 	ProductRepositoryImpl(Objectify objectify) {

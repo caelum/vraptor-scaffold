@@ -7,7 +7,7 @@ import <%= Configuration.full_models_package %>.<%= class_name %>;
 
 @Component
 public class <%= repository_impl_name %>
-    extends Repository<<%= class_name %>, Long>
+    extends Repository<<%= class_name %>>
     implements <%= repository_interface_name %> {
 
 	<%= repository_impl_name %>(<%= orm_class %> <%= orm_parameter_name %>) {
