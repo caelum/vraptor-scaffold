@@ -1,0 +1,22 @@
+package <%= Configuration.package %>.<%= Configuration.repositories_package %>;
+
+import java.util.List;
+
+import <%= Configuration.full_models_package %>.<%= class_name %>;
+
+public interface <%= repository_interface_name %> {
+	/*
+	 * Delete the methods you don't want to expose
+	 */
+	 
+	void create(<%= class_name %> entity);
+	
+	void update(<%= class_name %> entity);
+	
+	void destroy(<%= class_name %> entity);
+	
+	<%= class_name %> find(Long id);
+	
+	List<<%= class_name %>> findAll();
+
+}

@@ -14,7 +14,7 @@ describe ObjectifyRepositoryGenerator do
     end
 
     it "should create repository interface" do
-      source = File.join File.dirname(__FILE__), "templates", "ProductRepository.java"
+      source = File.join File.dirname(__FILE__), "templates", "Objectify_ProductRepository.java"
       destination = Configuration.main_class_path "repository", "ProductRepository.java"
       exists_and_identical?(source, destination)
     end
