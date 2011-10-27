@@ -25,11 +25,6 @@ class DependencyManager
     end
     provided_dependencies = [Dependency.new("javax.servlet", "servlet-api", "2.5"), Dependency.new("javax.servlet.jsp", "jsp-api", "2.1")]
 
-    if @options[:gae]
-      provided_dependencies += [Dependency.new("com.google.appengine", "appengine-api-1.0-sdk", "1.5.5"),
-                                Dependency.new("org.apache.geronimo.specs", "geronimo-jpa_3.0_spec", "1.1.1")]
-    end
-
     provided_dependencies
   end
 
@@ -64,8 +59,11 @@ class DependencyManager
   def append_gae_dependencies_if_necessary dependencies
     if @options[:gae]
       dependencies += [Dependency.new("com.googlecode.objectify", "objectify", "2.2.3"),
-                       Dependency.new("commons-fileupload", "commons-fileupload", "1.2.1")]
+                       Dependency.new("commons-fileupload", "commons-fileupload", "1.2.1"),
+                       Dependency.new("com.google.appengine", "appengine-api-1.0-sdk", "1.5.5"),
+                       Dependency.new("org.apache.geronimo.specs", "geronimo-jpa_3.0_spec", "1.1.1")]
     end
+
     dependencies
   end
 
