@@ -10,6 +10,8 @@ import br.com.caelum.vraptor.ioc.RequestScoped;
 import com.googlecode.objectify.Objectify;
 import com.googlecode.objectify.ObjectifyService;
 
+import app.models.Product;
+
 @Component
 @RequestScoped
 public class ObjectifyFactory implements ComponentFactory<Objectify> {
