@@ -290,7 +290,7 @@ describe AppGenerator do
     end
 
     it "should create build.xml" do
-      source = File.join AppGenerator.source_root, "build.xml"
+      source = File.join File.dirname(__FILE__), "templates", "build.xml"
       destination = "#{@project_path}/build.xml"
       exists_and_identical?(source, destination)
     end
