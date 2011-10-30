@@ -30,8 +30,14 @@ class DependencyManager
 
   private
   def default_dependencies
-    dependencies = [Dependency.new("br.com.caelum", "vraptor", "3.4.0"),
-                    Dependency.new("opensymphony", "sitemesh", "2.4.2"),
+    dependencies = []
+    if options[:gae]
+      dependencies += [Dependency.new("br.com.caelum", "vraptor", "3.3.1")]
+    else
+      dependencies += [Dependency.new("br.com.caelum", "vraptor", "3.4.0")]
+    end
+
+    dependencies += [Dependency.new("opensymphony", "sitemesh", "2.4.2"),
                     Dependency.new("javax.servlet", "jstl", "1.2")]
 
     if !@options[:gae]
