@@ -1,7 +1,6 @@
 package app.infra;
 
 import javax.annotation.PostConstruct;
-import javax.annotation.PreDestroy;
 
 import br.com.caelum.vraptor.ioc.Component;
 import br.com.caelum.vraptor.ioc.ComponentFactory;
