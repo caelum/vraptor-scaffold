@@ -13,7 +13,7 @@
 
 <% @attributes.each do |att| -%>
   <div class="field">
-    <%= att.name.camelize %>:<br />
+    <%= att.html_label %>:<br />
     <%= "<@html.#{att.html_input} \"#{model_parameter_name}.#{att.name}\" #{model_parameter_name}.#{att.name}/>"  %>
   </div>
 <% end -%>

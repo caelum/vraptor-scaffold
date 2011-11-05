@@ -15,7 +15,6 @@ describe FreemarkerGenerator do
     end
 
     after(:all) do
-      FileUtils.remove_dir("src")
     end
 
     it "should create index view" do
@@ -28,6 +27,9 @@ describe FreemarkerGenerator do
 
     it "should create form view" do
       File.exist?("#{@views_path}/form.ftl").should be_true
+      source = File.join File.dirname(__FILE__), "templates", "form.ftl"
+      destination = "#{Configuration::WEB_INF}/views/product/form.ftl"
+      exists_and_identical?(source, destination)
     end
 
     it "should create new view" do

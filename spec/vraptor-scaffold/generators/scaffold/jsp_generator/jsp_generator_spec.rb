@@ -27,7 +27,9 @@ describe JspGenerator do
     end
 
     it "should create form view" do
-      File.exist?("#{@views_path}/form.jsp").should be_true
+      source = File.join File.dirname(__FILE__), "templates", "form.jsp"
+      destination = "#{Configuration::WEB_INF}/jsp/product/form.jsp"
+      exists_and_identical?(source, destination)
     end
 
     it "should create new view" do
