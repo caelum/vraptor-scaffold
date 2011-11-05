@@ -7,12 +7,6 @@ Spec::Rake::SpecTask.new(:spec) do |spec|
   spec.spec_files = FileList['spec/**/*_spec.rb']
 end
 
-Spec::Rake::SpecTask.new(:rcov) do |spec|
-  spec.spec_files = FileList['spec/**/*_spec.rb']
-  spec.rcov_opts = ['--exclude', 'spec/*,gems/*']
-  spec.rcov = true
-end
-
 require 'rake/rdoctask'
 Rake::RDocTask.new do |rdoc|
   version = VraptorScaffold::VERSION
