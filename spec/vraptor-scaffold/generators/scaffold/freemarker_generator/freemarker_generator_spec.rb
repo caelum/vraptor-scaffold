@@ -15,6 +15,7 @@ describe FreemarkerGenerator do
     end
 
     after(:all) do
+      FileUtils.remove_dir("src")
     end
 
     it "should create index view" do
