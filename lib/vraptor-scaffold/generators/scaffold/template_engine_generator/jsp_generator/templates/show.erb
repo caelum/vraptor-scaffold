@@ -4,7 +4,7 @@
 <body>
 <%- @attributes.each do |att| -%>
 	<p>
-		<b><%= att.name.camelize %>:</b>
+		<b><%= att.html_label %>:</b>
 		<%= "${#{model_parameter_name}.#{att.name}}" %>
 	</p>
 <% end -%>
