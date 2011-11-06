@@ -1,41 +1,41 @@
 require File.expand_path(File.dirname(__FILE__) + "/../../../spec_helper")
 
 describe Attribute do
-  
+
   context "getter method prefix" do
     it "should be 'is' to boolean attributes" do
-       Attribute.new("active", "boolean").getter_prefix.should == "is"
+      Attribute.new("active", "boolean").getter_prefix.should == "is"
     end
-    
+
     it "should be 'get' otherwise" do
-       Attribute.new("description", "string").getter_prefix.should == "get"
+      Attribute.new("description", "string").getter_prefix.should == "get"
     end
   end
-  
+
   context "initialize attribute" do
     context "downcase name" do
-      it  "should downcase all words" do
+      it "should downcase all words" do
         Attribute.new("VALUE", "double").name.should == "value"
       end
 
-      it  "should camelize composed name" do
+      it "should camelize composed name" do
         Attribute.new("MyItem", "double").name.should == "myItem"
       end
 
-      it  "should camelize composed name" do
+      it "should camelize composed name" do
         Attribute.new("myItem", "double").name.should == "myItem"
       end
 
-      it  "should keep name in downcase" do
+      it "should keep name in downcase" do
         Attribute.new("value", "double").name.should == "value"
       end
     end
-    
-    it  "should downcase type" do
+
+    it "should downcase type" do
       Attribute.new("value", "DoublE").type.should == "double"
     end
   end
-  
+
   context "supported types" do
     it "should support boolean" do
       Attribute.valid_types.include?("boolean").should be_true
@@ -141,19 +141,19 @@ describe Attribute do
   context "validate" do
 
     it "should be valid when attribute is supported" do
-      Kernel.should_not_receive(:exit) 
+      Kernel.should_not_receive(:exit)
       Attribute.valid_types.each do |type|
         Attribute.new("name", type)
       end
     end
 
     it "cannot be valid when attribute is not supported" do
-      Kernel.should_receive(:exit) 
+      Kernel.should_receive(:exit)
       Attribute.new("name", "char")
     end
 
     it "should be valid when attribute is upper case" do
-      Kernel.should_not_receive(:exit) 
+      Kernel.should_not_receive(:exit)
       Attribute.new("name", "String")
     end
   end
@@ -164,5 +164,19 @@ describe Attribute do
 
   it "cannot be boolean otherwise" do
     Attribute.new("flag", "short").boolean?.should be_false
+  end
+
+  context "html label" do
+    it "should humanize composed name" do
+      Attribute.new("MyItem", "double").html_label.should == "My item"
+    end
+
+    it "should humanize composed name" do
+      Attribute.new("myItem", "double").html_label.should == "My item"
+    end
+
+    it "should humanize single name" do
+      Attribute.new("item", "double").html_label.should == "Item"
+    end
   end
 end
