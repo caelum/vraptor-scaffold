@@ -123,9 +123,7 @@ class AppGenerator < VraptorScaffold::Base
   def create_javascripts
     javascripts = File.join Configuration::WEB_APP, "javascripts"
     create_file File.join javascripts, "application.js"
-    http_request_for_jquery_repo = http_request(jquery_repo)
-    jquery_min = http_request_for_jquery_repo.get(jquery_uri)
-    add_file (File.join javascripts, "jquery.min.js"), jquery_min.body
+    add_file (File.join javascripts, "jquery.min.js"), get_jquery.body
   end
 
   def configure_scaffold_properties
@@ -154,23 +152,12 @@ class AppGenerator < VraptorScaffold::Base
     options[:build_tool]
   end
 
-  def jquery_repo
-    "ajax.googleapis.com"
-  end
-
-  def jquery_uri
-    jquery_version = "1" #this mean get latest version
-    jquery_version = options[:jquery] if options[:jquery] != 'latest version'
-    "/ajax/libs/jquery/#{jquery_version}/jquery.min.js"
-  end
-
   def create_eclipse_files
     template("eclipse/project.erb", ".project")
     template("eclipse/classpath.erb", ".classpath")
     directory("eclipse/settings", ".settings")
   end
 
-  require 'net/http'
   def validate
     unless BUILD_TOOLS.include? options[:build_tool]
       puts "Build tool #{options[:build_tool]} is not supported. The supported build tools are: #{BUILD_TOOLS.join(", ")}"
@@ -191,8 +178,7 @@ class AppGenerator < VraptorScaffold::Base
     end
 
     if options[:jquery] != 'latest version'
-      http = http_request(jquery_repo)
-      case http.get(jquery_uri)
+      case get_jquery
       when Net::HTTPClientError, Net::HTTPServerError
         download_url = "http://docs.jquery.com/Downloading_jQuery"
         puts "jQuery version #{options[:jquery]} was not found. Please visit the download page to see the versions available #{download_url}."
@@ -201,11 +187,13 @@ class AppGenerator < VraptorScaffold::Base
     end
   end
 
-  def http_request(url)
-    return Net::HTTP.start(url) unless ENV['http_proxy']
+  def jquery_uri
+    jquery_version = "1" #this mean get latest version
+    jquery_version = options[:jquery] if options[:jquery] != 'latest version'
+    "/ajax/libs/jquery/#{jquery_version}/jquery.min.js"
+  end
 
-    uri = URI.parse(ENV['http_proxy'])
-    proxy_user, proxy_pass = uri.userinfo.split(/:/) if uri.userinfo
-    Net::HTTP::Proxy(uri.host, uri.port, proxy_user, proxy_pass).start(url)
+  def get_jquery
+    VraptorScaffold::HttpRequest.open_session("ajax.googleapis.com").get jquery_uri
   end
 end
