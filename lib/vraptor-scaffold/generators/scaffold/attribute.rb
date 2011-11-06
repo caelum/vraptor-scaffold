@@ -14,6 +14,10 @@ class Attribute
     input
   end
 
+  def html_label
+    @name.underscore.humanize
+  end
+
   def java_type
     java = type.capitalize
     java = "boolean" if boolean?
