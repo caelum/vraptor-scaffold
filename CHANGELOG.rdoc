@@ -1,7 +1,7 @@
 == 1.2.2 / 2011-10-??
 * Bugfixes
     * Run scaffold commands behind proxy.
-    * Humanazing html labels.
+    * Humanizing html labels.
     * Heroku deploy.
 
 == 1.2.1 / 2011-10-18
