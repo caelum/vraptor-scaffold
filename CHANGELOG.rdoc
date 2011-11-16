@@ -1,9 +1,11 @@
-== 1.2.2 / 2011-11-15
+== 1.2.3 / 2011-11-15
 
 * Bugfixes
     * Run scaffold commands behind proxy.
     * Humanizing html labels.
     * Heroku deploy.
+
+== 1.2.2 / 2011-11-15 (Yanked)
 
 == 1.2.1 / 2011-10-18
 
