@@ -74,7 +74,7 @@ describe AppGenerator do
       end
 
       it "should create generic repository" do
-        source =  File.join File.dirname(__FILE__), "templates", "Repository.java"
+        source =  File.join File.dirname(__FILE__), "templates", "RepositoryJPA.java"
         destination = "#{@app}/repository/Repository.java"
         exists_and_identical?(source, destination)
       end
@@ -290,7 +290,7 @@ describe AppGenerator do
     end
 
     it "should create build.xml" do
-      source = File.join AppGenerator.source_root, "build.xml"
+      source = File.join File.dirname(__FILE__), "templates", "build.xml"
       destination = "#{@project_path}/build.xml"
       exists_and_identical?(source, destination)
     end
@@ -441,6 +441,11 @@ describe AppGenerator do
       Kernel.should_receive(:exit)
       AppGenerator.new(@project_path, ["-j=1.x"])
     end
+
+    it "should be invalid when gae and heroku are selected" do
+      Kernel.should_receive(:exit)
+      AppGenerator.new(@project_path, ["-g", "-h"])
+    end
   end
 
   context "heroku app" do
@@ -465,6 +470,76 @@ describe AppGenerator do
 
     it "should create main class to run heroku apps" do
       File.exist?("#{@project_path}/src/main/java/Main.java").should be_true
+    end
+  end
+
+  context "gae app" do
+    before(:all) do
+      @project_path = "gae"
+      AppGenerator.new(@project_path, ["--gae"]).invoke_all
+      @main_java = "#{@project_path}/#{Configuration::MAIN_SRC}"
+      @app = "#{@main_java}/app"
+    end
+
+    after(:all) do
+      FileUtils.remove_dir(@project_path)
+    end
+
+    it "should create ivy.xml" do
+      source = File.join File.dirname(__FILE__), "templates", "ivy-gae.xml"
+      destination = "#{@project_path}/ivy.xml"
+      exists_and_identical?(source, destination)
+    end
+
+    it "should create ivysettings.xml" do
+      File.exist?("#{@project_path}/ivysettings.xml").should be_true
+    end
+
+    it "should not create generic entity" do
+      File.exist?("#{@app}/model/Entity.java").should be_false
+    end
+
+    it "should create appengine-web xml to run gae apps" do
+      File.exist?("#{@project_path}/#{Configuration::WEB_INF}/appengine-web.xml").should be_true
+    end
+
+    it "should create logging properties for gae apps" do
+      File.exist?("#{@project_path}/#{Configuration::WEB_INF}/logging.properties").should be_true
+    end
+
+    it "should create web.xml" do
+      source = File.join File.dirname(__FILE__), "templates", "gae-jsp-web.xml"
+      destination = "#{@project_path}/#{Configuration::WEB_INF}/web.xml"
+      exists_and_identical?(source, destination)
+    end
+
+    it "should generate a objectify repository" do
+      source = File.join File.dirname(__FILE__), "templates", "RepositoryObjectify.java"
+      destination = "#{@project_path}/#{Configuration::MAIN_SRC}/app/repositories/Repository.java"
+      exists_and_identical?(source, destination)
+    end
+
+    it "should generate a objectify resource factory" do
+      source = File.join File.dirname(__FILE__), "templates", "ObjectifyFactory.java"
+      destination = "#{@project_path}/#{Configuration::MAIN_SRC}/app/infra/ObjectifyFactory.java"
+      exists_and_identical?(source, destination)
+    end
+
+    it "should create a specific .classpath for gae" do
+      source = File.join File.dirname(__FILE__), "templates", "classpath-gae"
+      destination = "#{@project_path}/.classpath"
+      exists_and_identical?(source, destination)
+    end
+
+    it "should create a specific .project for gae" do
+      source = File.join File.dirname(__FILE__), "templates", "project-gae"
+      destination = "#{@project_path}/.project"
+      exists_and_identical?(source, destination)
+    end
+
+    it "should create .settings" do
+      settings = File.join @project_path, ".settings"
+      File.exist?(settings).should be_true
     end
   end
 
