@@ -78,6 +78,7 @@ class AppGenerator < VraptorScaffold::Base
       copy_file(IVY_JAR)
     end
     if options[:gae]
+      copy_file("gae/ivysettings.xml", "ivysettings.xml")
       empty_directory "libs-vraptor-gae"
       copy_file(VRAPTOR_GAE_PLUGIN_JAR, "libs-vraptor-gae/#{VRAPTOR_GAE_PLUGIN_JAR}")
       copy_file(GMULTIPART_JAR, "libs-vraptor-gae/#{GMULTIPART_JAR}")

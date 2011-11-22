@@ -491,6 +491,10 @@ describe AppGenerator do
       exists_and_identical?(source, destination)
     end
 
+    it "should create ivysettings.xml" do
+      File.exist?("#{@project_path}/ivysettings.xml").should be_true
+    end
+
     it "should not create generic entity" do
       File.exist?("#{@app}/model/Entity.java").should be_false
     end
