@@ -1,9 +1,5 @@
 class JspGenerator < TemplateEngineGenerator
 
-  def self.source_root
-    File.dirname(__FILE__)
-  end
-
   def view_folder
     "jsp"
   end
@@ -15,4 +11,13 @@ class JspGenerator < TemplateEngineGenerator
   def path url=""
     %Q{${pageContext.request.contextPath}/#{base_path}#{url}}
   end
+  
+  def template_path
+    "src/templates/engine"
+  end
+  
+  def source_root
+    "template_engine_generator/jsp_generator/templates"
+  end
+  
 end

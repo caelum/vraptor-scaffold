@@ -6,6 +6,14 @@ describe JspGenerator do
     JspGenerator.new("myModel", build_attributes).path("/edit").should == "${pageContext.request.contextPath}/myModels/edit"
   end
 
+  it "template path off vraptor-scaffold" do
+    JspGenerator.new("category", build_attributes).template_path == "src/templates/engine"
+  end
+  
+  it "source root path in vraptor-scaffold" do
+    JspGenerator.new("category", build_attributes).source_root == "jsp_generator/templates"    
+  end
+
   context "simple model name" do
     before(:all) do
       model = "product"

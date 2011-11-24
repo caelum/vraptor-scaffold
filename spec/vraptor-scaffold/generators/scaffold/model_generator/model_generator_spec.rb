@@ -2,6 +2,14 @@ require File.expand_path(File.dirname(__FILE__) + "/../../../../spec_helper")
 
 describe ModelGenerator do
 
+  it "template path off vraptor-scaffold" do
+    ModelGenerator.new("category", build_attributes).template_path == "src/templates/model"
+  end
+  
+  it "source root path in vraptor-scaffold" do
+    ModelGenerator.new("category", build_attributes).source_root == "model_generator/templates"    
+  end
+
   context "jpa" do
     before(:each) do
       mock_config_file

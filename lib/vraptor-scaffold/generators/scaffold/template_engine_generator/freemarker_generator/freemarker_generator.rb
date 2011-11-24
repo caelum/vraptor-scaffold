@@ -1,9 +1,5 @@
 class FreemarkerGenerator < TemplateEngineGenerator
 
-  def self.source_root
-    File.dirname(__FILE__)
-  end
-
   def view_folder
     "views"
   end
@@ -15,4 +11,13 @@ class FreemarkerGenerator < TemplateEngineGenerator
   def path
     "${base}/#{base_path}"
   end
+  
+  def template_path
+    "src/templates/engine"
+  end
+  
+  def source_root
+    "template_engine_generator/freemarker_generator/templates"
+  end
+  
 end

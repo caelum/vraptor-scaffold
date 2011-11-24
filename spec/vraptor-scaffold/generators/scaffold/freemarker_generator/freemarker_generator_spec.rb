@@ -2,6 +2,14 @@ require File.expand_path(File.dirname(__FILE__) + "/../../../../spec_helper")
 
 describe FreemarkerGenerator do
 
+  it "template path off vraptor-scaffold" do
+    FreemarkerGenerator.new("category", build_attributes).template_path == "src/templates/engine"
+  end
+  
+  it "source root path in vraptor-scaffold" do
+    ControllerGenerator.new("category", build_attributes).source_root == "freemarker_generator/templates"    
+  end
+
   it "should append context to path" do
     FreemarkerGenerator.new("myModel", build_attributes).path.should == "${base}/myModels"
   end
