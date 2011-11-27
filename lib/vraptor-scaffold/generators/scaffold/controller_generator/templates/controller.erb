@@ -4,6 +4,11 @@ import java.util.List;
 
 import <%= Configuration.full_models_package %>.<%= class_name %>;
 import <%= Configuration.package %>.<%= Configuration.repositories_package %>.<%= repository_interface_name %>;
+<%- @attributes.each do |att| -%>
+	<%- if att.type.eql?("references") -%>
+import <%= Configuration.package %>.repositories.<%= att.name.camelize %>Repository;		
+	<%- end -%>
+<%- end -%>
 import br.com.caelum.vraptor.Delete;
 import br.com.caelum.vraptor.Get;
 import br.com.caelum.vraptor.Post;
@@ -17,11 +22,21 @@ public class <%= controller_class_name %> {
 
 	private final Result result;
 	private final <%= repository_interface_name %> repository;
+	<%- @attributes.each do |att| -%>
+		<%- if att.type.eql?("references") -%>
+	private final <%= att.name.camelize %>Repository <%= att.name %>Repository;		
+		<%- end -%>
+	<%- end -%>	
 	private final Validator validator;
 	
-	<%= controller_class_name %>(Result result, <%= repository_interface_name %> repository, Validator validator) {
+	public <%= controller_class_name %>(Result result, <%= repository_interface_name %> repository, 
+	<% @attributes.each do |att| -%>
+		<%- if att.type.eql?("references") -%><%= att.name.camelize %>Repository <%= att.name %>Repository,	<%- end -%><% end -%>Validator validator) {
 		this.result = result;
 		this.repository = repository;
+		<%- @attributes.each do |att| -%>
+			<%- if att.type.eql?("references") -%>
+		this.<%= att.name %>Repository = <%= att.name %>Repository;<%- end -%><%- end -%>	
 		this.validator = validator;
 	}
 	
@@ -40,6 +55,11 @@ public class <%= controller_class_name %> {
 	
 	@Get("<%= "#{path}/new" %>")
 	public <%= class_name %> new<%= class_name %>() {
+		<%- @attributes.each do |att| -%>
+			<%- if att.type.eql?("references") -%>
+		result.include("<%=att.name%>List", <%= att.name %>Repository.findAll());		
+			<%- end -%>
+		<%- end -%>
 		return new <%= class_name %>();
 	}
 	
@@ -53,6 +73,11 @@ public class <%= controller_class_name %> {
 	
 	@Get("<%= "#{path}/{#{model_parameter_name}.id}/edit" %>")
 	public <%= class_name %> edit(<%= class_name %> <%= model_parameter_name %>) {
+		<%- @attributes.each do |att| -%>
+			<%- if att.type.eql?("references") -%>
+		result.include("<%=att.name%>List", <%= att.name %>Repository.findAll());		
+			<%- end -%>
+		<%- end -%>		
 		return repository.find(<%= model_parameter_name %>.getId());
 	}
 
