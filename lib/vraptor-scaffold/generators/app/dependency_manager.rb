@@ -23,9 +23,7 @@ class DependencyManager
     if @options[:heroku]
       return []
     end
-    provided_dependencies = [Dependency.new("javax.servlet", "servlet-api", "2.5"), Dependency.new("javax.servlet.jsp", "jsp-api", "2.1")]
-
-    provided_dependencies
+    [Dependency.new("javax.servlet", "servlet-api", "2.5"), Dependency.new("javax.servlet.jsp", "jsp-api", "2.1")]
   end
 
   private
@@ -40,7 +38,7 @@ class DependencyManager
     dependencies += [Dependency.new("opensymphony", "sitemesh", "2.4.2"),
                     Dependency.new("javax.servlet", "jstl", "1.2")]
 
-    if !@options[:gae]
+    unless @options[:gae]
       hibernate_version = "3.6.7.Final"
       dependencies += [Dependency.new("org.hsqldb", "hsqldb", "2.2.4"),
                        Dependency.new("org.hibernate", "hibernate-entitymanager", hibernate_version),
