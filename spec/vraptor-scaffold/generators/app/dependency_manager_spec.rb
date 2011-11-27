@@ -19,7 +19,7 @@ describe DependencyManager do
     context "dependencies for a gae app" do
       it "should include gae dependencies when gae project option is selected" do
         options = {:gae => true}
-        Dependency.stub!(:new).with("com.googlecode.objectify", "objectify", "2.2.3").and_return(@dependency)
+        Dependency.stub!(:new).with("com.googlecode.objectify", "objectify", "3.1").and_return(@dependency)
         DependencyManager.new(options).compile_scope.include?(@dependency).should be_true
       end
 
