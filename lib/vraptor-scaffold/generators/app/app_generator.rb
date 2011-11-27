@@ -5,7 +5,6 @@ class AppGenerator < VraptorScaffold::Base
   ORMS = %w( jpa hibernate objectify )
   IVY_JAR = "ivy-2.2.0.jar"
   VRAPTOR_GAE_PLUGIN_JAR = "vraptor-gae.jar"
-  GMULTIPART_JAR = "gmultipart.jar"
 
   argument :project_path
 
@@ -81,7 +80,6 @@ class AppGenerator < VraptorScaffold::Base
       copy_file("gae/ivysettings.xml", "ivysettings.xml")
       empty_directory "libs-vraptor-gae"
       copy_file(VRAPTOR_GAE_PLUGIN_JAR, "libs-vraptor-gae/#{VRAPTOR_GAE_PLUGIN_JAR}")
-      copy_file(GMULTIPART_JAR, "libs-vraptor-gae/#{GMULTIPART_JAR}")
     end
   end
 

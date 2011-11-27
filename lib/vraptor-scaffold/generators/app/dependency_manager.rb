@@ -66,7 +66,6 @@ class DependencyManager
     if @options[:gae]
       appengine_version = "1.6.0"
       dependencies += [Dependency.new("com.googlecode.objectify", "objectify", "2.2.3"),
-                       Dependency.new("commons-fileupload", "commons-fileupload", "1.2.1"),
                        Dependency.new("com.google.appengine", "appengine-api-1.0-sdk", appengine_version),
                        Dependency.new("com.google.appengine", "appengine-api-labs", appengine_version),
                        Dependency.new("com.google.appengine", "appengine-jsr107cache", appengine_version),
