@@ -64,11 +64,12 @@ class DependencyManager
 
   def append_gae_dependencies_if_necessary dependencies
     if @options[:gae]
+      appengine_version = "1.6.0"
       dependencies += [Dependency.new("com.googlecode.objectify", "objectify", "2.2.3"),
                        Dependency.new("commons-fileupload", "commons-fileupload", "1.2.1"),
-                       Dependency.new("com.google.appengine", "appengine-api-1.0-sdk", "1.5.5"),
-                       Dependency.new("com.google.appengine", "appengine-api-labs", "1.5.5"),
-                       Dependency.new("com.google.appengine", "appengine-jsr107cache", "1.5.5"),
+                       Dependency.new("com.google.appengine", "appengine-api-1.0-sdk", appengine_version),
+                       Dependency.new("com.google.appengine", "appengine-api-labs", appengine_version),
+                       Dependency.new("com.google.appengine", "appengine-jsr107cache", appengine_version),
                        Dependency.new("net.sf.jsr107cache", "jsr107cache", "1.1"),
                        Dependency.new("org.apache.geronimo.specs", "geronimo-jpa_3.0_spec", "1.1.1")]
     end
