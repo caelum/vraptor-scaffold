@@ -13,6 +13,9 @@ class AnnotationManager
   
   def annotations
     {
+      :local_date => ["Type(type=\"org.joda.time.contrib.hibernate.PersistentLocalDate\")"],
+      :local_time => ["Type(type=\"org.joda.time.contrib.hibernate.PersistentLocalTimeAsTime\")"],
+      :local_date_time => ["Type(type=\"org.joda.time.contrib.hibernate.PersistentLocalDateTime\")"],      
       :references => ["ManyToOne"]
     }
   end

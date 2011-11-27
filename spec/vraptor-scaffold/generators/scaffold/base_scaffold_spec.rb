@@ -2,6 +2,11 @@ require File.expand_path(File.dirname(__FILE__) + "/../../../spec_helper")
 
 describe BaseScaffold do
 
+  it "should not allow duplicate import" do
+    @base = BaseScaffold.new("product", [Attribute.new("category", "references"), Attribute.new("price", "references")])
+    @base.imports.one?.should be_true
+  end
+
   context "simple model name" do
     before(:each) do
       @base = BaseScaffold.new("client")
