@@ -4,7 +4,6 @@ class AppGenerator < VraptorScaffold::Base
   BUILD_TOOLS = %w( ant mvn gradle )
   ORMS = %w( jpa hibernate objectify )
   IVY_JAR = "ivy-2.2.0.jar"
-  VRAPTOR_GAE_PLUGIN_JAR = "vraptor-gae.jar"
 
   argument :project_path
 
@@ -71,15 +70,13 @@ class AppGenerator < VraptorScaffold::Base
   def configure_ant
     if build_tool == "ant"
       create_eclipse_files unless options[:skip_eclipse]
-      template("build.xml.erb", "build.xml")
+      copy_file("build.xml")
       template("build.properties.erb", "build.properties")
       template("ivy.erb", "ivy.xml")
       copy_file(IVY_JAR)
     end
     if options[:gae]
       copy_file("gae/ivysettings.xml", "ivysettings.xml")
-      empty_directory "libs-vraptor-gae"
-      copy_file(VRAPTOR_GAE_PLUGIN_JAR, "libs-vraptor-gae/#{VRAPTOR_GAE_PLUGIN_JAR}")
     end
   end
 

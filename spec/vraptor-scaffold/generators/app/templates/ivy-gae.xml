@@ -17,6 +17,7 @@
 		<dependency org="joda-time" name="joda-time" rev="2.0" conf="default" />
 		<dependency org="com.thoughtworks.xstream" name="xstream" rev="1.4.1" conf="default" />
 		<dependency org="com.googlecode.objectify" name="objectify" rev="3.1" conf="default" />
+		<dependency org="br.com.caelum" name="vraptor-gae" rev="1.0" conf="default" />
 		<dependency org="commons-fileupload" name="commons-fileupload" rev="1.2.2" conf="default" />
 		<dependency org="com.google.appengine" name="appengine-api-1.0-sdk" rev="1.6.0" conf="default" />
 		<dependency org="com.google.appengine" name="appengine-api-labs" rev="1.6.0" conf="default" />
