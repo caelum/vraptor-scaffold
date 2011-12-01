@@ -3,9 +3,19 @@ module VraptorScaffold
 
     class Start
       def run(args)
-        if File.exist?(:src)
-        else
-          Kernel.puts "To run vraptor start please go to the project root folder."
+        validate
+      end
+
+      private
+
+      def validate
+        unless File.exist?(:src)
+          Kernel.puts "To run vraptor start please go to the project root folder." 
+          Kernel::exit
+        end
+        unless Configuration.orm == "objectify"
+          Kernel.puts "vraptor start command is available only for gae apps"
+          Kernel::exit
         end
       end
     end
