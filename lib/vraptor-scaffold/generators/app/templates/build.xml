@@ -14,6 +14,14 @@
 		<pathelement location="${build.dir}" />
 	</path>
 
+	<target name="proxy">
+		<property name="proxy.host" value="proxy.server"/>
+		<property name="proxy.port" value="80"/>
+		<input message="Please enter proxy username" addproperty="proxy.user" />
+		<input message="Please enter proxy password - NOTE: CLEAR TEXT" addproperty="proxy.pass"/>
+		<setproxy proxyhost="${proxy.host}" proxyport="${proxy.port}" proxyuser="${proxy.user}" proxypassword="${proxy.pass}"/>
+	</target>
+        
 	<!-- ================================= 
           target: resolve              
          ================================= -->
