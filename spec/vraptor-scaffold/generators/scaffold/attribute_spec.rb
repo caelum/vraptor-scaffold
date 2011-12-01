@@ -68,6 +68,10 @@ describe Attribute do
     it "should support text" do
       Attribute.valid_types.include?("text").should be_true
     end
+
+    it "should not support other" do
+      Attribute.valid_types.include?("other").should be_false
+    end
   end
 
   context "html_input" do

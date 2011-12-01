@@ -32,7 +32,7 @@ class Attribute
   def boolean?
     type.eql? "boolean"
   end
-  
+
   def getter_prefix
     return "is" if boolean?
     "get"

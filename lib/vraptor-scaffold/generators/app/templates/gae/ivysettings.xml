@@ -1,0 +1,10 @@
+<ivysettings>
+    <settings defaultResolver="chain"/>
+    <resolvers>
+        <chain name="chain">
+            <ibiblio name="central" m2compatible="true"/>
+            <ibiblio name="objectify-appengine" m2compatible="true" root="http://objectify-appengine.googlecode.com/svn/maven"/>
+            <ibiblio name="vraptor-scaffold-repo" m2compatible="true" root="https://raw.github.com/caelum/vraptor-scaffold/gae-wip/maven/repo"/>
+        </chain>
+    </resolvers>
+</ivysettings>
