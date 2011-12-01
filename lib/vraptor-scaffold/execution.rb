@@ -17,7 +17,8 @@ module VraptorScaffold
               "-h" => Runner::Generator,
               "new" => Runner::Generator,
               "scaffold" => Runner::Scaffold,
-              "plugin" => Runner::Plugin
+              "plugin" => Runner::Plugin,
+              "start" => Runner::Start
               #"configure" => Runner::Configure
   }
 
