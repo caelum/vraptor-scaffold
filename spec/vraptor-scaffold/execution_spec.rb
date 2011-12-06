@@ -31,6 +31,10 @@ describe VraptorScaffold::Execution do
       @execution.runner_for("plugin").should == VraptorScaffold::Runner::Plugin
     end
 
+    it "should be start application when start action" do
+      @execution.runner_for("start").should == VraptorScaffold::Runner::Start
+    end
+
     it "should be commands help when scaffold when unknown action" do
       @execution.runner_for("xpto").should == VraptorScaffold::Runner::CommandsHelp
     end
