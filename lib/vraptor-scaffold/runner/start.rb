@@ -4,8 +4,10 @@ module VraptorScaffold
     class Start
       def run(args)
         validate
-        %x[ant compile]
-        %x[sh $APPENGINE_SDK_HOME/bin/dev_appserver.sh #{Configuration::WEB_APP}]
+        #%x[ant compile]
+        #%x[sh $APPENGINE_SDK_HOME/bin/dev_appserver.sh #{Configuration::WEB_APP}]
+        system("ant compile")
+        system("sh $APPENGINE_SDK_HOME/bin/dev_appserver.sh #{Configuration::WEB_APP}")
       end
 
       private
