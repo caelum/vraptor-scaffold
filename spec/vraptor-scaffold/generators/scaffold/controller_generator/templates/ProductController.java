@@ -4,6 +4,7 @@ import java.util.List;
 
 import app.model.Product;
 import app.repository.ProductRepository;
+import app.repositories.CategoryRepository;		
 import br.com.caelum.vraptor.Delete;
 import br.com.caelum.vraptor.Get;
 import br.com.caelum.vraptor.Post;
@@ -17,11 +18,15 @@ public class ProductController {
 
 	private final Result result;
 	private final ProductRepository repository;
+	private final CategoryRepository categoryRepository;		
+	
 	private final Validator validator;
 	
-	ProductController(Result result, ProductRepository repository, Validator validator) {
+	public ProductController(Result result, ProductRepository repository, 
+	CategoryRepository categoryRepository,	Validator validator) {
 		this.result = result;
 		this.repository = repository;
+		this.categoryRepository = categoryRepository;	
 		this.validator = validator;
 	}
 	
@@ -40,6 +45,7 @@ public class ProductController {
 	
 	@Get("/products/new")
 	public Product newProduct() {
+		result.include("categoryList", categoryRepository.findAll());		
 		return new Product();
 	}
 	
@@ -53,6 +59,8 @@ public class ProductController {
 	
 	@Get("/products/{product.id}/edit")
 	public Product edit(Product product) {
+		result.include("categoryList", categoryRepository.findAll());		
+		
 		return repository.find(product.getId());
 	}
 

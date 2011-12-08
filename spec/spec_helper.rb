@@ -6,7 +6,8 @@ require 'spec/autorun'
 require File.dirname(__FILE__) + '/../lib/vraptor-scaffold'
 
 def build_attributes
-  [Attribute.new("name", "string"), Attribute.new("myFlag", "boolean")]
+  [Attribute.new("name", "string"), Attribute.new("myFlag", "boolean"), 
+    Attribute.new("price", "big_decimal"), Attribute.new("category", "references")]
 end
 
 def mock_config_file
