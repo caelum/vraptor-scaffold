@@ -5,7 +5,7 @@ class BaseScaffold < VraptorScaffold::Base
     @model = model
     @attributes = attributes
   end
-      
+
   def model_parameter_name
     @model.camelize(:lower)
   end
@@ -45,15 +45,6 @@ class BaseScaffold < VraptorScaffold::Base
   protected
   def define_source_paths
     source_paths << File.expand_path(template_path) if File.exists?(template_path)
-    source_paths << File.join(File.dirname(__FILE__), source_root)    
+    source_paths << source_root
   end
-  
-  def source_root
-    raise "abstract method"
-  end
-  
-  def template_path
-    raise "abstract method"
-  end
-  
 end

@@ -8,11 +8,11 @@ class ModelGenerator < BaseScaffold
   end
 
   def template_path
-    "src/templates/model"
+    "src/templates/models"
   end
   
   def source_root
-    "model_generator/templates"
+    File.join File.dirname(__FILE__), "templates"
   end
 
   private

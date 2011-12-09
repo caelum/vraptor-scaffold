@@ -12,12 +12,8 @@ class FreemarkerGenerator < TemplateEngineGenerator
     "${base}/#{base_path}"
   end
   
-  def template_path
-    "src/templates/engine"
-  end
-  
   def source_root
-    "template_engine_generator/freemarker_generator/templates"
+    File.join File.dirname(__FILE__), "templates"
   end
   
 end

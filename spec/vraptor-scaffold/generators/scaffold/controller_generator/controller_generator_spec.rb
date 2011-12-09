@@ -10,12 +10,8 @@ describe ControllerGenerator do
     ControllerGenerator.new("orderItem", build_attributes).path.should == "/orderItems"
   end
   
-  it "template path off vraptor-scaffold" do
-    ControllerGenerator.new("category", build_attributes).template_path == "src/templates/controller"
-  end
-  
-  it "source root path in vraptor-scaffold" do
-    ControllerGenerator.new("category", build_attributes).source_root == "controller_generator/templates"    
+  it "controller template path" do
+    ControllerGenerator.new("category", build_attributes).template_path.should == "src/templates/controllers"
   end
 
   describe "generating from a lowercased name" do

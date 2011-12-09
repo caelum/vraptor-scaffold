@@ -22,11 +22,11 @@ class RepositoryGenerator < BaseScaffold
   end
 
   def template_path
-    "src/templates/repository"
+    "src/templates/repositories"
   end
   
   def source_root
-    "repository_generator/templates"
+    File.join File.dirname(__FILE__), "templates"
   end
 
 end

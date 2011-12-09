@@ -16,6 +16,11 @@ class TemplateEngineGenerator < BaseScaffold
   def views_path
     File.join Configuration::WEB_INF, view_folder, model_parameter_name
   end
+  
+  def template_path
+    "src/templates/views"
+  end
+
 end
 
 require File.dirname(__FILE__) + "/jsp_generator/jsp_generator"
