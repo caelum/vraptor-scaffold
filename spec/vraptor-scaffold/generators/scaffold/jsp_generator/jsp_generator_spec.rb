@@ -6,6 +6,10 @@ describe JspGenerator do
     JspGenerator.new("myModel", build_attributes).path("/edit").should == "${pageContext.request.contextPath}/myModels/edit"
   end
 
+  it "jsp template path" do
+    JspGenerator.new("category", build_attributes).template_path.should == "src/templates/views"
+  end
+  
   context "simple model name" do
     before(:all) do
       model = "product"

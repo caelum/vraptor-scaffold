@@ -41,4 +41,10 @@ class BaseScaffold < VraptorScaffold::Base
   def base_path
     model_parameter_name.pluralize
   end
+  
+  protected
+  def define_source_paths
+    source_paths << File.expand_path(template_path) if File.exists?(template_path)
+    source_paths << source_root
+  end
 end

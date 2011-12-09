@@ -1,16 +1,20 @@
 require File.expand_path(File.dirname(__FILE__) + "/../../../../spec_helper")
 
 describe RepositoryGenerator do
-
-  after(:each) do
-    FileUtils.remove_dir("src")
+  
+  it "repository template path" do
+    RepositoryGenerator.new("category", build_attributes).template_path.should == "src/templates/repositories"
   end
-
+  
   context "JPA" do
     before(:each) do
       mock_config_file
       @generator = RepositoryGenerator.new("product", build_attributes)
       @generator.build
+    end
+    
+    after(:each) do
+      FileUtils.remove_dir("src")
     end
 
     it "should create repository interface" do
@@ -38,6 +42,10 @@ describe RepositoryGenerator do
       YAML.stub!(:load_file).with(Configuration::FILENAME).and_return(config)
       @generator = RepositoryGenerator.new("client", build_attributes)
       @generator.build
+    end
+    
+    after(:each) do
+      FileUtils.remove_dir("src")
     end
 
     it "should create repository interface" do

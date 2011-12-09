@@ -9,6 +9,10 @@ describe ControllerGenerator do
   it "paths to compound model name" do
     ControllerGenerator.new("orderItem", build_attributes).path.should == "/orderItems"
   end
+  
+  it "controller template path" do
+    ControllerGenerator.new("category", build_attributes).template_path.should == "src/templates/controllers"
+  end
 
   describe "generating from a lowercased name" do
     before(:each) do

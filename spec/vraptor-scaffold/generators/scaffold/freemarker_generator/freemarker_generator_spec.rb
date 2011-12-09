@@ -2,6 +2,10 @@ require File.expand_path(File.dirname(__FILE__) + "/../../../../spec_helper")
 
 describe FreemarkerGenerator do
 
+  it "freemarker template path" do
+    FreemarkerGenerator.new("category", build_attributes).template_path.should == "src/templates/views"
+  end
+
   it "should append context to path" do
     FreemarkerGenerator.new("myModel", build_attributes).path.should == "${base}/myModels"
   end
