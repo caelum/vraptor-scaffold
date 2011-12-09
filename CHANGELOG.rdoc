@@ -1,5 +1,9 @@
 == 1.3.0 / 2011-??-??
 
+* New Features
+    * GAE support (vraptor new app --gae)
+	* Customizing templates.
+
 == 1.2.3 / 2011-11-15
 
 * Bugfixes
