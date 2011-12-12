@@ -35,6 +35,7 @@ class DependencyManager
      Dependency.new("org.hibernate", "hibernate-c3p0", hibernate_version),
      Dependency.new("org.hibernate", "hibernate-validator", "4.2.0.Final"),
      Dependency.new("joda-time", "joda-time", "2.0"),
+     Dependency.new("joda-time", "joda-time-hibernate", "1.3"),
      Dependency.new("com.thoughtworks.xstream", "xstream", "1.4.1")]
   end
 
