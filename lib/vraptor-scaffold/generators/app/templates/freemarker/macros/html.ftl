@@ -14,6 +14,18 @@
     <textarea id="${name}" name="${name}" cols="40" rows="20">${value}</textarea>
 </#macro>
 
+<#macro option value text="" selected=false>
+    <option value="${value}"<#if selected>selected="true"</#if> >${text}</option>
+</#macro>
+
+<#macro select name values check>
+    <select name="${name}">
+	  	<#list values as obj>
+	  		<#nested obj, check==obj.id>
+	  	</#list>
+    </select>
+</#macro>
+
 <#macro css name>
 	<link rel="stylesheet" type="text/css" href="${base}/stylesheets/${name}.css" />  
 </#macro>

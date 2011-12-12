@@ -14,12 +14,22 @@
 <% @attributes.each do |att| -%>
 	<div class="field">
 		<%= att.html_label %>:<br />
+		<%- if att.type.eql?("references") -%>
+		<select name="<%= model_parameter_name %>.<%=att.name%>.id">
+		  <c:forEach var="<%=att.name%>" items="${<%=att.name%>List}">
+		    <option value="${<%=att.name%>.id}" <c:if test = "${<%= model_parameter_name %>.<%=att.name%>.id == <%=att.name%>.id}">selected="true"</c:if>>
+		      ${<%=att.name%>.id}
+			</option>
+		  </c:forEach>
+		</select>
+		<%- else -%>	
 		<input type="text" name="<%= model_parameter_name %>.<%=att.name%>" value="${<%=model_parameter_name%>.<%=att.name%>}"/>
+		<%- end -%>
 	</div>
+	
 <% end -%>
-
-<div class="actions">
-	<button type="submit">send</button>
+  <div class="actions">
+	  <button type="submit">send</button>
 	</div>
 </form>
 
