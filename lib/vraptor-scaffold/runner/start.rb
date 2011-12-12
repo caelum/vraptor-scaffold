@@ -20,7 +20,7 @@ module VraptorScaffold
           Kernel::exit
         end
         unless ENV['APPENGINE_SDK_HOME']
-          Kernel.puts "To run vraptor start, configure the env var APPENGINE_SDK_HOME."
+          Kernel.puts "To run vraptor start, configure environment variable APPENGINE_SDK_HOME."
           Kernel::exit
         end
       end

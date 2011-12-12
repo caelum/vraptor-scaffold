@@ -43,7 +43,7 @@ describe VraptorScaffold::Runner::Start do
       it "should not run vraptor start" do
         File.stub!(:exist?).and_return(true)
         Configuration.stub!(:orm).and_return("objectify")
-        Kernel.should_receive(:puts).with("To run vraptor start, configure the env var APPENGINE_SDK_HOME.")
+        Kernel.should_receive(:puts).with("To run vraptor start, configure environment variable APPENGINE_SDK_HOME.")
         lambda { @start.new.run nil }.should raise_error(SystemExit)
       end
     end
