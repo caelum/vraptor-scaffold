@@ -2,7 +2,7 @@ class AppGenerator < VraptorScaffold::Base
 
   TEMPLATE_ENGINES = %w( jsp ftl )
   BUILD_TOOLS = %w( ant mvn gradle )
-  ORMS = %w( jpa hibernate )
+  ORMS = %w( jpa hibernate objectify )
   IVY_JAR = "ivy-2.2.0.jar"
 
   argument :project_path
@@ -21,6 +21,9 @@ class AppGenerator < VraptorScaffold::Base
 
   class_option :heroku, :type => :boolean, :aliases => "-h",
                :desc => "heroku project"
+
+  class_option :gae, :type => :boolean, :aliases => "-g",
+               :desc => "google app engine project"
 
   class_option :repositories_package, :aliases => "-r", :default => "repositories",
                :desc => "Define repositories package"
@@ -72,10 +75,20 @@ class AppGenerator < VraptorScaffold::Base
       template("ivy.erb", "ivy.xml")
       copy_file(IVY_JAR)
     end
+    if options[:gae]
+      copy_file("gae/ivysettings.xml", "ivysettings.xml")
+    end
   end
 
   def configure_gradle
     template("build.gradle.erb", "build.gradle") if build_tool == "gradle"
+  end
+
+  def configure_vraptor_packages
+    vraptor_util_package = "br.com.caelum.vraptor.util"
+    @vraptor_packages = []
+    @vraptor_packages += ["#{vraptor_util_package}.#{orm}"] if orm == "jpa" or orm == "hibernate"
+    @vraptor_packages += ["#{vraptor_util_package}.gae"] if options[:gae]
   end
 
   def create_main_java
@@ -93,13 +106,17 @@ class AppGenerator < VraptorScaffold::Base
   def create_models_directory
     models_folder = File.join @src, options[:models_package]
     empty_directory models_folder
-    template("models/Entity.erb", "#{models_folder}/Entity.java")
+    template("models/Entity.erb", "#{models_folder}/Entity.java") unless options[:gae]
   end
 
   def create_repositories_directory
     repositories_folder = File.join @src, options[:repositories_package]
     empty_directory repositories_folder
-    template("orm/Repository-#{options[:orm]}.java.tt", "#{repositories_folder}/Repository.java")
+    if options[:gae]
+      template("orm/Repository-objectify.java.tt", "#{repositories_folder}/Repository.java")
+    else
+      template("orm/Repository-#{orm}.java.tt", "#{repositories_folder}/Repository.java")
+    end
   end
 
   def create_main_resources
@@ -107,8 +124,12 @@ class AppGenerator < VraptorScaffold::Base
   end
 
   def configure_orm
-    if (options[:orm] == "hibernate")
+    if (orm == "hibernate")
       copy_file("orm/hibernate.cfg.xml", (File.join Configuration::MAIN_RESOURCES, "hibernate.cfg.xml"))
+    elsif orm == "objectify"
+      infra_folder = File.join @src, "infra"
+      empty_directory infra_folder
+      template("gae/ObjectifyFactory.java.tt", "#{@src}/infra/ObjectifyFactory.java")
     else
       metainf = File.join Configuration::MAIN_RESOURCES, 'META-INF'
       empty_directory metainf
@@ -118,6 +139,10 @@ class AppGenerator < VraptorScaffold::Base
 
   def create_webapp
     directory("webapp", Configuration::WEB_APP)
+    if @options[:gae]
+      template("gae/appengine-web.xml.tt", "#{Configuration::WEB_INF}/appengine-web.xml")
+      copy_file("gae/logging.properties", "#{Configuration::WEB_INF}/logging.properties")
+    end
   end
 
   def create_javascripts
@@ -149,13 +174,25 @@ class AppGenerator < VraptorScaffold::Base
   private
   def build_tool
     return "mvn" if options[:heroku]
+    return "ant" if options[:gae]
     options[:build_tool]
   end
 
+  def orm
+    return "objectify" if options[:gae]
+    options[:orm]
+  end
+
   def create_eclipse_files
-    template("eclipse/project.erb", ".project")
-    template("eclipse/classpath.erb", ".classpath")
-    directory("eclipse/settings", ".settings")
+    if options[:gae]
+      template("eclipse/classpath-gae.erb", ".classpath")
+      template("eclipse/project-gae.erb", ".project")
+      directory("eclipse/settings-gae", ".settings")
+    else
+      template("eclipse/classpath.erb", ".classpath")
+      template("eclipse/project.erb", ".project")
+      directory("eclipse/settings", ".settings")
+    end
   end
 
   def validate
@@ -167,8 +204,13 @@ class AppGenerator < VraptorScaffold::Base
       puts "Template engine #{options[:template_engine]} is not supported. The supported template engines are: #{TEMPLATE_ENGINES.join(", ")}"
       Kernel::exit
     end
-    unless ORMS.include? options[:orm]
-      puts "ORM #{options[:orm]} is not supported. The supported object-relational mapping are: #{ORMS.join(", ")}"
+    unless ORMS.include? orm
+      puts "ORM #{orm} is not supported. The supported object-relational mapping are: #{ORMS.join(", ")}"
+      Kernel::exit
+    end
+
+    if options[:heroku] and options[:gae]
+      puts "You cannot create gae and heroku template project together"
       Kernel::exit
     end
 
