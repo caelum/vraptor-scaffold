@@ -70,4 +70,10 @@ describe BaseScaffold do
       BaseScaffold.new("OrderItem").base_path.should eql("orderItems")
     end
   end
+  
+  it "should not allow duplicate import" do
+    @base = BaseScaffold.new("product", [Attribute.new("category", "references"), Attribute.new("price", "references")])
+    @base.imports.one?.should be_true
+  end
+  
 end

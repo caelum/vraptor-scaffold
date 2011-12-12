@@ -37,9 +37,27 @@ class BaseScaffold < VraptorScaffold::Base
   def controller_test_class_name
     "#{controller_class_name}Test"
   end
+  
+  def controller_test_param
+    params = ""
+    @attributes.each do |att|
+      params += ", null"  if att.type.eql?("references")
+    end
+    params    
+  end
 
   def base_path
     model_parameter_name.pluralize
+  end
+
+  def imports
+    imports = []
+    @attributes.each do |attribute|
+      attribute.import.each do |import|
+        imports << import unless imports.include?(import)      
+      end
+    end
+    imports
   end
   
   protected
