@@ -7,7 +7,7 @@
 
 	<context-param>
 		<param-name>br.com.caelum.vraptor.packages</param-name>
-		<param-value>br.com.caelum.vraptor.util.gae</param-value>
+		<param-value>br.com.caelum.vraptor.gae</param-value>
 	</context-param>
 
 	<context-param>

@@ -85,9 +85,9 @@ class AppGenerator < VraptorScaffold::Base
   end
 
   def configure_vraptor_packages
-    vraptor_util_package = "br.com.caelum.vraptor.util"
+    vraptor_util_package = "br.com.caelum.vraptor"
     @vraptor_packages = []
-    @vraptor_packages += ["#{vraptor_util_package}.#{orm}"] if orm == "jpa" or orm == "hibernate"
+    @vraptor_packages += ["#{vraptor_util_package}.util.#{orm}"] if orm == "jpa" or orm == "hibernate"
     @vraptor_packages += ["#{vraptor_util_package}.gae"] if options[:gae]
   end
 
