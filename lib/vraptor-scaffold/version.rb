@@ -1,3 +1,3 @@
 module VraptorScaffold
-  VERSION = "1.3.0.rc"
+  VERSION = "1.3.0"
 end
