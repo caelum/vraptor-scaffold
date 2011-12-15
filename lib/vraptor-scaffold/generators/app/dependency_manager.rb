@@ -62,7 +62,7 @@ class DependencyManager
 
   def append_gae_dependencies_if_necessary dependencies
     if @options[:gae]
-      appengine_version = "1.6.0"
+      appengine_version = "1.6.1"
       dependencies += [Dependency.new("com.googlecode.objectify", "objectify", "3.1"),
                        Dependency.new("br.com.caelum", "vraptor-gae", "1.0"),
                        Dependency.new("commons-fileupload", "commons-fileupload", "1.2.2"),
