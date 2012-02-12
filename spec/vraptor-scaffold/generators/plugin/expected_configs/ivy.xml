@@ -28,7 +28,7 @@
 		<!-- Test dependencies -->
 		<dependency org="junit" name="junit" rev="4.10" conf="test->default" />
 		<dependency org="org.hamcrest" name="hamcrest-all" rev="1.1" conf="test->default" />
-		<dependency org="org.mockito" name="mockito-all" rev="1.8.5" conf="test->default" />
+		<dependency org="org.mockito" name="mockito-all" rev="1.9.0" conf="test->default" />
 
 		<!-- Jetty dependencies -->
 		<dependency org="org.mortbay.jetty" name="jsp-api-2.1" rev="6.1.14" conf="jetty->default" />

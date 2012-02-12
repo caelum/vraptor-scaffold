@@ -11,7 +11,7 @@
         
 	  <classpathentry kind="lib" path="lib/test/hamcrest-all-1.1.jar"/>
         
-	  <classpathentry kind="lib" path="lib/test/mockito-all-1.8.5.jar"/>
+	  <classpathentry kind="lib" path="lib/test/mockito-all-1.9.0.jar"/>
         	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="con" path="com.google.appengine.eclipse.core.GAE_CONTAINER"/>
 	<classpathentry kind="output" path="src/main/webapp/WEB-INF/classes"/>
