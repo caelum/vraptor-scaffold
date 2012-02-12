@@ -39,8 +39,8 @@ class DependencyManager
                     Dependency.new("javax.servlet", "jstl", "1.2")]
 
     unless @options[:gae]
-      hibernate_version = "3.6.7.Final"
-      dependencies += [Dependency.new("org.hsqldb", "hsqldb", "2.2.4"),
+      hibernate_version = "4.0.1.Final"
+      dependencies += [Dependency.new("org.hsqldb", "hsqldb", "2.2.8"),
                        Dependency.new("org.hibernate", "hibernate-entitymanager", hibernate_version),
                        Dependency.new("org.hibernate", "hibernate-c3p0", hibernate_version)]
     end

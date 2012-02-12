@@ -7,6 +7,8 @@
 
 * Improvements
     * updated mockito to 1.9.0.
+	* updated hibernte to 4.0.1.Final.
+	* updated hsqldb to 2.2.8.
 
 == 1.2.3 / 2011-11-15
 
