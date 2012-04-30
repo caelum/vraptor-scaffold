@@ -34,8 +34,8 @@ class AppGenerator < VraptorScaffold::Base
   class_option :orm, :default => "jpa", :aliases => "-o",
                :desc => "Object-relational mapping (options: #{ORMS.join(', ')})"
 
-  class_option :jquery, :aliases => "-j", :default => "latest version",
-               :desc => "jQuery version"
+  class_option :skip_jquery, :type => :boolean, :aliases => "-j",
+               :desc => "Skip jQuery download file"
 
   class_option :skip_eclipse, :type => :boolean, :aliases => "-E",
                :desc => "Skip Eclipse files"
@@ -148,7 +148,10 @@ class AppGenerator < VraptorScaffold::Base
   def create_javascripts
     javascripts = File.join Configuration::WEB_APP, "javascripts"
     create_file File.join javascripts, "application.js"
-    add_file (File.join javascripts, "jquery.min.js"), get_jquery.body
+    unless options[:skip_jquery]
+      jquery = get_jquery
+      add_file (File.join javascripts, "jquery.min.js"), jquery.body if jquery
+    end
   end
 
   def configure_scaffold_properties
@@ -157,7 +160,7 @@ class AppGenerator < VraptorScaffold::Base
 
   def configure_template_engine
     templates = {"jsp" => JspTemplateEngine, "ftl" => FreemarkerTemplateEngine}
-    templates[options[:template_engine]].new(project_path).configure if templates[options[:template_engine]]
+    templates[options[:template_engine]].new(project_path, @options).configure if templates[options[:template_engine]]
   end
 
   def create_test
@@ -218,24 +221,17 @@ class AppGenerator < VraptorScaffold::Base
       puts "The project #{project_path} already exist"
       Kernel::exit
     end
-
-    if options[:jquery] != 'latest version'
-      case get_jquery
-      when Net::HTTPClientError, Net::HTTPServerError
-        download_url = "http://docs.jquery.com/Downloading_jQuery"
-        puts "jQuery version #{options[:jquery]} was not found. Please visit the download page to see the versions available #{download_url}."
-        Kernel::exit
-      end
-    end
   end
 
   def jquery_uri
-    jquery_version = "1" #this mean get latest version
-    jquery_version = options[:jquery] if options[:jquery] != 'latest version'
-    "/ajax/libs/jquery/#{jquery_version}/jquery.min.js"
+    "/ajax/libs/jquery/1/jquery.min.js"
   end
 
   def get_jquery
-    VraptorScaffold::HttpRequest.open_session("ajax.googleapis.com").get jquery_uri
+    begin
+      VraptorScaffold::HttpRequest.open_session("ajax.googleapis.com").get jquery_uri
+    rescue
+      puts "Was not possible to download jQuery."
+    end
   end
 end

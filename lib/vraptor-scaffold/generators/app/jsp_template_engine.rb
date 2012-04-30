@@ -4,9 +4,10 @@ class JspTemplateEngine < VraptorScaffold::Base
     File.join(File.dirname(__FILE__), "templates", "jsp")
   end
 
-  def initialize(project_path)
+  def initialize(project_path, options)
     super
     self.destination_root=(project_path)
+    @options = options
   end
 
   def configure
@@ -19,11 +20,11 @@ class JspTemplateEngine < VraptorScaffold::Base
   def extension
     "jsp"
   end
-  
+
   def decorators_path
     File.join "jsp", "decorators"
   end
-  
+
   private
   def append_prelude_config
     file = File.join(Configuration::WEB_INF, "web.xml")

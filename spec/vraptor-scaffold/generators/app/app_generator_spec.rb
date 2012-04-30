@@ -5,7 +5,7 @@ describe AppGenerator do
   context "build new application" do
     before(:all) do
       @project_path = "src/vraptor-scaffold"
-      AppGenerator.new(@project_path, ["-b=mvn", "-r=repository", "-m=domain", "-c=control"]).invoke_all
+      AppGenerator.new(@project_path, ["-b=mvn", "-r=repository", "-m=domain", "-c=control", "--skip_jquery"]).invoke_all
     end
 
     after(:all) do
@@ -18,7 +18,7 @@ describe AppGenerator do
 
     it "should be invalid when project name already exist" do
       Kernel.should_receive(:exit)
-      AppGenerator.new(@project_path)
+      AppGenerator.new(@project_path, ["--skip_jquery"])
     end
 
     it "should create pom" do
@@ -91,7 +91,7 @@ describe AppGenerator do
           @project_path = "src/vraptor-scaffold-hibernate"
           @main_resources = "#{@project_path}/#{Configuration::MAIN_RESOURCES}"
           @meta_inf = "#{@main_resources}/META-INF"
-          AppGenerator.new(@project_path, ["--orm=hibernate"]).invoke_all
+          AppGenerator.new(@project_path, ["--orm=hibernate", "--skip_jquery"]).invoke_all
         end
 
         after(:all) do
@@ -182,11 +182,6 @@ describe AppGenerator do
         exists_and_identical?(source, destination)
       end
 
-      it "should create jquery js" do
-        destination = "#{@webapp}/javascripts/jquery.min.js"
-        File.exists?(destination).should be_true
-      end
-
       it "should create application js" do
         destination = "#{@webapp}/javascripts/application.js"
         File.exists?(destination).should be_true
@@ -234,7 +229,7 @@ describe AppGenerator do
 
     before(:all) do
       @project_path = "src/vraptor-scaffold"
-      AppGenerator.new(@project_path, ["-p=br.com.caelum"]).invoke_all
+      AppGenerator.new(@project_path, ["-p=br.com.caelum", "--skip_jquery"]).invoke_all
       @main_java = "#{@project_path}/#{Configuration::MAIN_SRC}/br/com/caelum"
       @test_java = "#{@project_path}/#{Configuration::TEST_SRC}/br/com/caelum"
     end
@@ -265,16 +260,16 @@ describe AppGenerator do
 
     it "should configure freemarker template engine" do
       template = mock(FreemarkerTemplateEngine)
-      FreemarkerTemplateEngine.stub!(:new).with(@project_path).and_return(template)
+      FreemarkerTemplateEngine.stub!(:new).with(@project_path, anything()).and_return(template)
       template.should_receive(:configure)
-      AppGenerator.new(@project_path, ["--template-engine=ftl"]).invoke_all
+      AppGenerator.new(@project_path, ["--template-engine=ftl", "--skip_jquery"]).invoke_all
     end
 
     it "should configure jsp template engine" do
       template = mock(JspTemplateEngine)
-      JspTemplateEngine.stub!(:new).with(@project_path).and_return(template)
+      JspTemplateEngine.stub!(:new).with(@project_path, anything()).and_return(template)
       template.should_receive(:configure)
-      AppGenerator.new(@project_path).invoke_all
+      AppGenerator.new(@project_path, ["--skip_jquery"]).invoke_all
     end
   end
 
@@ -282,7 +277,7 @@ describe AppGenerator do
 
     before(:all) do
       @project_path = "vraptor-scaffold"
-      AppGenerator.new(@project_path, ["-b=ant"]).invoke_all
+      AppGenerator.new(@project_path, ["-b=ant", "--skip_jquery"]).invoke_all
     end
 
     after(:all) do
@@ -341,7 +336,7 @@ describe AppGenerator do
   context "skip eclipse configuration files" do
     before(:all) do
       @project_path = "vraptor-scaffold"
-      AppGenerator.new(@project_path, ["--skip-eclipse"]).invoke_all
+      AppGenerator.new(@project_path, ["--skip-eclipse", "--skip_jquery"]).invoke_all
     end
 
     after(:all) do
@@ -357,7 +352,7 @@ describe AppGenerator do
 
     before(:all) do
       @project_path = "vraptor-scaffold"
-      AppGenerator.new(@project_path, ["-b=gradle"]).invoke_all
+      AppGenerator.new(@project_path, ["-b=gradle", "--skip_jquery"]).invoke_all
     end
 
     after(:all) do
@@ -424,34 +419,29 @@ describe AppGenerator do
 
     it "should be invalid when build tool is not supported" do
       Kernel.should_receive(:exit)
-      AppGenerator.new(@project_path, ["-b=maven"])
+      AppGenerator.new(@project_path, ["-b=maven", "--skip_jquery"])
     end
 
     it "should be invalid when template engine is not supported" do
       Kernel.should_receive(:exit)
-      AppGenerator.new(@project_path, ["-e=velocity"])
+      AppGenerator.new(@project_path, ["-e=velocity", "--skip_jquery"])
     end
 
     it "should be invalid when orm mapping is not supported" do
       Kernel.should_receive(:exit)
-      AppGenerator.new(@project_path, ["-o=toplink"])
-    end
-
-    it "should be invalid when jquery version does not exist" do
-      Kernel.should_receive(:exit)
-      AppGenerator.new(@project_path, ["-j=1.x"])
+      AppGenerator.new(@project_path, ["-o=toplink", "--skip_jquery"])
     end
 
     it "should be invalid when gae and heroku are selected" do
       Kernel.should_receive(:exit)
-      AppGenerator.new(@project_path, ["-g", "-h"])
+      AppGenerator.new(@project_path, ["-g", "-h", "--skip_jquery"])
     end
   end
 
   context "heroku app" do
     before(:all) do
       @project_path = "heroku"
-      AppGenerator.new(@project_path, ["--heroku"]).invoke_all
+      AppGenerator.new(@project_path, ["--heroku", "--skip_jquery"]).invoke_all
     end
 
     after(:all) do
@@ -476,7 +466,7 @@ describe AppGenerator do
   context "gae app" do
     before(:all) do
       @project_path = "gae"
-      AppGenerator.new(@project_path, ["--gae"]).invoke_all
+      AppGenerator.new(@project_path, ["--gae", "--skip_jquery"]).invoke_all
       @main_java = "#{@project_path}/#{Configuration::MAIN_SRC}"
       @app = "#{@main_java}/app"
     end
