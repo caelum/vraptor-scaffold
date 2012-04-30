@@ -12,7 +12,7 @@ describe FreemarkerTemplateEngine do
 
   context "configuring" do
     before(:all) do
-      AppGenerator.new(@project_path, ["--template-engine=ftl", "-p=br.com.caelum", "--orm=hibernate"]).invoke_all
+      AppGenerator.new(@project_path, ["--template-engine=ftl", "-p=br.com.caelum", "--orm=hibernate", "--skip-jquery"]).invoke_all
     end
 
     after(:all) do
@@ -32,11 +32,11 @@ describe FreemarkerTemplateEngine do
     end
 
     it "should create views folder" do
-      File.exist?("#{@web_inf}/views").should be_true 
+      File.exist?("#{@web_inf}/views").should be_true
     end
 
     it "should create infrastructure folder" do
-      File.exist?("#{@app}/infrastructure").should be_true 
+      File.exist?("#{@app}/infrastructure").should be_true
     end
 
     it "should create path resolver" do
