@@ -9,9 +9,9 @@ describe PluginGenerator do
     @gradle_projet = "#{@project_path}/gradle"
     @ant_projet = "#{@project_path}/ant"
 
-    AppGenerator.new(@maven_projet, ["-b=mvn"]).invoke_all
-    AppGenerator.new(@gradle_projet, ["-b=gradle"]).invoke_all
-    AppGenerator.new(@ant_projet, ["-b=ant"]).invoke_all
+    AppGenerator.new(@maven_projet, ["-b=mvn", "--skip-jquery"]).invoke_all
+    AppGenerator.new(@gradle_projet, ["-b=gradle", "--skip-jquery"]).invoke_all
+    AppGenerator.new(@ant_projet, ["-b=ant", "--skip-jquery"]).invoke_all
   end
 
   after :all do

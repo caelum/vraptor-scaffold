@@ -33,7 +33,7 @@ describe ModelGenerator do
     before(:each) do
       config = {"package" => "app", "orm" => "hibernate", "models_package" => "model"}
       YAML.stub!(:load_file).with(Configuration::FILENAME).and_return(config)
-      AppGenerator.new("src", ["-o=hibernate"]).configure_orm
+      AppGenerator.new("src", ["-o=hibernate", "--skip_jquery"]).configure_orm
       FileUtils.chdir("src")
       @generator = ModelGenerator.new("product", build_attributes)
       @generator.build
@@ -43,7 +43,7 @@ describe ModelGenerator do
     after(:each) do
       FileUtils.remove_dir("src")
     end
-    
+
     it "should map entity in hibernate.cfg.xml when orm is hibernate" do
       source = File.join File.dirname(__FILE__), "templates", "hibernate.cfg.xml"
       destination = File.join "src", Configuration::MAIN_RESOURCES, "hibernate.cfg.xml"
