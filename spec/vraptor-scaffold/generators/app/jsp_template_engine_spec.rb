@@ -78,14 +78,14 @@ describe JspTemplateEngine do
 
   context "building a jsp application without jquery" do
     before(:all) do
-      @project_path = "src/vraptor-scaffold-with-jquery"
+      @project_path = "src/vraptor-scaffold-without-jquery"
       @web_inf = "#{@project_path}/#{Configuration::WEB_INF}"
       @decorators = "#{@web_inf}/jsp/decorators"
       AppGenerator.new(@project_path, ["--skip-jquery"]).invoke_all
     end
 
     after(:all) do
-      FileUtils.remove_dir("src/vraptor-scaffold-with-jquery")
+      FileUtils.remove_dir("src/vraptor-scaffold-without-jquery")
     end
 
     it "should create a main file with jquery js import" do
