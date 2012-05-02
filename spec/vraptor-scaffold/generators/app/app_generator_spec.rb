@@ -352,10 +352,7 @@ describe AppGenerator do
     before(:all) do
       @project_path = "vraptor-scaffold"
 
-      http_request = mock(Net::HTTP)
-      http_request.stub!(:get).with(kind_of(String)).and_return(http_request)
-      http_request.stub!(:body).and_return("corpo :)")
-      VraptorScaffold::HttpRequest.stub!(:open_session).with(kind_of(String)).and_return(http_request)
+      mock_http_request()
 
       AppGenerator.new(@project_path).invoke_all
     end

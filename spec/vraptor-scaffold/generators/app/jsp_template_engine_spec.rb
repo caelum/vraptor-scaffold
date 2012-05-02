@@ -8,7 +8,10 @@ describe JspTemplateEngine do
       @web_inf = "#{@project_path}/#{Configuration::WEB_INF}"
       @decorators = "#{@web_inf}/jsp/decorators"
       @app = "#{@project_path}/#{Configuration::MAIN_SRC}/app"
-      AppGenerator.new(@project_path, ["--skip-jquery"]).invoke_all
+
+      mock_http_request()
+
+      AppGenerator.new(@project_path).invoke_all
     end
 
     after(:all) do
@@ -26,9 +29,7 @@ describe JspTemplateEngine do
     end
 
     it "should create decorator file" do
-      source = "#{JspTemplateEngine.source_root}/main.jsp"
-      destination = "#{@decorators}/main.jsp"
-      exists_and_identical?(source, destination)
+      File.exists?("#{@decorators}/main.jsp").should be_true
     end
 
     it "should not create infrastructure folder" do
@@ -49,6 +50,47 @@ describe JspTemplateEngine do
     it "should create prelude.jspf" do
       source = "#{JspTemplateEngine.source_root}/prelude.jspf"
       destination = "#{@web_inf}/jsp/prelude.jspf"
+      exists_and_identical?(source, destination)
+    end
+  end
+
+  context "building a jsp application with jquery" do
+    before(:all) do
+      @project_path = "src/vraptor-scaffold-with-jquery"
+      @web_inf = "#{@project_path}/#{Configuration::WEB_INF}"
+      @decorators = "#{@web_inf}/jsp/decorators"
+
+      mock_http_request()
+
+      AppGenerator.new(@project_path).invoke_all
+    end
+
+    after(:all) do
+      FileUtils.remove_dir("src/vraptor-scaffold-with-jquery")
+    end
+
+    it "should create a main file with jquery js import" do
+      source = File.join File.dirname(__FILE__), "templates", "main-with-jquery.jsp"
+      destination = "#{@decorators}/main.jsp"
+      exists_and_identical?(source, destination)
+    end
+  end
+
+  context "building a jsp application without jquery" do
+    before(:all) do
+      @project_path = "src/vraptor-scaffold-with-jquery"
+      @web_inf = "#{@project_path}/#{Configuration::WEB_INF}"
+      @decorators = "#{@web_inf}/jsp/decorators"
+      AppGenerator.new(@project_path, ["--skip-jquery"]).invoke_all
+    end
+
+    after(:all) do
+      FileUtils.remove_dir("src/vraptor-scaffold-with-jquery")
+    end
+
+    it "should create a main file with jquery js import" do
+      source = File.join File.dirname(__FILE__), "templates", "main-without-jquery.jsp"
+      destination = "#{@decorators}/main.jsp"
       exists_and_identical?(source, destination)
     end
   end
