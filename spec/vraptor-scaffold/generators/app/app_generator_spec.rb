@@ -348,6 +348,41 @@ describe AppGenerator do
     end
   end
 
+  context "no skip jquery download file" do
+    before(:all) do
+      @project_path = "vraptor-scaffold"
+
+      http_request = mock(Net::HTTP)
+      http_request.stub!(:get).with(kind_of(String)).and_return(http_request)
+      http_request.stub!(:body).and_return("corpo :)")
+      VraptorScaffold::HttpRequest.stub!(:open_session).with(kind_of(String)).and_return(http_request)
+
+      AppGenerator.new(@project_path).invoke_all
+    end
+
+    after(:all) do
+      FileUtils.remove_dir(@project_path)
+    end
+
+    it "should exist jquery.min.js file" do
+      javascripts = File.join @project_path, Configuration::WEB_APP, "javascripts", "jquery.min.js"
+      File.exist?(javascripts).should be_true
+    end
+
+    it "should show a message for http problems" do
+      http_request = mock(Net::HTTP)
+      http_request.stub!(:get).with(kind_of(String)).and_throw(Net::HTTPError)
+      VraptorScaffold::HttpRequest.stub!(:open_session).with(kind_of(String)).and_return(http_request)
+
+      Kernel.should_receive(:puts).with("Was not possible to download jQuery.")
+
+      local_project_path = "project_without_jquery_by_http_error"
+      AppGenerator.new(local_project_path).invoke_all
+
+      FileUtils.remove_dir(local_project_path)
+    end
+  end
+
   context "configuring gradle application" do
 
     before(:all) do

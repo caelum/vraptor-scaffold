@@ -229,9 +229,9 @@ class AppGenerator < VraptorScaffold::Base
 
   def get_jquery
     begin
-      VraptorScaffold::HttpRequest.open_session("ajax.googleapis.com").get jquery_uri
+      VraptorScaffold::HttpRequest.open_session("ajax.googleapis.com").get jquery_uri;
     rescue
-      puts "Was not possible to download jQuery."
+      Kernel.puts "Was not possible to download jQuery."
     end
   end
 end

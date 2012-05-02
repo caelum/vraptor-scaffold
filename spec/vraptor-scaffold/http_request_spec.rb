@@ -37,4 +37,11 @@ describe VraptorScaffold::HttpRequest do
     end
   end
 
+  context "open session" do
+    it "should open a http session" do
+      http_request = mock(VraptorScaffold::HttpRequest)
+      http = VraptorScaffold::HttpRequest.open_session "http://any_url/here"
+      http.should be_true
+    end
+  end
 end
