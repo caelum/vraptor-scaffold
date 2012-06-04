@@ -8,3 +8,4 @@ doc
 *.swp
 rdoc
 .DS_Store
+.rspec
