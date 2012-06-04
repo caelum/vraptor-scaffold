@@ -21,7 +21,7 @@ describe VraptorScaffold::HttpRequest do
 
     it "should use 'http_proxy' env when it is present" do
       http = VraptorScaffold::HttpRequest.http
-      http.should be_true http.proxy_class?
+      http.should be_proxy_class
     end
   end
 
@@ -33,7 +33,7 @@ describe VraptorScaffold::HttpRequest do
 
     it "should not use proxy settings when no http_proxy env exists" do
       http = VraptorScaffold::HttpRequest.http
-      http.should be_true !http.proxy_class?
+      http.should_not be_proxy_class
     end
   end
 

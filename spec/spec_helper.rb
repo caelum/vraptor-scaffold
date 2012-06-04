@@ -20,5 +20,5 @@ end
 def exists_and_identical?(source, created)
   c = File.open(created).read.gsub( /\r/m, "" )
   c2 = File.open(source).read.gsub( /\r/m, "" )
-  c.should be == c2
+  c.should == c2
 end
