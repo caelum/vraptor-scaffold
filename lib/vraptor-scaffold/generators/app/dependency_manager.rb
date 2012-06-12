@@ -30,7 +30,7 @@ class DependencyManager
   def default_dependencies
     dependencies = []
     if options[:gae]
-      dependencies += [Dependency.new("br.com.caelum", "vraptor", "3.3.1")]
+      dependencies += [Dependency.new("br.com.caelum", "vraptor", "3.4.1")]
     else
       dependencies += [Dependency.new("br.com.caelum", "vraptor", "3.4.0")]
     end
