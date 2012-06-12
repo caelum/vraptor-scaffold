@@ -64,7 +64,7 @@ class DependencyManager
     if @options[:gae]
       appengine_version = "1.6.1"
       dependencies += [Dependency.new("com.googlecode.objectify", "objectify", "3.1"),
-                       Dependency.new("br.com.caelum", "vraptor-gae", "1.0"),
+                       Dependency.new("br.com.caelum", "vraptor3.4-compatible-gae", "1.1"),
                        Dependency.new("commons-fileupload", "commons-fileupload", "1.2.2"),
                        Dependency.new("com.google.appengine", "appengine-api-1.0-sdk", appengine_version),
                        Dependency.new("com.google.appengine", "appengine-api-labs", appengine_version),
