@@ -10,7 +10,9 @@
 	</configurations>
 
 	<dependencies>
-		<dependency org="br.com.caelum" name="vraptor" rev="3.4.1" conf="default" />
+		<dependency org="br.com.caelum" name="vraptor" rev="3.4.1" conf="default">
+			<exclude org="org.objenesis" name="objenesis" />
+		</dependency>
 		<dependency org="opensymphony" name="sitemesh" rev="2.4.2" conf="default" />
 		<dependency org="javax.servlet" name="jstl" rev="1.2" conf="default" />
 		<dependency org="org.hibernate" name="hibernate-validator" rev="4.2.0.Final" conf="default" />
