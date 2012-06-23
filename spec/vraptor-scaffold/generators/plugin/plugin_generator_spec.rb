@@ -1,4 +1,4 @@
-require File.expand_path(File.dirname(__FILE__) + "/../../../spec_helper")
+require 'spec_helper'
 
 describe PluginGenerator do
 
@@ -29,96 +29,81 @@ describe PluginGenerator do
   context "maven project" do
 
     before :each do
-      FileUtils.chdir(@maven_projet)
-      @generator = PluginGenerator.new("vraptor-environment", ["-v=0.0.8"])
-      @generator.build
-      back
+      backup @maven_projet, 'pom.xml'
     end
 
-    it "should inject dependency into pom.xml" do
+    it "should inject dependency into pom.xmlwith default" do
+      PluginGenerator.new("vraptor-environment", ["-v=0.0.8"]).build
+      back
       source = expected_for "default_org_pom.xml"
       destination = "#{@maven_projet}/pom.xml"
       exists_and_identical?(source, destination)
     end
-  end
 
-  context "maven project with plugin org" do
-
-    before :each do
-      FileUtils.chdir(@maven_projet)
-      @generator = PluginGenerator.new("vraptor-environment", ["-v=0.0.8", "-g=br.com.caelum.vraptor.plugin"])
-      @generator.build
+    it "injects dependency into pom.xml with provided org" do
+      PluginGenerator.new("vraptor-environment", ["-v=0.0.8", "-g=br.com.caelum.vraptor.plugin"]).build
       back
-    end
-
-    it "should inject dependency into pom.xml" do
       source = expected_for "pom.xml"
       destination = "#{@maven_projet}/pom.xml"
       exists_and_identical?(source, destination)
+    end
+
+    after :each do
+      rollback @maven_projet, 'pom.xml'
     end
   end
 
   context "ant project" do
 
     before :each do
-      FileUtils.chdir(@ant_projet)
-      @generator = PluginGenerator.new("vraptor-environment", ["-v=0.0.8"])
-      @generator.build
-      back
+      backup @ant_projet, 'ivy.xml'
     end
 
-    it "should inject dependency into ivy.xml" do
+    it "should inject dependency into ivy.xml with default org" do
+      PluginGenerator.new("vraptor-environment", ["-v=0.0.8"]).build
+      back
       source = expected_for "default_org_ivy.xml"
       destination = "#{@ant_projet}/ivy.xml"
       exists_and_identical?(source, destination)
     end
-  end
 
-  context "ant project with plugin org" do
-
-    before :each do
-      FileUtils.chdir(@ant_projet)
-      @generator = PluginGenerator.new("vraptor-environment", ["-v=0.0.8", "-g=br.com.caelum.vraptor.plugin"])
-      @generator.build
+    it "injects dependency into ivy.xml with provided org" do
+      PluginGenerator.new("vraptor-environment", ["-v=0.0.8", "-g=br.com.caelum.vraptor.plugin"]).build
       back
-    end
-
-    it "should inject dependency into ivy.xml" do
       source = expected_for "ivy.xml"
       destination = "#{@ant_projet}/ivy.xml"
       exists_and_identical?(source, destination)
+    end
+
+    after :each do
+      rollback @ant_projet, 'ivy.xml'
     end
   end
 
   context "gradle project" do
 
     before :each do
-      FileUtils.chdir(@gradle_projet)
-      @generator = PluginGenerator.new("vraptor-environment", ["-v=0.0.8"])
-      @generator.build
-      back
+      backup @gradle_projet, 'build.gradle'
     end
 
-    it "should inject dependency into build.gradle" do
+    it "injects dependency into build.gradle with default org" do
+      PluginGenerator.new("vraptor-environment", ["-v=0.0.8"]).build
+      back
       source = expected_for "default_org_build.gradle"
       destination = "#{@gradle_projet}/build.gradle"
       exists_and_identical?(source, destination)
     end
-  end
-
-  context "gradle project with plugin org" do
-
-    before :each do
-      FileUtils.chdir(@gradle_projet)
-      @generator = PluginGenerator.new("vraptor-environment", ["-v=0.0.8", "-g=br.com.caelum.vraptor.plugin"])
-      @generator.build
-      back
-    end
 
     it "should inject dependency into build.gradle" do
+      PluginGenerator.new("vraptor-environment", ["-v=0.0.8", "-g=br.com.caelum.vraptor.plugin"]).build
+      back
       source = expected_for "build.gradle"
       destination = "#{@gradle_projet}/build.gradle"
       exists_and_identical?(source, destination)
+    end
+
+    after :each do
+      rollback @gradle_projet, 'build.gradle'
     end
   end
 
@@ -127,4 +112,12 @@ describe PluginGenerator do
     FileUtils.chdir("..")
   end
 
+  def backup dir_path, file_name
+    FileUtils.cp("#{dir_path}/#{file_name}", "#{dir_path}/#{file_name}.original")
+    FileUtils.chdir(dir_path)
+  end
+
+  def rollback dir_path, file_name
+    FileUtils.cp("#{dir_path}/#{file_name}.original", "#{dir_path}/#{file_name}")
+  end
 end

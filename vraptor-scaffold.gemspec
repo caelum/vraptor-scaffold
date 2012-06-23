@@ -15,11 +15,12 @@ Gem::Specification.new do |s|
   
   s.add_dependency('thor', '0.14.6')
   s.add_dependency('activesupport', "3.0.1")
-  s.add_dependency('rake', '0.9.2')
+  s.add_dependency('rake')
 
-  s.add_development_dependency('rspec', '1.3.2')
+  s.add_development_dependency('rspec')
   s.add_development_dependency('ZenTest', '4.4.0')
   s.add_development_dependency('simplecov', '0.5.4')
+  s.add_development_dependency('pry')
 
   s.files         = `git ls-files`.split("\n")
   s.test_files    = `git ls-files -- {spec}/*`.split("\n")
