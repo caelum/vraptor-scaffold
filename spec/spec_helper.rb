@@ -1,8 +1,7 @@
 require 'simplecov'
+require 'pry'
 SimpleCov.start
 
-require 'spec'
-require 'spec/autorun'
 require File.dirname(__FILE__) + '/../lib/vraptor-scaffold'
 
 def build_attributes
@@ -22,5 +21,5 @@ end
 def exists_and_identical?(source, created)
   c = File.open(created).read.gsub( /\r/m, "" )
   c2 = File.open(source).read.gsub( /\r/m, "" )
-  c.should be == c2
+  c.should == c2
 end
