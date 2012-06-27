@@ -88,7 +88,10 @@ describe Attribute do
     it "should suport LocalTime" do
       Attribute.valid_types.include?("local_time").should be_true
     end
-    
+
+    it "should not support other" do
+      Attribute.valid_types.include?("other").should be_false
+    end
   end
 
   context "html_input" do
@@ -123,7 +126,7 @@ describe Attribute do
     it "should know html input to text" do
       Attribute.new("name", "text").html_input.should eql("textarea")
     end
-    
+
     it "should know html input to big decimal" do
       Attribute.new("price", "big_decimal").html_input.should eql("text")
     end
@@ -147,7 +150,7 @@ describe Attribute do
     it "should know html input to LocalDateTime" do
       Attribute.new("price", "local_date_time").html_input.should eql("text")
     end
-    
+
   end
 
   context "java type" do
@@ -182,7 +185,7 @@ describe Attribute do
     it "should know correct java type to long" do
       Attribute.new("name", "long").java_type.should eql("Long")
     end
-    
+
     it "should know correct java type to BigDecimal" do
       Attribute.new("price", "big_decimal").java_type.should eql("BigDecimal")
     end
@@ -206,11 +209,11 @@ describe Attribute do
     it "should know correct java type to LocalDateTime" do
       Attribute.new("price", "local_date_time").java_type.should eql("LocalDateTime")
     end
-    
+
     it "should know correct type to relationship many to one" do
       Attribute.new("product", "references").java_type.should eql("Product")
     end
-    
+
   end
 
   context "validate" do

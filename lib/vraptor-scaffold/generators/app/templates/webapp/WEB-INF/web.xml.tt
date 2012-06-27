@@ -7,7 +7,7 @@
 
 	<context-param>
 		<param-name>br.com.caelum.vraptor.packages</param-name>
-		<param-value>br.com.caelum.vraptor.util.<%= options[:orm] %></param-value>
+		<param-value><%= @vraptor_packages * "," %></param-value>
 	</context-param>
 
 	<context-param>
