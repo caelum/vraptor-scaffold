@@ -10,6 +10,8 @@ public class Product {
 	private Long id;
 	private String name;
 	private boolean myFlag;
+	private BigDecimal price;
+	private Category category;
 	
 	public void setId(Long id) {
 		this.id = id;
@@ -33,6 +35,22 @@ public class Product {
 	
 	public boolean isMyFlag() {
 		return myFlag;
+	}
+	
+	public void setPrice(BigDecimal price) {
+		this.price = price;
+	}
+	
+	public BigDecimal getPrice() {
+		return price;
+	}
+	
+	public void setCategory(Category category) {
+		this.category = category;
+	}
+	
+	public Category getCategory() {
+		return category;
 	}
 	
 }
