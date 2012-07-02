@@ -43,7 +43,7 @@ describe ModelGenerator do
     after(:each) do
       FileUtils.remove_dir("src")
     end
-    
+
     it "should map entity in hibernate.cfg.xml when orm is hibernate" do
       source = File.join File.dirname(__FILE__), "templates", "hibernate.cfg.xml"
       destination = File.join "src", Configuration::MAIN_RESOURCES, "hibernate.cfg.xml"

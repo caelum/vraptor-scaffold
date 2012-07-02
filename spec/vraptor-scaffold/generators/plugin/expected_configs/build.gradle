@@ -34,12 +34,12 @@ sourceSets {
 sourceSets.main.classesDir = new File('src/main/webapp/WEB-INF/classes')
 
 jettyRun.scanIntervalSeconds=3
-jettyRun.contextPath = '/' 
+jettyRun.contextPath = '/'
 [jettyRunWar,jettyStop]*.stopPort = 8081
 [jettyRunWar,jettyStop]*.stopKey = 'stopKey'
 
 dependencies {
-    compile group: 'br.com.caelum.vraptor.plugin', name: 'vraptor-environment', version: '0.0.8'
+    compile group: 'br.com.caelum.vraptor', name: 'vraptor-environment', version: '0.0.8'
 
     compile group: 'br.com.caelum', name: 'vraptor', version: '3.4.0'
     compile group: 'opensymphony', name: 'sitemesh', version: '2.4.2'
@@ -49,7 +49,6 @@ dependencies {
     compile group: 'org.hibernate', name: 'hibernate-c3p0', version: '4.0.1.Final'
     compile group: 'org.hibernate', name: 'hibernate-validator', version: '4.2.0.Final'
     compile group: 'joda-time', name: 'joda-time', version: '2.0'
-    compile group: 'joda-time', name: 'joda-time-hibernate', version: '1.3'
     compile group: 'com.thoughtworks.xstream', name: 'xstream', version: '1.4.1'
 
     //Provided dependencies

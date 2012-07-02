@@ -22,13 +22,8 @@ class Attribute
     java = type.capitalize
     java = "boolean" if boolean?
     java = "String" if type.eql?("text")
-    java = "BigDecimal" if type.eql?("big_decimal")
-    java = "BigInteger" if type.eql?("big_integer")
-    java = "LocalDate" if type.eql?("local_date")
-    java = "LocalDateTime" if type.eql?("local_date_time")
-    java = "LocalTime" if type.eql?("local_time")
     java = "Date" if type.eql?("date")
-    java = name.camelize if type.eql?("references")    
+    java = name.camelize if type.eql?("references")
     java
   end
 
@@ -36,12 +31,8 @@ class Attribute
     ImportManager.new(type).package
   end
 
-  def annotation
-    AnnotationManager.new(type).annotation
-  end
-  
   def self.valid_types
-    %w(boolean double float short integer long string text big_decimal big_integer date local_date local_time local_date_time references)
+    %w(boolean double float short integer long string text date references)
   end
 
   def boolean?
