@@ -14,7 +14,15 @@
 <% @attributes.each do |att| -%>
   <div class="field">
     <%= att.html_label %>:<br />
+		<%- if att.type.eql?("references") -%>
+    <select name="<%= model_parameter_name %>.<%=att.name%>.id">
+	  	<#list <%=att.name%>List as <%=att.name%>>
+				<option value="${<%=att.name%>.id}" <#if <%= model_parameter_name %>.<%=att.name%>?? && <%= model_parameter_name %>.<%=att.name%>.id <%= "== #{att.name}"%>.id>selected="true"</#if> >${<%=att.name%>.id}</option>
+	  	</#list>
+    </select>
+		<%- else -%>	
     <%= "<@html.#{att.html_input} \"#{model_parameter_name}.#{att.name}\" #{model_parameter_name}.#{att.name}/>"  %>
+		<%- end -%>
   </div>
 <% end -%>
   <div class="actions">

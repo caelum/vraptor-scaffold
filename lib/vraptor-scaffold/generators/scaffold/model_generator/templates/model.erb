@@ -1,20 +1,23 @@
 package <%= Configuration.full_models_package %>;
 
+<% imports.each do |import| -%>
+import <%= import %>;
+<% end -%>
 @javax.persistence.Entity
 public class <%= class_name %> extends Entity {
-	
+
 <% @attributes.each do |att| -%>
 	private <%= att.java_type %> <%= att.name %>;
 <% end -%>
-	
+
 <% @attributes.each do |att| -%>
 	public void set<%= att.name.camelize %>(<%= att.java_type %> <%= att.name %>) {
 		this.<%= att.name %> = <%= att.name %>;
 	}
-	
+
 	public <%= att.java_type %> <%= att.getter_prefix + att.name.camelize %>() {
 		return <%= att.name %>;
 	}
-	
+
 <% end -%>
 }

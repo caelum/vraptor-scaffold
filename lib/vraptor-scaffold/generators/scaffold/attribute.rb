@@ -22,11 +22,17 @@ class Attribute
     java = type.capitalize
     java = "boolean" if boolean?
     java = "String" if type.eql?("text")
+    java = "Date" if type.eql?("date")
+    java = name.camelize if type.eql?("references")
     java
   end
 
+  def import
+    ImportManager.new(type).package
+  end
+
   def self.valid_types
-    %w(boolean double float short integer long string text)
+    %w(boolean double float short integer long string text date references)
   end
 
   def boolean?

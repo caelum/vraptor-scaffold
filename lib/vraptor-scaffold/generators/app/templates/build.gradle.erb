@@ -34,7 +34,7 @@ sourceSets {
 sourceSets.main.classesDir = new File('<%= Configuration::WEB_INF %>/classes')
 
 jettyRun.scanIntervalSeconds=3
-jettyRun.contextPath = '/' 
+jettyRun.contextPath = '/'
 [jettyRunWar,jettyStop]*.stopPort = 8081
 [jettyRunWar,jettyStop]*.stopKey = 'stopKey'
 

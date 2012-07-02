@@ -46,7 +46,7 @@ describe PluginGenerator do
 
     before :each do
       FileUtils.chdir(@maven_projet)
-      @generator = PluginGenerator.new("vraptor-environment", ["-v=0.0.8", "-g=br.com.caelum.vraptor.plugin"])
+      @generator = PluginGenerator.new("vraptor-environment", ["-v=0.0.8", "-g=br.com.caelum.vraptor"])
       @generator.build
       back
     end
@@ -78,7 +78,7 @@ describe PluginGenerator do
 
     before :each do
       FileUtils.chdir(@ant_projet)
-      @generator = PluginGenerator.new("vraptor-environment", ["-v=0.0.8", "-g=br.com.caelum.vraptor.plugin"])
+      @generator = PluginGenerator.new("vraptor-environment", ["-v=0.0.8", "-g=br.com.caelum.vraptor"])
       @generator.build
       back
     end
@@ -94,7 +94,7 @@ describe PluginGenerator do
 
     before :each do
       FileUtils.chdir(@gradle_projet)
-      @generator = PluginGenerator.new("vraptor-environment", ["-v=0.0.8"])
+      @generator = PluginGenerator.new("vraptor-environment", ["-v=0.0.8", "-g=br.com.caelum.vraptor"])
       @generator.build
       back
     end
@@ -110,7 +110,7 @@ describe PluginGenerator do
 
     before :each do
       FileUtils.chdir(@gradle_projet)
-      @generator = PluginGenerator.new("vraptor-environment", ["-v=0.0.8", "-g=br.com.caelum.vraptor.plugin"])
+      @generator = PluginGenerator.new("vraptor-environment", ["-v=0.0.8"])
       @generator.build
       back
     end
