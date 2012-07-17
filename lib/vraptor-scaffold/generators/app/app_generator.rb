@@ -53,7 +53,7 @@ class AppGenerator < VraptorScaffold::Base
     validate
     self.destination_root=(project_path)
     @project_name = project_path.split("/").last
-    @dependency_manager = DependencyManager.new(options)
+    @dependency_manager = DependencyManager.new(options).dependencies
   end
 
   def create_root_folder
