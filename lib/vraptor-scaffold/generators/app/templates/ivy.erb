@@ -9,15 +9,15 @@
 		<conf name="minify" description="dependencies used to minify js and css" visibility="public" />
 	</configurations>
 
-	<dependencies><% @dependency_manager.compile_scope.each do |dependency| -%>
+	<dependencies><% @dependencies.compile_scope.each do |dependency| -%>
 		<dependency org="<%= dependency.group %>" name="<%= dependency.name %>" rev="<%= dependency.version %>" conf="default"<% if dependency.has_exclusions? %>><% dependency.exclusions.each do |exclusion| %>
 			<exclude org="<%= exclusion.group %>" name="<%= exclusion.name %>" />
 		</dependency><% end %><% else %> /><% end %><% end %>
 
-		<!-- Provided dependencies --><% @dependency_manager.provided_scope.each do |dependency| -%>
+		<!-- Provided dependencies --><% @dependencies.provided_scope.each do |dependency| -%>
 		<dependency org="<%= dependency.group %>" name="<%= dependency.name %>" rev="<%= dependency.version %>" conf="provided->default" /><% end -%>
 
-		<!-- Test dependencies --><% @dependency_manager.test_scope.each do |dependency| -%>
+		<!-- Test dependencies --><% @dependencies.test_scope.each do |dependency| -%>
 		<dependency org="<%= dependency.group %>" name="<%= dependency.name %>" rev="<%= dependency.version %>" conf="test->default" /><% end -%>
 
 		<!-- Jetty dependencies -->

@@ -76,7 +76,7 @@
 		</plugins>
 	</build>
 
-	<dependencies><% @dependency_manager.compile_scope.each do |dependency| %>
+	<dependencies><% @dependencies.compile_scope.each do |dependency| %>
 		<dependency>
 			<groupId><%= dependency.group %></groupId>
 			<artifactId><%= dependency.name %></artifactId>
@@ -89,7 +89,7 @@
 			</exclusions><% end %>
 		</dependency><% end %>
 
-		<!-- Test dependencies --><% @dependency_manager.test_scope.each do |dependency| %>
+		<!-- Test dependencies --><% @dependencies.test_scope.each do |dependency| %>
 		<dependency>
 			<groupId><%= dependency.group %></groupId>
 			<artifactId><%= dependency.name %></artifactId>
@@ -97,7 +97,7 @@
 			<scope>test</scope>
 		</dependency><% end %>
 
-		<!-- Provided dependencies --><% @dependency_manager.provided_scope.each do |dependency| %>
+		<!-- Provided dependencies --><% @dependencies.provided_scope.each do |dependency| %>
 		<dependency>
 			<groupId><%= dependency.group %></groupId>
 			<artifactId><%= dependency.name %></artifactId>
