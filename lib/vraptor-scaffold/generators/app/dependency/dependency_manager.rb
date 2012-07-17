@@ -16,13 +16,10 @@ class DependencyManager
 
 	private
   def project_style
-		if @options[:heroku]
-			return "heroku"
-		elsif @options[:gae]
-			return "gae"
-		else
-			return "default"
-		end
+		return "heroku" if @options[:heroku]
+		return "gae" if @options[:gae]
+
+		"default"
   end
 
 end
