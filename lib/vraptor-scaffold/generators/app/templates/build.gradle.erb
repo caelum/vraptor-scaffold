@@ -34,24 +34,24 @@ sourceSets {
 sourceSets.main.classesDir = new File('<%= Configuration::WEB_INF %>/classes')
 
 jettyRun.scanIntervalSeconds=3
-jettyRun.contextPath = '/' 
+jettyRun.contextPath = '/'
 [jettyRunWar,jettyStop]*.stopPort = 8081
 [jettyRunWar,jettyStop]*.stopKey = 'stopKey'
 
 dependencies {
-<% @dependency_manager.compile_scope.each do |dependency| -%>
+<% @dependencies.compile_scope.each do |dependency| -%>
     compile group: '<%= dependency.group %>', name: '<%= dependency.name %>', version: '<%= dependency.version %>'<% if dependency.has_exclusions? %>, {<% dependency.exclusions.each do |exclusion| %>
         exclude group: '<%= exclusion.group %>', name: '<%= exclusion.name %>'<% end %>
     }<% end %>
 <% end -%>
 
     //Provided dependencies
-<% @dependency_manager.provided_scope.each do |dependency| -%>
+<% @dependencies.provided_scope.each do |dependency| -%>
     providedCompile group: '<%= dependency.group %>', name: '<%= dependency.name %>', version: '<%= dependency.version %>'
 <% end -%>
 
     //Test dependencies
-<% @dependency_manager.test_scope.each do |dependency| -%>
+<% @dependencies.test_scope.each do |dependency| -%>
     testCompile group: '<%= dependency.group %>', name: '<%= dependency.name %>', version: '<%= dependency.version %>'
 <% end -%>
 }
