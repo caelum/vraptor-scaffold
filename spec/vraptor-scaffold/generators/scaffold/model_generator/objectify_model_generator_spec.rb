@@ -4,7 +4,7 @@ describe ObjectifyModelGenerator do
 
   context "objectify" do
     before(:all) do
-      AppGenerator.new("new_project", ["-o=objectify", "--gae", "--skip_jquery"]).invoke_all
+      GaeAppGenerator.new("new_project", ["-o=objectify", "--gae", "--skip_jquery"]).invoke_all
       FileUtils.chdir("new_project")
       @generator = ObjectifyModelGenerator.new("product", build_attributes)
       @generator.build
