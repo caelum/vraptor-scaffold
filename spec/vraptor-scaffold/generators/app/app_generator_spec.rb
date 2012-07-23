@@ -5,7 +5,7 @@ describe AppGenerator do
   context "build new application" do
     before(:all) do
       @project_path = "src/vraptor-scaffold"
-      AppGenerator.new(@project_path, ["-b=mvn", "-r=repository", "-m=domain", "-c=control"]).invoke_all
+      AppGenerator.new(@project_path, ["-b=mvn", "-r=repository", "-m=domain", "-c=control", "--skip_jquery"]).invoke_all
     end
 
     after(:all) do
@@ -18,7 +18,7 @@ describe AppGenerator do
 
     it "should be invalid when project name already exist" do
       Kernel.should_receive(:exit)
-      AppGenerator.new(@project_path)
+      AppGenerator.new(@project_path, ["--skip_jquery"])
     end
 
     it "should create pom" do
@@ -91,7 +91,7 @@ describe AppGenerator do
           @project_path = "src/vraptor-scaffold-hibernate"
           @main_resources = "#{@project_path}/#{Configuration::MAIN_RESOURCES}"
           @meta_inf = "#{@main_resources}/META-INF"
-          AppGenerator.new(@project_path, ["--orm=hibernate"]).invoke_all
+          AppGenerator.new(@project_path, ["--orm=hibernate", "--skip_jquery"]).invoke_all
         end
 
         after(:all) do
@@ -182,11 +182,6 @@ describe AppGenerator do
         exists_and_identical?(source, destination)
       end
 
-      it "should create jquery js" do
-        destination = "#{@webapp}/javascripts/jquery.min.js"
-        File.exists?(destination).should be_true
-      end
-
       it "should create application js" do
         destination = "#{@webapp}/javascripts/application.js"
         File.exists?(destination).should be_true
@@ -234,7 +229,7 @@ describe AppGenerator do
 
     before(:all) do
       @project_path = "src/vraptor-scaffold"
-      AppGenerator.new(@project_path, ["-p=br.com.caelum"]).invoke_all
+      AppGenerator.new(@project_path, ["-p=br.com.caelum", "--skip_jquery"]).invoke_all
       @main_java = "#{@project_path}/#{Configuration::MAIN_SRC}/br/com/caelum"
       @test_java = "#{@project_path}/#{Configuration::TEST_SRC}/br/com/caelum"
     end
@@ -265,16 +260,16 @@ describe AppGenerator do
 
     it "should configure freemarker template engine" do
       template = mock(FreemarkerTemplateEngine)
-      FreemarkerTemplateEngine.stub!(:new).with(@project_path).and_return(template)
+      FreemarkerTemplateEngine.stub!(:new).with(@project_path, anything()).and_return(template)
       template.should_receive(:configure)
-      AppGenerator.new(@project_path, ["--template-engine=ftl"]).invoke_all
+      AppGenerator.new(@project_path, ["--template-engine=ftl", "--skip_jquery"]).invoke_all
     end
 
     it "should configure jsp template engine" do
       template = mock(JspTemplateEngine)
-      JspTemplateEngine.stub!(:new).with(@project_path).and_return(template)
+      JspTemplateEngine.stub!(:new).with(@project_path, anything()).and_return(template)
       template.should_receive(:configure)
-      AppGenerator.new(@project_path).invoke_all
+      AppGenerator.new(@project_path, ["--skip_jquery"]).invoke_all
     end
   end
 
@@ -282,7 +277,7 @@ describe AppGenerator do
 
     before(:all) do
       @project_path = "vraptor-scaffold"
-      AppGenerator.new(@project_path, ["-b=ant"]).invoke_all
+      AppGenerator.new(@project_path, ["-b=ant", "--skip_jquery"]).invoke_all
     end
 
     after(:all) do
@@ -341,7 +336,7 @@ describe AppGenerator do
   context "skip eclipse configuration files" do
     before(:all) do
       @project_path = "vraptor-scaffold"
-      AppGenerator.new(@project_path, ["--skip-eclipse"]).invoke_all
+      AppGenerator.new(@project_path, ["--skip-eclipse", "--skip_jquery"]).invoke_all
     end
 
     after(:all) do
@@ -353,11 +348,43 @@ describe AppGenerator do
     end
   end
 
+  context "no skip jquery download file" do
+    before(:all) do
+      @project_path = "vraptor-scaffold"
+
+      mock_http_request()
+
+      AppGenerator.new(@project_path).invoke_all
+    end
+
+    after(:all) do
+      FileUtils.remove_dir(@project_path)
+    end
+
+    it "should exist jquery.min.js file" do
+      javascripts = File.join @project_path, Configuration::WEB_APP, "javascripts", "jquery.min.js"
+      File.exist?(javascripts).should be_true
+    end
+
+    it "should show a message for http problems" do
+      http_request = mock(Net::HTTP)
+      http_request.stub!(:get).with(kind_of(String)).and_throw(Net::HTTPError)
+      VraptorScaffold::HttpRequest.stub!(:open_session).with(kind_of(String)).and_return(http_request)
+
+      Kernel.should_receive(:puts).with("Was not possible to download jQuery.")
+
+      local_project_path = "project_without_jquery_by_http_error"
+      AppGenerator.new(local_project_path).invoke_all
+
+      FileUtils.remove_dir(local_project_path)
+    end
+  end
+
   context "configuring gradle application" do
 
     before(:all) do
       @project_path = "vraptor-scaffold"
-      AppGenerator.new(@project_path, ["-b=gradle"]).invoke_all
+      AppGenerator.new(@project_path, ["-b=gradle", "--skip_jquery"]).invoke_all
     end
 
     after(:all) do
@@ -424,34 +451,25 @@ describe AppGenerator do
 
     it "should be invalid when build tool is not supported" do
       Kernel.should_receive(:exit)
-      AppGenerator.new(@project_path, ["-b=maven"])
+      AppGenerator.new(@project_path, ["-b=maven", "--skip_jquery"])
     end
 
     it "should be invalid when template engine is not supported" do
       Kernel.should_receive(:exit)
-      AppGenerator.new(@project_path, ["-e=velocity"])
+      AppGenerator.new(@project_path, ["-e=velocity", "--skip_jquery"])
     end
 
     it "should be invalid when orm mapping is not supported" do
       Kernel.should_receive(:exit)
-      AppGenerator.new(@project_path, ["-o=toplink"])
+      AppGenerator.new(@project_path, ["-o=toplink", "--skip_jquery"])
     end
 
-    it "should be invalid when jquery version does not exist" do
-      Kernel.should_receive(:exit)
-      AppGenerator.new(@project_path, ["-j=1.x"])
-    end
-
-    it "should be invalid when gae and heroku are selected" do
-      Kernel.should_receive(:exit)
-      AppGenerator.new(@project_path, ["-g", "-h"])
-    end
   end
 
   context "heroku app" do
     before(:all) do
       @project_path = "heroku"
-      AppGenerator.new(@project_path, ["--heroku"]).invoke_all
+      AppGenerator.new(@project_path, ["--heroku", "--skip_jquery"]).invoke_all
     end
 
     after(:all) do
@@ -470,76 +488,6 @@ describe AppGenerator do
 
     it "should create main class to run heroku apps" do
       File.exist?("#{@project_path}/src/main/java/Main.java").should be_true
-    end
-  end
-
-  context "gae app" do
-    before(:all) do
-      @project_path = "gae"
-      AppGenerator.new(@project_path, ["--gae"]).invoke_all
-      @main_java = "#{@project_path}/#{Configuration::MAIN_SRC}"
-      @app = "#{@main_java}/app"
-    end
-
-    after(:all) do
-      FileUtils.remove_dir(@project_path)
-    end
-
-    it "should create ivy.xml" do
-      source = File.join File.dirname(__FILE__), "templates", "ivy-gae.xml"
-      destination = "#{@project_path}/ivy.xml"
-      exists_and_identical?(source, destination)
-    end
-
-    it "should create ivysettings.xml" do
-      File.exist?("#{@project_path}/ivysettings.xml").should be_true
-    end
-
-    it "should not create generic entity" do
-      File.exist?("#{@app}/model/Entity.java").should be_false
-    end
-
-    it "should create appengine-web xml to run gae apps" do
-      File.exist?("#{@project_path}/#{Configuration::WEB_INF}/appengine-web.xml").should be_true
-    end
-
-    it "should create logging properties for gae apps" do
-      File.exist?("#{@project_path}/#{Configuration::WEB_INF}/logging.properties").should be_true
-    end
-
-    it "should create web.xml" do
-      source = File.join File.dirname(__FILE__), "templates", "gae-jsp-web.xml"
-      destination = "#{@project_path}/#{Configuration::WEB_INF}/web.xml"
-      exists_and_identical?(source, destination)
-    end
-
-    it "should generate a objectify repository" do
-      source = File.join File.dirname(__FILE__), "templates", "RepositoryObjectify.java"
-      destination = "#{@project_path}/#{Configuration::MAIN_SRC}/app/repositories/Repository.java"
-      exists_and_identical?(source, destination)
-    end
-
-    it "should generate a objectify resource factory" do
-      source = File.join File.dirname(__FILE__), "templates", "ObjectifyFactory.java"
-      destination = "#{@project_path}/#{Configuration::MAIN_SRC}/app/infra/ObjectifyFactory.java"
-      exists_and_identical?(source, destination)
-    end
-
-    it "should create a specific .classpath for gae" do
-      source = File.join File.dirname(__FILE__), "templates", "classpath-gae"
-      destination = "#{@project_path}/.classpath"
-      exists_and_identical?(source, destination)
-    end
-
-    it "should create a specific .project for gae" do
-      source = File.join File.dirname(__FILE__), "templates", "project-gae"
-      destination = "#{@project_path}/.project"
-      exists_and_identical?(source, destination)
-    end
-
-    it "should create .settings" do
-      settings = File.join @project_path, ".settings"
-      File.exist?(settings).should be_true
     end
   end
 

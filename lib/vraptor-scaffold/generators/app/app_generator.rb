@@ -22,9 +22,6 @@ class AppGenerator < VraptorScaffold::Base
   class_option :heroku, :type => :boolean, :aliases => "-h",
                :desc => "heroku project"
 
-  class_option :gae, :type => :boolean, :aliases => "-g",
-               :desc => "google app engine project"
-
   class_option :repositories_package, :aliases => "-r", :default => "repositories",
                :desc => "Define repositories package"
 
@@ -34,8 +31,8 @@ class AppGenerator < VraptorScaffold::Base
   class_option :orm, :default => "jpa", :aliases => "-o",
                :desc => "Object-relational mapping (options: #{ORMS.join(', ')})"
 
-  class_option :jquery, :aliases => "-j", :default => "latest version",
-               :desc => "jQuery version"
+  class_option :skip_jquery, :type => :boolean, :aliases => "-j",
+               :desc => "Skip jQuery download file"
 
   class_option :skip_eclipse, :type => :boolean, :aliases => "-E",
                :desc => "Skip Eclipse files"
@@ -75,9 +72,6 @@ class AppGenerator < VraptorScaffold::Base
       template("ivy.erb", "ivy.xml")
       copy_file(IVY_JAR)
     end
-    if options[:gae]
-      copy_file("gae/ivysettings.xml", "ivysettings.xml")
-    end
   end
 
   def configure_gradle
@@ -88,7 +82,6 @@ class AppGenerator < VraptorScaffold::Base
     vraptor_util_package = "br.com.caelum.vraptor"
     @vraptor_packages = []
     @vraptor_packages += ["#{vraptor_util_package}.util.#{orm}"] if orm == "jpa" or orm == "hibernate"
-    @vraptor_packages += ["#{vraptor_util_package}.gae"] if options[:gae]
   end
 
   def create_main_java
@@ -106,17 +99,13 @@ class AppGenerator < VraptorScaffold::Base
   def create_models_directory
     models_folder = File.join @src, options[:models_package]
     empty_directory models_folder
-    template("models/Entity.erb", "#{models_folder}/Entity.java") unless options[:gae]
+    template("models/Entity.erb", "#{models_folder}/Entity.java")
   end
 
   def create_repositories_directory
     repositories_folder = File.join @src, options[:repositories_package]
     empty_directory repositories_folder
-    if options[:gae]
-      template("orm/Repository-objectify.java.tt", "#{repositories_folder}/Repository.java")
-    else
-      template("orm/Repository-#{orm}.java.tt", "#{repositories_folder}/Repository.java")
-    end
+    template("orm/Repository-#{orm}.java.tt", "#{repositories_folder}/Repository.java")
   end
 
   def create_main_resources
@@ -126,10 +115,6 @@ class AppGenerator < VraptorScaffold::Base
   def configure_orm
     if (orm == "hibernate")
       copy_file("orm/hibernate.cfg.xml", (File.join Configuration::MAIN_RESOURCES, "hibernate.cfg.xml"))
-    elsif orm == "objectify"
-      infra_folder = File.join @src, "infra"
-      empty_directory infra_folder
-      template("gae/ObjectifyFactory.java.tt", "#{@src}/infra/ObjectifyFactory.java")
     else
       metainf = File.join Configuration::MAIN_RESOURCES, 'META-INF'
       empty_directory metainf
@@ -139,16 +124,15 @@ class AppGenerator < VraptorScaffold::Base
 
   def create_webapp
     directory("webapp", Configuration::WEB_APP)
-    if @options[:gae]
-      template("gae/appengine-web.xml.tt", "#{Configuration::WEB_INF}/appengine-web.xml")
-      copy_file("gae/logging.properties", "#{Configuration::WEB_INF}/logging.properties")
-    end
   end
 
   def create_javascripts
     javascripts = File.join Configuration::WEB_APP, "javascripts"
     create_file File.join javascripts, "application.js"
-    add_file (File.join javascripts, "jquery.min.js"), get_jquery.body
+    unless options[:skip_jquery]
+      jquery = get_jquery
+      add_file (File.join javascripts, "jquery.min.js"), jquery.body if jquery
+    end
   end
 
   def configure_scaffold_properties
@@ -157,7 +141,7 @@ class AppGenerator < VraptorScaffold::Base
 
   def configure_template_engine
     templates = {"jsp" => JspTemplateEngine, "ftl" => FreemarkerTemplateEngine}
-    templates[options[:template_engine]].new(project_path).configure if templates[options[:template_engine]]
+    templates[options[:template_engine]].new(project_path, @options).configure if templates[options[:template_engine]]
   end
 
   def create_test
@@ -174,25 +158,17 @@ class AppGenerator < VraptorScaffold::Base
   private
   def build_tool
     return "mvn" if options[:heroku]
-    return "ant" if options[:gae]
     options[:build_tool]
   end
 
   def orm
-    return "objectify" if options[:gae]
     options[:orm]
   end
 
   def create_eclipse_files
-    if options[:gae]
-      template("eclipse/classpath-gae.erb", ".classpath")
-      template("eclipse/project-gae.erb", ".project")
-      directory("eclipse/settings-gae", ".settings")
-    else
-      template("eclipse/classpath.erb", ".classpath")
-      template("eclipse/project.erb", ".project")
-      directory("eclipse/settings", ".settings")
-    end
+    template("eclipse/classpath.erb", ".classpath")
+    template("eclipse/project.erb", ".project")
+    directory("eclipse/settings", ".settings")
   end
 
   def validate
@@ -209,33 +185,21 @@ class AppGenerator < VraptorScaffold::Base
       Kernel::exit
     end
 
-    if options[:heroku] and options[:gae]
-      puts "You cannot create gae and heroku template project together"
-      Kernel::exit
-    end
-
     if File.directory? project_path
       puts "The project #{project_path} already exist"
       Kernel::exit
     end
-
-    if options[:jquery] != 'latest version'
-      case get_jquery
-      when Net::HTTPClientError, Net::HTTPServerError
-        download_url = "http://docs.jquery.com/Downloading_jQuery"
-        puts "jQuery version #{options[:jquery]} was not found. Please visit the download page to see the versions available #{download_url}."
-        Kernel::exit
-      end
-    end
   end
 
   def jquery_uri
-    jquery_version = "1" #this mean get latest version
-    jquery_version = options[:jquery] if options[:jquery] != 'latest version'
-    "/ajax/libs/jquery/#{jquery_version}/jquery.min.js"
+    "/ajax/libs/jquery/1/jquery.min.js"
   end
 
   def get_jquery
-    VraptorScaffold::HttpRequest.open_session("ajax.googleapis.com").get jquery_uri
+    begin
+      VraptorScaffold::HttpRequest.open_session("ajax.googleapis.com").get jquery_uri;
+    rescue
+      Kernel.puts "Was not possible to download jQuery."
+    end
   end
 end
