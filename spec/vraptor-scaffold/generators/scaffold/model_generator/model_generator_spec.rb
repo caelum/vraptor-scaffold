@@ -33,7 +33,7 @@ describe ModelGenerator do
     before(:each) do
       config = {"package" => "app", "orm" => "hibernate", "models_package" => "model"}
       YAML.stub!(:load_file).with(Configuration::FILENAME).and_return(config)
-      AppGenerator.new("src", ["-o=hibernate"]).configure_orm
+      AppGenerator.new("src", ["-o=hibernate", "--skip_jquery"]).configure_orm
       FileUtils.chdir("src")
       @generator = ModelGenerator.new("product", build_attributes)
       @generator.build
