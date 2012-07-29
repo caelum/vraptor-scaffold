@@ -6,6 +6,7 @@ end
 
 require File.dirname(__FILE__) + '/plugin/plugin_generator'
 require File.dirname(__FILE__) + '/app/app_generator'
+require File.dirname(__FILE__) + '/app/gae_app_generator'
 require File.dirname(__FILE__) + '/app/dependency/dependency'
 require File.dirname(__FILE__) + '/app/dependency/dependency_manager'
 require File.dirname(__FILE__) + '/app/dependency/default_dependencies'
