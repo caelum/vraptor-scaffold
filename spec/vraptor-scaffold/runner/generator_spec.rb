@@ -13,13 +13,29 @@ describe VraptorScaffold::Runner::Generator do
     @generator_runner.new.run(["--help"])
   end
 
-  context "app generator" do
+  context "default app generator" do
     before(:each) do
       @generator = mock(AppGenerator)
       project_name = "vraptor-scaffold"
       option = "--package=br.com.caelum"
       @args = [project_name, option]
       AppGenerator.stub!(:new).with(project_name, [option]).and_return(@generator)
+    end
+
+    it "should invoke all app generator tasks when typed new" do
+      @help.stub!(:help).and_return false
+      @generator.should_receive(:invoke_all)
+      @generator_runner.new.run(@args)
+    end
+  end
+
+  context "gae app generator" do
+    before(:each) do
+      @generator = mock(GaeAppGenerator)
+      project_name = "gae-project"
+      option = "--gae"
+      @args = [project_name, option]
+      GaeAppGenerator.stub!(:new).with(project_name, [option]).and_return(@generator)
     end
 
     it "should invoke all app generator tasks when typed new" do
