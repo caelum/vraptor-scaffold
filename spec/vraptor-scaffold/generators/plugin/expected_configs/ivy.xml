@@ -11,7 +11,7 @@
 
 	<dependencies>
 		<dependency org="br.com.caelum.vraptor" name="vraptor-environment" rev="0.0.8" conf="default" />
-		<dependency org="br.com.caelum" name="vraptor" rev="3.4.0" conf="default" />
+		<dependency org="br.com.caelum" name="vraptor" rev="3.4.1" conf="default" />
 		<dependency org="opensymphony" name="sitemesh" rev="2.4.2" conf="default" />
 		<dependency org="javax.servlet" name="jstl" rev="1.2" conf="default" />
 		<dependency org="org.hsqldb" name="hsqldb" rev="2.2.8" conf="default" />

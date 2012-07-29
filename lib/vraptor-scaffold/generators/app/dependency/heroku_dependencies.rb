@@ -24,7 +24,7 @@ class HerokuDependencies
 	private
 	def default_dependencies
 		hibernate_version = "4.0.1.Final"
-		dependencies = [Dependency.new("br.com.caelum", "vraptor", "3.4.0"),
+		dependencies = [Dependency.new("br.com.caelum", "vraptor", "3.4.1"),
 									Dependency.new("opensymphony", "sitemesh", "2.4.2"),
 									Dependency.new("javax.servlet", "jstl", "1.2"),
 									Dependency.new("org.hsqldb", "hsqldb", "2.2.8"),
