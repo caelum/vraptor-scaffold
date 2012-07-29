@@ -6,8 +6,11 @@ end
 
 require File.dirname(__FILE__) + '/plugin/plugin_generator'
 require File.dirname(__FILE__) + '/app/app_generator'
-require File.dirname(__FILE__) + '/app/dependency'
-require File.dirname(__FILE__) + '/app/dependency_manager'
+require File.dirname(__FILE__) + '/app/dependency/dependency'
+require File.dirname(__FILE__) + '/app/dependency/dependency_manager'
+require File.dirname(__FILE__) + '/app/dependency/default_dependencies'
+require File.dirname(__FILE__) + '/app/dependency/heroku_dependencies'
+require File.dirname(__FILE__) + '/app/dependency/gae_dependencies'
 require File.dirname(__FILE__) + '/app/freemarker_template_engine'
 require File.dirname(__FILE__) + '/app/jsp_template_engine'
 require File.dirname(__FILE__) + '/scaffold/attribute'

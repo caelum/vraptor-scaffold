@@ -12,7 +12,7 @@
 	</classpathentry>
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.web.container"/>
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.module.container"/>
-	<% @dependency_manager.test_scope.each do |dependency| %>
+	<% @dependencies.test_scope.each do |dependency| %>
 	<classpathentry kind="lib" path="lib/test/<%= "#{dependency.name}-#{dependency.version}.jar" %>"/>
   <% end -%>
 </classpath>
