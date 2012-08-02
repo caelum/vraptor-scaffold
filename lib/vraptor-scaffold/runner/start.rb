@@ -4,7 +4,7 @@ module VraptorScaffold
     class Start
       def run(args)
         validate
-        Kernel.system("ant compile")
+        Kernel.system("ant vraptor-scanning")
         Kernel.system("sh $APPENGINE_SDK_HOME/bin/dev_appserver.sh #{Configuration::WEB_APP}")
       end
 
