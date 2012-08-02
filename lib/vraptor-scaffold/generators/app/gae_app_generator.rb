@@ -38,7 +38,7 @@ class GaeAppGenerator < VraptorScaffold::Base
 
   def configure_ant
     create_eclipse_files unless options[:skip_eclipse]
-    copy_file("build.xml")
+    copy_file("build-gae.xml", "build.xml")
     template("build.properties.erb", "build.properties")
     template("ivy.erb", "ivy.xml")
     copy_file(AppGenerator::IVY_JAR)
