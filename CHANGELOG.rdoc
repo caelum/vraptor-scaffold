@@ -3,6 +3,7 @@
 * New Features
     * Support entity relationship on scaffold (vraptor scaffold student pencil:references).
     * Skip jquery download (vraptor new app --skip-jquery)
+    * vraptor-scanning ant task for appengine projects. Fast bootstrap for apps.
 
 * Improvements
     * Update vraptor to 3.4.1.
