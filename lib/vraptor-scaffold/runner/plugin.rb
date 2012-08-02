@@ -4,8 +4,10 @@ module VraptorScaffold
     class Plugin
 
       def run(args)
-        if VraptorScaffold::Runner::Help.help?(args.first) || args.size < 2
+        if VraptorScaffold::Runner::Help.help?(args.first)
           PluginGenerator.start(["-h"])
+        elsif args.first.eql? "list"
+					Kernel.puts "List plugins..."
         elsif File.exist?("src")
           PluginGenerator.new(args.shift, args).invoke_all
         else

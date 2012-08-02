@@ -16,9 +16,12 @@ describe VraptorScaffold::Runner::Plugin do
     it "should ptin when options --help" do
       @plugin_runner.new.run(["--help"])
     end
+  end
 
-    it "should print when args is less than 2" do
-      @plugin_runner.new.run(["simplemail"])
+  context "list plugins" do
+    it "should list plugins available" do
+			Kernel.should_receive(:puts).with("List plugins...")
+      @plugin_runner.new.run(["list"])
     end
   end
 
