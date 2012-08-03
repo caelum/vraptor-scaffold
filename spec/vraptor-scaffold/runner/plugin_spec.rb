@@ -18,9 +18,16 @@ describe VraptorScaffold::Runner::Plugin do
     end
   end
 
-  context "list plugins" do
-    it "should list plugins available" do
-			Kernel.should_receive(:puts).with("List plugins...")
+  context "plugins list" do
+    it "should be downloaded if not exists" do
+      File.stub(:exist?).with(".vraptor-contrib").and_return(false)
+      PluginListFetcher.should_receive(:fetch)
+      @plugin_runner.new.run(["list"])
+    end
+
+    it "should be shown when exists" do
+      File.stub(:exist?).with(".vraptor-contrib").and_return(true)
+      PluginListFetcher.should_not_receive(:fetch)
       @plugin_runner.new.run(["list"])
     end
   end
