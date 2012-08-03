@@ -22,13 +22,21 @@ describe VraptorScaffold::Runner::Plugin do
     it "should be downloaded if not exists" do
       File.stub(:exist?).with(".vraptor-contrib").and_return(false)
       PluginList.should_receive(:fetch)
+      PluginList.should_receive(:show)
       @plugin_runner.new.run(["list"])
     end
 
     it "should be shown when exists" do
       File.stub(:exist?).with(".vraptor-contrib").and_return(true)
       PluginList.should_not_receive(:fetch)
+      PluginList.should_receive(:show)
       @plugin_runner.new.run(["list"])
+    end
+  end
+
+  context "plugin install" do
+    it "should be downloaded if not exists" do
+      @plugin_runner.new.run(["install"])
     end
   end
 

@@ -9,4 +9,8 @@ class PluginList
     Kernel.system("curl --progress-bar #{VRAPTOR_PLUGINS_URI} >> .vraptor-contrib")
   end
 
+  def self.show
+    File.open(".vraptor-contrib").read
+  end
+
 end

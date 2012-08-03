@@ -8,6 +8,9 @@ module VraptorScaffold
           PluginGenerator.start(["-h"])
         elsif args.first.eql? "list"
           PluginList.fetch unless File.exist?(".vraptor-contrib")
+          PluginList.show
+        elsif args.first.eql? "install"
+          puts "installing vraptor plugin."
         elsif File.exist?("src")
           PluginGenerator.new(args.shift, args).invoke_all
         else
