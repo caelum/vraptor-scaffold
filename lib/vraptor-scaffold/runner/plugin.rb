@@ -7,7 +7,7 @@ module VraptorScaffold
         if VraptorScaffold::Runner::Help.help?(args.first)
           PluginGenerator.start(["-h"])
         elsif args.first.eql? "list"
-          PluginListFetcher.fetch unless File.exist?(".vraptor-contrib")
+          PluginList.fetch unless File.exist?(".vraptor-contrib")
         elsif File.exist?("src")
           PluginGenerator.new(args.shift, args).invoke_all
         else

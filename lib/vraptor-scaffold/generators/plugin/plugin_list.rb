@@ -1,7 +1,7 @@
 require "net/https"
 require "uri"
 
-class PluginListFetcher
+class PluginList
 
   VRAPTOR_PLUGINS_URI = "https://raw.github.com/caelum/vraptor-contrib/master/.gitmodules"
 
