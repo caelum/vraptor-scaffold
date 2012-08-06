@@ -5,8 +5,12 @@ describe PluginList do
   context "plugin list" do
 
     it "should download list of plugins available" do
-      Kernel.should_receive(:system)
       PluginList.fetch
+    end
+
+    it "should download list of plugins available" do
+#      File.should_receive(:readlines).and_return([])
+#      PluginList.show
     end
   end
 end
