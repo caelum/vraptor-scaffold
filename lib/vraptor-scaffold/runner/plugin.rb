@@ -7,7 +7,6 @@ module VraptorScaffold
         if VraptorScaffold::Runner::Help.help?(args.first)
           PluginGenerator.start(["-h"])
         elsif args.first.eql? "list"
-          PluginList.fetch unless File.exist?(".vraptor-contrib")
           PluginList.show
         elsif args.first.eql? "install"
           puts "installing vraptor plugin."
