@@ -23,10 +23,12 @@ class PluginList
 
         plugin_name_to_url << " = "
         plugin_name_to_url << plugin_address
+        plugin_name_to_url << "\n"
 
-        vraptor_contrib.puts(plugin_name_to_url)
       end
     end
+
+    vraptor_contrib.puts(plugin_name_to_url)
   end
 
 end
