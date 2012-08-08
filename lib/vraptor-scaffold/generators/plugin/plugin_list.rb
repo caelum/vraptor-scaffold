@@ -16,8 +16,15 @@ class PluginList
     plugin_name_to_url = organize_file(modules)
 
     vraptor_contrib.puts(plugin_name_to_url)
+    vraptor_contrib.close
+
     FileUtils.rm(".vraptor-contrib-modules") if File.exists?(".vraptor-contrib-modules")
-    YAML.load_file(".vraptor-contrib")
+
+    YAML.load_file(".vraptor-contrib").each do |plugin|
+      Kernel.puts plugin[0]
+    end
+
+    Kernel.puts "\nend."
   end
 
   private
@@ -36,7 +43,7 @@ class PluginList
       if line[/url =/]
         plugin_address = line[/= (.*)/][2..-1]
 
-        plugin_name_to_url << " = "
+        plugin_name_to_url << ": "
         plugin_name_to_url << plugin_address
         plugin_name_to_url << "\n"
       end
