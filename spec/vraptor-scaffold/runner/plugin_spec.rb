@@ -5,6 +5,7 @@ describe VraptorScaffold::Runner::Plugin do
   before(:all) do
     @help = VraptorScaffold::Runner::Help
     @plugin_runner = VraptorScaffold::Runner::Plugin
+    @plugin_installer = PluginInstaller
   end
 
   context "help command" do
@@ -34,7 +35,10 @@ describe VraptorScaffold::Runner::Plugin do
   end
 
   context "plugin install" do
-    it "should be downloaded if not exists" do
+    it "should call plugin installer" do
+      PluginInstaller.should_receive(:new).and_return(@plugin_installer)
+      @plugin_installer.should_receive(:invoke_all)
+
       @plugin_runner.new.run(["install"])
     end
   end
