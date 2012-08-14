@@ -4,14 +4,16 @@ module VraptorScaffold
     class Plugin
 
       def run(args)
-        if VraptorScaffold::Runner::Help.help?(args.first)
+        plugin_option = args.shift
+
+        if VraptorScaffold::Runner::Help.help?(plugin_option)
           PluginGenerator.start(["-h"])
-        elsif args.first.eql? "list"
+        elsif plugin_option.eql? "list"
           PluginList.show
-        elsif args.first.eql? "install"
-          PluginInstaller.start(["-h"])
+        elsif plugin_option.eql? "install"
+          PluginInstaller.new(plugin_option, args).invoke_all
         elsif File.exist?("src")
-          PluginGenerator.new(args.shift, args).invoke_all
+          PluginGenerator.new(plugin_option, args).invoke_all
         else
           puts "To run vraptor plugin please go to the project root folder."
         end

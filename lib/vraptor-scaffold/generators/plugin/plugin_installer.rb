@@ -8,7 +8,6 @@ class PluginInstaller < VraptorScaffold::Base
 
   def initialize(args, opts=[])
     super([args], opts)
-    puts name
   end
 
   def is_ivy?
