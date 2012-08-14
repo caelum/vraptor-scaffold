@@ -8,6 +8,8 @@ class PluginInstaller < VraptorScaffold::Base
 
   def initialize(args, opts=[])
     super([args], opts)
+    validate
+    puts name
   end
 
   def is_ivy?
@@ -16,6 +18,14 @@ class PluginInstaller < VraptorScaffold::Base
 
   def is_maven?
     File.exist?("pom.xml")
+  end
+
+  private
+  def validate
+    unless File.exist?("src")
+      Kernel.puts "To run 'vraptor plugin install' please go to the project root folder."
+      Kernel::exit
+    end
   end
 
 end
