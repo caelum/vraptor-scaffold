@@ -7,7 +7,7 @@
 
 * Improvements
     * Update vraptor to 3.4.1.
-    * Update gae to 1.7.0 sdk.
+    * Update gae to 1.7.2.1 sdk.
     * Replaced http requisitions by mocks on specs. Specs running so fast.
     * Refactoring on app generators.
     * Refactoring on dependency manager.
