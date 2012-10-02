@@ -29,7 +29,7 @@ class GaeDependencies
 		  Dependency.new("joda-time", "joda-time", "2.0"),
 		  Dependency.new("com.thoughtworks.xstream", "xstream", "1.4.1")]
 
-		appengine_version = "1.6.1"
+		appengine_version = "1.7.2.1"
 		dependencies += [Dependency.new("com.googlecode.objectify", "objectify", "3.1"),
 		   Dependency.new("br.com.caelum", "vraptor3.4-compatible-gae", "1.1"),
 		   Dependency.new("commons-fileupload", "commons-fileupload", "1.2.2"),
