@@ -9,6 +9,6 @@
 	</system-properties>
 
 	<sessions-enabled>true</sessions-enabled>
-    <threadsafe>true></threadsafe>
+  <threadsafe>true</threadsafe>
 
 </appengine-web-app>
