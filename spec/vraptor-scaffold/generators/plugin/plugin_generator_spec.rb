@@ -1,4 +1,4 @@
-require File.expand_path(File.dirname(__FILE__) + "/../../../spec_helper")
+require "spec_helper"
 
 describe PluginGenerator do
 
@@ -8,13 +8,9 @@ describe PluginGenerator do
     @maven_projet = "#{@project_path}/maven"
     @gradle_projet = "#{@project_path}/gradle"
     @ant_projet = "#{@project_path}/ant"
-
-    AppGenerator.new(@maven_projet, ["-b=mvn"]).invoke_all
-    AppGenerator.new(@gradle_projet, ["-b=gradle"]).invoke_all
-    AppGenerator.new(@ant_projet, ["-b=ant"]).invoke_all
   end
 
-  after :all do
+  after do
     FileUtils.rm_rf(@project_path)
   end
 
@@ -29,6 +25,7 @@ describe PluginGenerator do
   context "maven project" do
 
     before :each do
+      AppGenerator.new(@maven_projet, ["-b=mvn"]).invoke_all
       FileUtils.chdir(@maven_projet)
       @generator = PluginGenerator.new("vraptor-environment", ["-v=0.0.8"])
       @generator.build
@@ -45,6 +42,7 @@ describe PluginGenerator do
   context "maven project with plugin org" do
 
     before :each do
+      AppGenerator.new(@maven_projet, ["-b=mvn"]).invoke_all
       FileUtils.chdir(@maven_projet)
       @generator = PluginGenerator.new("vraptor-environment", ["-v=0.0.8", "-g=br.com.caelum.vraptor"])
       @generator.build
@@ -61,6 +59,7 @@ describe PluginGenerator do
   context "ant project" do
 
     before :each do
+      AppGenerator.new(@ant_projet, ["-b=ant"]).invoke_all
       FileUtils.chdir(@ant_projet)
       @generator = PluginGenerator.new("vraptor-environment", ["-v=0.0.8"])
       @generator.build
@@ -77,6 +76,7 @@ describe PluginGenerator do
   context "ant project with plugin org" do
 
     before :each do
+      AppGenerator.new(@ant_projet, ["-b=ant"]).invoke_all
       FileUtils.chdir(@ant_projet)
       @generator = PluginGenerator.new("vraptor-environment", ["-v=0.0.8", "-g=br.com.caelum.vraptor"])
       @generator.build
@@ -93,6 +93,7 @@ describe PluginGenerator do
   context "gradle project" do
 
     before :each do
+      AppGenerator.new(@gradle_projet, ["-b=gradle"]).invoke_all
       FileUtils.chdir(@gradle_projet)
       @generator = PluginGenerator.new("vraptor-environment", ["-v=0.0.8", "-g=br.com.caelum.vraptor"])
       @generator.build
@@ -109,6 +110,7 @@ describe PluginGenerator do
   context "gradle project with plugin org" do
 
     before :each do
+      AppGenerator.new(@gradle_projet, ["-b=gradle"]).invoke_all
       FileUtils.chdir(@gradle_projet)
       @generator = PluginGenerator.new("vraptor-environment", ["-v=0.0.8"])
       @generator.build
