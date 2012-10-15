@@ -1,9 +1,9 @@
-class PluginInstaller < VraptorScaffold::Base
+class ContribInstaller < VraptorScaffold::Base
 
   argument :name
 
   def self.banner
-    "vraptor plugin install plugin_name"
+    "vraptor contrib install contrib_name"
   end
 
   def initialize(args, opts=[])
@@ -23,7 +23,7 @@ class PluginInstaller < VraptorScaffold::Base
   private
   def validate
     unless File.exist?("src")
-      Kernel.puts "To run 'vraptor plugin install' please go to the project root folder."
+      Kernel.puts "To run 'vraptor contrib install' please go to the project root folder."
       Kernel::exit
     end
   end

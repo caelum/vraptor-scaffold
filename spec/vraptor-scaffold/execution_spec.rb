@@ -27,6 +27,10 @@ describe VraptorScaffold::Execution do
       @execution.runner_for("plugin").should == VraptorScaffold::Runner::Plugin
     end
 
+    it "should be contrib when contrib action" do
+      @execution.runner_for("contrib").should == VraptorScaffold::Runner::Contrib
+    end
+
     it "should be start application when start action" do
       @execution.runner_for("start").should == VraptorScaffold::Runner::Start
     end

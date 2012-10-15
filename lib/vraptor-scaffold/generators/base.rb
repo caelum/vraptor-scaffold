@@ -5,8 +5,8 @@ module VraptorScaffold
 end
 
 require File.dirname(__FILE__) + '/plugin/plugin_generator'
-require File.dirname(__FILE__) + '/plugin/plugin_list'
-require File.dirname(__FILE__) + '/plugin/plugin_installer'
+require File.dirname(__FILE__) + '/contrib/contrib_list'
+require File.dirname(__FILE__) + '/contrib/contrib_installer'
 require File.dirname(__FILE__) + '/app/app_generator'
 require File.dirname(__FILE__) + '/app/gae_app_generator'
 require File.dirname(__FILE__) + '/app/dependency/dependency'

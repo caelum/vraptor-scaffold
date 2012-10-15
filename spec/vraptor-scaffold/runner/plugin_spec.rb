@@ -5,7 +5,6 @@ describe VraptorScaffold::Runner::Plugin do
   before(:all) do
     @help = VraptorScaffold::Runner::Help
     @plugin_runner = VraptorScaffold::Runner::Plugin
-    @plugin_installer = PluginInstaller
   end
 
   context "help command" do
@@ -16,30 +15,6 @@ describe VraptorScaffold::Runner::Plugin do
 
     it "should ptin when options --help" do
       @plugin_runner.new.run(["--help"])
-    end
-  end
-
-  context "plugins list" do
-    it "should be downloaded if not exists" do
-      File.stub(:exist?).with(".vraptor-contrib").and_return(false)
-      PluginList.should_receive(:show)
-      @plugin_runner.new.run(["list"])
-    end
-
-    it "should be shown when exists" do
-      File.stub(:exist?).with(".vraptor-contrib").and_return(true)
-      PluginList.should_not_receive(:fetch)
-      PluginList.should_receive(:show)
-      @plugin_runner.new.run(["list"])
-    end
-  end
-
-  context "plugin install" do
-    it "should call plugin installer" do
-      PluginInstaller.should_receive(:new).and_return(@plugin_installer)
-      @plugin_installer.should_receive(:invoke_all)
-
-      @plugin_runner.new.run(["install"])
     end
   end
 
