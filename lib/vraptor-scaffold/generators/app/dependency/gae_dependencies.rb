@@ -27,7 +27,7 @@ class GaeDependencies
 		  Dependency.new("javax.servlet", "jstl", "1.2"),
 		  Dependency.new("org.hibernate", "hibernate-validator", "4.2.0.Final"),
 		  Dependency.new("joda-time", "joda-time", "2.0"),
-		  Dependency.new("com.thoughtworks.xstream", "xstream", "1.4.1")]
+		  Dependency.new("com.thoughtworks.xstream", "xstream", "1.3.1")]
 
 		appengine_version = "1.7.2.1"
 		dependencies += [Dependency.new("com.googlecode.objectify", "objectify", "3.1"),

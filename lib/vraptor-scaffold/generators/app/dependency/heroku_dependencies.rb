@@ -32,7 +32,7 @@ class HerokuDependencies
 									Dependency.new("org.hibernate", "hibernate-c3p0", hibernate_version),
 									Dependency.new("org.hibernate", "hibernate-validator", "4.2.0.Final"),
 									Dependency.new("joda-time", "joda-time", "2.0"),
-									Dependency.new("com.thoughtworks.xstream", "xstream", "1.4.1")]
+									Dependency.new("com.thoughtworks.xstream", "xstream", "1.3.1")]
 
 		#heroku
 		dependencies += [Dependency.new("org.eclipse.jetty", "jetty-webapp", "7.4.4.v20110707"),
