@@ -5,7 +5,8 @@ describe VraptorScaffold::Runner::Contrib do
   before(:all) do
     @help = VraptorScaffold::Runner::Help
     @contrib_runner = VraptorScaffold::Runner::Contrib
-    @contrib_installer = ContribInstaller
+    @contrib_installer = mock(ContribInstaller)
+    @contrib_list = mock(ContribList)
     File.stub!(:exist?).with("src").and_return(true)
   end
 
@@ -18,7 +19,8 @@ describe VraptorScaffold::Runner::Contrib do
 
   context "contribs list" do
     it "should be downloaded if not exists" do
-      ContribList.should_receive(:show)
+      ContribList.should_receive(:new).and_return(@contrib_list)
+      @contrib_list.should_receive(:invoke_all)
       @contrib_runner.new.run(["list"])
     end
   end

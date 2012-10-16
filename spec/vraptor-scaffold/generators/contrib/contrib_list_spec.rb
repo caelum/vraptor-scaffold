@@ -7,6 +7,10 @@ describe ContribList do
     before(:each) do
     end
 
+    it "should have a banner" do
+      ContribList.banner == "vraptor contrib list"
+    end
+
     it "should download one contrib available" do
       Kernel.should_receive(:system)
       File.should_receive(:readlines).and_return(["path = vraptor-contrib", "url = http://contrib.url"])
@@ -20,7 +24,7 @@ describe ContribList do
       Kernel.should_receive(:puts).with("vraptor-contrib").ordered
       Kernel.should_receive(:puts).with("\nend.").ordered
 
-      ContribList.show
+      ContribList.new("list").invoke_all
     end
 
     it "should download list of contribs available" do
@@ -42,7 +46,7 @@ describe ContribList do
       YAML.should_receive(:load_file).with(".vraptor-contrib").and_return({})
       Kernel.should_receive(:puts).with("\nend.")
 
-      ContribList.show
+      ContribList.new("list").invoke_all
     end
 
   end

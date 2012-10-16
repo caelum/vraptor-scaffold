@@ -1,11 +1,19 @@
 require "net/https"
 require "uri"
 
-class ContribList
+class ContribList < VraptorScaffold::Base
 
   VRAPTOR_PLUGINS_URI = "https://raw.github.com/caelum/vraptor-contrib/master/.gitmodules"
 
-  def self.show
+  def self.banner
+    "vraptor contrib list"
+  end
+
+  def initialize(args, opts=[])
+    super([args], opts)
+  end
+
+  def show
     Kernel.system("curl --progress-bar #{VRAPTOR_PLUGINS_URI} >> .vraptor-contrib-modules")
 
     create_new_contrib_file
@@ -28,12 +36,12 @@ class ContribList
   end
 
   private
-  def self.create_new_contrib_file
+  def create_new_contrib_file
     FileUtils.rm(".vraptor-contrib") if File.exists?(".vraptor-contrib")
     FileUtils.touch(".vraptor-contrib")
   end
 
-  def self.organize_file(git_modules_file)
+  def organize_file(git_modules_file)
     contrib_name_to_url = ""
     git_modules_file.each do |line|
       if line[/path =/]

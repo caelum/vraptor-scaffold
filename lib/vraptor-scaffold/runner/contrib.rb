@@ -1,17 +1,17 @@
 module VraptorScaffold
+
   module Runner
 
     class Contrib
-
       def run(args)
         validate
-        contrib_option = args.shift
 
-        if contrib_option.eql? "list"
-          ContribList.show
-        elsif contrib_option.eql? "install"
-          ContribInstaller.new(contrib_option, args).invoke_all
-        end
+        contrib_options = {"list" => ContribList,
+                           "install" => ContribInstaller}
+
+        option_selected = args.shift
+
+        contrib_options.fetch(option_selected, ContribList).new(option_selected, args).invoke_all
       end
 
       private
@@ -23,7 +23,6 @@ module VraptorScaffold
       end
 
     end
-
   end
 end
 
