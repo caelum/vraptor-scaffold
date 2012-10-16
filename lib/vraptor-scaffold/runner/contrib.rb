@@ -11,7 +11,7 @@ module VraptorScaffold
 
         option_selected = args.shift
 
-        contrib_options.fetch(option_selected, ContribList).new(option_selected, args).invoke_all
+        contrib_options.fetch(option_selected, ContribList).new(args).invoke_all
       end
 
       private

@@ -1,6 +1,6 @@
 class ContribInstaller < VraptorScaffold::Base
 
-  argument :name
+  argument :contrib_name
 
   def self.banner
     "vraptor contrib install contrib_name"
@@ -9,7 +9,7 @@ class ContribInstaller < VraptorScaffold::Base
   def initialize(args, opts=[])
     super([args], opts)
     validate
-    puts name
+    puts contrib_name
   end
 
   def is_ivy?
