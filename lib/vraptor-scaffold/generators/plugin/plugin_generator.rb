@@ -32,11 +32,11 @@ class PluginGenerator < VraptorScaffold::Base
   end
 
   def is_ivy?
-    File.exist?("ivy.xml")
+    File.exists?("ivy.xml")
   end
 
   def is_maven?
-    File.exist?("pom.xml")
+    File.exists?("pom.xml")
   end
 
 end
