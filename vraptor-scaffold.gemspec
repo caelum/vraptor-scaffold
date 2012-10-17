@@ -12,10 +12,11 @@ Gem::Specification.new do |s|
   s.summary     = "VRaptor Scaffold."
   s.description = "VRaptor scaffold extension to make it easier configuring new projects and plugins."
   s.post_install_message = "Thank you for installing vraptor-scaffold. Please read http://github.com/caelum/vraptor-scaffold/blob/master/README.textile for more information."
-  
+
   s.add_dependency('thor', '0.14.6')
   s.add_dependency('activesupport', "3.0.1")
   s.add_dependency('rake', '0.9.2')
+  s.add_dependency('rest-client', '1.6.7')
 
   s.add_development_dependency('rspec', '1.3.2')
   s.add_development_dependency('ZenTest', '4.4.0')

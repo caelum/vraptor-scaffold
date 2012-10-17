@@ -1,3 +1,5 @@
+require 'rest-client'
+
 class ContribInstaller < VraptorScaffold::Base
 
   argument :contrib_name
