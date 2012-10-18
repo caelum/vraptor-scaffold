@@ -1,10 +1,15 @@
 #!/usr/bin/env rake
 require "bundler/gem_tasks"
 
+@integration = ENV["i"]
 require 'spec/rake/spectask'
 Spec::Rake::SpecTask.new(:spec) do |spec|
   spec.libs << 'lib' << 'spec'
-  spec.spec_files = FileList['spec/**/*_spec.rb']
+  spec.spec_files = FileList.new('spec/**/*_spec.rb') do |fl|
+    if not @integration
+      fl.exclude(/.*integration_spec\.rb/)
+    end
+  end
 end
 
 require 'rake/rdoctask'

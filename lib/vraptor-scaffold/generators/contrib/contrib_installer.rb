@@ -10,7 +10,7 @@ class ContribInstaller < VraptorScaffold::Base
   end
 
   def initialize(args, opts=[])
-    super(args, opts)
+    super([args], opts)
     validate
   end
 
@@ -26,6 +26,7 @@ class ContribInstaller < VraptorScaffold::Base
       contrib_package = contrib_selected['g']
 
       @generator = PluginGenerator.new(contrib_name, ["-v=" << contrib_version, "-g=" << contrib_package]).build
+      PluginGenerator
     end
   end
 
