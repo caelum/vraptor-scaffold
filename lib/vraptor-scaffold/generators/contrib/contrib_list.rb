@@ -14,7 +14,7 @@ class ContribList < VraptorScaffold::Base
   end
 
   def download
-    Kernel.system("curl --progress-bar #{VRAPTOR_PLUGINS_URI} >> .vraptor-contrib-modules")
+    Kernel.system("curl --silent #{VRAPTOR_PLUGINS_URI} >> .vraptor-contrib-modules")
 
     create_new_contrib_file
 
@@ -34,8 +34,10 @@ class ContribList < VraptorScaffold::Base
   def show
     download unless File.exists?(".vraptor-contrib")
 
+    counter = 0
     YAML.load_file(".vraptor-contrib").each do |contrib|
-      Kernel.puts contrib[0]
+      say_status("#{counter}.", contrib[0])
+      counter += 1
     end
 
     Kernel.puts "\nend."

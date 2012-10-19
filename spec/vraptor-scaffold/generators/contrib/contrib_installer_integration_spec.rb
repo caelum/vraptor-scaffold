@@ -16,7 +16,7 @@ describe ContribInstaller do
       lambda { ContribInstaller.new("vraptor-authz").invoke_all }.should raise_error(SystemExit)
   end
 
-  context "finded contrib into maven official repo" do
+  context "found contrib into maven official repo" do
 
     before :each do
       AppGenerator.new("mvn_project", ["-b=mvn", "--skip-jquery"]).invoke_all
@@ -35,7 +35,7 @@ describe ContribInstaller do
     end
   end
 
-  context "not finded contrib into maven official repo," do
+  context "not found contrib into maven official repo," do
 
     before :each do
       AppGenerator.new("project", ["--skip-jquery"]).invoke_all
