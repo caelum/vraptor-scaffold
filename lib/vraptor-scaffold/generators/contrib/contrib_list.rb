@@ -41,6 +41,22 @@ class ContribList < VraptorScaffold::Base
     Kernel.puts "\nend."
   end
 
+  def self.which_address_type_to_plugin contrib_name
+    download unless File.exists?(".vraptor-contrib")
+
+    @url_regex = /((https?|git)\:\/\/)[a-zA-Z0-9\-\.@]+\.[a-zA-Z]{2,3}(\/\S*)?/
+    @ssh_regex = /[a-zA-Z0-9]+@[a-zA-Z0-9\/\.:-]+/
+
+    File.readlines(".vraptor-contrib").each do |line|
+      if /#{contrib_name}:/.match(line)
+        return :url if @url_regex.match(line)
+        return :ssh if @ssh_regex.match(line)
+      end
+    end
+
+    :unkown
+  end
+
   private
   def create_new_contrib_file
     FileUtils.rm(".vraptor-contrib") if File.exists?(".vraptor-contrib")
