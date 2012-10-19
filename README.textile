@@ -14,16 +14,20 @@ gem install vraptor-scaffold
 h1. Getting Started
 
 At the command line client:
- 
+
 	vraptor new myapp
 	cd myapp
 	vraptor scaffold product name:string value:double
 	ant jetty.run
-	
+
 	open http://localhost:8080/products
 
+h3. And new:
+
+	vraptor new myapp2 --gae #for appengine app
+
 h2. Note on Patches/Pull Requests
- 
+
 * Fork the project.
 * Make your feature addition or bug fix.
 * Add tests for it. This is important so I don't break it in a
