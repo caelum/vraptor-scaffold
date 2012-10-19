@@ -10,7 +10,7 @@ describe ContribInstaller do
   end
 
   it "should validate when not in root folder" do
-      File.stub(:exist?).and_return(false)
+      File.stub(:exist?).with("src").and_return(false)
       Kernel.should_receive(:puts).with("To run 'vraptor contrib install' please go to the project root folder.")
 
       lambda { ContribInstaller.new("vraptor-authz").invoke_all }.should raise_error(SystemExit)
