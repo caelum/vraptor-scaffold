@@ -1,5 +1,6 @@
 require 'rest-client'
 require 'json'
+require 'xmlsimple'
 
 class ContribInstaller < VraptorScaffold::Base
 
