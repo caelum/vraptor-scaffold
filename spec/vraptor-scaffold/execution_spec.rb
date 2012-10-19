@@ -11,12 +11,8 @@ describe VraptorScaffold::Execution do
       @execution.runner_for(nil).should == VraptorScaffold::Runner::CommandsHelp
     end
 
-    it "should be app generator when -h action" do
-      @execution.runner_for("-h").should == VraptorScaffold::Runner::Generator
-    end
-
-    it "should be app generator when --help action" do
-      @execution.runner_for("--help").should == VraptorScaffold::Runner::Generator
+    it "should be app generator when help action" do
+      @execution.runner_for("any").should == VraptorScaffold::Runner::CommandsHelp
     end
 
     it "should be app generator when new action" do
@@ -47,5 +43,13 @@ describe VraptorScaffold::Execution do
     @execution.stub!(:runner_for).with('new').and_return(runner)
     @execution.run(['new', 'app'])
   end
-  
+
+  it "should call a runner help" do
+    runner = mock(VraptorScaffold::Runner::Scaffold)
+    runner.stub!(:new).and_return runner
+    runner.should_receive(:run).with(['-h'])
+    @execution.stub!(:runner_for).with('scaffold').and_return(runner)
+    @execution.run(['help', 'scaffold'])
+  end
+
 end

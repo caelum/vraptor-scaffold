@@ -14,6 +14,14 @@ describe VraptorScaffold::Runner::Start do
     @start.new.run nil
   end
 
+  it "help command" do
+    Kernel.should_receive(:puts).with("  vraptor start is available only for appengine apps.")
+    Kernel.should_receive(:puts).with("  you should configure environment variable APPENGINE_SDK_HOME.")
+    Kernel.should_receive(:puts).with("  To run vraptor start please go to the project root folder.")
+    Kernel.should_receive(:puts).with("")
+    @start.new.run(["-h"])
+  end
+
   context "validate" do
 
     it "cannot run start outside root folder" do

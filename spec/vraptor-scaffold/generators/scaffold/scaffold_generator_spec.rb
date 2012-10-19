@@ -74,6 +74,8 @@ describe ScaffoldGenerator do
   end
 
   it "should configure banner" do
-    ScaffoldGenerator.banner.should == "vraptor scaffold MODEL [field:type field:type]"
+    banner =  "vraptor scaffold MODEL [field:type field:type]\n\n"
+    banner += "  The supported types are: boolean, double, float, short, integer, long, string, text, date, references"
+    ScaffoldGenerator.banner.should == banner
   end
 end

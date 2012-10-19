@@ -6,13 +6,14 @@ class ScaffoldGenerator < VraptorScaffold::Base
 
 
   def self.banner
-    "vraptor scaffold #{self.arguments.map(&:usage).join(' ')}"
+    banner =  "vraptor scaffold #{self.arguments.map(&:usage).join(' ')}\n\n"
+    banner += "  The supported types are: #{Attribute.valid_types.join(", ")}"
   end
 
   def initialize(args)
     super(args)
     @generated_attributes = []
-    attributes.each { |field, type| 
+    attributes.each { |field, type|
       @generated_attributes << Attribute.new(field, type)
     }
   end

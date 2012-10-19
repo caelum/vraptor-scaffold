@@ -20,6 +20,10 @@ describe VraptorScaffold::Runner::Help do
       @help.help?('--help').should be_true
     end
 
+    it "should be true when help" do
+      @help.help?('help').should be_true
+    end
+
     it "should be false otherwise" do
       @help.help?('scaffold').should be_false
     end

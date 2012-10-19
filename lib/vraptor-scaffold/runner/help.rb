@@ -4,7 +4,7 @@ module VraptorScaffold
     class Help
 
       def self.help?(arg)
-        [nil, "-h", "--help"].include?(arg)
+        [nil, "-h", "--help", "help"].include?(arg)
       end
 
     end

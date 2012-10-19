@@ -4,7 +4,12 @@ module VraptorScaffold
 
     def run(args)
       action = args.shift
-      runner_for(action).new.run(args)
+
+      if Runner::Help.help? action
+        runner_for(args.shift).new.run(["-h"])
+      else
+        runner_for(action).new.run(args)
+      end
     end
 
     def runner_for(action)
@@ -13,9 +18,7 @@ module VraptorScaffold
 
   end
 
-  COMMANDS = {"--help" => Runner::Generator,
-              "-h" => Runner::Generator,
-              "new" => Runner::Generator,
+  COMMANDS = {"new" => Runner::Generator,
               "scaffold" => Runner::Scaffold,
               "plugin" => Runner::Plugin,
               "start" => Runner::Start
