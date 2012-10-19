@@ -32,11 +32,10 @@ describe ContribList do
       ContribList.which_address_type_to_plugin("vraptor-test").should eql(:unkown)
     end
 
-
     it "should download contrib list available" do
       ContribList.new("list").invoke_all
       File.exists?('.vraptor-contrib').should be_true
+      FileUtils.rm('.vraptor-contrib')
     end
-
   end
 end
