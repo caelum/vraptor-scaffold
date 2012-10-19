@@ -14,6 +14,8 @@ describe ContribList do
     it "should download one contrib available" do
       Kernel.should_receive(:system)
       File.should_receive(:readlines).and_return(["path = vraptor-contrib", "url = http://contrib.url"])
+      File.should_receive(:exists?).any_number_of_times().and_return(true)
+      FileUtils.should_receive(:rm).any_number_of_times()
 
       vraptor_contrib = mock(File)
       vraptor_contrib.should_receive(:puts).with("vraptor-contrib: http://contrib.url\n")
@@ -36,6 +38,8 @@ describe ContribList do
                            "url = http://contrib-two.url"]
 
       File.should_receive(:readlines).and_return(contribs_available)
+      File.should_receive(:exists?).any_number_of_times().and_return(true)
+      FileUtils.should_receive(:rm).any_number_of_times()
 
       vraptor_contrib = mock(File)
       vraptor_contrib.should_receive(:puts).with("vraptor-contrib: http://contrib.url\nvraptor-contrib-two: http://contrib-two.url\n").ordered

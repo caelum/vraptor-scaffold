@@ -15,18 +15,21 @@ class ContribInstaller < VraptorScaffold::Base
   end
 
   def find_lib
-    params = {:params => {:q => contrib_name, :wt => :json}}
-    response = RestClient.get 'http://search.maven.org/solrsearch/select', params
-    vraptor_maven_libs = JSON.parse(response.to_str) if response.code == 200
+    vraptor_maven_libs = find_maven_jar
 
     if found(vraptor_maven_libs)
-      contrib_selected = vraptor_maven_libs['response']['docs'][0]
+      add_dependency_to_build_tool vraptor_maven_libs
+    else
+      ContribList.new(nil).download unless File.exists?(".vraptor-contrib")
 
-      contrib_name = contrib_selected['a']
-      contrib_version = contrib_selected['latestVersion']
-      contrib_package = contrib_selected['g']
+      YAML.load_file(".vraptor-contrib").each do |contrib|
+        if contrib_name.eql?(contrib[0])
+          Kernel.system("git clone -q #{contrib[1]}.git")
+        end
+      end
 
-      @generator = PluginGenerator.new(contrib_name, ["-v=" << contrib_version, "-g=" << contrib_package]).build
+      puts "is_maven? #{is_maven?}"
+      puts "is_ivy? #{is_ivy?}"
     end
   end
 
@@ -44,6 +47,22 @@ class ContribInstaller < VraptorScaffold::Base
       Kernel.puts "To run 'vraptor contrib install' please go to the project root folder."
       Kernel::exit
     end
+  end
+
+  def add_dependency_to_build_tool vraptor_maven_libs
+    contrib_selected = vraptor_maven_libs['response']['docs'][0]
+
+    contrib_name = contrib_selected['a']
+    contrib_version = contrib_selected['latestVersion']
+    contrib_package = contrib_selected['g']
+
+    PluginGenerator.new(contrib_name, ["-v=" << contrib_version, "-g=" << contrib_package]).build
+  end
+
+  def find_maven_jar
+    params = {:params => {:q => contrib_name, :wt => :json}}
+    response = RestClient.get 'http://search.maven.org/solrsearch/select', params
+    JSON.parse(response.to_str) if response.code == 200
   end
 
   def found(vraptor_maven_libs)

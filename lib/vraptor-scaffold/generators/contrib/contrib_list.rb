@@ -13,7 +13,7 @@ class ContribList < VraptorScaffold::Base
     super([args], opts)
   end
 
-  def show
+  def download
     Kernel.system("curl --progress-bar #{VRAPTOR_PLUGINS_URI} >> .vraptor-contrib-modules")
 
     create_new_contrib_file
@@ -27,6 +27,12 @@ class ContribList < VraptorScaffold::Base
     vraptor_contrib.close
 
     FileUtils.rm(".vraptor-contrib-modules") if File.exists?(".vraptor-contrib-modules")
+
+    self
+  end
+
+  def show
+    download unless File.exists?(".vraptor-contrib")
 
     YAML.load_file(".vraptor-contrib").each do |contrib|
       Kernel.puts contrib[0]
