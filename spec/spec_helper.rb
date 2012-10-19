@@ -32,3 +32,11 @@ def mock_http_request
   http_request.stub!(:body).and_return("corpo :)")
   VraptorScaffold::HttpRequest.stub!(:open_session).with(kind_of(String)).and_return(http_request)
 end
+
+def check_file( file, string )
+  File.open( file ) do |io|
+    io.each {|line| line.chomp! ; return true if line.include? string}
+  end
+
+  false
+end

@@ -15,7 +15,8 @@ class ContribInstaller < VraptorScaffold::Base
   end
 
   def find_lib
-    response = RestClient.get 'http://search.maven.org/solrsearch/select', {:params => {:q => contrib_name, 'wt' => 'json'}}
+    params = {:params => {:q => contrib_name, 'wt' => 'json'}}
+    response = RestClient.get 'http://search.maven.org/solrsearch/select', params
     vraptor_maven_libs = JSON.parse(response.to_str) if response.code == 200
 
     if found(vraptor_maven_libs)
@@ -26,7 +27,6 @@ class ContribInstaller < VraptorScaffold::Base
       contrib_package = contrib_selected['g']
 
       @generator = PluginGenerator.new(contrib_name, ["-v=" << contrib_version, "-g=" << contrib_package]).build
-      PluginGenerator
     end
   end
 

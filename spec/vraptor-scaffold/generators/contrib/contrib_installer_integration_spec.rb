@@ -26,7 +26,9 @@ describe ContribInstaller do
       Kernel.should_receive(:puts).with("To run 'vraptor contrib install' please go to the project root folder.")
       Kernel.should_receive(:exit)
 
+      check_file("pom.xml", "vraptor-authz").should be_false
       ContribInstaller.new("vraptor-authz").invoke_all
+      check_file("pom.xml", "vraptor-authz").should be_true
     end
   end
 
