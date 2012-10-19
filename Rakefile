@@ -6,7 +6,7 @@ require 'spec/rake/spectask'
 Spec::Rake::SpecTask.new(:spec) do |spec|
   spec.libs << 'lib' << 'spec'
   spec.spec_files = FileList.new('spec/**/*_spec.rb') do |fl|
-    if not @integration
+    if @integration == "false"
       fl.exclude(/.*integration_spec\.rb/)
     end
   end

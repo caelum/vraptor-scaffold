@@ -15,7 +15,7 @@ class ContribInstaller < VraptorScaffold::Base
   end
 
   def find_lib
-    params = {:params => {:q => contrib_name, 'wt' => 'json'}}
+    params = {:params => {:q => contrib_name, :wt => :json}}
     response = RestClient.get 'http://search.maven.org/solrsearch/select', params
     vraptor_maven_libs = JSON.parse(response.to_str) if response.code == 200
 
