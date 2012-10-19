@@ -22,9 +22,9 @@ At the command line client:
 
 	open http://localhost:8080/products
 
-h3. And new:
+h3. To run vraptor on appengine:
 
-	vraptor new myapp2 --gae #for appengine app
+	vraptor new store --gae
 
 h2. Note on Patches/Pull Requests
 
