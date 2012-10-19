@@ -35,7 +35,7 @@ describe ContribInstaller do
     end
   end
 
-  context "not finded contrib into maven official repo" do
+  context "not finded contrib into maven official repo," do
 
     before :each do
       AppGenerator.new("project", ["--skip-jquery"]).invoke_all
@@ -47,7 +47,7 @@ describe ContribInstaller do
       FileUtils.rm_rf("project")
     end
 
-    it ", should download vraptor-contrib file if not exists" do
+    it "should download vraptor-contrib file if not exists" do
       contrib_name = "vraptor-cep"
       check_file("ivy.xml", contrib_name).should be_false
 

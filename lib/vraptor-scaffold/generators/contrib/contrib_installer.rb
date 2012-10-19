@@ -68,5 +68,4 @@ class ContribInstaller < VraptorScaffold::Base
   def found(vraptor_maven_libs)
     vraptor_maven_libs and vraptor_maven_libs['response']['docs'].size >= 1
   end
-
 end
