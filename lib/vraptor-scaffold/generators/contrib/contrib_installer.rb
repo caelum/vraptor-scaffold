@@ -23,9 +23,11 @@ class ContribInstaller < VraptorScaffold::Base
       add_dependency_to_build_tool vraptor_maven_libs
     else
       say_status(:status, "not found contrib on official maven repo.")
+      say_status(:status, "downloading contrib plugin from github...")
       ContribList.new(nil).download unless File.exists?(".vraptor-contrib")
       clone_repo_from_github
       install_lib_on_local_repo
+      delete_contrib_clone_repo
     end
   end
 
@@ -50,28 +52,34 @@ class ContribInstaller < VraptorScaffold::Base
   def clone_repo_from_github
     YAML.load_file(".vraptor-contrib").each do |contrib|
       if contrib_name.eql?(contrib[0])
-        Kernel.system("git clone -q #{contrib[1]}.git")
+        remote_url = contrib[1]
+        remote_url << ".git" unless /\.git$/.match(contrib[1])
+
+        Kernel.system("git clone -q #{remote_url} #{contrib_name}")
         break
       end
     end
   end
 
   def install_lib_on_local_repo
-    FileUtils.chdir("#{contrib_name}")
+    say_status(:status, "installing contrib on local repo... will try run tests too.")
 
     if is_maven?
-      say_status(:status, "maven build tool")
-      say_status(:install, "installing contrib on local repo... will try run tests too.")
-      Kernel.system("mvn --quiet install")
-    elsif is_ivy?
-      Kernel.puts("ivy install")
-    elsif is_gradle?
-      Kernel.puts("gradle install")
-    else
-      Kernel.puts("There is no build tool. Cancelling the 'contrib install'")
-    end
+      Kernel.system("mvn install --quiet -f #{contrib_name}/pom.xml")
+      pom = XmlSimple.xml_in("#{contrib_name}/pom.xml")
 
-    FileUtils.chdir("..")
+      PluginGenerator.new(pom["artifactId"].first, ["-v=" << pom["version"].first, "-g=" << pom["groupId"].first]).build
+    elsif is_ivy?
+      error_n_close "The contrib plugin has using ivy. Isn't supported yet."
+    elsif is_gradle?
+      error_n_close "The contrib plugin has using gradle. Isn't supported yet."
+    else
+      error_n_close "The contrib plugin has no build tool. Exiting installation."
+    end
+  end
+
+  def delete_contrib_clone_repo
+    FileUtils.rm_rf("#{contrib_name}")
   end
 
   def find_maven_jar
@@ -87,15 +95,21 @@ class ContribInstaller < VraptorScaffold::Base
     vraptor_maven_libs and vraptor_maven_libs['response']['docs'].size >= 1
   end
 
+  def error_n_close message
+    say_status(:error, message, :red)
+    FileUtils.rm_rf("#{contrib_name}")
+    Kernel::exit
+  end
+
   def is_ivy?
-    File.exist?("ivy.xml")
+    File.exist?("#{contrib_name}/ivy.xml")
   end
 
   def is_gradle?
-    File.exist?("build.gradle")
+    File.exist?("#{contrib_name}/build.gradle")
   end
 
   def is_maven?
-    File.exist?("pom.xml")
+    File.exist?("#{contrib_name}/pom.xml")
   end
 end
