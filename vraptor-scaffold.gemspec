@@ -15,7 +15,7 @@ Gem::Specification.new do |s|
   
   s.add_dependency('thor', '0.14.6')
   s.add_dependency('activesupport', "3.0.1")
-  s.add_dependency('rake', '0.9.2')
+  s.add_dependency('rake', '13.0.1')
 
   s.add_development_dependency('rspec', '1.3.2')
   s.add_development_dependency('ZenTest', '4.4.0')
